@@ -412,7 +412,7 @@ acerca de nuestros productos y servicios.</p>
         <div class="row">
             <div class="col-md-6">
                 <center>
-                    <img src="https://goodapps.com.ar/RRHH/Imagenes/Isologotipo_Coovilros_horizontal_blanco_total.png" style="height: 40px;" />
+                    <img src="https://www.coovilros.com/Imagenes/logo-dark.png" style="height: 40px;" />
                 </center>
             </div>
             <div class="col-md-6">

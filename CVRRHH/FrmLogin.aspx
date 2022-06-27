@@ -163,7 +163,7 @@ if it's not present, don't show loader */
 
 
 
-<img src="https://goodapps.com.ar/RRHH/Imagenes/Isologotipo_Coovilros_horizontal_blanco_total.png" width="250px" style="float:right; margin-top:10px;margin-right:10px" />
+<img src="https://www.coovilros.com/Imagenes/logo-dark.png" width="250px" style="float:right; margin-top:10px;margin-right:10px" />
 </div>
 
 
@@ -310,7 +310,7 @@ cuadro de sombra: -1px 2px 5px 0px rgba (0,0,0,0.75);" id="oculto" runat="server
                            
                            
                            
-                           <center><img src="https://goodapps.com.ar/RRHH/Imagenes/Isologotipo_Coovilros_horizontal.png" width="300"  id="imagencoop" runat="server"/>       
+                           <center><img src="https://www.coovilros.com/Imagenes/logo-dark.png" width="300"  id="imagencoop" runat="server"/>       
                                      </center>
 
 

@@ -1391,7 +1391,7 @@ create
 </script>		
                                     
 
-<div alt="Cargando Imagen..." style="background-image:url('https://cuota-facil.com.ar/Imagenes/subir.png');background-size: cover;height:50px;width:50px;cursor:pointer;decoration:none;" required="" name="imagen" id="Div1" type="file" accept="image/*">
+<div alt="Cargando Imagen..." style="background-image:url('https://crear.net.ar/CLIENTES/PIN/Pin/camara-fotografica.png');background-size: cover;height:50px;width:50px;cursor:pointer;decoration:none;" required="" name="imagen" id="Div1" type="file" accept="image/*">
  <center> <asp:FileUpload style="background-image:url('https://cuota-facil.com.ar/Imagenes/ErrorTickets.png');background-size: cover; opacity: 0; height:80px;width:80px;cursor:pointer;margin-top:-5px;decoration:none;"  runat="server" id="SubirRecibo"  accept="application/pdf,image/*"  onchange="return validarExt2();" runat="server"></asp:FileUpload></center></div>
 
  <div id="visorArchivo">
@@ -1928,7 +1928,7 @@ arrow_upward
         <div class="row">
             <div class="col-md-6">
                 <center>
-                    <img src="https://goodapps.com.ar/RRHH/Imagenes/Isologotipo_Coovilros_horizontal_blanco_total.png" style="height: 40px;" />
+                    <img src="https://www.coovilros.com/Imagenes/logo-dark.png" style="height: 40px;" />
                 </center>
             </div>
             <div class="col-md-6">
