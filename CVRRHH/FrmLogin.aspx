@@ -34,9 +34,14 @@
 
     
         <link href="css/blue.css" rel="stylesheet" type="text/css" />
-           <!-- SweetAlert2 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
+
+
+    <!-- alerts -->
+    <script type="text/javascript" src="Scripts/Alertas/sweetalert2@9.js"></script>
+    <script type="text/javascript" src="Scripts/Alertas/Alertas.js"></script>
+    <link href="Scripts/Alertas/sweetalert2.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="Scripts/Alertas/sweetalert2.min.js"></script>
+
 </head>
 <style>
     
@@ -246,7 +251,7 @@ cuadro de sombra: -1px 2px 5px 0px rgba (0,0,0,0.75);" id="formulario" runat="se
          <center> <div class="col-md-12">
      <div class="form-group">
     
-    <button type="button" class="btn btn-success" ID="BtnEnviar" runat="server" onmouseup="Alerta();">ENVIAR</button>
+    <button type="button" class="btn btn-success" ID="BtnEnviar" runat="server">ENVIAR</button>
     </div></div>
     
     <p>(**) Es importante que ingrese una cuenta de email existente ya que a la misma llegaran las instrucciones para completar el PASO 2
@@ -325,48 +330,7 @@ cuadro de sombra: -1px 2px 5px 0px rgba (0,0,0,0.75);" id="oculto" runat="server
   
         
              <script>
-                 function Alerta() {
-                     var User = document.getElementById("TxtApellido").value;
-                     var lastName = document.getElementById("TxtNombre").value;
-                     var Pass = document.getElementById("TxtPass").value;
-                     var Confirm = document.getElementById("TxtConfirmarPass").value;
-
-                     if (User == "" || lastName=="" || Pass == "" || Confirm == "") {
-                         //alert("Campos Obligatorios");
-                         //document.getElementById("ContactoSucces").style.display = "block";
-
-                         $(document).on('click', '#BtnEnviar', function (e) {
-                             swal(
-				'Atención!',
-				'Debes cargar los datos requeridos!',
-				'error'
-			)
-                             window.setTimeout(function () {
-                                 //location.href = "FrmLogin.aspx";
-                             }, 6000);
-                         });
-
-                     } else {
-                         //alert("Consulta Enviada con Éxito");
-                         //document.getElementById("ContactoSucces").style.display = "block";
-                         $(document).on('click', '#BtnEnviar', function (e) {
-                             swal(
-				'Esperá un momento',
-				'Estamos procesando tu solicitud <br><br><img src="https://flevix.com/wp-content/uploads/2019/07/Ring-Preloader.gif" width="250px">',
-				'success'
-			)
-                             window.setTimeout(function () {
-                                 //location.href = "FrmLogin.aspx";
-                             }, 6000);
-
-                         });
-
-
-                     }
-
-                 }
-           
-
+                 
            </script>   
 
         

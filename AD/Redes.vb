@@ -80,5 +80,18 @@ Public Class Redes
 
     End Function
 
+    Public Function Eliminar(ByVal ID_Redes As Integer)
+        Try
+
+            Return oDatabase.ExecuteDataSet("RedesSociales_Eliminar", ID_Redes)
+
+        Catch ex As Exception
+
+            Throw ex
+
+        End Try
+
+    End Function
+
 
 End Class

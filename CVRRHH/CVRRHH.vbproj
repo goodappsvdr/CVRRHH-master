@@ -112,9 +112,14 @@
     <Content Include="FrmModificarGrupoFamiliar.aspx" />
     <Content Include="FrmModificarReferenciaLaboral.aspx" />
     <Content Include="ResetEmail.aspx" />
+    <Content Include="Scripts\Alertas\Alertas.js" />
+    <Content Include="Scripts\Alertas\sweetalert2%409.js" />
+    <Content Include="Scripts\Alertas\sweetalert2.min.css" />
+    <Content Include="Scripts\Alertas\sweetalert2.min.js" />
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Scripts\Redes.js" />
     <Content Include="ValidarEmail.aspx" />
     <Content Include="VerMiPerfil.aspx" />
     <Content Include="Web.config">
@@ -249,6 +254,9 @@
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="globalWS.vb" />
+    <Compile Include="Metodos\DatosContactoWs.vb" />
+    <Compile Include="Metodos\DatosPersonalesWs.vb" />
+    <Compile Include="Metodos\RedesWs.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -311,6 +319,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ImagenesPersonales\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AD\AD.vbproj">

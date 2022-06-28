@@ -1,14 +1,25 @@
-﻿
-Imports AD
+﻿Imports System.Web.Script.Serialization
+Imports System.Web.Script.Services
+Imports System.Web.Services
 Imports System.IO
+Imports System.Globalization
+Imports AD
 
 Public Class FrmMiPerfil
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
+        If User.Identity.IsAuthenticated = False Then
+            Response.Redirect("FrmInicio.aspx")
+        End If
+
         If Page.IsPostBack = False Then
 
-
+            Dim GalletaEmail As HttpCookie
+            GalletaEmail = Request.Cookies("datos")
+            Dim email As String = GalletaEmail.Values("nombre")
+            txtEmail.Text = email
 
             CargarGrilla()
             CargarGrillaGrupoFamiliar()
@@ -40,11 +51,7 @@ Public Class FrmMiPerfil
                 Dim username As String = userId
                 Dim ods As New DataSet
                 Dim Objeto As New PersonalLegajos
-
-
-
             Else
-
                 Dim ods As New DataSet
                 Dim Objeto As New PersonalLegajos
 
@@ -59,16 +66,12 @@ Public Class FrmMiPerfil
                 'Repeaterusuario.DataSource = ods.Tables(1)
                 'Repeaterusuario.DataBind()
                 If ods.Tables(0).Rows.Count > 0 Then
-
-
                     Dim Nombre As String = ods.Tables(0).Rows(0).Item("Nombre").ToString
                     Dim Apellido As String = ods.Tables(0).Rows(0).Item("Apellido").ToString
                     Dim ID_PersonalLegajo As Integer = ods.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
-
-
                 End If
-
             End If
+
         End If
         'CargaDatosUsuarios()
 
@@ -776,7 +779,7 @@ Public Class FrmMiPerfil
 
                 'UserPerfil.InnerHtml = "HOLA " & Nombre
 
-                TituloPaginaWeb.Text = "CV " & Nombre & " " & Apellido & " ID " & ID_PersonalLegajo
+                TituloPaginaWeb.Text = "CV " & Nombre & " " & Apellido
 
                 ImgPersonal.Src = ods.Tables(0).Rows(0).Item("Foto").ToString
 
@@ -797,13 +800,13 @@ Public Class FrmMiPerfil
                 CboEstadoCivil.SelectedValue = ods.Tables(0).Rows(0).Item("ID_EstadoCivil").ToString
 
 
-                Dim ods2 As New DataSet
-                Dim oobjeto2 As New Redes
+                'Dim ods2 As New DataSet
+                'Dim oobjeto2 As New Redes
 
-                ods2 = oobjeto2.RedesSociales_BuscarPorEmail(username)
+                'ods2 = oobjeto2.RedesSociales_BuscarPorEmail(username)
 
-                RepeaterRedes.DataSource = ods2.Tables(0)
-                RepeaterRedes.DataBind()
+                'RepeaterRedes.DataSource = ods2.Tables(0)
+                'RepeaterRedes.DataBind()
 
 
                 'Dim Ods3 As New DataSet
@@ -899,7 +902,7 @@ Public Class FrmMiPerfil
 
 
 
-                TituloPaginaWeb.Text = "CV " & Nombre & " " & Apellido & " ID " & ID_PersonalLegajo
+                TituloPaginaWeb.Text = "CV " & Nombre & " " & Apellido
 
                 ImgPersonal.Src = ods.Tables(0).Rows(0).Item("Foto").ToString
 
@@ -922,13 +925,13 @@ Public Class FrmMiPerfil
 
 
 
-                Dim ods2 As New DataSet
-                Dim oobjeto2 As New Redes
+                'Dim ods2 As New DataSet
+                'Dim oobjeto2 As New Redes
 
-                ods2 = oobjeto2.RedesSociales_BuscarPorEmail(name)
+                'ods2 = oobjeto2.RedesSociales_BuscarPorEmail(name)
 
-                RepeaterRedes.DataSource = ods2.Tables(0)
-                RepeaterRedes.DataBind()
+                'RepeaterRedes.DataSource = ods2.Tables(0)
+                'RepeaterRedes.DataBind()
 
                 'Dim Ods3 As New DataSet
                 'Dim Objeto3 As New Redes
@@ -965,7 +968,6 @@ Public Class FrmMiPerfil
 
     End Sub
     Protected Sub CerrarSesion(sender As Object, e As EventArgs)
-
         Session.Clear()
         Response.Cookies("datos").Expires = Now.AddDays(-1D)
 
@@ -974,302 +976,285 @@ Public Class FrmMiPerfil
         FormsAuthentication.SignOut()
         Roles.DeleteCookie()
 
-
         'Session.Abandon()
 
-
         Response.Redirect("FrmInicio.aspx")
-
-    End Sub
-    Protected Sub GuardarySeguir(sender As Object, e As EventArgs)
-        ModificarDatosPersonales()
     End Sub
 
+    'Protected Sub GuardarySeguir(sender As Object, e As EventArgs)
+    '    ModificarDatosPersonales()
+    'End Sub
 
+    'Public Sub ModificarDatosContacto()
 
+    '    Dim PruebaGalleta As HttpCookie
+    '    PruebaGalleta = Request.Cookies("datos")
 
-    Public Sub ModificarDatosContacto()
+    '    'aca valido si hay cookies
 
-        Dim PruebaGalleta As HttpCookie
-        PruebaGalleta = Request.Cookies("datos")
+    '    If PruebaGalleta Is Nothing Then
 
-        'aca valido si hay cookies
 
-        If PruebaGalleta Is Nothing Then
 
 
+    '        Dim Ods As New DataSet
+    '        Dim Objeto As New PersonalLegajos
 
+    '        Dim userId As String = Membership.GetUser().UserName
 
-            Dim Ods As New DataSet
-            Dim Objeto As New PersonalLegajos
+    '        Dim username As String = userId
 
-            Dim userId As String = Membership.GetUser().UserName
 
-            Dim username As String = userId
+    '        Dim ods2 As New DataSet
+    '        Dim Objeto2 As New PersonalLegajos
 
 
-            Dim ods2 As New DataSet
-            Dim Objeto2 As New PersonalLegajos
+    '        ods2 = Objeto2.BuscarDatosDeUsuarioPorEmail(username)
 
+    '        Dim Nombre As String = ods2.Tables(0).Rows(0).Item("Nombre").ToString
+    '        Dim Apellido As String = ods2.Tables(0).Rows(0).Item("Apellido").ToString
+    '        Dim ID_PersonalLegajo As Integer = ods2.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
 
-            ods2 = Objeto2.BuscarDatosDeUsuarioPorEmail(username)
+    '        Ods = Objeto.ModificarDatosDeContacto(ID_PersonalLegajo, TxtCalle.Value, TxtNumeroCalle.Value, TxtPiso.Value, TxtDepto.Value, TxtTelefonoFijo.Value, TxtTelefonMovil.Value, CboLocalidad.SelectedValue)
 
-            Dim Nombre As String = ods2.Tables(0).Rows(0).Item("Nombre").ToString
-            Dim Apellido As String = ods2.Tables(0).Rows(0).Item("Apellido").ToString
-            Dim ID_PersonalLegajo As Integer = ods2.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
+    '        'ACA DEBO AGREGAR REDES SOCIALES
 
-            Ods = Objeto.ModificarDatosDeContacto(ID_PersonalLegajo, TxtCalle.Value, TxtNumeroCalle.Value, TxtPiso.Value, TxtDepto.Value, TxtTelefonoFijo.Value, TxtTelefonMovil.Value, CboLocalidad.SelectedValue)
+    '        Dim odsRedes As New DataSet
+    '        Dim ObjeRedes As New Redes
+    '        Dim ID_Red As Integer
+    '        Dim Imagen As String
 
-            'ACA DEBO AGREGAR REDES SOCIALES
+    '        If ComboRedes.SelectedItem.Text = "FACEBOOK" Then
+    '            Imagen = "https://crear.net.ar/CLIENTES/CONSTRUC/Construc/Facebook_icon-icons.com_66805.png"
+    '        ElseIf ComboRedes.SelectedItem.Text = "INSTAGRAM" Then
+    '            Imagen = "https://crear.net.ar/CLIENTES/CONSTRUC/Construc/1491580635-yumminkysocialmedia26_83102.png"
+    '        ElseIf ComboRedes.SelectedItem.Text = "TWITTER" Then
+    '            Imagen = "https://crear.net.ar/CLIENTES/CONSTRUC/Construc/1491579542-yumminkysocialmedia22_83078.png"
+    '        ElseIf ComboRedes.SelectedItem.Text = "YOUTUBE" Then
+    '            Imagen = "https://crear.net.ar/CLIENTES/CONSTRUC/Construc/1491580651-yumminkysocialmedia28_83061.png"
 
-            Dim odsRedes As New DataSet
-            Dim ObjeRedes As New Redes
-            Dim ID_Red As Integer
-            Dim Imagen As String
+    '        End If
 
-            If ComboRedes.SelectedItem.Text = "FACEBOOK" Then
-                Imagen = "https://crear.net.ar/CLIENTES/CONSTRUC/Construc/Facebook_icon-icons.com_66805.png"
-            ElseIf ComboRedes.SelectedItem.Text = "INSTAGRAM" Then
-                Imagen = "https://crear.net.ar/CLIENTES/CONSTRUC/Construc/1491580635-yumminkysocialmedia26_83102.png"
-            ElseIf ComboRedes.SelectedItem.Text = "TWITTER" Then
-                Imagen = "https://crear.net.ar/CLIENTES/CONSTRUC/Construc/1491579542-yumminkysocialmedia22_83078.png"
-            ElseIf ComboRedes.SelectedItem.Text = "YOUTUBE" Then
-                Imagen = "https://crear.net.ar/CLIENTES/CONSTRUC/Construc/1491580651-yumminkysocialmedia28_83061.png"
 
-            End If
 
+    '        Dim Ods3 As New DataSet
+    '        Dim Objeto3 As New Redes
+    '        Ods3 = Objeto3.RedesSociales_BuscarDatosDeRedes(username, ComboRedes.SelectedItem.Text)
 
 
-            Dim Ods3 As New DataSet
-            Dim Objeto3 As New Redes
-            Ods3 = Objeto3.RedesSociales_BuscarDatosDeRedes(username, ComboRedes.SelectedItem.Text)
 
 
+    '        If Ods3.Tables(0).Rows.Count > 0 Then
+    '            Dim ID_Redbase As String = Ods3.Tables(0).Rows(0).Item("ID_Redes").ToString
+    '            TxtLinkRedsocial.Text = Ods3.Tables(0).Rows(0).Item("Link").ToString
 
 
-            If Ods3.Tables(0).Rows.Count > 0 Then
-                Dim ID_Redbase As String = Ods3.Tables(0).Rows(0).Item("ID_Redes").ToString
-                TxtLinkRedsocial.Text = Ods3.Tables(0).Rows(0).Item("Link").ToString
 
 
+    '            Ods3 = Objeto3.Modificar(ID_Redbase, ID_PersonalLegajo, TxtLinkRedsocial.Text, ComboRedes.SelectedItem.Text, 1, Imagen)
 
+    '        Else
 
-                Ods3 = Objeto3.Modificar(ID_Redbase, ID_PersonalLegajo, TxtLinkRedsocial.Text, ComboRedes.SelectedItem.Text, 1, Imagen)
+    '            If TxtLinkRedsocial.Text <> "" And ComboRedes.SelectedItem.Text <> "SELECCIONE..." Then
 
-            Else
 
-                If TxtLinkRedsocial.Text <> "" And ComboRedes.SelectedItem.Text <> "SELECCIONE..." Then
+    '                ID_Red = ObjeRedes.Agregar(ID_PersonalLegajo, TxtLinkRedsocial.Text, ComboRedes.SelectedItem.Text, 1, Imagen)
+    '            Else
+    '                Return
+    '            End If
 
 
-                    ID_Red = ObjeRedes.Agregar(ID_PersonalLegajo, TxtLinkRedsocial.Text, ComboRedes.SelectedItem.Text, 1, Imagen)
-                Else
-                    Return
-                End If
+    '        End If
 
+    '    Else
 
-            End If
+    '        Dim Galleta As HttpCookie
+    '        Galleta = Request.Cookies("datos")
 
-        Else
+    '        Dim ods2 As New DataSet
+    '        Dim Objeto2 As New PersonalLegajos
 
-            Dim Galleta As HttpCookie
-            Galleta = Request.Cookies("datos")
+    '        Dim name As String = Galleta.Values("nombre")
+    '        Dim pass As String = Galleta.Values("pass")
+    '        Dim IdUser As String = Galleta.Values("userid")
+    '        ods2 = Objeto2.BuscarDatosDeUsuarioPorEmail(name)
 
-            Dim ods2 As New DataSet
-            Dim Objeto2 As New PersonalLegajos
 
-            Dim name As String = Galleta.Values("nombre")
-            Dim pass As String = Galleta.Values("pass")
-            Dim IdUser As String = Galleta.Values("userid")
-            ods2 = Objeto2.BuscarDatosDeUsuarioPorEmail(name)
 
+    '        Dim Nombre As String = ods2.Tables(0).Rows(0).Item("Nombre").ToString
+    '        Dim Apellido As String = ods2.Tables(0).Rows(0).Item("Apellido").ToString
+    '        Dim ID_PersonalLegajo As Integer = ods2.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
 
+    '        ods2 = Objeto2.ModificarDatosDeContacto(ID_PersonalLegajo, TxtCalle.Value, TxtNumeroCalle.Value, TxtPiso.Value, TxtDepto.Value, TxtTelefonoFijo.Value, TxtTelefonMovil.Value, CboLocalidad.SelectedValue)
 
-            Dim Nombre As String = ods2.Tables(0).Rows(0).Item("Nombre").ToString
-            Dim Apellido As String = ods2.Tables(0).Rows(0).Item("Apellido").ToString
-            Dim ID_PersonalLegajo As Integer = ods2.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
 
-            ods2 = Objeto2.ModificarDatosDeContacto(ID_PersonalLegajo, TxtCalle.Value, TxtNumeroCalle.Value, TxtPiso.Value, TxtDepto.Value, TxtTelefonoFijo.Value, TxtTelefonMovil.Value, CboLocalidad.SelectedValue)
+    '        'ACA DEBO AGREGAR REDES SOCIALES
 
+    '        Dim odsRedes As New DataSet
+    '        Dim ObjeRedes As New Redes
+    '        Dim ID_Red As Integer
+    '        Dim Imagen As String
 
-            'ACA DEBO AGREGAR REDES SOCIALES
+    '        If ComboRedes.SelectedItem.Text = "FACEBOOK" Then
+    '            Imagen = "https://crear.net.ar/CLIENTES/CONSTRUC/Construc/Facebook_icon-icons.com_66805.png"
+    '        ElseIf ComboRedes.SelectedItem.Text = "INSTAGRAM" Then
+    '            Imagen = "https://crear.net.ar/CLIENTES/CONSTRUC/Construc/1491580635-yumminkysocialmedia26_83102.png"
+    '        ElseIf ComboRedes.SelectedItem.Text = "TWITTER" Then
+    '            Imagen = "https://crear.net.ar/CLIENTES/CONSTRUC/Construc/1491579542-yumminkysocialmedia22_83078.png"
+    '        ElseIf ComboRedes.SelectedItem.Text = "YOUTUBE" Then
+    '            Imagen = "https://crear.net.ar/CLIENTES/CONSTRUC/Construc/1491580651-yumminkysocialmedia28_83061.png"
 
-            Dim odsRedes As New DataSet
-            Dim ObjeRedes As New Redes
-            Dim ID_Red As Integer
-            Dim Imagen As String
+    '        End If
 
-            If ComboRedes.SelectedItem.Text = "FACEBOOK" Then
-                Imagen = "https://crear.net.ar/CLIENTES/CONSTRUC/Construc/Facebook_icon-icons.com_66805.png"
-            ElseIf ComboRedes.SelectedItem.Text = "INSTAGRAM" Then
-                Imagen = "https://crear.net.ar/CLIENTES/CONSTRUC/Construc/1491580635-yumminkysocialmedia26_83102.png"
-            ElseIf ComboRedes.SelectedItem.Text = "TWITTER" Then
-                Imagen = "https://crear.net.ar/CLIENTES/CONSTRUC/Construc/1491579542-yumminkysocialmedia22_83078.png"
-            ElseIf ComboRedes.SelectedItem.Text = "YOUTUBE" Then
-                Imagen = "https://crear.net.ar/CLIENTES/CONSTRUC/Construc/1491580651-yumminkysocialmedia28_83061.png"
+    '        Dim Ods3 As New DataSet
+    '        Dim Objeto3 As New Redes
+    '        Ods3 = Objeto3.RedesSociales_BuscarDatosDeRedes(name, ComboRedes.SelectedItem.Text)
 
-            End If
 
-            Dim Ods3 As New DataSet
-            Dim Objeto3 As New Redes
-            Ods3 = Objeto3.RedesSociales_BuscarDatosDeRedes(name, ComboRedes.SelectedItem.Text)
 
 
+    '        If Ods3.Tables(0).Rows.Count > 0 Then
+    '            Dim ID_Redbase As String = Ods3.Tables(0).Rows(0).Item("ID_Redes").ToString
+    '            'TxtLinkRedsocial.Text = Ods3.Tables(0).Rows(0).Item("Link").ToString
+    '            Ods3 = Objeto3.Modificar(ID_Redbase, ID_PersonalLegajo, TxtLinkRedsocial.Text, ComboRedes.SelectedItem.Text, 1, Imagen)
 
+    '        Else
 
-            If Ods3.Tables(0).Rows.Count > 0 Then
-                Dim ID_Redbase As String = Ods3.Tables(0).Rows(0).Item("ID_Redes").ToString
-                'TxtLinkRedsocial.Text = Ods3.Tables(0).Rows(0).Item("Link").ToString
-                Ods3 = Objeto3.Modificar(ID_Redbase, ID_PersonalLegajo, TxtLinkRedsocial.Text, ComboRedes.SelectedItem.Text, 1, Imagen)
 
-            Else
+    '            If TxtLinkRedsocial.Text <> "" And ComboRedes.SelectedItem.Text <> "SELECCIONE..." Then
 
 
-                If TxtLinkRedsocial.Text <> "" And ComboRedes.SelectedItem.Text <> "SELECCIONE..." Then
 
-                
+    '            ID_Red = ObjeRedes.Agregar(ID_PersonalLegajo, TxtLinkRedsocial.Text, ComboRedes.SelectedItem.Text, 1, Imagen)
 
-                ID_Red = ObjeRedes.Agregar(ID_PersonalLegajo, TxtLinkRedsocial.Text, ComboRedes.SelectedItem.Text, 1, Imagen)
+    '            Else
+    '                Return
+    '            End If
 
-                Else
-                    Return
-                End If
+    '        End If
+    '    End If
 
-            End If
-        End If
 
 
 
 
 
 
+    'End Sub
 
-    End Sub
 
+    'Public Sub ModificarDatosPersonales()
 
-    Public Sub ModificarDatosPersonales()
+    '    Dim PruebaGalleta As HttpCookie
+    '    PruebaGalleta = Request.Cookies("datos")
 
-        Dim PruebaGalleta As HttpCookie
-        PruebaGalleta = Request.Cookies("datos")
+    '    'aca valido si hay cookies
 
-        'aca valido si hay cookies
+    '    If PruebaGalleta Is Nothing Then
 
-        If PruebaGalleta Is Nothing Then
+    '        Dim Ods As New DataSet
+    '        Dim Objeto As New PersonalLegajos
 
+    '        Dim userId As String = Membership.GetUser().UserName
+    '        Dim username As String = userId
 
+    '        Dim ods2 As New DataSet
+    '        Dim Objeto2 As New PersonalLegajos
 
+    '        ods2 = Objeto2.BuscarDatosDeUsuarioPorEmail(username)
 
-            Dim Ods As New DataSet
-            Dim Objeto As New PersonalLegajos
+    '        Dim Nombre As String = ods2.Tables(0).Rows(0).Item("Nombre").ToString
+    '        Dim Apellido As String = ods2.Tables(0).Rows(0).Item("Apellido").ToString
+    '        Dim ID_PersonalLegajo As Integer = ods2.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
 
-            Dim userId As String = Membership.GetUser().UserName
-            Dim username As String = userId
+    '        If TxtNumeroDoc.Value <> "" And TxtFechaNac.Text <> "" And TxtCuil.Value <> "" Then
+    '            Ods = Objeto.ModificarDatosPersonales(ID_PersonalLegajo, Apellido, Nombre, CboTipoDoc.SelectedValue, TxtNumeroDoc.Value, CboNivelFormacion.SelectedValue, CboEstadoCivil.SelectedValue, TxtFechaNac.Text, CboNacionalidad.SelectedValue, CboSexo.SelectedValue, TxtCuil.Value)
 
 
-            Dim ods2 As New DataSet
-            Dim Objeto2 As New PersonalLegajos
+    '            If btnSubirImgEmpleado.HasFile = True Then
+    '                Dim urlImagen As String
+    '                urlImagen = "http://coovilros.com/rrhh/ImagenesPersonal/"
 
+    '                btnSubirImgEmpleado.SaveAs(HttpContext.Current.Server.MapPath("./ImagenesPersonal/") & ID_PersonalLegajo & ".png")
 
-            ods2 = Objeto2.BuscarDatosDeUsuarioPorEmail(username)
+    '                urlImagen = urlImagen & ID_PersonalLegajo & ".png"
 
-            Dim Nombre As String = ods2.Tables(0).Rows(0).Item("Nombre").ToString
-            Dim Apellido As String = ods2.Tables(0).Rows(0).Item("Apellido").ToString
-            Dim ID_PersonalLegajo As Integer = ods2.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
+    '                Dim ods3 As New DataSet
+    '                Dim oObjeto3 As New PersonalLegajos
 
-            Ods = Objeto.ModificarDatosPersonales(ID_PersonalLegajo, Apellido, Nombre, CboTipoDoc.SelectedValue, TxtNumeroDoc.Value, CboNivelFormacion.SelectedValue, CboEstadoCivil.SelectedValue, TxtFechaNac.Text, CboNacionalidad.SelectedValue, CboSexo.SelectedValue, TxtCuil.Value)
+    '                ods3 = oObjeto3.ModificarFoto(ID_PersonalLegajo, urlImagen)
 
+    '                Page.ClientScript.RegisterStartupScript(Me.GetType, "alert", "<script>swal('Felicitaciones!', 'Tus datos se modificaron con Éxito!', 'success')</script>")
 
-            If btnSubirImgEmpleado.HasFile = True Then
+    '                Response.Redirect("FrmMiPerfil.aspx")
+    '                'Else
+    '                '    Dim ods3 As New DataSet
+    '                '    Dim oObjeto3 As New PersonalLegajos
+    '                '    ods3 = oObjeto3.ModificarFoto(ID_PersonalLegajo, "https://crear.net.ar/CLIENTES/LACALLE/Lacalle/user.png")
 
-                Dim urlImagen As String
-                urlImagen = "http://coovilros.com/rrhh/ImagenesPersonal/"
+    '                '
+    '            Else
+    '                'ScriptManager.RegisterClientScriptBlock(Me, GetType(String), "mensaje", "info('', 'Debes completar todos los campos', 'info')", True)
+    '            End If
 
-                btnSubirImgEmpleado.SaveAs(HttpContext.Current.Server.MapPath("./ImagenesPersonal/") & ID_PersonalLegajo & ".png")
+    '        End If
 
-                urlImagen = urlImagen & ID_PersonalLegajo & ".png"
+    '    Else
 
+    '        Dim Ods As New DataSet
+    '        Dim Objeto As New PersonalLegajos
 
-                Dim ods3 As New DataSet
-                Dim oObjeto3 As New PersonalLegajos
+    '        Dim Galleta As HttpCookie
+    '        Galleta = Request.Cookies("datos")
 
-                ods3 = oObjeto3.ModificarFoto(ID_PersonalLegajo, urlImagen)
+    '        Dim ods2 As New DataSet
+    '        Dim Objeto2 As New PersonalLegajos
 
+    '        Dim name As String = Galleta.Values("nombre")
+    '        Dim pass As String = Galleta.Values("pass")
+    '        Dim IdUser As String = Galleta.Values("userid")
+    '        ods2 = Objeto2.BuscarDatosDeUsuarioPorEmail(name)
 
+    '        Dim Nombre As String = ods2.Tables(0).Rows(0).Item("Nombre").ToString
+    '        Dim Apellido As String = ods2.Tables(0).Rows(0).Item("Apellido").ToString
+    '        Dim ID_PersonalLegajo As Integer = ods2.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
 
-                Page.ClientScript.RegisterStartupScript(Me.GetType, "alert", "<script>swal('Felicitaciones!', 'Tus datos se modificaron con Éxito!', 'success')</script>")
-                
+    '        If TxtNumeroDoc.Value <> "" And TxtFechaNac.Text <> "" And TxtCuil.Value <> "" Then
 
-                Response.Redirect("FrmMiPerfil.aspx")
+    '            Ods = Objeto.ModificarDatosPersonales(ID_PersonalLegajo, Apellido, Nombre, CboTipoDoc.SelectedValue, TxtNumeroDoc.Value, CboNivelFormacion.SelectedValue, CboEstadoCivil.SelectedValue, TxtFechaNac.Text, CboNacionalidad.SelectedValue, CboSexo.SelectedValue, TxtCuil.Value)
 
+    '            If btnSubirImgEmpleado.HasFile = True Then
 
+    '                Dim urlImagen As String
+    '                urlImagen = "http://coovilros.com/rrhh/ImagenesPersonal/"
 
+    '                btnSubirImgEmpleado.SaveAs(HttpContext.Current.Server.MapPath("./ImagenesPersonal/") & ID_PersonalLegajo & ".png")
 
-                'Else
-                '    Dim ods3 As New DataSet
-                '    Dim oObjeto3 As New PersonalLegajos
-                '    ods3 = oObjeto3.ModificarFoto(ID_PersonalLegajo, "https://crear.net.ar/CLIENTES/LACALLE/Lacalle/user.png")
+    '                urlImagen = urlImagen & ID_PersonalLegajo & ".png"
 
-                '
-            End If
+    '                Dim ods3 As New DataSet
+    '                Dim oObjeto3 As New PersonalLegajos
 
+    '                ods3 = oObjeto3.ModificarFoto(ID_PersonalLegajo, urlImagen)
 
-        Else
+    '                Page.ClientScript.RegisterStartupScript(Me.GetType, "alert", "<script>swal('Felicitaciones!', 'Tus datos se modificaron con Éxito!', 'success')</script>")
 
+    '                Response.Redirect("FrmMiPerfil.aspx")
 
-            Dim Ods As New DataSet
-            Dim Objeto As New PersonalLegajos
+    '                'Else
+    '                '    Dim ods3 As New DataSet
+    '                '    Dim oObjeto3 As New PersonalLegajos
+    '                '    ods3 = oObjeto3.ModificarFoto(ID_PersonalLegajo, "https://crear.net.ar/CLIENTES/LACALLE/Lacalle/user.png")
 
-            Dim Galleta As HttpCookie
-            Galleta = Request.Cookies("datos")
+    '                '
+    '            End If
 
-            Dim ods2 As New DataSet
-            Dim Objeto2 As New PersonalLegajos
+    '        Else
+    '            ScriptManager.RegisterClientScriptBlock(Me, GetType(String), "mensaje", "info('', 'Debes completar todos los campos', 'info')", True)
+    '        End If
 
-            Dim name As String = Galleta.Values("nombre")
-            Dim pass As String = Galleta.Values("pass")
-            Dim IdUser As String = Galleta.Values("userid")
-            ods2 = Objeto2.BuscarDatosDeUsuarioPorEmail(name)
-
-            Dim Nombre As String = ods2.Tables(0).Rows(0).Item("Nombre").ToString
-            Dim Apellido As String = ods2.Tables(0).Rows(0).Item("Apellido").ToString
-            Dim ID_PersonalLegajo As Integer = ods2.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
-
-            Ods = Objeto.ModificarDatosPersonales(ID_PersonalLegajo, Apellido, Nombre, CboTipoDoc.SelectedValue, TxtNumeroDoc.Value, CboNivelFormacion.SelectedValue, CboEstadoCivil.SelectedValue, TxtFechaNac.Text, CboNacionalidad.SelectedValue, CboSexo.SelectedValue, TxtCuil.Value)
-
-
-            If btnSubirImgEmpleado.HasFile = True Then
-
-                Dim urlImagen As String
-                urlImagen = "http://coovilros.com/rrhh/ImagenesPersonal/"
-
-                btnSubirImgEmpleado.SaveAs(HttpContext.Current.Server.MapPath("./ImagenesPersonal/") & ID_PersonalLegajo & ".png")
-
-                urlImagen = urlImagen & ID_PersonalLegajo & ".png"
-
-
-
-
-
-                Dim ods3 As New DataSet
-                Dim oObjeto3 As New PersonalLegajos
-
-                ods3 = oObjeto3.ModificarFoto(ID_PersonalLegajo, urlImagen)
-
-                Page.ClientScript.RegisterStartupScript(Me.GetType, "alert", "<script>swal('Felicitaciones!', 'Tus datos se modificaron con Éxito!', 'success')</script>")
-
-                Response.Redirect("FrmMiPerfil.aspx")
-
-                'Else
-                '    Dim ods3 As New DataSet
-                '    Dim oObjeto3 As New PersonalLegajos
-                '    ods3 = oObjeto3.ModificarFoto(ID_PersonalLegajo, "https://crear.net.ar/CLIENTES/LACALLE/Lacalle/user.png")
-
-                '
-            End If
-
-
-
-        End If
-    End Sub
+    '    End If
+    'End Sub
 
 
     Public Sub ModificarDatosReferenciasLaborales()
@@ -2141,21 +2126,21 @@ Public Class FrmMiPerfil
 
 
 
-    Private Sub BtnDatosPersonles_ServerClick(sender As Object, e As System.EventArgs) Handles BtnDatosPersonles.ServerClick
+    'Private Sub BtnDatosPersonles_ServerClick(sender As Object, e As System.EventArgs) Handles BtnDatosPersonles.ServerClick
 
 
-        ModificarDatosPersonales()
+    '    ModificarDatosPersonales()
 
 
-    End Sub
+    'End Sub
 
 
 
-    Private Sub BtnDatosDeContacto_ServerClick(sender As Object, e As System.EventArgs) Handles BtnDatosDeContacto.ServerClick
+    'Private Sub BtnDatosDeContacto_ServerClick(sender As Object, e As System.EventArgs) Handles BtnDatosDeContacto.ServerClick
 
-        ModificarDatosContacto()
-        Response.Redirect("FrmMiPerfil.aspx")
-    End Sub
+    '    ModificarDatosContacto()
+    '    Response.Redirect("FrmMiPerfil.aspx")
+    'End Sub
 
     Private Sub BtnRefLab_ServerClick(sender As Object, e As System.EventArgs) Handles BtnRefLab.ServerClick
 
@@ -2443,76 +2428,487 @@ Public Class FrmMiPerfil
 
 
 
-    Private Sub ComboRedes_SelectedIndexChanged(sender As Object, e As System.EventArgs) Handles ComboRedes.SelectedIndexChanged
-        'Dim PruebaGalleta As HttpCookie
-        'PruebaGalleta = Request.Cookies("datos")
-        'If PruebaGalleta Is Nothing Then
+    'Private Sub ComboRedes_SelectedIndexChanged(sender As Object, e As System.EventArgs) Handles ComboRedes.SelectedIndexChanged
+    'Dim PruebaGalleta As HttpCookie
+    'PruebaGalleta = Request.Cookies("datos")
+    'If PruebaGalleta Is Nothing Then
 
 
 
 
-        '    Dim Ods As New DataSet
-        '    Dim Objeto As New PersonalLegajos
+    '    Dim Ods As New DataSet
+    '    Dim Objeto As New PersonalLegajos
 
-        '    Dim userId As String = Membership.GetUser().UserName
+    '    Dim userId As String = Membership.GetUser().UserName
 
-        '    Dim username As String = userId
-
-
-        '    Dim ods2 As New DataSet
-        '    Dim Objeto2 As New PersonalLegajos
+    '    Dim username As String = userId
 
 
-        '    ods2 = Objeto2.BuscarDatosDeUsuarioPorEmail(username)
-
-        '    Dim Nombre As String = ods2.Tables(0).Rows(0).Item("Nombre").ToString
-        '    Dim Apellido As String = ods2.Tables(0).Rows(0).Item("Apellido").ToString
-        '    Dim ID_PersonalLegajo As Integer = ods2.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
+    '    Dim ods2 As New DataSet
+    '    Dim Objeto2 As New PersonalLegajos
 
 
+    '    ods2 = Objeto2.BuscarDatosDeUsuarioPorEmail(username)
+
+    '    Dim Nombre As String = ods2.Tables(0).Rows(0).Item("Nombre").ToString
+    '    Dim Apellido As String = ods2.Tables(0).Rows(0).Item("Apellido").ToString
+    '    Dim ID_PersonalLegajo As Integer = ods2.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
 
 
 
 
-        '    Dim Ods3 As New DataSet
-        '    Dim Objeto3 As New Redes
-        '    Ods3 = Objeto3.RedesSociales_BuscarDatosDeRedes(username, ComboRedes.SelectedItem.Text)
-        '    If Ods3.Tables(0).Rows.Count > 0 Then
-        '        TxtLinkRedsocial.Text = Ods3.Tables(0).Rows(0).Item("Link").ToString
-
-        '    End If
-
-        'Else
-
-        '    Dim Galleta As HttpCookie
-        '    Galleta = Request.Cookies("datos")
-
-        '    Dim ods2 As New DataSet
-        '    Dim Objeto2 As New PersonalLegajos
-
-        '    Dim name As String = Galleta.Values("nombre")
-        '    Dim pass As String = Galleta.Values("pass")
-        '    Dim IdUser As String = Galleta.Values("userid")
-        '    ods2 = Objeto2.BuscarDatosDeUsuarioPorEmail(name)
 
 
+    '    Dim Ods3 As New DataSet
+    '    Dim Objeto3 As New Redes
+    '    Ods3 = Objeto3.RedesSociales_BuscarDatosDeRedes(username, ComboRedes.SelectedItem.Text)
+    '    If Ods3.Tables(0).Rows.Count > 0 Then
+    '        TxtLinkRedsocial.Text = Ods3.Tables(0).Rows(0).Item("Link").ToString
 
-        '    Dim Nombre As String = ods2.Tables(0).Rows(0).Item("Nombre").ToString
-        '    Dim Apellido As String = ods2.Tables(0).Rows(0).Item("Apellido").ToString
-        '    Dim ID_PersonalLegajo As Integer = ods2.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
+    '    End If
 
+    'Else
 
-        '    Dim Ods3 As New DataSet
-        '    Dim Objeto3 As New Redes
-        '    Ods3 = Objeto3.RedesSociales_BuscarDatosDeRedes(name, ComboRedes.SelectedItem.Text)
-        '    If Ods3.Tables(0).Rows.Count > 0 Then
-        '        TxtLinkRedsocial.Text = Ods3.Tables(0).Rows(0).Item("Link").ToString
+    '    Dim Galleta As HttpCookie
+    '    Galleta = Request.Cookies("datos")
 
-        '    End If
+    '    Dim ods2 As New DataSet
+    '    Dim Objeto2 As New PersonalLegajos
+
+    '    Dim name As String = Galleta.Values("nombre")
+    '    Dim pass As String = Galleta.Values("pass")
+    '    Dim IdUser As String = Galleta.Values("userid")
+    '    ods2 = Objeto2.BuscarDatosDeUsuarioPorEmail(name)
 
 
 
+    '    Dim Nombre As String = ods2.Tables(0).Rows(0).Item("Nombre").ToString
+    '    Dim Apellido As String = ods2.Tables(0).Rows(0).Item("Apellido").ToString
+    '    Dim ID_PersonalLegajo As Integer = ods2.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
 
-        'End If
-    End Sub
+
+    '    Dim Ods3 As New DataSet
+    '    Dim Objeto3 As New Redes
+    '    Ods3 = Objeto3.RedesSociales_BuscarDatosDeRedes(name, ComboRedes.SelectedItem.Text)
+    '    If Ods3.Tables(0).Rows.Count > 0 Then
+    '        TxtLinkRedsocial.Text = Ods3.Tables(0).Rows(0).Item("Link").ToString
+
+    '    End If
+
+
+
+
+    'End If
+    'End Sub
+
+
+
+    'WEB METHODS
+
+#Region "DATOS PERSONALES"
+    <WebMethod()>
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    Public Shared Function GuardarDatosPersonales(ByVal cadena As String) As String
+
+        Try
+            'Main()
+            'IniciaTransaccion()
+
+            Dim jss As New JavaScriptSerializer()
+            jss.MaxJsonLength = 500000000
+            Dim dict = jss.Deserialize(Of List(Of DatosPersonalesWs))("[" & cadena & "]")
+
+            'Imagen
+
+            Dim TipoDocumento As String
+            TipoDocumento = Convert.ToString(dict(0).TipoDocumento)
+            Dim NroDocumento As String
+            NroDocumento = Convert.ToString(dict(0).NroDocumento)
+            Dim FechaNacimiento As String
+            FechaNacimiento = Convert.ToString(dict(0).FechaNacimiento)
+            Dim Sexo As String
+            Sexo = Convert.ToString(dict(0).Sexo)
+            Dim EstadoCivil As String
+            EstadoCivil = Convert.ToString(dict(0).EstadoCivil)
+            Dim Nacionalidad As String
+            Nacionalidad = Convert.ToString(dict(0).Nacionalidad)
+            Dim NivelFormacion As String
+            NivelFormacion = Convert.ToString(dict(0).NivelFormacion)
+            Dim Cuil As String
+            Cuil = Convert.ToString(dict(0).Cuil)
+
+            Dim Email As String
+            Email = Convert.ToString(dict(0).Email)
+
+            Dim Archivo As String
+            Archivo = Convert.ToString(dict(0).Imagen)
+
+            Dim ods As New DataSet
+            Dim oObjeto As New PersonalLegajos
+
+            ods = oObjeto.BuscarDatosDeUsuarioPorEmail(Email)
+
+            Dim Nombre As String = ods.Tables(0).Rows(0).Item("Nombre").ToString
+            Dim Apellido As String = ods.Tables(0).Rows(0).Item("Apellido").ToString
+            Dim ID_PersonalLegajo As Integer = ods.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
+
+            Dim ArchivoTipo As String = ""
+
+            If Archivo = "" Then
+                oObjeto.ModificarDatosPersonales(ID_PersonalLegajo, Apellido, Nombre, TipoDocumento, NroDocumento, NivelFormacion, EstadoCivil, FechaNacimiento, Nacionalidad, Sexo, Cuil)
+
+                Dim data = New With {
+                        Key .Status = "200"
+                    }
+
+                Dim serializer = New JavaScriptSerializer()
+                Dim json = serializer.Serialize(data)
+
+                Return New JavaScriptSerializer().Serialize(data)
+            Else
+                'genero letra random para el nombre de la img
+                Dim s As String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+                Dim r As New Random
+                Dim sb As New StringBuilder
+                For i As Integer = 1 To 8
+                    Dim idx As Integer = r.Next(0, 35)
+                    sb.Append(s.Substring(idx, 1))
+                Next
+                Dim letraRandom As String = sb.ToString
+
+                Dim imagenfinal() As String
+                Dim img As System.Drawing.Image
+
+                'empiezo a convertir la img
+                If Archivo <> Nothing Then
+                    imagenfinal = Archivo.Split(",")
+                    imagenfinal(1).ToString()
+
+                    ArchivoTipo = imagenfinal(0)
+
+                    Dim MS As System.IO.MemoryStream = New System.IO.MemoryStream
+                    Dim b64 As String = imagenfinal(1).ToString().Replace(" ", "+")
+                    Dim b() As Byte
+
+                    b = Convert.FromBase64String(b64)
+                    MS = New System.IO.MemoryStream(b)
+                    img = System.Drawing.Image.FromStream(MS)
+                    If Archivo <> Nothing Then
+                        Dim path__1 As [String] = HttpContext.Current.Server.MapPath("./ImagenesPersonal/")
+                        If Not System.IO.Directory.Exists(path__1) Then
+                            System.IO.Directory.CreateDirectory(path__1)
+                        End If
+
+                        Dim imageName As String = letraRandom & Convert.ToString(".png")
+
+                        Dim imgPath As String = Path.Combine(path__1, imageName)
+
+                        img.Save(imgPath, System.Drawing.Imaging.ImageFormat.Jpeg)
+
+                        Dim oObjeto2 As New PersonalLegajos
+                        Dim resultado As Integer
+                        Dim imagenUrl As String = "http://coovilros.com/rrhh/ImagenesPersonal/" & imageName
+
+                        oObjeto.ModificarDatosPersonales(ID_PersonalLegajo, Apellido, Nombre, TipoDocumento, NroDocumento, NivelFormacion, EstadoCivil, FechaNacimiento, Nacionalidad, Sexo, Cuil)
+                        oObjeto2.ModificarFoto(ID_PersonalLegajo, imagenUrl)
+
+                    End If
+
+                    Dim data = New With {
+                        Key .Status = "200"
+                    }
+
+                    Dim serializer = New JavaScriptSerializer()
+                    Dim json = serializer.Serialize(data)
+
+                    Return New JavaScriptSerializer().Serialize(data)
+
+                Else
+                    Return Error401("Error en el tipo de base 64")
+                End If
+
+            End If
+
+        Catch ex As Exception
+            Return Error401()
+        End Try
+
+    End Function
+#End Region
+
+#Region "DATOS DE CONTACTO Y REDES"
+
+    <WebMethod()>
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    Public Shared Function GuardarDatosContacto(ByVal cadena As String) As String
+
+        Try
+
+            Dim jss As New JavaScriptSerializer()
+            Dim dict = jss.Deserialize(Of List(Of DatosContactoWs))("[" & cadena & "]")
+
+            Dim Calle As String
+            Calle = Convert.ToString(dict(0).Calle)
+            Dim NroCalle As String
+            NroCalle = Convert.ToString(dict(0).NroCalle)
+            Dim Piso As String
+            Piso = Convert.ToString(dict(0).Piso)
+            Dim Depto As String
+            Depto = Convert.ToString(dict(0).Depto)
+            Dim TelefonoFijo As String
+            TelefonoFijo = Convert.ToString(dict(0).TelefonoFijo)
+            Dim TelefonoMovil As String
+            TelefonoMovil = Convert.ToString(dict(0).TelefonoMovil)
+            Dim Localidad As String
+            Localidad = Convert.ToString(dict(0).Localidad)
+            Dim Email As String
+            Email = Convert.ToString(dict(0).Email)
+
+            Dim ods As New DataSet
+            Dim oObjeto As New Redes
+
+            Dim ods1 As New DataSet
+            Dim oObjeto1 As New PersonalLegajos
+
+            ods1 = oObjeto1.BuscarDatosDeUsuarioPorEmail(Email)
+
+            Dim Nombre As String = ods1.Tables(0).Rows(0).Item("Nombre").ToString
+            Dim Apellido As String = ods1.Tables(0).Rows(0).Item("Apellido").ToString
+            Dim ID_PersonalLegajo As Integer = ods1.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
+
+            oObjeto1.ModificarDatosDeContacto(ID_PersonalLegajo, Calle, NroCalle, Piso, Depto, TelefonoFijo, TelefonoMovil, Localidad)
+
+            Dim data = New With {
+                Key .Status = "200"
+            }
+
+            Dim serializer = New JavaScriptSerializer()
+            Dim json = serializer.Serialize(data)
+
+            Return New JavaScriptSerializer().Serialize(data)
+
+        Catch ex As Exception
+
+            Return Error401()
+        End Try
+
+    End Function
+
+    <WebMethod()>
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    Public Shared Function AgregarRedes(ByVal cadena As String) As String
+
+
+        Try
+
+            Dim jss As New JavaScriptSerializer()
+            Dim dict = jss.Deserialize(Of List(Of RedesWs))("[" & cadena & "]")
+
+            Dim Link As String
+            Link = Convert.ToString(dict(0).Link)
+
+
+            Dim ComboRedes As String
+            ComboRedes = Convert.ToString(dict(0).ComboRedes)
+
+            Dim ods As New DataSet
+            Dim oObjeto As New Redes
+
+            Dim ods1 As New DataSet
+            Dim oObjeto1 As New PersonalLegajos
+
+            Dim user = Membership.GetUser()
+
+            ods1 = oObjeto1.BuscarDatosDeUsuarioPorEmail(user.Email)
+
+            Dim ID_PersonalLegajo As Integer = ods1.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
+
+            Dim ID_Redes As Integer
+
+            Dim Url As String = ""
+
+            Select Case ComboRedes
+                Case "FACEBOOK"
+                    Url = "https://crear.net.ar/CLIENTES/CONSTRUC/Construc/Facebook_icon-icons.com_66805.png"
+                Case "INSTAGRAM"
+                    Url = "https://crear.net.ar/CLIENTES/CONSTRUC/Construc/1491580635-yumminkysocialmedia26_83102.png"
+                Case "TWITTER"
+                    Url = "https://crear.net.ar/CLIENTES/CONSTRUC/Construc/1491579542-yumminkysocialmedia22_83078.png"
+                Case "YOUTUBE"
+                    Url = "https://crear.net.ar/CLIENTES/CONSTRUC/Construc/1491580651-yumminkysocialmedia28_83061.png"
+                Case Else
+
+            End Select
+
+            ID_Redes = oObjeto.Agregar(ID_PersonalLegajo, Link, ComboRedes, 1, Url)
+
+            Dim data = New With {
+                Key .Status = "200",
+                Key .ID_Redes = ID_Redes
+            }
+
+            Dim serializer = New JavaScriptSerializer()
+            Dim json = serializer.Serialize(data)
+
+            Return New JavaScriptSerializer().Serialize(data)
+
+        Catch ex As Exception
+
+            Return Error401()
+        End Try
+
+    End Function
+
+    <WebMethod()>
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    Public Shared Function CargarRedes() As String
+
+        Try
+
+            Dim oRed As New Redes
+            Dim ods As New DataSet
+
+            Dim userId As String = Membership.GetUser().UserName
+
+            Dim username As String = userId
+
+            ods = oRed.RedesSociales_BuscarPorEmail(username)
+
+            Dim e As RedesWs() = New RedesWs(ods.Tables(0).Rows.Count - 1) {}
+
+            For i = 0 To ods.Tables(0).Rows.Count - 1
+
+                Dim ID_Redes As String = ods.Tables(0).Rows(i).Item("ID_Redes").ToString
+
+                e(i) = New RedesWs()
+                e(i).ID_Redes = ID_Redes
+                e(i).Link = ods.Tables(0).Rows(i).Item("Link").ToString
+                e(i).ComboRedes = ods.Tables(0).Rows(i).Item("Nombre").ToString
+                e(i).Imagen = ods.Tables(0).Rows(i).Item("Imagen").ToString
+
+            Next
+
+            Dim data = New With {
+                         Key .Status = "200",
+                         Key .Data = e
+                 }
+
+            Dim serializer = New JavaScriptSerializer()
+            Dim json = serializer.Serialize(data)
+
+            Return New JavaScriptSerializer().Serialize(data)
+
+        Catch ex As Exception
+
+            Return Error401()
+
+        End Try
+
+
+    End Function
+
+    <WebMethod()>
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    Public Shared Function EliminarRedes(ByVal cadena As String) As String
+
+        Try
+
+            Dim jss As New JavaScriptSerializer()
+            Dim dict = jss.Deserialize(Of List(Of RedesWs))("[" & cadena & "]")
+
+            Dim ID_Redes As String
+            ID_Redes = Convert.ToString(dict(0).ID_Redes)
+
+            Dim ods As New DataSet
+            Dim oObjeto As New Redes
+
+            ods = oObjeto.Eliminar(ID_Redes)
+
+            Dim data = New With {
+                Key .Status = "200",
+                Key .Data = New With {
+                    Key .Mensaje = "Ok"
+                }
+            }
+
+            Dim serializer = New JavaScriptSerializer()
+            Dim json = serializer.Serialize(data)
+
+            Return New JavaScriptSerializer().Serialize(data)
+
+        Catch ex As Exception
+
+            Return Error401()
+        End Try
+
+    End Function
+#End Region
+
+#Region "Manejo de Status"
+    Public Shared Function Error401()
+
+        Dim data = New With {
+                         Key .Status = "401"
+                     }
+        Dim serializer = New JavaScriptSerializer()
+        Dim json = serializer.Serialize(data)
+
+        Return New JavaScriptSerializer().Serialize(data)
+    End Function
+
+    Public Function Status200()
+        Dim data = New With {
+                   Key .Status = "200"}
+
+        Dim serializer = New JavaScriptSerializer()
+        Dim json = serializer.Serialize(data)
+
+        Return New JavaScriptSerializer().Serialize(data)
+
+    End Function
+
+    Public Function ErrorLogin(ByVal Mensaje As String)
+        Dim data = New With {
+                     Key .Status = "401",
+                     Key .Data = New With {
+                     Key .Message = Mensaje
+                   }
+                 }
+
+        Dim serializer = New JavaScriptSerializer()
+        Dim json = serializer.Serialize(data)
+
+
+
+
+        Return New JavaScriptSerializer().Serialize(data)
+    End Function
+
+    Private Function StatusReclamos(ByVal NroStatus As String, ByVal Mensaje As String)
+        Dim data = New With {
+                  Key .Status = NroStatus,
+                  Key .Data = New With {
+                  Key .Message = Mensaje
+                }
+              }
+
+        Dim serializer = New JavaScriptSerializer()
+        Dim json = serializer.Serialize(data)
+        Return New JavaScriptSerializer().Serialize(data)
+    End Function
+
+    Private Function StatusCambioPAss(ByVal NroStatus As String, ByVal Mensaje As String)
+        Dim data = New With {
+                  Key .Status = NroStatus,
+                  Key .Data = New With {
+                  Key .Message = Mensaje
+                }
+              }
+
+        Dim serializer = New JavaScriptSerializer()
+        Dim json = serializer.Serialize(data)
+        Return New JavaScriptSerializer().Serialize(data)
+    End Function
+#End Region
+
 End Class

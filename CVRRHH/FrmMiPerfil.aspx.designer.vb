@@ -77,6 +77,15 @@ Partial Public Class FrmMiPerfil
     Protected WithEvents irAPerfil As Global.System.Web.UI.HtmlControls.HtmlAnchor
 
     '''<summary>
+    '''Control txtEmail.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtEmail As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
     '''Control UserPerfil.
     '''</summary>
     '''<remarks>
@@ -185,15 +194,6 @@ Partial Public Class FrmMiPerfil
     Protected WithEvents btnSubirImgEmpleado As Global.System.Web.UI.WebControls.FileUpload
 
     '''<summary>
-    '''Control BtnDatosPersonles.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents BtnDatosPersonles As Global.System.Web.UI.HtmlControls.HtmlInputButton
-
-    '''<summary>
     '''Control TxtCalle.
     '''</summary>
     '''<remarks>
@@ -248,6 +248,15 @@ Partial Public Class FrmMiPerfil
     Protected WithEvents TxtTelefonMovil As Global.System.Web.UI.HtmlControls.HtmlInputText
 
     '''<summary>
+    '''Control CboLocalidad.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents CboLocalidad As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
     '''Control ComboRedes.
     '''</summary>
     '''<remarks>
@@ -266,31 +275,13 @@ Partial Public Class FrmMiPerfil
     Protected WithEvents TxtLinkRedsocial As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control CboLocalidad.
+    '''Control ChkActivo.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents CboLocalidad As Global.System.Web.UI.WebControls.DropDownList
-
-    '''<summary>
-    '''Control BtnDatosDeContacto.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents BtnDatosDeContacto As Global.System.Web.UI.HtmlControls.HtmlInputButton
-
-    '''<summary>
-    '''Control RepeaterRedes.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents RepeaterRedes As Global.System.Web.UI.WebControls.Repeater
+    Protected WithEvents ChkActivo As Global.System.Web.UI.HtmlControls.HtmlInputCheckBox
 
     '''<summary>
     '''Control TxtFechaDesde.
@@ -300,15 +291,6 @@ Partial Public Class FrmMiPerfil
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents TxtFechaDesde As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''Control ChkActivo.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents ChkActivo As Global.System.Web.UI.HtmlControls.HtmlInputCheckBox
 
     '''<summary>
     '''Control TxtFechaHasta.

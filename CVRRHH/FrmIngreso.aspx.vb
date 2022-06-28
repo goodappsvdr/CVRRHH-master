@@ -11,6 +11,7 @@ Public Class FrmIngreso
 
 
         If Page.IsPostBack = False Then
+
             Dim Galleta As HttpCookie
             Galleta = Request.Cookies("datos")
 
@@ -19,8 +20,7 @@ Public Class FrmIngreso
             If Galleta Is Nothing Then
                 'Response.Redirect("FrmInicio.aspx")
             Else
-                Response.Redirect("FrmMiPerfil.aspx?login=true")
-
+                'Response.Redirect("FrmMiPerfil.aspx?login=true")
             End If
 
         End If
