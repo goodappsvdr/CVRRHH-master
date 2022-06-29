@@ -22,9 +22,11 @@
 
  
     
-  <!-- SweetAlert2 -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/limonte-sweetalert2/7.2.0/sweetalert2.all.min.js"></script>
+  <!-- alerts -->
+    <script type="text/javascript" src="Scripts/Alertas/sweetalert2@9.js"></script>
+    <script type="text/javascript" src="Scripts/Alertas/Alertas.js"></script>
+    <link href="Scripts/Alertas/sweetalert2.min.css" rel="stylesheet" />
+    <script type="text/javascript" src="Scripts/Alertas/sweetalert2.min.js"></script>
 
 
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -180,7 +182,7 @@
 </script>		
                                     
 
-<div alt="Cargando Imagen..." style="background-image:url('https://cuota-facil.com.ar/Imagenes/subir.png');background-size: cover;height:50px;width:50px;cursor:pointer;decoration:none;" required="" name="imagen" id="Div1" type="file" accept="image/*">
+<div alt="Cargando Imagen..." style="background-image:url('https://crear.net.ar/CLIENTES/PIN/Pin/camara-fotografica.png');background-size: cover;height:50px;width:50px;cursor:pointer;decoration:none;" required="" name="imagen" id="Div1" type="file" accept="image/*">
  <center> <asp:FileUpload style="background-image:url('https://cuota-facil.com.ar/Imagenes/ErrorTickets.png');background-size: cover; opacity: 0; height:80px;width:80px;cursor:pointer;margin-top:-5px;decoration:none;"  runat="server" id="SubirRecibo"  accept="application/pdf,image/*"  onchange="return validarExt2();" runat="server"></asp:FileUpload></center></div>
 
  <div id="visorArchivo">
@@ -209,7 +211,7 @@
   
   <br /><br />
 
-  <center><input type="button" id="BtnFormacionAca" runat="server" value="MODIFICAR DATOS" style="background:#047537; color:#fff;   border:1px solid black; width:300px;height:40px" onmouseup="Alert();"/>
+  <center><input type="button" id="BtnFormacionAca" runat="server" value="MODIFICAR DATOS" style="background:#047537; color:#fff;   border:1px solid black; width:300px;height:40px" />
    <a href="FrmMiPerfil.aspx"><input type="button" id="Button1" runat="server" value="CANCELAR" style="background:#CCC; color:#000;cursor:pointer;  border:1px solid black; width:300px;height:40px" /></a></center><br />
 
 </div>

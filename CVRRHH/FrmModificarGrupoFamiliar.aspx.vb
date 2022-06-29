@@ -198,7 +198,8 @@ Public Class FrmModificarGrupoFamiliar
 
             'esto va en FrmModificarGrupoFamiliar.aspx
 
-            Response.Redirect("FrmMiPerfil.aspx")
+            ScriptManager.RegisterClientScriptBlock(Me, GetType(String), "mensaje", "success('', 'Familiar guardado con éxito', 'success', 'FrmMiPerfil.aspx')", True)
+            'Response.Redirect("FrmMiPerfil.aspx")
 
 
         Else
@@ -226,11 +227,8 @@ Public Class FrmModificarGrupoFamiliar
 
             'esto va en FrmModificarGrupoFamiliar.aspx
 
-            Response.Redirect("FrmMiPerfil.aspx")
-
-
-
-
+            ScriptManager.RegisterClientScriptBlock(Me, GetType(String), "mensaje", "success('', 'Familiar guardado con éxito', 'success', 'FrmMiPerfil.aspx')", True)
+            'Response.Redirect("FrmMiPerfil.aspx")
 
         End If
 

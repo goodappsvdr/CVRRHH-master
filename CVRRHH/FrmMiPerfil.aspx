@@ -831,20 +831,18 @@
                                 <div class="row">
 
                                     <div class="col-md-4" style="margin-bottom: 20px;">
-                                        <div class="row" style="margin-top: 24px; border: 1px solid #CED4DA; border-radius: 2px; padding: 2px;">
-                                            <div class="col-md-7">
-                                                <label>Aún Activo en la Empresa</label>
-                                            </div>
-                                            <div class="col-md-5" style="margin-top: 8px;">
-                                                <input type="checkbox" class="form-control" id="ChkActivo" runat="server" />
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="col-md-4" style="margin-bottom: 20px;">
                                         <label>Desde</label>
                                         <asp:TextBox ID="TxtFechaDesde" type="date" runat="server" ForeColor="Black"
                                             class="form-control" Height="40px" Width="100%" Style="margin-top: -10px"></asp:TextBox>
+                                    </div>
+
+                                    <div class="col-md-4" style="margin-bottom: 20px;">
+                                        <div class="row" style="margin-top: 24px; border: 1px solid #CED4DA; border-radius: 2px; padding: 2px;">
+                                            <div class="col-md-12" style="display:flex;">
+                                                <label style="width:60%;">Aún Activo en la Empresa</label>
+                                                <input style="width:10%; margin-top: 7px;" onclick="desactivarHasta()" type="checkbox" class="form-control" id="ChkActivo" runat="server" />
+                                            </div>
+                                        </div>
                                     </div>
 
                                     <div class="col-md-4" style="margin-bottom: 20px;">
@@ -856,7 +854,7 @@
                                     <div class="col-md-4" style="margin-bottom: 20px;">
                                         <label>Empresa</label>
                                         <asp:TextBox ID="TxtEmpresa" type="text" runat="server" ForeColor="Black"
-                                            class="form-control" Height="40px" Width="100%" Style="margin-top: -10px"></asp:TextBox>
+                                            class="form-control" Height="40px" Width="100%" Style="margin-top: -1px"></asp:TextBox>
                                     </div>
 
                                     <div class="col-md-4" style="margin-bottom: 20px;">
@@ -912,6 +910,19 @@
                                             //document.getElementById('TxtFechaDesde').value = ano + "-" + mes + "-" + dia;
                                             //document.getElementById('TxtFechaHasta').value = ano + "-" + mes + "-" + dia;
                                         }
+
+                                        function desactivarHasta() {
+                                            var control = document.getElementById("ChkActivo");
+
+                                            if (control.checked) {
+                                                document.getElementById("TxtFechaHasta").disabled = true
+                                                document.getElementById("TxtFechaHasta").value = '';
+                                            }
+                                            else {
+                                                document.getElementById("TxtFechaHasta").disabled = false
+                                            }
+                                        }
+
                                     </script>
 
                                 </div>
@@ -920,7 +931,7 @@
                                 <br />
 
                                 <center>
-                                    <input type="button" id="BtnRefLab" runat="server" value="AGREGAR DATOS" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px" onmouseup="AlertaUno();" /></center>
+                                    <input type="button" id="BtnRefLab" runat="server" value="AGREGAR DATOS" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px"/></center>
                                 <br />
 
                             </div>
@@ -1179,8 +1190,6 @@
                                         <div style="padding-top: 20px; padding-bottom: 20px; margin: 10px; border: 1px solid #E3E3E3; border-radius: 4px;">
                                             <center>
 
-
-
                                                 <script type="text/javascript">
                                                     function readURL3(input) {
                                                         if (input.files && input.files[0]) {
@@ -1241,18 +1250,13 @@
 
                                     </div>
 
-
-
-
-
-
                                 </div>
 
                                 <br />
                                 <br />
 
                                 <center>
-                                    <input type="button" id="BtnFormacionAca" runat="server" value="AGREGAR DATOS" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px" onmouseup="Alert();" /></center>
+                                    <input type="button" id="BtnFormacionAca" runat="server" value="AGREGAR DATOS" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px;" /></center>
                                 <br />
 
                             </div>
@@ -1284,10 +1288,6 @@
 
 
                                 }
-
-
-
-
                             </script>
 
                         </div>
@@ -1313,8 +1313,6 @@
 
                                     </asp:TemplateField>
 
-
-
                                     <asp:TemplateField HeaderText="Eliminar">
                                         <ItemTemplate>
                                             <%--<asp:TextBox ID="" runat="server" class="form-control" ></asp:TextBox>--%>
@@ -1331,14 +1329,6 @@
                                     </asp:TemplateField>
 
                                 </Columns>
-
-
-
-
-
-
-
-
 
                             </asp:GridView>
                         </div>
@@ -1432,7 +1422,7 @@
                                 <br />
 
                                 <center>
-                                    <input type="button" id="BtnAgregarCurso" runat="server" value="AGREGAR DATOS" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px" onmouseup="AlertCursos();" /></center>
+                                    <input type="button" id="BtnAgregarCurso" runat="server" value="AGREGAR DATOS" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px" /></center>
                                 <br />
 
                             </div>
@@ -1517,24 +1507,9 @@
                         </center>
                         <br />
 
-
-
-
                         <asp:TextBox ID="TextBox7" runat="server" Style="display: none"></asp:TextBox><br />
 
-
-
                     </div>
-
-
-
-
-
-
-
-
-
-
 
 
                     <div class="col-md-12" id="DatosAntSal" style="display: none">
@@ -1577,15 +1552,11 @@
                                             console.log(checkbox.id);
                                             if (otro.checked) {
                                                 otro.checked = false;
-
                                             }
 
                                             if (checkbox.id = "EnfermedadSI") {
                                                 document.getElementById("tratamiento").style = "display:block";
-
                                             }
-
-
                                         }
 
                                     </script>
@@ -1629,10 +1600,6 @@
                                         <asp:TextBox ID="TxtCirugia" type="text" runat="server" ForeColor="Black"
                                             class="form-control" Height="80px" Width="100%" placeholder="Descripcion y detalle cirugia" TextMode="MultiLine"></asp:TextBox>
                                     </div>
-
-
-
-
 
                                 </div>
 

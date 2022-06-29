@@ -72,7 +72,7 @@ Public Class FrmModificarReferenciaLaboral
             Dim IdUser As String = Galleta.Values("userid")
 
 
-           
+
             Dim ID As Integer = Request.QueryString("ID")
 
             ods = Objeto.BuscarDatosDeUsuarioPorEmailYPorIDAntecentes(name, ID)
@@ -106,10 +106,6 @@ Public Class FrmModificarReferenciaLaboral
 
     End Sub
 
-
-
-
-
     Private Sub BtnRefLab_ServerClick(sender As Object, e As System.EventArgs) Handles BtnRefLab.ServerClick
 
         Dim PruebaGalleta As HttpCookie
@@ -119,21 +115,14 @@ Public Class FrmModificarReferenciaLaboral
 
         If PruebaGalleta Is Nothing Then
 
-
-
             Dim userId As String = Membership.GetUser().UserName
 
             Dim username As String = userId
 
-
             Dim ods As New DataSet
             Dim Objeto As New PersonalLegajos
 
-
             ods = Objeto.BuscarDatosDeUsuarioPorEmail(username)
-
-
-
 
             Dim Nombre As String = ods.Tables(0).Rows(0).Item("Nombre").ToString
             Dim Apellido As String = ods.Tables(0).Rows(0).Item("Apellido").ToString
@@ -149,10 +138,10 @@ Public Class FrmModificarReferenciaLaboral
                 Activo = 0
             End If
 
-
-
             ods2 = Objeto2.Modificar_AntecedentesLaborales(ID, ID_PersonalLegajo, TxtFechaDesde.Text, Activo, TxtFechaHasta.Text, TxtEmpresa.Text, TxtPuesto.Value, Combo.Value, TxtDescrip.Value, TxtDatosRef.Value, TxtRefCoov.Value)
-            Response.Redirect("FrmMiPerfil.aspx")
+
+            ScriptManager.RegisterClientScriptBlock(Me, GetType(String), "mensaje", "success('', 'Referencia laboral guardada con éxito', 'success', 'FrmMiPerfil.aspx')", True)
+            'Response.Redirect("FrmMiPerfil.aspx")
 
         Else
 
@@ -161,13 +150,10 @@ Public Class FrmModificarReferenciaLaboral
             Dim Galleta As HttpCookie
             Galleta = Request.Cookies("datos")
 
-
-
             Dim name As String = Galleta.Values("nombre")
             Dim pass As String = Galleta.Values("pass")
             Dim IdUser As String = Galleta.Values("userid")
             ods2 = Objeto2.BuscarDatosDeUsuarioPorEmail(name)
-
 
             Dim Nombre As String = ods2.Tables(0).Rows(0).Item("Nombre").ToString
             Dim Apellido As String = ods2.Tables(0).Rows(0).Item("Apellido").ToString
@@ -183,11 +169,10 @@ Public Class FrmModificarReferenciaLaboral
                 Activo = 0
             End If
 
-
-
             ods = Objeto.Modificar_AntecedentesLaborales(ID, ID_PersonalLegajo, TxtFechaDesde.Text, Activo, TxtFechaHasta.Text, TxtEmpresa.Text, TxtPuesto.Value, Combo.Value, TxtDescrip.Value, TxtDatosRef.Value, TxtRefCoov.Value)
-            Response.Redirect("FrmMiPerfil.aspx")
 
+            ScriptManager.RegisterClientScriptBlock(Me, GetType(String), "mensaje", "success('', 'Referencia laboral guardada con éxito', 'success', 'FrmMiPerfil.aspx')", True)
+            'Response.Redirect("FrmMiPerfil.aspx")
 
         End If
 

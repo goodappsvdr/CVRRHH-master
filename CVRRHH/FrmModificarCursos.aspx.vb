@@ -9,11 +9,7 @@ Public Class FrmModificarCursos
 
             BuscarPorID()
 
-
-
         End If
-
-
 
     End Sub
 
@@ -48,7 +44,6 @@ Public Class FrmModificarCursos
 
             ods = oObjeto.BuscarPorID(ID)
 
-
             TxtFechaDesdeCurso.Text = ods.Tables(0).Rows(0).Item("Desde").ToString
             TxtFechaHastaCurso.Text = ods.Tables(0).Rows(0).Item("Hasta").ToString
             ComboCursos.Value = ods.Tables(0).Rows(0).Item("Area").ToString
@@ -57,14 +52,11 @@ Public Class FrmModificarCursos
             TxtNombredelCurso.Text = ods.Tables(0).Rows(0).Item("NombreCurso").ToString
             TxtHoras.Text = ods.Tables(0).Rows(0).Item("Horas").ToString
 
-
         Else
             Dim ods As New DataSet
             Dim Objeto As New PersonalLegajos
             Dim Galleta As HttpCookie
             Galleta = Request.Cookies("datos")
-
-
 
             Dim name As String = Galleta.Values("nombre")
             Dim pass As String = Galleta.Values("pass")
@@ -82,7 +74,6 @@ Public Class FrmModificarCursos
 
             ods2 = oObjeto.BuscarPorID(ID)
 
-
             TxtFechaDesdeCurso.Text = ods2.Tables(0).Rows(0).Item("Desde").ToString
             TxtFechaHastaCurso.Text = ods2.Tables(0).Rows(0).Item("Hasta").ToString
             ComboCursos.Value = ods2.Tables(0).Rows(0).Item("Area").ToString
@@ -90,7 +81,6 @@ Public Class FrmModificarCursos
             TxtComentarios.Text = ods2.Tables(0).Rows(0).Item("Comentarios").ToString
             TxtNombredelCurso.Text = ods2.Tables(0).Rows(0).Item("NombreCurso").ToString
             TxtHoras.Text = ods2.Tables(0).Rows(0).Item("Horas").ToString
-
 
         End If
     End Sub
@@ -105,8 +95,6 @@ Public Class FrmModificarCursos
 
         If PruebaGalleta Is Nothing Then
 
-
-
             Dim ods2 As New DataSet
             Dim Objeto2 As New PersonalLegajos
 
@@ -119,16 +107,14 @@ Public Class FrmModificarCursos
             Dim Apellido As String = ods2.Tables(0).Rows(0).Item("Apellido").ToString
             Dim ID_PersonalLegajo As Integer = ods2.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
 
-
             Dim ods As New DataSet
             Dim oObjeto As New Cursos
             Dim ID As String = Request.QueryString("ID")
 
             ods = oObjeto.Modificar(ID, ID_PersonalLegajo, TxtFechaDesdeCurso.Text, TxtFechaHastaCurso.Text, TxtNombredelCurso.Text, ComboCursos.Value, TxtHoras.Text, TxtInstitucionCursos.Text, TxtComentarios.Text)
 
-
-
-            Response.Redirect("FrmMiPerfil.aspx")
+            ScriptManager.RegisterClientScriptBlock(Me, GetType(String), "mensaje", "success('', 'Curso guardado con éxito', 'success', 'FrmMiPerfil.aspx')", True)
+            'Response.Redirect("FrmMiPerfil.aspx")
 
         Else
             Dim ods2 As New DataSet
@@ -136,18 +122,14 @@ Public Class FrmModificarCursos
             Dim Galleta As HttpCookie
             Galleta = Request.Cookies("datos")
 
-
-
             Dim name As String = Galleta.Values("nombre")
             Dim pass As String = Galleta.Values("pass")
             Dim IdUser As String = Galleta.Values("userid")
             ods2 = Objeto2.BuscarDatosDeUsuarioPorEmail(name)
 
-
             Dim Nombre As String = ods2.Tables(0).Rows(0).Item("Nombre").ToString
             Dim Apellido As String = ods2.Tables(0).Rows(0).Item("Apellido").ToString
             Dim ID_PersonalLegajo As Integer = ods2.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
-
 
             Dim ods As New DataSet
             Dim oObjeto As New Cursos
@@ -155,13 +137,8 @@ Public Class FrmModificarCursos
 
             ods = oObjeto.Modificar(ID, ID_PersonalLegajo, TxtFechaDesdeCurso.Text, TxtFechaHastaCurso.Text, TxtNombredelCurso.Text, ComboCursos.Value, TxtHoras.Text, TxtInstitucionCursos.Text, TxtComentarios.Text)
 
-
-
-            Response.Redirect("FrmMiPerfil.aspx")
-
-
-
-
+            ScriptManager.RegisterClientScriptBlock(Me, GetType(String), "mensaje", "success('', 'Curso guardado con éxito', 'success', 'FrmMiPerfil.aspx')", True)
+            'Response.Redirect("FrmMiPerfil.aspx")
 
         End If
     End Sub

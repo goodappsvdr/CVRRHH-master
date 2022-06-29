@@ -10,11 +10,7 @@ Public Class FrmModificarFormacionAcademica
 
             BuscarPorID()
 
-
-
         End If
-
-
 
     End Sub
 
@@ -29,9 +25,6 @@ Public Class FrmModificarFormacionAcademica
         'aca valido si hay cookies
 
         If PruebaGalleta Is Nothing Then
-
-
-
 
             Dim ods2 As New DataSet
             Dim Objeto2 As New PersonalLegajos
@@ -135,42 +128,26 @@ Public Class FrmModificarFormacionAcademica
 
             ods = oObjeto.Modificar(ID, ID_PersonalLegajo, TxtDesdeFA.Text, TxtHastaFA.Text, ComboFA.Value, TxtInstitucion.Text, TxtTitulo.Text, ComboEspecilidad.Value)
 
-
-
             If SubirRecibo.HasFile = True Then
                 'EXTENCION DE RECIBOS
                 Dim FiRec2 As FileInfo = New FileInfo(SubirRecibo.FileName)
                 Dim extRec2 As String = FiRec2.Extension
 
-
-
-
                 Dim ExtensionRecibos2 As String = extRec2
 
-
-
-
-
-
                 SubirRecibo.SaveAs((HttpContext.Current.Server.MapPath("./ArchivoAdjunto/") & ID & ExtensionRecibos2))
-
-
-
 
                 ods = oObjeto.ModificarArchivoAjunto(ID, "http://coovilros.com/rrhh/ArchivoAdjunto/" & ID & ExtensionRecibos2)
             End If
 
-
-
-            Response.Redirect("FrmMiPerfil.aspx")
+            ScriptManager.RegisterClientScriptBlock(Me, GetType(String), "mensaje", "success('', 'Formación guardada con éxito', 'success', 'FrmMiPerfil.aspx')", True)
+            'Response.Redirect("FrmMiPerfil.aspx")
 
         Else
             Dim ods2 As New DataSet
             Dim Objeto2 As New PersonalLegajos
             Dim Galleta As HttpCookie
             Galleta = Request.Cookies("datos")
-
-
 
             Dim name As String = Galleta.Values("nombre")
             Dim pass As String = Galleta.Values("pass")
@@ -181,48 +158,28 @@ Public Class FrmModificarFormacionAcademica
             Dim Apellido As String = ods2.Tables(0).Rows(0).Item("Apellido").ToString
             Dim ID_PersonalLegajo As Integer = ods2.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
 
-
             Dim ods As New DataSet
             Dim oObjeto As New FormacionAcademica
             Dim ID As String = Request.QueryString("ID")
 
             ods = oObjeto.Modificar(ID, ID_PersonalLegajo, TxtDesdeFA.Text, TxtHastaFA.Text, ComboFA.Value, TxtInstitucion.Text, TxtTitulo.Text, ComboEspecilidad.Value)
 
-
             If SubirRecibo.HasFile = True Then
                 'EXTENCION DE RECIBOS
                 Dim FiRec2 As FileInfo = New FileInfo(SubirRecibo.FileName)
                 Dim extRec2 As String = FiRec2.Extension
 
-
-
-
                 Dim ExtensionRecibos2 As String = extRec2
 
-
-
-
-
-
                 SubirRecibo.SaveAs((HttpContext.Current.Server.MapPath("./ArchivoAdjunto/") & ID & ExtensionRecibos2))
-
-
-
 
                 ods = oObjeto.ModificarArchivoAjunto(ID, "http://coovilros.com/rrhh/ArchivoAdjunto/" & ID & ExtensionRecibos2)
             End If
 
-
-            Response.Redirect("FrmMiPerfil.aspx")
-
-
-
+            ScriptManager.RegisterClientScriptBlock(Me, GetType(String), "mensaje", "success('', 'Formación guardada con éxito', 'success', 'FrmMiPerfil.aspx')", True)
+            'Response.Redirect("FrmMiPerfil.aspx")
 
         End If
     End Sub
-
-
-
-
 
 End Class

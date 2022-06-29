@@ -275,15 +275,6 @@ Partial Public Class FrmMiPerfil
     Protected WithEvents TxtLinkRedsocial As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control ChkActivo.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents ChkActivo As Global.System.Web.UI.HtmlControls.HtmlInputCheckBox
-
-    '''<summary>
     '''Control TxtFechaDesde.
     '''</summary>
     '''<remarks>
@@ -291,6 +282,15 @@ Partial Public Class FrmMiPerfil
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents TxtFechaDesde As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control ChkActivo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents ChkActivo As Global.System.Web.UI.HtmlControls.HtmlInputCheckBox
 
     '''<summary>
     '''Control TxtFechaHasta.

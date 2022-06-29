@@ -321,6 +321,8 @@ Public Class FrmMiPerfil
 
                 If ods3.Tables(1).Rows.Count > 0 Then
                     TituloGF.InnerHtml = "MIS DATOS GRUPO FAMILIAR"
+                Else
+                    TituloGF.InnerHtml = ""
                 End If
                 For i = 0 To ods3.Tables(2).Rows.Count - 1
                     'Dim Valor As Button = TryCast(GrillaGrupoFam.Rows(i).Cells(1).Controls(1), Button)
@@ -364,6 +366,8 @@ Public Class FrmMiPerfil
 
                 If ods3.Tables(1).Rows.Count > 0 Then
                     TituloGF.InnerHtml = "MIS DATOS GRUPO FAMILIAR"
+                Else
+                    TituloGF.InnerHtml = ""
                 End If
                 For i = 0 To ods3.Tables(2).Rows.Count - 1
                     'Dim Valor As Button = TryCast(GrillaGrupoFam.Rows(i).Cells(1).Controls(1), Button)
@@ -429,6 +433,8 @@ Public Class FrmMiPerfil
 
                 If ods3.Tables(3).Rows.Count > 0 Then
                     TituloGF.InnerHtml = "MIS DATOS ACADEMICOS"
+                Else
+                    TituloGF.InnerHtml = ""
                 End If
                 For i = 0 To ods3.Tables(3).Rows.Count - 1
                     'Dim Valor As Button = TryCast(GrillaGrupoFam.Rows(i).Cells(1).Controls(1), Button)
@@ -471,6 +477,8 @@ Public Class FrmMiPerfil
 
                 If ods3.Tables(3).Rows.Count > 0 Then
                     TituloGF.InnerHtml = "MIS DATOS ACADEMICOS"
+                Else
+                    TituloGF.InnerHtml = ""
                 End If
                 For i = 0 To ods3.Tables(3).Rows.Count - 1
                     'Dim Valor As Button = TryCast(GrillaGrupoFam.Rows(i).Cells(1).Controls(1), Button)
@@ -527,6 +535,8 @@ Public Class FrmMiPerfil
 
                 If ods3.Tables(4).Rows.Count > 0 Then
                     TituloGF.InnerHtml = "MIS CURSOS"
+                Else
+                    TituloGF.InnerHtml = ""
                 End If
                 For i = 0 To ods3.Tables(4).Rows.Count - 1
                     'Dim Valor As Button = TryCast(GrillaGrupoFam.Rows(i).Cells(1).Controls(1), Button)
@@ -569,6 +579,8 @@ Public Class FrmMiPerfil
 
                 If ods3.Tables(4).Rows.Count > 0 Then
                     TituloGF.InnerHtml = "MIS CURSOS"
+                Else
+                    TituloGF.InnerHtml = ""
                 End If
                 For i = 0 To ods3.Tables(4).Rows.Count - 1
                     'Dim Valor As Button = TryCast(GrillaGrupoFam.Rows(i).Cells(1).Controls(1), Button)
@@ -1343,16 +1355,12 @@ Public Class FrmMiPerfil
 
     Public Sub GuardarDatosReferenciasLaborales()
 
-
         Dim PruebaGalleta As HttpCookie
         PruebaGalleta = Request.Cookies("datos")
 
         'aca valido si hay cookies
 
         If PruebaGalleta Is Nothing Then
-
-
-
 
             Dim Ods As New DataSet
             Dim Objeto As New PersonalLegajos
@@ -1361,10 +1369,8 @@ Public Class FrmMiPerfil
 
             Dim username As String = userId
 
-
             Dim ods2 As New DataSet
             Dim Objeto2 As New PersonalLegajos
-
 
             ods2 = Objeto2.BuscarDatosDeUsuarioPorEmail(username)
 
@@ -1383,13 +1389,10 @@ Public Class FrmMiPerfil
 
             ID_Resultado = Objeto2.Agregar_AntecedentesLaborales(ID_PersonalLegajo, TxtFechaDesde.Text, Activo, TxtFechaHasta.Text, TxtEmpresa.Text, TxtPuesto.Value, Combo.Value, TxtDescrip.Value, TxtDatosRef.Value, TxtRefCoov.Value)
 
-
-
-            Response.Redirect("FrmMiPerfil.aspx")
+            ScriptManager.RegisterClientScriptBlock(Me, GetType(String), "mensaje", "success('', 'Referencia laboral guardada con éxito', 'success', 'FrmMiPerfil.aspx')", True)
+            'Response.Redirect("FrmMiPerfil.aspx")
 
         Else
-
-
 
             Dim Galleta As HttpCookie
             Galleta = Request.Cookies("datos")
@@ -1418,23 +1421,20 @@ Public Class FrmMiPerfil
             ID_Resultado = Objeto2.Agregar_AntecedentesLaborales(ID_PersonalLegajo, TxtFechaDesde.Text, Activo, TxtFechaHasta.Text, TxtEmpresa.Text, TxtPuesto.Value, Combo.Value, TxtDescrip.Value, TxtDatosRef.Value, TxtRefCoov.Value)
 
 
-
-            Response.Redirect("FrmMiPerfil.aspx")
+            ScriptManager.RegisterClientScriptBlock(Me, GetType(String), "mensaje", "success('', 'Referencia laboral guardada con éxito', 'success', 'FrmMiPerfil.aspx')", True)
+            'Response.Redirect("FrmMiPerfil.aspx")
 
         End If
 
     End Sub
     Public Sub GuardarDatosGrupofamiliar()
 
-
         Dim PruebaGalleta As HttpCookie
         PruebaGalleta = Request.Cookies("datos")
 
         'aca valido si hay cookies
 
         If PruebaGalleta Is Nothing Then
-
-
 
             Dim Ods As New DataSet
             Dim Objeto As New PersonalLegajos
@@ -1443,10 +1443,8 @@ Public Class FrmMiPerfil
 
             Dim username As String = userId
 
-
             Dim ods2 As New DataSet
             Dim Objeto2 As New PersonalLegajos
-
 
             ods2 = Objeto2.BuscarDatosDeUsuarioPorEmail(username)
 
@@ -1465,12 +1463,10 @@ Public Class FrmMiPerfil
 
             ID_Resultado = Objeto2.Agregar_GrupoFamiliar(ID_PersonalLegajo, TxtApellidoGrupFam.Text, TxtNombreGrupFam.Text, ComboPrentezco.Value, TxtFechaNacGF.Text, TxtOcupacion.Text)
 
-
-
-            Response.Redirect("FrmMiPerfil.aspx")
+            ScriptManager.RegisterClientScriptBlock(Me, GetType(String), "mensaje", "success('', 'Familiar guardado con éxito', 'success', 'FrmMiPerfil.aspx')", True)
+            'Response.Redirect("FrmMiPerfil.aspx")
 
         Else
-
 
             Dim Galleta As HttpCookie
             Galleta = Request.Cookies("datos")
@@ -1482,7 +1478,6 @@ Public Class FrmMiPerfil
             Dim pass As String = Galleta.Values("pass")
             Dim IdUser As String = Galleta.Values("userid")
             ods2 = Objeto2.BuscarDatosDeUsuarioPorEmail(name)
-
 
             Dim ID_PersonalLegajo As Integer = ods2.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
 
@@ -1499,13 +1494,10 @@ Public Class FrmMiPerfil
 
             ID_Resultado = Objeto2.Agregar_GrupoFamiliar(ID_PersonalLegajo, TxtApellidoGrupFam.Text, TxtNombreGrupFam.Text, ComboPrentezco.Value, TxtFechaNacGF.Text, TxtOcupacion.Text)
 
-
-
-            Response.Redirect("FrmMiPerfil.aspx")
+            ScriptManager.RegisterClientScriptBlock(Me, GetType(String), "mensaje", "success('', 'Familiar guardado con éxito', 'success', 'FrmMiPerfil.aspx')", True)
+            'Response.Redirect("FrmMiPerfil.aspx")
 
         End If
-
-
     End Sub
     Public Sub GuardarFormacionAcademica()
 
@@ -1516,9 +1508,6 @@ Public Class FrmMiPerfil
 
         If PruebaGalleta Is Nothing Then
 
-
-
-
             Dim ods2 As New DataSet
             Dim Objeto2 As New PersonalLegajos
 
@@ -1528,59 +1517,30 @@ Public Class FrmMiPerfil
 
             ods2 = Objeto2.BuscarDatosDeUsuarioPorEmail(username)
 
-
-
-
-
-
             Dim Nombre As String = ods2.Tables(0).Rows(0).Item("Nombre").ToString
             Dim Apellido As String = ods2.Tables(0).Rows(0).Item("Apellido").ToString
             Dim ID_PersonalLegajo As Integer = ods2.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
-
-
 
             Dim Ods As New DataSet
             Dim oObjeto As New FormacionAcademica
             Dim Resultado As Integer
 
-
-
-
-
-
-
-
-
-
             Resultado = oObjeto.Agregar(ID_PersonalLegajo, TxtHastaFA.Text, TxtHastaFA.Text, ComboFA.Value, TxtInstitucion.Text, TxtTitulo.Text, "", ComboEspecilidad.Value)
+
             If SubirRecibo.HasFile = True Then
                 'EXTENCION DE RECIBOS
                 Dim FiRec2 As FileInfo = New FileInfo(SubirRecibo.FileName)
                 Dim extRec2 As String = FiRec2.Extension
 
-              
-
-
                 Dim ExtensionRecibos2 As String = extRec2
 
-
-
-
-
-
                 SubirRecibo.SaveAs((HttpContext.Current.Server.MapPath("./ArchivoAdjunto/") & Resultado & ExtensionRecibos2))
-
-
-
 
                 Ods = oObjeto.ModificarArchivoAjunto(Resultado, "http://coovilros.com/rrhh/ArchivoAdjunto/" & Resultado & ExtensionRecibos2)
             End If
 
-
-
-
-
-            Response.Redirect("FrmMiperfil.aspx")
+            ScriptManager.RegisterClientScriptBlock(Me, GetType(String), "mensaje", "success('', 'Formación guardada con éxito', 'success', 'FrmMiPerfil.aspx')", True)
+            'Response.Redirect("FrmMiperfil.aspx")
 
         Else
             Dim Galleta As HttpCookie
@@ -1598,41 +1558,25 @@ Public Class FrmMiPerfil
             Dim Apellido As String = ods2.Tables(0).Rows(0).Item("Apellido").ToString
             Dim ID_PersonalLegajo As Integer = ods2.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
 
-
-
             Dim Ods As New DataSet
             Dim oObjeto As New FormacionAcademica
             Dim Resultado As Integer
             Resultado = oObjeto.Agregar(ID_PersonalLegajo, TxtHastaFA.Text, TxtHastaFA.Text, ComboFA.Value, TxtInstitucion.Text, TxtTitulo.Text, "", ComboEspecilidad.Value)
-
 
             If SubirRecibo.HasFile = True Then
                 'EXTENCION DE RECIBOS
                 Dim FiRec2 As FileInfo = New FileInfo(SubirRecibo.FileName)
                 Dim extRec2 As String = FiRec2.Extension
 
-
-
-
                 Dim ExtensionRecibos2 As String = extRec2
 
-
-
-
-
-
                 SubirRecibo.SaveAs((HttpContext.Current.Server.MapPath("./ArchivoAdjunto/") & Resultado & ExtensionRecibos2))
-
-
-
 
                 Ods = oObjeto.ModificarArchivoAjunto(Resultado, "http://coovilros.com/rrhh/ArchivoAdjunto/" & Resultado & ExtensionRecibos2)
             End If
 
-            Response.Redirect("FrmMiperfil.aspx")
-
-
-
+            ScriptManager.RegisterClientScriptBlock(Me, GetType(String), "mensaje", "success('', 'Formación guardada con éxito', 'success', 'FrmMiPerfil.aspx')", True)
+            'Response.Redirect("FrmMiperfil.aspx")
 
         End If
 
@@ -1647,10 +1591,6 @@ Public Class FrmMiPerfil
 
         If PruebaGalleta Is Nothing Then
 
-
-
-
-
             Dim ods2 As New DataSet
             Dim Objeto2 As New PersonalLegajos
 
@@ -1664,14 +1604,14 @@ Public Class FrmMiPerfil
             Dim Apellido As String = ods2.Tables(0).Rows(0).Item("Apellido").ToString
             Dim ID_PersonalLegajo As Integer = ods2.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
 
-
             Dim ods As New DataSet
             Dim oObjeto As New Cursos
             Dim ID_Resultado As Integer
 
             ID_Resultado = oObjeto.Agregar(ID_PersonalLegajo, TxtFechaDesdeCurso.Text, TxtFechaHastaCurso.Text, TxtNombredelCurso.Text, ComboCursos.Value, TxtHoras.Text, TxtInstitucionCursos.Text, TxtComentarios.Text)
 
-            Response.Redirect("FrmMiPerfil.aspx")
+            ScriptManager.RegisterClientScriptBlock(Me, GetType(String), "mensaje", "success('', 'Curso guardado con éxito', 'success', 'FrmMiPerfil.aspx')", True)
+            'Response.Redirect("FrmMiPerfil.aspx")
 
         Else
 
@@ -1686,11 +1626,9 @@ Public Class FrmMiPerfil
             Dim IdUser As String = Galleta.Values("userid")
             ods2 = Objeto2.BuscarDatosDeUsuarioPorEmail(name)
 
-
             Dim Nombre As String = ods2.Tables(0).Rows(0).Item("Nombre").ToString
             Dim Apellido As String = ods2.Tables(0).Rows(0).Item("Apellido").ToString
             Dim ID_PersonalLegajo As Integer = ods2.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
-
 
             Dim ods As New DataSet
             Dim oObjeto As New Cursos
@@ -1698,11 +1636,8 @@ Public Class FrmMiPerfil
 
             ID_Resultado = oObjeto.Agregar(ID_PersonalLegajo, TxtFechaDesdeCurso.Text, TxtFechaHastaCurso.Text, TxtNombredelCurso.Text, ComboCursos.Value, TxtHoras.Text, TxtInstitucionCursos.Text, TxtComentarios.Text)
 
-            Response.Redirect("FrmMiPerfil.aspx")
-
-
-
-
+            ScriptManager.RegisterClientScriptBlock(Me, GetType(String), "mensaje", "success('', 'Curso guardado con éxito', 'success', 'FrmMiPerfil.aspx')", True)
+            'Response.Redirect("FrmMiPerfil.aspx")
 
         End If
 
@@ -1717,9 +1652,6 @@ Public Class FrmMiPerfil
 
         If PruebaGalleta Is Nothing Then
 
-
-
-
             Dim ods2 As New DataSet
             Dim Objeto2 As New PersonalLegajos
 
@@ -1754,13 +1686,10 @@ Public Class FrmMiPerfil
 
             If TxtAltura.Text <> "" And TxtPeso.Text <> "" Then
 
-
-
-
                 ID_Resultado = oObjeto.Agregar(ID_PersonalLegajo, TxtAltura.Text, TxtPeso.Text, Enfermedad, TxtTratamiento.Text, Cirugia, TxtCirugia.Text)
 
-                Response.Redirect("FrmMiPerfil.aspx")
-
+                ScriptManager.RegisterClientScriptBlock(Me, GetType(String), "mensaje", "success('', 'Antecedente guardado con éxito', 'success', 'FrmMiPerfil.aspx')", True)
+                'Response.Redirect("FrmMiPerfil.aspx")
 
             End If
 
@@ -1776,8 +1705,6 @@ Public Class FrmMiPerfil
             Dim pass As String = Galleta.Values("pass")
             Dim IdUser As String = Galleta.Values("userid")
             ods2 = Objeto2.BuscarDatosDeUsuarioPorEmail(name)
-
-
 
             Dim Nombre As String = ods2.Tables(0).Rows(0).Item("Nombre").ToString
             Dim Apellido As String = ods2.Tables(0).Rows(0).Item("Apellido").ToString
@@ -1804,20 +1731,12 @@ Public Class FrmMiPerfil
 
             If TxtAltura.Text <> "" And TxtPeso.Text <> "" Then
 
-
-
-
                 ID_Resultado = oObjeto.Agregar(ID_PersonalLegajo, TxtAltura.Text, TxtPeso.Text, Enfermedad, TxtTratamiento.Text, Cirugia, TxtCirugia.Text)
 
-                Response.Redirect("FrmMiPerfil.aspx")
-
+                ScriptManager.RegisterClientScriptBlock(Me, GetType(String), "mensaje", "success('', 'Antecedente guardado con éxito', 'success', 'FrmMiPerfil.aspx')", True)
+                'Response.Redirect("FrmMiPerfil.aspx")
 
             End If
-
-
-
-
-
 
         End If
     End Sub
@@ -2223,8 +2142,6 @@ Public Class FrmMiPerfil
 
         If PruebaGalleta Is Nothing Then
 
-
-
             Dim ods2 As New DataSet
             Dim Objeto2 As New PersonalLegajos
 
@@ -2242,9 +2159,6 @@ Public Class FrmMiPerfil
             Dim ods3 As New DataSet
             Dim oObjeto3 As New PersonalLegajos
 
-
-
-
             ods3 = oObjeto3.BuscarDatosDeUsuarioPorEmail(username)
 
             If ods3.Tables(5).Rows.Count > 0 Then
@@ -2253,13 +2167,10 @@ Public Class FrmMiPerfil
                 Dim ID As String = ods3.Tables(5).Rows(0).Item("ID_AntecedentesSalud").ToString
             End If
             If ID <> "" Then
-
                 ModificarDatosAntecedentesSalud()
-
             Else
                 GuardarAntecedentesSalud()
             End If
-
 
         Else
             Dim ods2 As New DataSet
@@ -2276,18 +2187,9 @@ Public Class FrmMiPerfil
             Dim IdUser As String = Galleta.Values("userid")
             ods3 = oobjeto3.BuscarDatosDeUsuarioPorEmail(name)
 
-
-
-
             Dim Nombre As String = ods3.Tables(0).Rows(0).Item("Nombre").ToString
             Dim Apellido As String = ods3.Tables(0).Rows(0).Item("Apellido").ToString
             Dim ID_PersonalLegajo As Integer = ods3.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
-
-
-
-
-
-
 
             ods3 = oobjeto3.BuscarDatosDeUsuarioPorEmail(name)
 
@@ -2303,10 +2205,6 @@ Public Class FrmMiPerfil
             Else
                 GuardarAntecedentesSalud()
             End If
-
-
-
-
 
         End If
 
