@@ -130,7 +130,7 @@ Public Class FrmLogin
                 '------------------------------mando email--------------------------------------------------
                 Dim mail As System.Net.Mail.MailMessage = New System.Net.Mail.MailMessage()
                 Dim SmtpServer As SmtpClient = New SmtpClient("smtp.gmail.com")
-                mail.From = New MailAddress("contacto@crear.net.ar", "COOVILROS", System.Text.Encoding.UTF8)
+                mail.From = New MailAddress("logistica.ideastdi@gmail.com", "COOVILROS", System.Text.Encoding.UTF8)
 
                 Dim horayuser As String = Date.Now.Year.ToString + Date.Now.Month.ToString + Date.Now.Day.ToString + Date.Now.TimeOfDay.TotalMinutes.ToString + UserID.ToString
 
@@ -160,9 +160,9 @@ Public Class FrmLogin
                 'Dim attachment As System.Net.Mail.Attachment
                 'attachment = New System.Net.Mail.Attachment("https://goodapps.com.ar/RRHH/Imagenes/Isologotipo_Coovilros_horizontal.png")
                 'mail.Attachments.Add(attachment)
-                SmtpServer.Host = "smtp.hostinger.com.ar"
+                SmtpServer.Host = "smtp.gmail.com"
                 SmtpServer.Port = 587
-                SmtpServer.Credentials = New System.Net.NetworkCredential("contacto@crear.net.ar", "EmailCrear34117882*")
+                SmtpServer.Credentials = New System.Net.NetworkCredential("logistica.ideastdi@gmail.com", "ajgewnmsywaoqwdx")
                 SmtpServer.EnableSsl = True
                 SmtpServer.Send(mail)
 
