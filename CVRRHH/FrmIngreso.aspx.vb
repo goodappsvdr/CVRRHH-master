@@ -18,9 +18,9 @@ Public Class FrmIngreso
             'aca valido si hay cookies
 
             If Galleta Is Nothing Then
-                'Response.Redirect("FrmInicio.aspx")
+                ' Response.Redirect("FrmInicio.aspx")
             Else
-                'Response.Redirect("FrmMiPerfil.aspx?login=true")
+                Response.Redirect("FrmMiPerfil.aspx?login=true")
             End If
 
         End If

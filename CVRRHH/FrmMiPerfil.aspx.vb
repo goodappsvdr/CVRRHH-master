@@ -9,15 +9,23 @@ Public Class FrmMiPerfil
     Inherits System.Web.UI.Page
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        Dim GalletaEmail As HttpCookie
+        GalletaEmail = Request.Cookies("datos")
 
         If User.Identity.IsAuthenticated = False Then
+            'Response.Redirect("FrmInicio.aspx")
+        End If
+
+
+
+        If GalletaEmail Is Nothing Then
             Response.Redirect("FrmInicio.aspx")
         End If
 
+
         If Page.IsPostBack = False Then
 
-            Dim GalletaEmail As HttpCookie
-            GalletaEmail = Request.Cookies("datos")
+
             Dim email As String = GalletaEmail.Values("nombre")
             txtEmail.Text = email
 
@@ -52,6 +60,8 @@ Public Class FrmMiPerfil
                 Dim ods As New DataSet
                 Dim Objeto As New PersonalLegajos
             Else
+                PruebaGalleta.Expires = Date.Now
+
                 Dim ods As New DataSet
                 Dim Objeto As New PersonalLegajos
 
@@ -980,11 +990,16 @@ Public Class FrmMiPerfil
 
     End Sub
     Protected Sub CerrarSesion(sender As Object, e As EventArgs)
+
+        Dim Galleta As HttpCookie
+        Galleta = Request.Cookies("datos")
+        Galleta.Expires = DateTime.Now.AddDays(-1)
+        Response.Cookies.Add(Galleta)
+
+
+
         Session.Clear()
-        Response.Cookies("datos").Expires = Now.AddDays(-1D)
 
-
-        Response.Cookies.Remove("datos")
         FormsAuthentication.SignOut()
         Roles.DeleteCookie()
 
