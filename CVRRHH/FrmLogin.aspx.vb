@@ -2,6 +2,8 @@
 Imports AD
 Imports System.Net.Mail
 Imports RestSharp
+Imports Newtonsoft.Json.Linq
+Imports System.Web.Script.Serialization
 
 Public Class FrmLogin
     Inherits System.Web.UI.Page
@@ -90,7 +92,9 @@ Public Class FrmLogin
                 id_personal = oObjeto2.Agregar(TxtApellido.Text, TxtNombre.Text, "", "", "", "", "", "", 5, "", "", 11, 12, TxtFechaRegistro.Text, 19, 22, "", 122, TxtFechaRegistro.Text, TxtFechaRegistro.Text, "", 64, 27, "", 29, "", 1, 3, 14, "", "", "", "", "", "", "", "", 140, 78, TxtEmail.Text, 209)
 
                 'Apellido, Nombre, Calle, Nro, Piso, Depto, Telefono, Movil, ID_DocumentoTipo, NroDocumento, Foto, ID_NivelFormacion, ID_EstadoCivil, Nacimiento, ID_Nacionalidad, Sexo, CUIL, Categoria, Ingreso, Egreso, MesesAntiguedadReconocida, ID_Convenio, ID_Art, NroAfiliado, ID_Banco, NroCajaAhorro, ID_Seccion, ID_Puesto, ID_Jefe, Jubilado, Tarjeta, MensajeIngreso, MensajeEgreso, FondoCompJub, AporteVoluntario, Observaciones, Archivo, Estado, Tipo,Email
-                EnviarEmailParaConfirmar(newUserId)
+
+                'EnviarEmailParaConfirmar(newUserId)
+                SendEmailByApi(newUserId, TxtEmail.Text.ToLower)
                 formulario.Visible = False
 
                 oculto.Visible = True
@@ -203,59 +207,139 @@ Public Class FrmLogin
 
 
 
-    'Public Shared Function SendEmailByApi(UserID As Guid, email As String) As String
+    Public Shared Function SendEmailByApi(UserID As Guid, email As String) As String
 
-    '    Try
+        Try
 
-    '        '{"email": "jonataneze2323@gmail.com", "token": "12345hdfdfgg"}
+            '{"email": "jonataneze2323@gmail.com", "token": "12345hdfdfgg"}
 
-    '        Dim token As String = UserID.ToString
-
-
-
-    '        If token <> "" And email <> "" Then
-
-    '            System.Net.ServicePointManager.SecurityProtocol = 3072
-
-    '            Dim client = New RestClient("https://crear.net.ar/dev/apiEmail")
-    '            client.Timeout = -1
-    '            Dim request = New RestRequest(Method.POST)
-    '            request.AddHeader("Content-Type", "application/x-www-form-urlencoded")
-    '            request.AddParameter("email", email)
-    '            request.AddParameter("token", token)
-    '            Dim response As IRestResponse = client.Execute(request)
-    '            Console.WriteLine(response.Content)
-
-    '            Dim respuesta As String = response.Content
-
-    '            Dim jsonString = respuesta
-    '            Dim json2 As JObject = JObject.Parse(jsonString)
-    '            Dim status = json2("data").First.First
-    '            If status = "200" Then
-    '                Dim data = New With {
-    '              Key .Status = 200
-    '              }
-
-    '                Dim serializer = New JavaScriptSerializer()
-    '                serializer.MaxJsonLength = 500000000
-    '                Dim json = serializer.Serialize(data)
-
-    '                Return json
-    '            Else
-    '                Return Error401()
-
-    '            End If
+            Dim token As String = UserID.ToString
 
 
 
+            If token <> "" And email <> "" Then
 
-    '        End If
+                System.Net.ServicePointManager.SecurityProtocol = 3072
 
-    '    Catch ex As Exception
-    '        Return Error401()
+                Dim client = New RestClient("https://crear.net.ar/dev/apiEmail")
+                client.Timeout = -1
+                Dim request = New RestRequest(Method.POST)
+                request.AddHeader("Content-Type", "application/x-www-form-urlencoded")
+                request.AddParameter("email", email)
+                request.AddParameter("token", token)
+                Dim response As IRestResponse = client.Execute(request)
+                Console.WriteLine(response.Content)
+
+                Dim respuesta As String = response.Content
+
+                Dim jsonString = respuesta
+                Dim json2 As JObject = JObject.Parse(jsonString)
+                Dim status = json2("data").First.First
+                If status = "200" Then
+                    Dim data = New With {
+                  Key .Status = 200
+                  }
+
+                    Dim serializer = New JavaScriptSerializer()
+                    serializer.MaxJsonLength = 500000000
+                    Dim json = serializer.Serialize(data)
+
+                    Return json
+                Else
+                    Return Error401()
+
+                End If
 
 
-    '    End Try
-    'End Function
+
+
+            End If
+
+        Catch ex As Exception
+            Return Error401()
+
+
+        End Try
+    End Function
+
+
+#Region "Manejo de Status"
+
+    Public Shared Function Error401()
+
+        Dim data = New With {
+                         Key .Status = "401"}
+
+        Dim serializer = New JavaScriptSerializer()
+        Dim json = serializer.Serialize(data)
+
+        Return New JavaScriptSerializer().Serialize(data)
+    End Function
+
+
+    Public Function Error406()
+
+        Dim data = New With {
+                         Key .Status = "406"}
+
+        Dim serializer = New JavaScriptSerializer()
+        Dim json = serializer.Serialize(data)
+
+        Return New JavaScriptSerializer().Serialize(data)
+    End Function
+    Public Function Status200()
+        Dim data = New With {
+                   Key .Status = "200"}
+
+        Dim serializer = New JavaScriptSerializer()
+        Dim json = serializer.Serialize(data)
+
+        Return New JavaScriptSerializer().Serialize(data)
+
+    End Function
+
+    Public Function ErrorLogin(ByVal Mensaje As String)
+        Dim data = New With {
+                     Key .Status = "401",
+                     Key .Data = New With {
+                     Key .Message = Mensaje
+                   }
+                 }
+
+        Dim serializer = New JavaScriptSerializer()
+        Dim json = serializer.Serialize(data)
+
+
+
+
+        Return New JavaScriptSerializer().Serialize(data)
+    End Function
+
+    Private Function StatusReclamos(ByVal NroStatus As String, ByVal Mensaje As String)
+        Dim data = New With {
+                  Key .Status = NroStatus,
+                  Key .Data = New With {
+                  Key .Message = Mensaje
+                }
+              }
+
+        Dim serializer = New JavaScriptSerializer()
+        Dim json = serializer.Serialize(data)
+        Return New JavaScriptSerializer().Serialize(data)
+    End Function
+
+    Private Function StatusCambioPAss(ByVal NroStatus As String, ByVal Mensaje As String)
+        Dim data = New With {
+                  Key .Status = NroStatus,
+                  Key .Data = New With {
+                  Key .Message = Mensaje
+                }
+              }
+
+        Dim serializer = New JavaScriptSerializer()
+        Dim json = serializer.Serialize(data)
+        Return New JavaScriptSerializer().Serialize(data)
+    End Function
+#End Region
 
 End Class

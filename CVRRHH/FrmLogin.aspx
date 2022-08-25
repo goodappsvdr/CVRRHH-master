@@ -251,7 +251,7 @@ cuadro de sombra: -1px 2px 5px 0px rgba (0,0,0,0.75);" id="formulario" runat="se
          <center> <div class="col-md-12">
      <div class="form-group">
     
-    <button type="button" class="btn btn-success" ID="BtnEnviar" runat="server">ENVIAR</button>
+    <button type="button" class="btn btn-success" ID="BtnEnviar" runat="server" onmouseup="loading()">ENVIAR</button>
     </div></div>
     
     <p>(**) Es importante que ingrese una cuenta de email existente ya que a la misma llegaran las instrucciones para completar el PASO 2
@@ -881,7 +881,11 @@ fieldset {
 
               swal("LAS CONSTRASEÑAS NO COINCIDEN", "revisa por favor!", "error");
           }
-    </script>
+          function loading() {
+
+              swal("Espere por favor", "procesando información!", "warning");
+          }
+      </script>
 
      <script type="text/javascript">
 
