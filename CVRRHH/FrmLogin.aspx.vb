@@ -1,6 +1,7 @@
 ﻿
 Imports AD
 Imports System.Net.Mail
+Imports RestSharp
 
 Public Class FrmLogin
     Inherits System.Web.UI.Page
@@ -147,7 +148,7 @@ Public Class FrmLogin
     "<title>CLASIFICACIÓN</title></head><body style='background:#fff;'><center>" &
     "<center><br>" &
     "<div style='background:#fff; color:#000;margin-top:-100px;z-index:9999999;width:90%;height:auto;padding: 20px;-webkit-box-shadow: 0px 5px 13px 2px rgba(51,49,51,1);'>" &
-    "<img src='https://goodapps.com.ar/RRHH/Imagenes/Isologotipo_Coovilros_horizontal.png' width='300'><hr>" &
+    "<img src='https://www.coovilros.com/Imagenes/logo-dark.png' width='300'><hr>" &
     "<h2 style='color:#000;font-family: monospace'>HOLA 🖐 " & TxtNombre.Text & ", BIENVENIDO!!</h2>" &
     "<h2 style='color:#000;font-family: monospace'>TU USUARIO ES: " & TxtEmail.Text & "</h2>" &
     "<h2 style='color:#000;font-family: monospace'>TU CONTRASEÑA ES: " & TxtPass.Text & "</h2>" &
@@ -162,7 +163,7 @@ Public Class FrmLogin
                 'mail.Attachments.Add(attachment)
                 SmtpServer.Host = "smtp.gmail.com"
                 SmtpServer.Port = 587
-                SmtpServer.Credentials = New System.Net.NetworkCredential("logistica.ideastdi@gmail.com", "ajgewnmsywaoqwdx")
+                SmtpServer.Credentials = New System.Net.NetworkCredential("logistica.ideastdi@gmail.com", "nzhfrhzlubdzgotk")
                 SmtpServer.EnableSsl = True
                 SmtpServer.Send(mail)
 
@@ -197,4 +198,64 @@ Public Class FrmLogin
 
 
     End Sub
+
+
+
+
+
+    'Public Shared Function SendEmailByApi(UserID As Guid, email As String) As String
+
+    '    Try
+
+    '        '{"email": "jonataneze2323@gmail.com", "token": "12345hdfdfgg"}
+
+    '        Dim token As String = UserID.ToString
+
+
+
+    '        If token <> "" And email <> "" Then
+
+    '            System.Net.ServicePointManager.SecurityProtocol = 3072
+
+    '            Dim client = New RestClient("https://crear.net.ar/dev/apiEmail")
+    '            client.Timeout = -1
+    '            Dim request = New RestRequest(Method.POST)
+    '            request.AddHeader("Content-Type", "application/x-www-form-urlencoded")
+    '            request.AddParameter("email", email)
+    '            request.AddParameter("token", token)
+    '            Dim response As IRestResponse = client.Execute(request)
+    '            Console.WriteLine(response.Content)
+
+    '            Dim respuesta As String = response.Content
+
+    '            Dim jsonString = respuesta
+    '            Dim json2 As JObject = JObject.Parse(jsonString)
+    '            Dim status = json2("data").First.First
+    '            If status = "200" Then
+    '                Dim data = New With {
+    '              Key .Status = 200
+    '              }
+
+    '                Dim serializer = New JavaScriptSerializer()
+    '                serializer.MaxJsonLength = 500000000
+    '                Dim json = serializer.Serialize(data)
+
+    '                Return json
+    '            Else
+    '                Return Error401()
+
+    '            End If
+
+
+
+
+    '        End If
+
+    '    Catch ex As Exception
+    '        Return Error401()
+
+
+    '    End Try
+    'End Function
+
 End Class

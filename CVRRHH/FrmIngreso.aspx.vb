@@ -148,7 +148,7 @@ Public Class FrmIngreso
             'mail.Attachments.Add(attachment)
             SmtpServer.Host = "smtp.gmail.com"
             SmtpServer.Port = 587
-            SmtpServer.Credentials = New System.Net.NetworkCredential("logistica.ideastdi@gmail.com", "ajgewnmsywaoqwdx")
+            SmtpServer.Credentials = New System.Net.NetworkCredential("logistica.ideastdi@gmail.com", "nzhfrhzlubdzgotk")
             SmtpServer.EnableSsl = True
             SmtpServer.Send(mail)
 
