@@ -112,6 +112,7 @@
     </Compile>
     <Compile Include="PersonalLegajos.vb" />
     <Compile Include="Redes.vb" />
+    <Compile Include="SeccionTrabajar.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
