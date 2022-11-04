@@ -607,6 +607,17 @@ Public Class FrmMiPerfil
                 CboLocalidad.SelectedValue = ods.Tables(0).Rows(0).Item("ID_Localidad").ToString
                 TxtNumeroDoc.Value = ods.Tables(0).Rows(0).Item("NroDocumento").ToString
                 CboEstadoCivil.SelectedValue = ods.Tables(0).Rows(0).Item("ID_EstadoCivil").ToString
+
+                Dim ods2 As New DataSet
+                Dim obj2 As New SeccionTrabajar
+                ods2 = obj2.BuscarPorId_Legajo(ID_PersonalLegajo)
+                If ods2.Tables(0).Rows.Count > 0 Then
+                    cboSecciones.Value = ods2.Tables(0).Rows(0).Item("Descripcion")
+                    cboSecciones.Disabled = True
+                Else
+
+                End If
+
             End If
 
             If TxtNumeroDoc.Value <> "" Then
@@ -1767,6 +1778,9 @@ Public Class FrmMiPerfil
             Dim ods1 As New DataSet
             Dim oObjeto1 As New PersonalLegajos
 
+            Dim ods2 As New DataSet
+            Dim oObjeto2 As New SeccionTrabajar
+
             Dim act As Integer
             If Activo = True Then
                 act = 1
@@ -1780,8 +1794,15 @@ Public Class FrmMiPerfil
             Dim Apellido As String = ods1.Tables(0).Rows(0).Item("Apellido").ToString
             Dim ID_PersonalLegajo As Integer = ods1.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
 
+            'buscar si ya han seleccionado seccion a la que le gustaria trabajar
+            ods2 = oObjeto2.BuscarPorId_Legajo(ID_PersonalLegajo)
+            If ods2.Tables(0).Rows.Count > 0 Then
+            Else
+                oObjeto2.Agregar(ID_PersonalLegajo, SeccionCoov)
+            End If
+
             Dim ID_Resultado As Integer
-            ID_Resultado = oObjeto1.Agregar_AntecedentesLaborales(ID_PersonalLegajo, FechaDesde, act, FechaHasta, Empresa, Puesto, Area, Descripcion, DatosReferentes, RefCoov) ', SeccionCoov)
+            ID_Resultado = oObjeto1.Agregar_AntecedentesLaborales(ID_PersonalLegajo, FechaDesde, act, FechaHasta, Empresa, Puesto, Area, Descripcion, DatosReferentes, RefCoov)
 
             Dim data = New With {
                 Key .Status = "200"
