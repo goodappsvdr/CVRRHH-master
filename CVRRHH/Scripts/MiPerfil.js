@@ -297,7 +297,7 @@ function guardarDatPers() {
 
 
 //DATOS DE CONTACTO
-function alertDatCont() {
+function agregarDatCont() {
     var calle = $("#TxtCalle").val();
     var nroCalle = $("#TxtNumeroCalle").val();
     var piso = $("#TxtPiso").val();
@@ -357,4 +357,88 @@ function alertDatCont() {
             }
         })
     }
+}
+
+//REFERENCIAS LABORALES
+function agregarRefLab() {
+    var fechaDesde = $("#TxtFechaDesde").val();
+    var activo = $('#ChkActivo').prop('checked')
+    var fechaHasta = $("#TxtFechaHasta").val();
+    var empresa = $("#TxtEmpresa").val();
+    var puesto = $("#TxtPuesto").val();
+    var area = $("#Combo").val();
+    var descripcionTareas = $("#TxtDescrip").val();
+    var datosReferentes = $("#TxtDatosRef").val();
+    var refCoov = $("#TxtRefCoov").val();
+    var seccCoov = $("#cboSecciones").val();
+    var email = $("#txtEmail").val();
+
+    if (fechaDesde == '') {
+        swal('', 'El campo fecha desde no puede estar vacío', 'info')
+    } else if (empresa == '') {
+        swal('', 'El campo empresa no puede estar vacío', 'info')
+    } else if (puesto == '') {
+        swal('', 'El campo puesto no puede estar vacío', 'info')
+    } else if (area == 'SELECCIONAR') {
+        swal('', 'Debes seleccionar un área', 'info')
+    } else if (descripcionTareas == '') {
+        swal('', 'El campo descripción de las tareas no puede estar vacío', 'info')
+    } else if (datosReferentes == '') {
+        swal('', 'El campo datos referentes no puede estar vacío', 'info')
+    } else if (seccCoov == 'SELECCIONAR') {
+        swal('', 'Debes seleccionar una sección', 'info')
+    } else {
+        var par = { FechaDesde: fechaDesde, Activo: activo, FechaHasta: fechaHasta, Empresa: empresa, Puesto: puesto, Area: area, Descripcion: descripcionTareas, DatosReferentes: datosReferentes, RefCoov: refCoov, SeccionCoov: seccCoov, Email: email };
+        var payload = { cadena: JSON.stringify(par) };
+
+        $.ajax({
+            type: "POST",
+            "url": "FrmMiPerfil.aspx/GuardarReferenciasLaborales",
+            data: JSON.stringify(payload),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+
+                var json = $.parseJSON(data.d);
+                var status = json.Status;
+
+                if (status == 200) {
+                    swal('',
+                        'Referencias laborales guardadas con éxito',
+                        'success',
+                        'CONTINUAR',
+                    ).then(function () {
+                        window.location.href = 'FrmMiPerfil.aspx'
+                        //ActualizarCampos()
+                    })
+                } else if (status = 401) {
+                    swal('', 'Ocurrió un error', 'warning');
+                }
+            },
+            error: function (xmlHttpRequest, textStatus, errorThrown) {
+                console.log(xmlHttpRequest.responseText);
+                console.log(textStatus);
+                console.log(errorThrown);
+            },
+            beforeSend: function () {
+                //$('#ImagenloaderM').show();
+            },
+            complete: function () {
+                $(".se-pre-con").fadeOut("slow");;
+            }
+        })
+    }
+}
+
+function ActualizarCampos() {
+    $("#TxtFechaDesde").val() = '';
+    $('#ChkActivo').prop('checked') = false
+    $("#TxtFechaHasta").val() = '';
+    $("#TxtEmpresa").val() = '';
+    $("#TxtPuesto").val() = '';
+    $("#Combo").val() = 'SELECCIONAR';
+    $("#TxtDescrip").val() = '';
+    $("#TxtDatosRef").val() = '';
+    $("#TxtRefCoov").val() = '';
+    $("#cboSecciones").val() = 'SELECCIONAR';
 }

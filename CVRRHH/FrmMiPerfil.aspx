@@ -202,7 +202,7 @@
 
         <div style="width: 100%; height: auto; background: #fff">
 
-            <div style="display: none;" class="col-md-4">
+            <div style="display: block;" class="col-md-4">
                 <asp:TextBox ID="txtEmail" type="text" runat="server" ForeColor="#495057"
                     class="form-control" Height="40px" Width="100%" Style=""></asp:TextBox>
             </div>
@@ -545,7 +545,7 @@
                                 <br />
 
                                 <center>
-                                    <button id="BtnDatosDeContacto" onclick="alertDatCont()" type="button" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px; cursor: pointer;">Guardar</button></center>
+                                    <button id="BtnDatosDeContacto" onclick="agregarDatCont()" type="button" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px; cursor: pointer;">Guardar</button></center>
                                 <br />
 
                             </div>
@@ -618,6 +618,7 @@
                                     <div class="col-md-4" style="margin-bottom: 20px;">
                                         <label>Área</label>
                                         <select id="Combo" name="select" runat="server" class="form-control">
+                                            <option id="sel" value="SELECCIONAR" class="form-control">SELECCIONAR</option>
                                             <option id="Autos" value="ADMINISTRACIÓN" class="form-control">ADMINISTRACIÓN</option>
                                             <option id="Motos" value="COMERCIALIZACIÓN" class="form-control">COMERCIALIZACIÓN</option>
                                             <option id="Option1" value="ELECTROMECANICO" class="form-control">ELECTROMECANICO</option>
@@ -637,7 +638,7 @@
 
                                     <div class="col-md-6" style="margin-bottom: 20px;">
                                         <label>Descripción de las tareas</label>
-                                        <textarea id="TxtDescrip" runat="server" class="form-control"></textarea>
+                                        <textarea maxlength="100" id="TxtDescrip" runat="server" class="form-control"></textarea>
                                     </div>
 
                                     <div class="col-md-6" style="margin-bottom: 20px;">
@@ -650,9 +651,10 @@
                                         <textarea id="TxtRefCoov" runat="server" class="form-control"></textarea>
                                     </div>
 
-                                    <div class="col-md-6" style="margin-bottom: 20px; display:none;">
+                                    <div class="col-md-4" style="margin-bottom: 20px;">
                                         <label>¿En qué sección de Coovilros te gustaría trabajar?</label>
-                                        <select id="cboSecciones" name="select" style="display: none;" runat="server" class="form-control">
+                                        <select id="cboSecciones" name="select" style="" runat="server" class="form-control">
+                                            <option id="Opt11" value="SELECCIONAR" class="form-control">SELECCIONAR</option>
                                             <option id="Opt15" value="ADMINISTRACIÓN CONTABLE" class="form-control">ADMINISTRACIÓN CONTABLE</option>
                                             <option id="Opt16" value="SERVICIOS SOCIALES" class="form-control">SERVICIOS SOCIALES</option>
                                             <option id="OpT17" value="CEMENTERIO PARQUE" class="form-control">CEMENTERIO PARQUE</option>
@@ -670,7 +672,9 @@
                                 <br />
 
                                 <center>
-                                    <input type="button" id="BtnRefLab" runat="server" value="AGREGAR DATOS" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px"/></center>
+                                    <button id="BtnRefLab" onclick="agregarRefLab()" type="button" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px; cursor: pointer;">Guardar</button>
+                                </center>
+                                                                   
                                 <br />
 
                             </div>
@@ -1088,7 +1092,7 @@
 
                                     <div class="col-md-12" style="margin-bottom: 20px;">
                                         <label>Comentarios</label>
-                                        <asp:TextBox ID="TxtComentarios" type="text" TextMode="MultiLine" runat="server" ForeColor="Black"
+                                        <asp:TextBox ID="TxtComentarios" maxlength="100" type="text" TextMode="MultiLine" runat="server" ForeColor="Black"
                                             class="form-control" Height="80px" Width="100%" placeholder="Comentarios"></asp:TextBox>
                                     </div>
 

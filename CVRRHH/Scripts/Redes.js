@@ -3,7 +3,26 @@ var add = 0;
 
 //agregar
 function AgregarRedes() {
-    //txtNombreZ txtDescripcionZ cboEstadoZ
+
+    //var calle = $("#TxtCalle").val();
+    //var nroCalle = $("#TxtNumeroCalle").val();
+    //var telMovil = $("#TxtTelefonMovil").val();
+    //var localidad = $("#CboLocalidad").val();
+
+    //if (calle == '') {
+    //    swal('', 'El campo calle no puede estar vacío', 'info')
+    //} else if (nroCalle == '') {
+    //    swal('', 'El campo nro de calle no puede estar vacío', 'info')
+    //} else if (telMovil == '') {
+    //    swal('', 'El campo teléfono móvil no puede estar vacío', 'info')
+    //} else if (localidad == '') {
+    //    swal('', 'Escribe tu localidad', 'info')
+    //} else {
+
+    //}
+
+
+    var Email = $("#txtEmail").val();
     var Link = $('#TxtLinkRedsocial').val();
     var ComboRedes = $('#ComboRedes').val();
 
@@ -17,7 +36,7 @@ function AgregarRedes() {
         return;
     }
 
-    var parametro = { Link, ComboRedes };
+    var parametro = { Link, ComboRedes, Email };
     var Json = { cadena: JSON.stringify(parametro) };
 
     $.ajax({

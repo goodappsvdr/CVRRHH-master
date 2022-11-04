@@ -374,15 +374,6 @@ Partial Public Class FrmMiPerfil
     Protected WithEvents cboSecciones As Global.System.Web.UI.HtmlControls.HtmlSelect
 
     '''<summary>
-    '''Control BtnRefLab.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents BtnRefLab As Global.System.Web.UI.HtmlControls.HtmlInputButton
-
-    '''<summary>
     '''Control MisReferencias.
     '''</summary>
     '''<remarks>

@@ -1233,9 +1233,9 @@ Public Class FrmMiPerfil
         End If
     End Sub
 
-    Private Sub BtnRefLab_ServerClick(sender As Object, e As System.EventArgs) Handles BtnRefLab.ServerClick
-        GuardarDatosReferenciasLaborales()
-    End Sub
+    'Private Sub BtnRefLab_ServerClick(sender As Object, e As System.EventArgs) Handles BtnRefLab.ServerClick
+    'GuardarDatosReferenciasLaborales()
+    'End Sub
 
     Private Sub Grilla_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles Grilla.RowCreated
         e.Row.Cells(6).Visible = False
@@ -1618,15 +1618,16 @@ Public Class FrmMiPerfil
             Dim ComboRedes As String
             ComboRedes = Convert.ToString(dict(0).ComboRedes)
 
+            'Dim user = Membership.GetUser()
+            Dim user = Convert.ToString(dict(0).Email)
+
             Dim ods As New DataSet
             Dim oObjeto As New Redes
 
             Dim ods1 As New DataSet
             Dim oObjeto1 As New PersonalLegajos
 
-            Dim user = Membership.GetUser()
-
-            ods1 = oObjeto1.BuscarDatosDeUsuarioPorEmail(user.Email)
+            ods1 = oObjeto1.BuscarDatosDeUsuarioPorEmail(user)
 
             Dim ID_PersonalLegajo As Integer = ods1.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
 
@@ -1720,6 +1721,70 @@ Public Class FrmMiPerfil
                 Key .Data = New With {
                     Key .Mensaje = "Ok"
                 }
+            }
+
+            Dim serializer = New JavaScriptSerializer()
+            Dim json = serializer.Serialize(data)
+            Return New JavaScriptSerializer().Serialize(data)
+        Catch ex As Exception
+            Return Error401()
+        End Try
+    End Function
+#End Region
+
+#Region "REFERENCIAS LABORALES"
+    <WebMethod()>
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    Public Shared Function GuardarReferenciasLaborales(ByVal cadena As String) As String
+        Try
+
+            Dim jss As New JavaScriptSerializer()
+            Dim dict = jss.Deserialize(Of List(Of ReferenciasLaboralesWs))("[" & cadena & "]")
+
+            Dim FechaDesde As String
+            FechaDesde = Convert.ToString(dict(0).FechaDesde)
+            Dim Activo As String
+            Activo = Convert.ToBoolean(dict(0).Activo)
+            Dim FechaHasta As String
+            FechaHasta = Convert.ToString(dict(0).FechaHasta)
+            Dim Empresa As String
+            Empresa = Convert.ToString(dict(0).Empresa)
+            Dim Puesto As String
+            Puesto = Convert.ToString(dict(0).Puesto)
+            Dim Area As String
+            Area = Convert.ToString(dict(0).Area)
+            Dim Descripcion As String
+            Descripcion = Convert.ToString(dict(0).Descripcion)
+            Dim DatosReferentes As String
+            DatosReferentes = Convert.ToString(dict(0).DatosReferentes)
+            Dim RefCoov As String
+            RefCoov = Convert.ToString(dict(0).RefCoov)
+            Dim SeccionCoov As String
+            SeccionCoov = Convert.ToString(dict(0).SeccionCoov)
+            Dim Email As String
+            Email = Convert.ToString(dict(0).Email)
+
+            Dim ods1 As New DataSet
+            Dim oObjeto1 As New PersonalLegajos
+
+            Dim act As Integer
+            If Activo = True Then
+                act = 1
+            Else
+                act = 0
+            End If
+
+            ods1 = oObjeto1.BuscarDatosDeUsuarioPorEmail(Email)
+
+            Dim Nombre As String = ods1.Tables(0).Rows(0).Item("Nombre").ToString
+            Dim Apellido As String = ods1.Tables(0).Rows(0).Item("Apellido").ToString
+            Dim ID_PersonalLegajo As Integer = ods1.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
+
+            Dim ID_Resultado As Integer
+            ID_Resultado = oObjeto1.Agregar_AntecedentesLaborales(ID_PersonalLegajo, FechaDesde, act, FechaHasta, Empresa, Puesto, Area, Descripcion, DatosReferentes, RefCoov) ', SeccionCoov)
+
+            Dim data = New With {
+                Key .Status = "200"
             }
 
             Dim serializer = New JavaScriptSerializer()

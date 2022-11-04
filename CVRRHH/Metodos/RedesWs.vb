@@ -5,4 +5,5 @@
     Public Property ComboRedes As String
     Public Property Activo As Boolean
     Public Property Imagen As String
+    Public Property Email As String
 End Class

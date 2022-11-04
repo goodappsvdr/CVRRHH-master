@@ -272,6 +272,7 @@
     <Compile Include="Metodos\DatosContactoWs.vb" />
     <Compile Include="Metodos\DatosPersonalesWs.vb" />
     <Compile Include="Metodos\RedesWs.vb" />
+    <Compile Include="Metodos\ReferenciasLaboralesWs.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
