@@ -26,7 +26,7 @@
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
         rel="stylesheet">
-    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
 </head>
 
 <style>
@@ -151,7 +151,7 @@
             <br />
         </nav>
 
-        <script>
+        <script type="text/javascript">
             $(document).ready(function () {
                 $('[data-toggle="tooltip"]').tooltip();
             });
@@ -182,7 +182,7 @@
             }
         </style>
 
-        <script>
+        <script type="text/javascript">
             $(function () {
                 $('a[href*="#"]:not([href="#"])').click(function () {
                     if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
@@ -199,47 +199,6 @@
             });
         </script>
 
-
-
-        <script>
-            function AlertaUno() {
-
-                $(document).on('click', '#BtnDatosDeContacto', function (e) {
-                    swal(
-                        'Felicitaciones!',
-                        'Tus datos se modificaron con Éxito!',
-                        'success'
-                    )
-                    window.setTimeout(function () {
-                        //location.href = "FrmLogin.aspx";
-                    }, 6000);
-                });
-
-                $(document).on('click', '#BtnDatosPersonles', function (e) {
-                    swal(
-                        'Felicitaciones!',
-                        'Tus datos se modificaron con Éxito!',
-                        'success'
-                    )
-                    window.setTimeout(function () {
-                        //location.href = "FrmLogin.aspx";
-                    }, 6000);
-                });
-
-                $(document).on('click', '#BtnRefLab', function (e) {
-                    swal(
-                        'Felicitaciones!',
-                        'Tus datos se modificaron con Éxito!',
-                        'success'
-                    )
-                    window.setTimeout(function () {
-                        location.href = "FrmMiPerfil.aspx";
-                    }, 2000);
-                });
-
-
-            }
-        </script>
 
         <div style="width: 100%; height: auto; background: #fff">
 
@@ -492,154 +451,18 @@
                                 </center>
 
                                 <center>
-                                    <script type="text/javascript">
-
-</script>
                                     <div alt="Cargando Imagen..." style="background-image: url('https://crear.net.ar/CLIENTES/PIN/Pin/camara-fotografica.png'); background-size: cover; height: 50px; width: 50px; cursor: pointer; decoration: none;" required="" name="imagen" id="files" type="file" accept="image/*">
                                         <asp:FileUpload Style="background-image: url('Imagenes/ErrorTickets.png'); background-size: cover; opacity: 0; height: 80px; width: 80px; cursor: pointer; margin-top: -5px; decoration: none;" runat="server" ID="btnSubirImgEmpleado" onchange="readURL(this);" runat="server"></asp:FileUpload>
                                     </div>
                                 </center>
                             </div>
-
+                            <p id="srcFoto" style="display: none;" runat="server"></p>
                             <%-- <center><a onserverclick="GuardarySeguir" runat="server"><input type="button" value="SIGUIENTE" style="background:#047537; color:#fff;   border:1px solid black; width:300px;height:40px" onmouseup="MostrarSig()"/></a></center><br />--%>
                             <center>
-                                <button id="BtnDatosPersonles" onclick="alertDatPers()" type="button" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px; cursor: pointer;">Guardar</button></center>
+                                <button id="BtnDatosPersonles" onclick="guardarDatPers()" type="button" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px; cursor: pointer;">Guardar</button></center>
                             <br />
                         </div>
                     </div>
-
-                    <script>       
-
-                        var visorImg;
-
-                        function readURL(input) {
-                            if (input.files && input.files[0]) {
-                                var reader = new FileReader();
-
-                                reader.onload = function (e) {
-                                    $('#ImgPersonal')
-                                        .attr('src', e.target.result)
-                                        .width(150)
-                                        .height(150);
-                                };
-
-                                reader.readAsDataURL(input.files[0]);
-                                visorImg = reader;
-                                //console.log(visorImg);
-                            }
-                        }
-
-                        function alertDatPers() {
-
-                            var tipoDoc = $("#CboTipoDoc").val();
-                            var nroDoc = $("#TxtNumeroDoc").val();
-                            var fechaNac = $("#TxtFechaNac").val();
-                            var sexo = $("#CboSexo").val();
-                            var estadoCivil = $("#CboEstadoCivil").val();
-                            var nacionalidad = $("#CboNacionalidad").val();
-                            var nivelFormacion = $("#CboNivelFormacion").val();
-                            var cuil = $("#TxtCuil").val();
-
-                            var email = $("#txtEmail").val();
-
-                            //var Provincia = $("#CboProvincia option:selected").text();
-
-                            if (nroDoc == '') {
-                                swal('', 'Escribe tu nro de documento', 'info')
-                            } else if (fechaNac == '') {
-                                swal('', 'Escribe tu fecha de nacimiento', 'info')
-                            } else if (cuil == '') {
-                                swal('', 'Escribe tu cuil', 'info')
-                            } else {
-
-                                var archivoInput = document.getElementById('btnSubirImgEmpleado');
-                                var archivoRuta = archivoInput.value;
-                                var extPermitidas = /(.jpg|.png|.jpeg|.JPG|.PNG|.JPEG)$/i;
-                                if (!extPermitidas.exec(archivoRuta)) {
-                                    //swal("", "Seleccione una foto para subir", "info");
-                                    var par = { TipoDocumento: tipoDoc, NroDocumento: nroDoc, FechaNacimiento: fechaNac, Sexo: sexo, EstadoCivil: estadoCivil, Nacionalidad: nacionalidad, NivelFormacion: nivelFormacion, Cuil: cuil, Imagen: "", Email: email };
-                                    var payload = { cadena: JSON.stringify(par) };
-
-                                    $.ajax({
-                                        type: "POST",
-                                        "url": "FrmMiPerfil.aspx/GuardarDatosPersonales",
-                                        data: JSON.stringify(payload),
-                                        contentType: "application/json; charset=utf-8",
-                                        dataType: "json",
-                                        success: function (data) {
-
-                                            var json = $.parseJSON(data.d);
-                                            var status = json.Status;
-
-                                            if (status == 200) {
-                                                swal('',
-                                                    'Datos personales guardados con éxito',
-                                                    'success',
-                                                    'CONTINUAR',
-                                                ).then(function () {
-                                                    window.location.href = 'FrmMiPerfil.aspx'
-                                                })
-                                            } else if (status = 401) {
-                                                swal('', 'Ocurrió un error', 'warning');
-                                            }
-                                        },
-                                        error: function (xmlHttpRequest, textStatus, errorThrown) {
-                                            console.log(xmlHttpRequest.responseText);
-                                            console.log(textStatus);
-                                            console.log(errorThrown);
-                                        },
-                                        beforeSend: function () {
-                                            //$('#ImagenloaderM').show();
-                                        },
-                                        complete: function () {
-                                            $(".se-pre-con").fadeOut("slow");;
-                                        }
-                                    })
-                                } else {
-                                    var nombreImg = visorImg.result;
-
-                                    var par = { TipoDocumento: tipoDoc, NroDocumento: nroDoc, FechaNacimiento: fechaNac, Sexo: sexo, EstadoCivil: estadoCivil, Nacionalidad: nacionalidad, NivelFormacion: nivelFormacion, Cuil: cuil, Imagen: nombreImg, Email: email };
-                                    var payload = { cadena: JSON.stringify(par) };
-
-                                    $.ajax({
-                                        type: "POST",
-                                        "url": "FrmMiPerfil.aspx/GuardarDatosPersonales",
-                                        data: JSON.stringify(payload),
-                                        contentType: "application/json; charset=utf-8",
-                                        dataType: "json",
-                                        success: function (data) {
-
-                                            var json = $.parseJSON(data.d);
-                                            var status = json.Status;
-
-                                            if (status == 200) {
-                                                swal('',
-                                                    'Datos personales guardados con éxito',
-                                                    'success',
-                                                    'CONTINUAR',
-                                                ).then(function () {
-                                                    window.location.href = 'FrmMiPerfil.aspx'
-                                                })
-                                            } else if (status = 401) {
-                                                swal('', 'Ocurrió un error', 'warning');
-                                            }
-                                        },
-                                        error: function (xmlHttpRequest, textStatus, errorThrown) {
-                                            console.log(xmlHttpRequest.responseText);
-                                            console.log(textStatus);
-                                            console.log(errorThrown);
-                                        },
-                                        beforeSend: function () {
-                                            //$('#ImagenloaderM').show();
-                                        },
-                                        complete: function () {
-                                            $(".se-pre-con").fadeOut("slow");;
-                                        }
-                                    })
-                                }
-                            }
-                        }
-                    </script>
 
                     <br />
                     <br />
@@ -749,76 +572,6 @@
                         </div>
                     </div>
 
-                    <script>
-                        function alertDatCont() {
-
-                            var calle = $("#TxtCalle").val();
-                            var nroCalle = $("#TxtNumeroCalle").val();
-                            var piso = $("#TxtPiso").val();
-                            var depto = $("#TxtDepto").val();
-                            var telFijo = $("#TxtTelefonoFijo").val();
-                            var telMovil = $("#TxtTelefonMovil").val();
-                            //var redes = $("#ComboRedes").val();
-                            //var linkRedSocial = $("#TxtLinkRedsocial").val();
-                            var localidad = $("#CboLocalidad").val();
-
-                            var email = $("#txtEmail").val();
-
-                            //var Provincia = $("#CboProvincia option:selected").text();
-
-                            if (calle == '') {
-                                swal('', 'El campo calle no puede estar vacío', 'info')
-                            } else if (nroCalle == '') {
-                                swal('', 'El campo nro de calle no puede estar vacío', 'info')
-                            } else if (telMovil == '') {
-                                swal('', 'El campo teléfono móvil no puede estar vacío', 'info')
-                            } else if (localidad == '') {
-                                swal('', 'Escribe tu localidad', 'info')
-                            } else {
-
-                                //swal("", "Seleccione una foto para subir", "info");
-                                var par = { Calle: calle, NroCalle: nroCalle, Piso: piso, Depto: depto, TelefonoFijo: telFijo, TelefonoMovil: telMovil, Localidad: localidad, Email: email };
-                                var payload = { cadena: JSON.stringify(par) };
-
-                                $.ajax({
-                                    type: "POST",
-                                    "url": "FrmMiPerfil.aspx/GuardarDatosContacto",
-                                    data: JSON.stringify(payload),
-                                    contentType: "application/json; charset=utf-8",
-                                    dataType: "json",
-                                    success: function (data) {
-
-                                        var json = $.parseJSON(data.d);
-                                        var status = json.Status;
-
-                                        if (status == 200) {
-                                            swal('',
-                                                'Datos del contacto guardados con éxito',
-                                                'success',
-                                                'CONTINUAR',
-                                            ).then(function () {
-                                                window.location.href = 'FrmMiPerfil.aspx'
-                                            })
-                                        } else if (status = 401) {
-                                            swal('', 'Ocurrió un error', 'warning');
-                                        }
-                                    },
-                                    error: function (xmlHttpRequest, textStatus, errorThrown) {
-                                        console.log(xmlHttpRequest.responseText);
-                                        console.log(textStatus);
-                                        console.log(errorThrown);
-                                    },
-                                    beforeSend: function () {
-                                        //$('#ImagenloaderM').show();
-                                    },
-                                    complete: function () {
-                                        $(".se-pre-con").fadeOut("slow");;
-                                    }
-                                })
-                            }
-                        }
-                    </script>
-
                     <!--REFERENCIAS LABORALES-->
                     <div class="col-md-12" id="DatosRefLab" style="display: none">
 
@@ -897,33 +650,19 @@
                                         <textarea id="TxtRefCoov" runat="server" class="form-control"></textarea>
                                     </div>
 
-                                    <script>
-                                        window.onload = function () {
-                                            var fecha = new Date(); //Fecha actual
-                                            var mes = fecha.getMonth() + 1; //obteniendo mes
-                                            var dia = fecha.getDate(); //obteniendo dia
-                                            var ano = fecha.getFullYear(); //obteniendo año
-                                            if (dia < 10)
-                                                dia = '0' + dia; //agrega cero si el menor de 10
-                                            if (mes < 10)
-                                                mes = '0' + mes //agrega cero si el menor de 10
-                                            //document.getElementById('TxtFechaDesde').value = ano + "-" + mes + "-" + dia;
-                                            //document.getElementById('TxtFechaHasta').value = ano + "-" + mes + "-" + dia;
-                                        }
-
-                                        function desactivarHasta() {
-                                            var control = document.getElementById("ChkActivo");
-
-                                            if (control.checked) {
-                                                document.getElementById("TxtFechaHasta").disabled = true
-                                                document.getElementById("TxtFechaHasta").value = '';
-                                            }
-                                            else {
-                                                document.getElementById("TxtFechaHasta").disabled = false
-                                            }
-                                        }
-
-                                    </script>
+                                    <div class="col-md-6" style="margin-bottom: 20px; display:none;">
+                                        <label>¿En qué sección de Coovilros te gustaría trabajar?</label>
+                                        <select id="cboSecciones" name="select" style="display: none;" runat="server" class="form-control">
+                                            <option id="Opt15" value="ADMINISTRACIÓN CONTABLE" class="form-control">ADMINISTRACIÓN CONTABLE</option>
+                                            <option id="Opt16" value="SERVICIOS SOCIALES" class="form-control">SERVICIOS SOCIALES</option>
+                                            <option id="OpT17" value="CEMENTERIO PARQUE" class="form-control">CEMENTERIO PARQUE</option>
+                                            <option id="Opt18" value="COMUNICACIONES E INTERNE" class="form-control">COMUNICACIONES E INTERNE</option>
+                                            <option id="Opt19" value="REDES ELÉCTRICAS" class="form-control">REDES ELÉCTRICAS</option>
+                                            <option id="Opt20" value="ATENCIÓN AL PUBLICO" class="form-control">ATENCIÓN AL PUBLICO</option>
+                                            <option id="Opt23" value="CAJAS Y TESORERÍA" class="form-control">CAJAS Y TESORERÍA</option>
+                                            <option id="Opt24" value="MAESTRANZA Y LIMPIEZA" class="form-control">MAESTRANZA Y LIMPIEZA</option>
+                                        </select>
+                                    </div>
 
                                 </div>
 
@@ -1034,22 +773,6 @@
 
                             </div>
 
-                            <script>
-                                function Alert() {
-
-                                    $(document).on('click', '#BtnAgregarGrupoFam', function (e) {
-                                        swal(
-                                            'Felicitaciones!',
-                                            'Tus datos se Agregaron con Éxito!',
-                                            'success'
-                                        )
-                                        window.setTimeout(function () {
-                                            //location.href = "FrmLogin.aspx";
-                                        }, 6000);
-                                    });
-                                }
-                            </script>
-
                         </div>
                         <div class="card-body" style="border: 1px solid #fff; width: 100%; border-radius: 3px">
                             <center>
@@ -1126,10 +849,8 @@
 
                                     <div class="col-md-4" style="margin-bottom: 20px;">
                                         <label>Nivel Académico</label>
-
-
-
-                                        <select id="ComboFA" name="select" runat="server" class="form-control">
+                                        <select id="ComboFA" name="select" runat="server" onchange="comboFA()" class="form-control">
+                                            <option id="Opt1" value="SELECCIONAR" class="form-control">SELECCIONAR</option>
                                             <option id="Option15" value="SECUNDARIO COMPLETO" class="form-control">SECUNDARIO COMPLETO</option>
                                             <option id="Option16" value="SECUNDARIO EN CURSO" class="form-control">SECUNDARIO EN CURSO</option>
                                             <option id="Option32" value="SECUNDARIO INCOMPLETO" class="form-control">SECUNDARIO INCOMPLETO</option>
@@ -1139,30 +860,44 @@
                                             <option id="Option36" value="UNIVERSITARIO COMPLETO" class="form-control">UNIVERSITARIO COMPLETO</option>
                                             <option id="Option37" value="UNIVERSITARIO EN CURSO" class="form-control">UNIVERSITARIO EN CURSO</option>
                                             <option id="Option38" value="UNIVERSITARIO INCOMPLETO" class="form-control">UNIVERSITARIO INCOMPLETO</option>
-
                                         </select>
-
                                     </div>
 
+                                    <script type="text/javascript">
+                                        function comboFA() {
+                                            var cboFA = $('#ComboFA').val();
+                                            if (cboFA == "SECUNDARIO COMPLETO") {
+                                                $('#TxtInstitucion').hide();
+                                                $('#CboInstitucion').show();
+                                            } else {
+                                                $('#TxtInstitucion').show();
+                                                $('#CboInstitucion').hide();
+                                            }
+                                        }
+
+                                        function comboInst() {
+                                            var cboInst = $('#CboInstitucion').val();
+                                            if (cboInst == "OTRO") {
+                                                $('#contentInst').show();
+                                            } else {
+                                                $('#contentInst').hide();
+                                            }
+                                        }
+                                    </script>
 
 
                                     <div class="col-md-4" style="margin-bottom: 20px;">
                                         <label>Especialidad</label>
                                         <select id="ComboEspecilidad" name="select" runat="server" class="form-control">
-                                            <option id="Option22" value="ELECTROMECANICA" class="form-control">ELECTROMECANICA</option>
+                                            <option id="Opt2" value="SELECCIONAR" class="form-control">SELECCIONAR</option>
                                             <option id="Option14" value="ADMINISTRACION Y GESTION" class="form-control">ADMINISTRACION Y GESTION</option>
-                                            <option id="Option17" value="ELECTRONICA" class="form-control">ELECTRONICA</option>
-                                            <option id="Option18" value="INFORMATICA" class="form-control">INFORMATICA</option>
-                                            <option id="Option19" value="PROGRAMADOR" class="form-control">PROGRAMADOR</option>
-                                            <option id="Option20" value="MAESTRO MAYOR DE OBRAS" class="form-control">MAESTRO MAYOR DE OBRAS</option>
+                                            <option id="Option29" value="HUMANIDADES" class="form-control">HUMANIDADES</option>
+                                            <option id="Option30" value="AGROTÉCNICO" class="form-control">AGROTÉCNICO</option>
+                                            <option id="Option31" value="ELECTRICIDAD" class="form-control">ELECTRICIDAD</option>
+                                            <option id="Option22" value="ELECTROMECÁNICA" class="form-control">ELECTROMECANICA</option>
                                             <option id="Option21" value="AUTOMOTORES" class="form-control">AUTOMOTORES</option>
-                                            <option id="Option23" value="DIBUJO TECNICO" class="form-control">DIBUJO TECNICO</option>
-                                            <option id="Option24" value="MECANICA INDUSTRIAL" class="form-control">MECANICA INDUSTRIAL</option>
-                                            <option id="Option25" value="TELECOMUNICACIONES" class="form-control">TELECOMUNICACIONES</option>
-                                            <option id="Option26" value="HOTELERIA Y TURISMO" class="form-control">HOTELERIA Y TURISMO</option>
                                             <option id="Option27" value="CARPINTERIA" class="form-control">CARPINTERIA</option>
-                                            <option id="Option28" value="SEGURIDAD INDUSTRIAL" class="form-control">SEGURIDAD INDUSTRIAL</option>
-
+                                            <option id="Option17" value="OTROS" class="form-control">OTROS</option>
                                         </select>
 
                                     </div>
@@ -1172,8 +907,25 @@
                                         <label>Institución</label>
                                         <asp:TextBox ID="TxtInstitucion" type="text" placeholder="Institución" runat="server" ForeColor="Black"
                                             class="form-control" Height="40px" Width="100%"></asp:TextBox>
+
+                                        <select id="CboInstitucion" name="select" onchange="comboInst()" style="display: none;" runat="server" class="form-control">
+                                            <option id="Opt4" value="SELECCIONAR" class="form-control">SELECCIONAR</option>
+                                            <option id="Opt14" value="IPEM N°148 JOSÉ MARÍA PAZ" class="form-control">IPEM N°148 JOSÉ MARÍA PAZ</option>
+                                            <option id="Opt29" value="IBAT SAN JOSE" class="form-control">IBAT SAN JOSE</option>
+                                            <option id="OpT30" value="ICMA ADORATRICES" class="form-control">ICMA ADORATRICES</option>
+                                            <option id="Opt31" value="IPEM N°55 TECNICO" class="form-control">IPEM N°55 TECNICO</option>
+                                            <option id="Opt22" value="CENMA N°186" class="form-control">CENMA N°186</option>
+                                            <option id="Opt21" value="OTRO" class="form-control">OTRO</option>
+                                        </select>
+
                                     </div>
 
+                                    <!--habilitar si selecciona otro-->
+                                    <div class="col-md-4" id="contentInst" style="margin-bottom: 20px; display: none;">
+                                        <label>Nombre de la Institución</label>
+                                        <asp:TextBox ID="TxtInstitucion2" type="text" runat="server" ForeColor="Black"
+                                            class="form-control" Height="40px" Width="100%" placeholder="Nombre de la Institución"></asp:TextBox>
+                                    </div>
 
                                     <div class="col-md-4" style="margin-bottom: 20px;">
                                         <label>Nombre del Título</label>
@@ -1190,50 +942,6 @@
                                         <div style="padding-top: 20px; padding-bottom: 20px; margin: 10px; border: 1px solid #E3E3E3; border-radius: 4px;">
                                             <center>
 
-                                                <script type="text/javascript">
-                                                    function readURL3(input) {
-                                                        if (input.files && input.files[0]) {
-                                                            var reader = new FileReader();
-
-                                                            reader.onload = function (e) {
-                                                                $('#Recibos')
-                                                                    .attr('src', e.target.result)
-                                                                    .width(200)
-                                                                    .height(200);
-                                                            };
-
-                                                            reader.readAsDataURL(input.files[0]);
-                                                        }
-                                                    }
-                                                </script>
-
-                                                <script type="text/javascript">
-
-                                                    function validarExt2() {
-                                                        var archivoInput = document.getElementById('SubirRecibo');
-                                                        var archivoRuta = archivoInput.value;
-                                                        var extPermitidas = /(.PDF|.pdf|.jpg|.png|.jpeg)$/i;
-                                                        if (!extPermitidas.exec(archivoRuta)) {
-                                                            alert('Asegurese de haber seleccionado un archivo permitido');
-                                                            archivoInput.value = '';
-                                                            return false;
-                                                        }
-
-                                                        else {
-                                                            //PRevio del PDF
-                                                            if (archivoInput.files && archivoInput.files[0]) {
-                                                                var visor = new FileReader();
-                                                                visor.onload = function (e) {
-                                                                    document.getElementById('visorArchivo').innerHTML =
-                                                                        '<embed src="' + e.target.result + '" width="400" height="440" />';
-                                                                };
-                                                                visor.readAsDataURL(archivoInput.files[0]);
-                                                            }
-                                                        }
-                                                    }
-                                                </script>
-
-
                                                 <div alt="Cargando Imagen..." style="background-image: url('https://crear.net.ar/CLIENTES/PIN/Pin/camara-fotografica.png'); background-size: cover; height: 50px; width: 50px; cursor: pointer; decoration: none;" required="" name="imagen" id="Div1" type="file" accept="image/*">
                                                     <center>
                                                         <asp:FileUpload Style="background-image: url('https://cuota-facil.com.ar/Imagenes/ErrorTickets.png'); background-size: cover; opacity: 0; height: 80px; width: 80px; cursor: pointer; margin-top: -5px; decoration: none;" runat="server" ID="SubirRecibo" accept="application/pdf,image/*" onchange="return validarExt2();" runat="server"></asp:FileUpload></center>
@@ -1243,8 +951,6 @@
                                                     <!--Aqui se desplegará el fichero-->
                                                 </div>
 
-                                                <%--<img src="" id="Recibos" runat="server"  style="margin-top:10px; width:200px;  height:200px;border: 8px solid #fff;
-    box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2); object-fit:cover;" />--%>
                                             </center>
                                         </div>
 
@@ -1260,35 +966,6 @@
                                 <br />
 
                             </div>
-
-                            <script>
-                                function Alert() {
-
-                                    $(document).on('click', '#BtnAgregarGrupoFam', function (e) {
-                                        swal(
-                                            'Felicitaciones!',
-                                            'Tus datos se Agregaron con Éxito!',
-                                            'success'
-                                        )
-                                        window.setTimeout(function () {
-                                            //location.href = "FrmLogin.aspx";
-                                        }, 6000);
-                                    });
-                                    $(document).on('click', '#BtnFormacionAca', function (e) {
-                                        swal(
-                                            'Felicitaciones!',
-                                            'Tus datos se Agregaron con Éxito!',
-                                            'success'
-                                        )
-                                        window.setTimeout(function () {
-                                            //location.href = "FrmLogin.aspx";
-                                        }, 6000);
-                                    });
-
-
-
-                                }
-                            </script>
 
                         </div>
                         <div class="card-body" style="border: 1px solid #fff; width: 100%; border-radius: 3px">
@@ -1427,30 +1104,6 @@
 
                             </div>
 
-                            <script>
-                                function AlertCursos() {
-
-                                    $(document).on('click', '#BtnAgregarCurso', function (e) {
-                                        swal(
-                                            'Felicitaciones!',
-                                            'Tus datos se Agregaron con Éxito!',
-                                            'success'
-                                        )
-                                        window.setTimeout(function () {
-                                            //location.href = "FrmLogin.aspx";
-                                        }, 6000);
-                                    });
-
-
-
-
-                                }
-
-
-
-
-                            </script>
-
                         </div>
                         <div class="card-body" style="border: 1px solid #fff; width: 100%; border-radius: 3px">
                             <center>
@@ -1546,21 +1199,6 @@
 
                                     </div>
 
-                                    <script type="text/javascript">
-                                        function comprobar(checkbox) {
-                                            otro = checkbox.parentNode.querySelector("[type=checkbox]:not(#" + checkbox.id + ")");
-                                            console.log(checkbox.id);
-                                            if (otro.checked) {
-                                                otro.checked = false;
-                                            }
-
-                                            if (checkbox.id = "EnfermedadSI") {
-                                                document.getElementById("tratamiento").style = "display:block";
-                                            }
-                                        }
-
-                                    </script>
-
                                     <div class="col-md-6" id="tratamiento" style="display: none">
                                         <label>Descripción y detalle tratamiento</label>
                                         <asp:TextBox ID="TxtTratamiento" type="text" runat="server" ForeColor="Black"
@@ -1575,25 +1213,6 @@
                                         <input type="checkbox" value="0" id="CirugiaNo" name="check" onchange="comprobar2(this)" cssclass="BigCheckBox" checked="checked" runat="server" />NO<br />
 
                                     </div>
-
-
-
-                                    <script type="text/javascript">
-                                        function comprobar2(checkbox) {
-                                            otro = checkbox.parentNode.querySelector("[type=checkbox]:not(#" + checkbox.id + ")");
-                                            console.log(checkbox.id);
-                                            if (otro.checked) {
-                                                otro.checked = false;
-
-                                            }
-
-                                            if (checkbox.id = "cirugiaSi") {
-                                                document.getElementById("cirugia").style = "display:block";
-
-                                            }
-                                        }
-
-                                    </script>
 
                                     <div class="col-md-6" id="cirugia" style="display: none">
                                         <label>Descripción y detalle de cirugia/s</label>
@@ -1613,30 +1232,6 @@
                             </div>
                         </div>
                     </div>
-
-
-
-                    <script>
-                        function AlertCursos() {
-
-                            $(document).on('click', '#BtnAgregarAntSalud', function (e) {
-                                swal(
-                                    'Felicitaciones!',
-                                    'Tus datos se Agregaron con Éxito!',
-                                    'success'
-                                )
-                                window.setTimeout(function () {
-                                    //location.href = "FrmLogin.aspx";
-                                }, 6000);
-                            });
-
-
-
-
-                        }
-                    </script>
-
-
 
                     <div class="card-body" style="border: 1px solid #fff; width: 100%; border-radius: 3px">
                         <center>
@@ -1731,7 +1326,29 @@
             </footer>
     </form>
 
-    <script>
+    <script type="text/javascript">
+        function comprobar(checkbox) {
+            otro = checkbox.parentNode.querySelector("[type=checkbox]:not(#" + checkbox.id + ")");
+            console.log(checkbox.id);
+            if (otro.checked) {
+                otro.checked = false;
+            }
+            if (checkbox.id = "EnfermedadSI") {
+                document.getElementById("tratamiento").style = "display:block";
+            }
+        }
+
+        function comprobar2(checkbox) {
+            otro = checkbox.parentNode.querySelector("[type=checkbox]:not(#" + checkbox.id + ")");
+            console.log(checkbox.id);
+            if (otro.checked) {
+                otro.checked = false;
+            }
+            if (checkbox.id = "cirugiaSi") {
+                document.getElementById("cirugia").style = "display:block";
+            }
+        }
+
         function MostrarSig() {
             document.getElementById("primero").style = "display:block";
             document.getElementById("DatosContactoHide").style = "display:none";
@@ -1807,14 +1424,16 @@
         }
     </script>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    
+    <script type="text/javascript" src="Scripts/MiPerfil.js"></script>
 
-    <script src="Scripts/Redes.js"></script>
+    <script type="text/javascript" src="Scripts/Redes.js"></script>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
-    <script>
+    <script type="text/javascript">
         $(document).ready(function () {
             CargarRedes();
             $('#TxtLinkRedsocial').val("");

@@ -9,30 +9,23 @@ Public Class FrmIngreso
 
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
-
         If Page.IsPostBack = False Then
-
             Dim Galleta As HttpCookie
             Galleta = Request.Cookies("datos")
 
             'aca valido si hay cookies
-
             If Galleta Is Nothing Then
-                ' Response.Redirect("FrmInicio.aspx")
+                'Response.Redirect("FrmInicio.aspx")
             Else
                 Response.Redirect("FrmMiPerfil.aspx?login=true")
             End If
 
         End If
-
     End Sub
 
-
     Public Sub Logueo()
-
         'primero buscar el estado del usuario por el email
         'si es 1 es aprovado si es 0 no aprovado
-
         If TxtEmail.Value <> "" And TxtPass.Value <> "" Then
             Dim ods2 As New DataSet
             Dim objeo As New Login
@@ -42,13 +35,11 @@ Public Class FrmIngreso
                     If Membership.ValidateUser(TxtEmail.Value, TxtPass.Value) Then
 
                         FormsAuthentication.SetAuthCookie(TxtEmail.Value, True)
-
-
                         'guardo los datos en cookies deberia poner un check que pregunte si quiere guardar los datos
                         Dim Galleta As HttpCookie
                         Galleta = New HttpCookie("datos")
                         Galleta.Values.Add("nombre", TxtEmail.Value)
-                        Galleta.Values.Add("pass", TxtPass.Value)
+                        'Galleta.Values.Add("pass", TxtPass.Value)
                         Galleta.Expires = DateTime.MaxValue 'Nunca caduca
                         Response.AppendCookie(Galleta)
 
@@ -61,12 +52,7 @@ Public Class FrmIngreso
                             Dim Userid As String = ods.Tables(0).Rows(0).Item("UserId").ToString
                             Galleta.Values.Add("userid", Userid)
                         End If
-
-
-
-
                         Response.Redirect("FrmMiPerfil.aspx?login=true")
-
                     Else
                         DivStatus.Visible = True
                         divAproved.Visible = False
@@ -90,25 +76,16 @@ Public Class FrmIngreso
             DivStatus.Visible = False
             div1.Visible = True
             Return
-
         End If
-
-       
-
-
-
-        
     End Sub
 
     Private Sub Cmdlogin_Click(sender As Object, e As System.EventArgs) Handles Cmdlogin.Click
         Logueo()
     End Sub
 
-
     <WebMethod()>
-   <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
     Public Shared Function reset(ByVal cadena As String) As String
-
         Try
             Dim jss As New JavaScriptSerializer()
             Dim dict = jss.Deserialize(Of List(Of globalWS))("[" & cadena & "]")
@@ -152,37 +129,17 @@ Public Class FrmIngreso
             SmtpServer.EnableSsl = True
             SmtpServer.Send(mail)
 
-
             Dim data = New With {
                 Key .Status = "200"
-                   }
-
-
-
-            'Key .Data = e
-
+            }
 
             Dim serializer = New JavaScriptSerializer()
             Dim json = serializer.Serialize(data)
-
             Return New JavaScriptSerializer().Serialize(data)
-
-
-
         Catch ex As Exception
-
             Return Error401()
         End Try
-
-
-
-
-
-
-
-
     End Function
-
 
 #Region "Manejo de Status"
 

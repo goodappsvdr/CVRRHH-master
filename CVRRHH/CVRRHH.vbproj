@@ -122,6 +122,9 @@
     <Content Include="FrmModificarFormacionAcademica.aspx" />
     <Content Include="FrmModificarGrupoFamiliar.aspx" />
     <Content Include="FrmModificarReferenciaLaboral.aspx" />
+    <Content Include="ImagenesPersonal\HVFMZNH1.png" />
+    <Content Include="ImagenesPersonal\L15MKBLC.png" />
+    <Content Include="ImagenesPersonal\SZUUKT8U.png" />
     <Content Include="ResetEmail.aspx" />
     <Content Include="Scripts\Alertas\Alertas.js" />
     <Content Include="Scripts\Alertas\sweetalert2%409.js" />
@@ -130,6 +133,7 @@
     <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
     <Content Include="Scripts\jquery-1.4.1.js" />
     <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Scripts\MiPerfil.js" />
     <Content Include="Scripts\Redes.js" />
     <Content Include="ValidarEmail.aspx" />
     <Content Include="VerMiPerfil.aspx" />

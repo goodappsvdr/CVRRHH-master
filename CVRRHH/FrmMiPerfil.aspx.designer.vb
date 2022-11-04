@@ -194,6 +194,15 @@ Partial Public Class FrmMiPerfil
     Protected WithEvents btnSubirImgEmpleado As Global.System.Web.UI.WebControls.FileUpload
 
     '''<summary>
+    '''Control srcFoto.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents srcFoto As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
     '''Control TxtCalle.
     '''</summary>
     '''<remarks>
@@ -356,6 +365,15 @@ Partial Public Class FrmMiPerfil
     Protected WithEvents TxtRefCoov As Global.System.Web.UI.HtmlControls.HtmlTextArea
 
     '''<summary>
+    '''Control cboSecciones.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents cboSecciones As Global.System.Web.UI.HtmlControls.HtmlSelect
+
+    '''<summary>
     '''Control BtnRefLab.
     '''</summary>
     '''<remarks>
@@ -516,6 +534,24 @@ Partial Public Class FrmMiPerfil
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents TxtInstitucion As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
+    '''Control CboInstitucion.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents CboInstitucion As Global.System.Web.UI.HtmlControls.HtmlSelect
+
+    '''<summary>
+    '''Control TxtInstitucion2.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TxtInstitucion2 As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''Control TxtTitulo.
