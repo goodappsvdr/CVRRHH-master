@@ -1,4 +1,5 @@
 ﻿var visorImg;
+var visorFormacionAcademica;
 
 window.onload = function () {
     var fecha = new Date(); //Fecha actual
@@ -170,6 +171,7 @@ function validarExt2() {
                     '<embed src="' + e.target.result + '" width="400" height="440" />';
             };
             visor.readAsDataURL(archivoInput.files[0]);
+            visorFormacionAcademica = visor;
         }
     }
 }
@@ -359,6 +361,7 @@ function agregarDatCont() {
     }
 }
 
+
 //REFERENCIAS LABORALES
 function agregarRefLab() {
     var fechaDesde = $("#TxtFechaDesde").val();
@@ -427,6 +430,95 @@ function agregarRefLab() {
                 $(".se-pre-con").fadeOut("slow");;
             }
         })
+    }
+}
+
+
+//ANTECEDENTES LABORALES
+function agregarFormAcademica() {
+    var fechaDesde = $("#TxtDesdeFA").val();
+    var fechaHasta = $("#TxtHastaFA").val();
+    var nivelAcademico = $("#ComboFA").val();
+    var especialidad = $("#ComboEspecilidad").val();
+    var titulo = $("#TxtTitulo").val();
+    var email = $("#txtEmail").val();
+
+    var txtInstitucion = $("#TxtInstitucion").val();
+    var cboInstitucion = $("#CboInstitucion").val();
+    var institucion = "";
+
+    if (txtInstitucion == "" && cboInstitucion != "SELECCIONAR") {
+        institucion = cboInstitucion;
+    } else if (txtInstitucion != "" && cboInstitucion == "SELECCIONAR") {
+        institucion = txtInstitucion;
+    } else {
+        swal('', 'Debes seleccionar una institución', 'info')
+        return;
+    }
+    
+    if (fechaDesde == '') {
+        swal('', 'Debes seleccionar una fecha desde', 'info');
+    } else if (fechaHasta == '') {
+        swal('', 'Debes seleccionar una fecha hasta', 'info');
+    } else if (nivelAcademico == '') {
+        swal('', 'Debes seleccionar tu nivel académico', 'info');
+    } else if (especialidad == '') {
+        swal('', 'Debes seleccionar tu especialidad', 'info');
+    } else if (titulo == '') {
+        swal('', 'Escribe tu título', 'info');
+    } else if (institucion == '') {
+        swal('', 'Debes seleccionar una institución', 'info');
+    } else {
+        var archivoInput = document.getElementById('SubirRecibo');
+        var archivoRuta = archivoInput.value;
+        var extPermitidas = /(.jpg|.png|.jpeg|.JPG|.PNG|.JPEG|.pdf|.PDF)$/i;
+        if (!extPermitidas.exec(archivoRuta)) {
+            if (srcFoto.innerHTML == "") {
+                swal("", "Seleccione un documento para subir", "info");
+                return;
+            }
+        } else {
+            var pdfFA = visorFormacionAcademica.result;
+
+            var par = { FechaDesde: fechaDesde, FechaHasta: fechaHasta, NivelAcademico: nivelAcademico, Especialidad: especialidad, Titulo: titulo, Institucion: institucion, Archivo: pdfFA, Email: email };
+            var payload = { cadena: JSON.stringify(par) };
+
+            $.ajax({
+                type: "POST",
+                "url": "FrmMiPerfil.aspx/GuardarFormacionAcademica",
+                data: JSON.stringify(payload),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+
+                    var json = $.parseJSON(data.d);
+                    var status = json.Status;
+
+                    if (status == 200) {
+                        swal('',
+                            'Formación académica guardada con éxito',
+                            'success',
+                            'CONTINUAR',
+                        ).then(function () {
+                            window.location.href = 'FrmMiPerfil.aspx'
+                        })
+                    } else if (status = 401) {
+                        swal('', 'Ocurrió un error', 'warning');
+                    }
+                },
+                error: function (xmlHttpRequest, textStatus, errorThrown) {
+                    console.log(xmlHttpRequest.responseText);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                },
+                beforeSend: function () {
+                    //$('#ImagenloaderM').show();
+                },
+                complete: function () {
+                    $(".se-pre-con").fadeOut("slow");;
+                }
+            })
+        }
     }
 }
 

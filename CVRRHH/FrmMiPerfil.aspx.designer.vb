@@ -563,15 +563,6 @@ Partial Public Class FrmMiPerfil
     Protected WithEvents SubirRecibo As Global.System.Web.UI.WebControls.FileUpload
 
     '''<summary>
-    '''Control BtnFormacionAca.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents BtnFormacionAca As Global.System.Web.UI.HtmlControls.HtmlInputButton
-
-    '''<summary>
     '''Control H1.
     '''</summary>
     '''<remarks>

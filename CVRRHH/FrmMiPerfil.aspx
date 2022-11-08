@@ -877,6 +877,13 @@
                                                 $('#TxtInstitucion').show();
                                                 $('#CboInstitucion').hide();
                                             }
+
+                                            if (cboFA == "SECUNDARIO EN CURSO" || cboFA == "SECUNDARIO INCOMPLETO") {
+                                                swal('', '“Por política interna de esta Cooperativa, solo se receptarán los Curriculums de postulantes que obtengan el nivel secundario COMPLETO(analítico en mano)', 'info')
+                                                $("#BtnFormacionAca").hide();
+                                            } else {
+                                                $("#BtnFormacionAca").show();
+                                            }
                                         }
 
                                         function comboInst() {
@@ -966,7 +973,8 @@
                                 <br />
 
                                 <center>
-                                    <input type="button" id="BtnFormacionAca" runat="server" value="AGREGAR DATOS" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px;" /></center>
+                                    <button id="BtnFormacionAca" onclick="agregarFormAcademica()" type="button" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px; cursor: pointer;">Guardar</button></center>
+                                    
                                 <br />
 
                             </div>

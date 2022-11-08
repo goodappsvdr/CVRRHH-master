@@ -1264,9 +1264,9 @@ Public Class FrmMiPerfil
         e.Row.Cells(0).Visible = False
     End Sub
 
-    Private Sub BtnFormacionAca_ServerClick(sender As Object, e As EventArgs) Handles BtnFormacionAca.ServerClick
-        GuardarFormacionAcademica()
-    End Sub
+    'Private Sub BtnFormacionAca_ServerClick(sender As Object, e As EventArgs) Handles BtnFormacionAca.ServerClick
+    'GuardarFormacionAcademica()
+    'End Sub
 
     Private Sub GrillaFA_RowCreated(sender As Object, e As GridViewRowEventArgs) Handles GrillaFA.RowCreated
         e.Row.Cells(5).Visible = False
@@ -1811,6 +1811,102 @@ Public Class FrmMiPerfil
             Dim serializer = New JavaScriptSerializer()
             Dim json = serializer.Serialize(data)
             Return New JavaScriptSerializer().Serialize(data)
+        Catch ex As Exception
+            Return Error401()
+        End Try
+    End Function
+#End Region
+
+#Region "FORMACION ACADEMICA"
+    <WebMethod()>
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    Public Shared Function GuardarFormacionAcademica(ByVal cadena As String) As String
+        Try
+
+            Dim jss As New JavaScriptSerializer()
+            jss.MaxJsonLength = 900000000
+            Dim dict = jss.Deserialize(Of List(Of FormacionAcademicaWs))("[" & cadena & "]")
+
+            Dim FechaDesde As String = Convert.ToString(dict(0).FechaDesde)
+            Dim FechaHasta As String = Convert.ToString(dict(0).FechaHasta)
+            Dim NivelAcademico As String = Convert.ToString(dict(0).NivelAcademico)
+            Dim Especialidad As String = Convert.ToString(dict(0).Especialidad)
+            Dim Titulo As String = Convert.ToString(dict(0).Titulo)
+            Dim Institucion As String = Convert.ToString(dict(0).Institucion)
+            Dim Archivo As String = Convert.ToString(dict(0).Archivo)
+            Dim Email As String = Convert.ToString(dict(0).Email)
+
+            Dim ods As New DataSet
+            Dim oObjeto As New PersonalLegajos
+            Dim oObjeto2 As New FormacionAcademica
+
+            ods = oObjeto.BuscarDatosDeUsuarioPorEmail(Email)
+
+            Dim Nombre As String = ods.Tables(0).Rows(0).Item("Nombre").ToString
+            Dim Apellido As String = ods.Tables(0).Rows(0).Item("Apellido").ToString
+            Dim ID_PersonalLegajo As Integer = ods.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
+
+            Dim ArchivoTipo As String = ""
+
+            'genero letra random para el nombre de la img
+            Dim s As String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+            Dim r As New Random
+            Dim sb As New StringBuilder
+            For i As Integer = 1 To 8
+                Dim idx As Integer = r.Next(0, 35)
+                sb.Append(s.Substring(idx, 1))
+            Next
+            Dim letraRandom As String = sb.ToString
+
+            Dim imagenfinal() As String
+            Dim img As System.Drawing.Image
+
+            'empiezo a convertir la img
+            If Archivo <> Nothing Then
+                imagenfinal = Archivo.Split(",")
+                imagenfinal(1).ToString()
+
+                ArchivoTipo = imagenfinal(0)
+
+                Dim MS As System.IO.MemoryStream = New System.IO.MemoryStream
+                Dim b64 As String = imagenfinal(1).ToString().Replace(" ", "+")
+                Dim b() As Byte
+
+                b = Convert.FromBase64String(b64)
+                MS = New System.IO.MemoryStream(b)
+                img = System.Drawing.Image.FromStream(MS)
+                If Archivo <> Nothing Then
+                    Dim path__1 As [String] = HttpContext.Current.Server.MapPath("./ArchivoAdjunto//")
+                    If Not System.IO.Directory.Exists(path__1) Then
+                        System.IO.Directory.CreateDirectory(path__1)
+                    End If
+
+                    Dim imageName As String = letraRandom & Convert.ToString(".png")
+
+                    Dim imgPath As String = Path.Combine(path__1, imageName)
+
+                    img.Save(imgPath, System.Drawing.Imaging.ImageFormat.Jpeg)
+
+                    Dim resultado As Integer
+                    Dim imagenUrl As String = "http://coovilros.com/rrhh/ArchivoAdjunto/" & imageName
+
+                    oObjeto2.Agregar(ID_PersonalLegajo, FechaDesde, FechaHasta, NivelAcademico, Institucion, Titulo, imagenUrl, Especialidad)
+                End If
+
+                Dim data = New With {
+                    Key .Status = "200"
+                }
+
+                Dim serializer = New JavaScriptSerializer()
+                serializer.MaxJsonLength = 900000000
+                Dim json = serializer.Serialize(data)
+
+                Return New JavaScriptSerializer().Serialize(data)
+
+            Else
+                Return Error401("Error en el tipo de base 64")
+            End If
+
         Catch ex As Exception
             Return Error401()
         End Try

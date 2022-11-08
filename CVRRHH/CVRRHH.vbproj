@@ -271,6 +271,7 @@
     <Compile Include="globalWS.vb" />
     <Compile Include="Metodos\DatosContactoWs.vb" />
     <Compile Include="Metodos\DatosPersonalesWs.vb" />
+    <Compile Include="Metodos\FormacionAcademicaWs.vb" />
     <Compile Include="Metodos\RedesWs.vb" />
     <Compile Include="Metodos\ReferenciasLaboralesWs.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -337,6 +338,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="ArchivoAdjunto\" />
     <Folder Include="ImagenesPersonales\" />
   </ItemGroup>
   <ItemGroup>
