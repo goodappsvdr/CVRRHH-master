@@ -739,19 +739,19 @@
                                     <div class="col-md-4" style="margin-bottom: 20px;">
                                         <label>Apellido</label>
                                         <asp:TextBox ID="TxtApellidoGrupFam" type="text" runat="server" ForeColor="Black"
-                                            class="form-control" Height="40px" Width="100%"></asp:TextBox>
+                                            class="form-control" placeholder="Apellido" Height="40px" Width="100%"></asp:TextBox>
                                     </div>
 
                                     <div class="col-md-4" style="margin-bottom: 20px;">
                                         <label>Nombre</label>
                                         <asp:TextBox ID="TxtNombreGrupFam" type="text" runat="server" ForeColor="Black"
-                                            class="form-control" Height="40px" Width="100%"></asp:TextBox>
+                                            class="form-control" placeholder="Nombre" Height="40px" Width="100%"></asp:TextBox>
                                     </div>
 
                                     <div class="col-md-4" style="margin-bottom: 20px;">
                                         <label>Parentezco</label>
                                         <select id="ComboPrentezco" name="select" runat="server" class="form-control">
-                                            <option id="Option13" value="HIJO" class="form-control">HIJO</option>
+                                            
                                         </select>
                                     </div>
 
@@ -764,7 +764,7 @@
                                     <div class="col-md-4" style="margin-bottom: 20px;">
                                         <label>Ocupación</label>
                                         <asp:TextBox ID="TxtOcupacion" type="text" runat="server" ForeColor="Black"
-                                            class="form-control" Height="40px" Width="100%" placeholder="Informatico"></asp:TextBox>
+                                            class="form-control" Height="40px" Width="100%" placeholder="Ocupación"></asp:TextBox>
                                     </div>
                                 </div>
 
@@ -772,7 +772,8 @@
                                 <br />
 
                                 <center>
-                                    <input type="button" id="BtnAgregarGrupoFam" runat="server" value="AGREGAR DATOS" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px" onmouseup="Alert();" /></center>
+                                    <button id="BtnAgregarGrupoFam" onclick="agregarGrupoFam()" type="button" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px; cursor: pointer;">Guardar</button>
+                                </center>
                                 <br />
 
                             </div>
@@ -1068,6 +1069,7 @@
                                     <div class="col-md-4" style="margin-bottom: 20px;">
                                         <label>Area</label>
                                         <select id="ComboCursos" name="select" runat="server" class="form-control">
+                                            <option id="as" value="SELECCIONAR" class="form-control">SELECCIONAR</option>
                                             <option id="a" value="ADMINISTRACIÓN" class="form-control">ADMINISTRACIÓN</option>
                                             <option id="b" value="COMERCIALIZACIÓN" class="form-control">COMERCIALIZACIÓN</option>
                                             <option id="c" value="ELECTROMECANICO" class="form-control">ELECTROMECANICO</option>
@@ -1111,7 +1113,8 @@
                                 <br />
 
                                 <center>
-                                    <input type="button" id="BtnAgregarCurso" runat="server" value="AGREGAR DATOS" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px" /></center>
+                                    <button id="BtnAgregarCurso" onclick="agregarCurso()" type="button" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px; cursor: pointer;">Guardar</button>
+                                </center>
                                 <br />
 
                             </div>

@@ -522,6 +522,137 @@ function agregarFormAcademica() {
     }
 }
 
+
+//GRUPO FAMILIAR
+function agregarGrupoFam() {
+    var apellido = $("#TxtApellidoGrupFam").val();
+    var nombre = $("#TxtNombreGrupFam").val();
+    var parentezco = $("#ComboPrentezco").val();
+    var fechaNac = $("#TxtFechaNacGF").val();
+    var ocupacion = $("#TxtOcupacion").val();
+    var email = $("#txtEmail").val();
+
+    if (apellido == '') {
+        swal('', 'El campo apellido no puede estar vacío', 'info')
+    } else if (nombre == '') {
+        swal('', 'El campo nombre no puede estar vacío', 'info')
+    } else if (fechaNac == '') {
+        swal('', 'El campo fecha nacimiento no puede estar vacío', 'info')
+    } else if (ocupacion == "") {
+        swal('', 'El campo ocupacion no puede estar vacío', 'info')
+    } else {
+
+        var par = { Apellido: apellido, Nombre: nombre, ID_Parentezco: parentezco, FechaNac: fechaNac, Ocupacion: ocupacion, Email: email };
+        var payload = { cadena: JSON.stringify(par) };
+
+        $.ajax({
+            type: "POST",
+            "url": "FrmMiPerfil.aspx/GuardarGrupoFamiliar",
+            data: JSON.stringify(payload),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+
+                var json = $.parseJSON(data.d);
+                var status = json.Status;
+
+                if (status == 200) {
+                    swal('',
+                        'Familiar guardado con éxito',
+                        'success',
+                        'CONTINUAR',
+                    ).then(function () {
+                        window.location.href = 'FrmMiPerfil.aspx'
+                    })
+                } else if (status = 401) {
+                    swal('', 'Ocurrió un error', 'warning');
+                }
+            },
+            error: function (xmlHttpRequest, textStatus, errorThrown) {
+                console.log(xmlHttpRequest.responseText);
+                console.log(textStatus);
+                console.log(errorThrown);
+            },
+            beforeSend: function () {
+                //$('#ImagenloaderM').show();
+            },
+            complete: function () {
+                $(".se-pre-con").fadeOut("slow");;
+            }
+        })
+    }
+}
+
+
+//CURSOS
+function agregarCurso() {
+    var desde = $("#TxtFechaDesdeCurso").val();
+    var hasta = $("#TxtFechaHastaCurso").val();
+    var nombreCurso = $("#TxtNombredelCurso").val();
+    var areas = $("#ComboCursos").val();
+    var horas = $("#TxtHoras").val();
+    var institución = $("#TxtInstitucionCursos").val();
+    var comentarios = $("#TxtComentarios").val();
+    var email = $("#txtEmail").val();
+
+    if (desde == '') {
+        swal('', 'El campo fecha desde no puede estar vacío', 'info')
+    } else if (hasta == '') {
+        swal('', 'El campo fecha hasta no puede estar vacío', 'info')
+    } else if (nombreCurso == '') {
+        swal('', 'El campo nombre del curso no puede estar vacío', 'info')
+    } else if (areas == "SELECCIONAR") {
+        swal('', 'Debes seleccionar una área', 'info')
+    } else if (horas == "") {
+        swal('', 'El campo horas no puede estar vacío', 'info')
+    }  else if (institución == "") {
+        swal('', 'El campo institución no puede estar vacío', 'info')
+    } else if (comentarios == "") {
+        swal('', 'El campo ocupacion no puede estar vacío', 'info')
+    } else {
+
+        var par = { Desde: desde, Hasta: hasta, NombreCurso: nombreCurso, Areas: areas, Horas: horas, Institución: institución, Comentarios: comentarios, Email: email };
+        var payload = { cadena: JSON.stringify(par) };
+
+        $.ajax({
+            type: "POST",
+            "url": "FrmMiPerfil.aspx/GuardarCurso",
+            data: JSON.stringify(payload),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+
+                var json = $.parseJSON(data.d);
+                var status = json.Status;
+
+                if (status == 200) {
+                    swal('',
+                        'Curso guardado con éxito',
+                        'success',
+                        'CONTINUAR',
+                    ).then(function () {
+                        window.location.href = 'FrmMiPerfil.aspx'
+                    })
+                } else if (status = 401) {
+                    swal('', 'Ocurrió un error', 'warning');
+                }
+            },
+            error: function (xmlHttpRequest, textStatus, errorThrown) {
+                console.log(xmlHttpRequest.responseText);
+                console.log(textStatus);
+                console.log(errorThrown);
+            },
+            beforeSend: function () {
+                //$('#ImagenloaderM').show();
+            },
+            complete: function () {
+                $(".se-pre-con").fadeOut("slow");;
+            }
+        })
+    }
+}
+
+
 function ActualizarCampos() {
     $("#TxtFechaDesde").val() = '';
     $('#ChkActivo').prop('checked') = false

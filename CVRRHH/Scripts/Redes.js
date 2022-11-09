@@ -77,10 +77,15 @@ function AgregarRedes() {
 //cargar
 function CargarRedes() {
 
-    $.ajax({
+    var Email = $("#txtEmail").val();
 
+    var parametro = { Email };
+    var Json = { cadena: JSON.stringify(parametro) };
+
+    $.ajax({
         type: "POST",
         "url": "FrmMiPerfil.aspx/CargarRedes",
+        data: JSON.stringify(Json),
         contentType: "application/json; charset=utf-8",
         dataType: "json",
         success: function (data) {

@@ -446,15 +446,6 @@ Partial Public Class FrmMiPerfil
     Protected WithEvents TxtOcupacion As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control BtnAgregarGrupoFam.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents BtnAgregarGrupoFam As Global.System.Web.UI.HtmlControls.HtmlInputButton
-
-    '''<summary>
     '''Control TituloGF.
     '''</summary>
     '''<remarks>
@@ -651,15 +642,6 @@ Partial Public Class FrmMiPerfil
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents TxtComentarios As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''Control BtnAgregarCurso.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents BtnAgregarCurso As Global.System.Web.UI.HtmlControls.HtmlInputButton
 
     '''<summary>
     '''Control H2.

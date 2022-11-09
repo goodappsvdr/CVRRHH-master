@@ -269,11 +269,13 @@
       <SubType>ASPXCodebehind</SubType>
     </Compile>
     <Compile Include="globalWS.vb" />
-    <Compile Include="Metodos\DatosContactoWs.vb" />
-    <Compile Include="Metodos\DatosPersonalesWs.vb" />
-    <Compile Include="Metodos\FormacionAcademicaWs.vb" />
-    <Compile Include="Metodos\RedesWs.vb" />
-    <Compile Include="Metodos\ReferenciasLaboralesWs.vb" />
+    <Compile Include="Model\CursosWs.vb" />
+    <Compile Include="Model\DatosContactoWs.vb" />
+    <Compile Include="Model\DatosPersonalesWs.vb" />
+    <Compile Include="Model\FormacionAcademicaWs.vb" />
+    <Compile Include="Model\GrupoFamiliarWs.vb" />
+    <Compile Include="Model\RedesWs.vb" />
+    <Compile Include="Model\ReferenciasLaboralesWs.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>

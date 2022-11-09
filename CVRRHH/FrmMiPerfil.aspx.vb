@@ -1254,9 +1254,9 @@ Public Class FrmMiPerfil
         e.Row.Cells(0).Visible = False
     End Sub
 
-    Private Sub BtnAgregarGrupoFam_ServerClick(sender As Object, e As System.EventArgs) Handles BtnAgregarGrupoFam.ServerClick
-        GuardarDatosGrupofamiliar()
-    End Sub
+    'Private Sub BtnAgregarGrupoFam_ServerClick(sender As Object, e As System.EventArgs) Handles BtnAgregarGrupoFam.ServerClick
+    'GuardarDatosGrupofamiliar()
+    'End Sub
 
     Private Sub GrillaGrupoFam_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GrillaGrupoFam.RowCreated
         e.Row.Cells(6).Visible = False
@@ -1274,9 +1274,9 @@ Public Class FrmMiPerfil
         e.Row.Cells(0).Visible = False
     End Sub
 
-    Private Sub BtnAgregarCurso_ServerClick(sender As Object, e As EventArgs) Handles BtnAgregarCurso.ServerClick
-        GuardarCursos()
-    End Sub
+    'Private Sub BtnAgregarCurso_ServerClick(sender As Object, e As EventArgs) Handles BtnAgregarCurso.ServerClick
+    'GuardarCursos()
+    'End Sub
 
     Private Sub GrillaCurso_RowCreated(sender As Object, e As GridViewRowEventArgs) Handles GrillaCurso.RowCreated
         e.Row.Cells(5).Visible = False
@@ -1676,14 +1676,19 @@ Public Class FrmMiPerfil
 
     <WebMethod()>
     <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
-    Public Shared Function CargarRedes() As String
+    Public Shared Function CargarRedes(ByVal cadena As String) As String
         Try
+
+            Dim jss As New JavaScriptSerializer()
+            Dim dict = jss.Deserialize(Of List(Of RedesWs))("[" & cadena & "]")
+
+            Dim username = Convert.ToString(dict(0).Email)
 
             Dim oRed As New Redes
             Dim ods As New DataSet
 
-            Dim userId As String = Membership.GetUser().UserName
-            Dim username As String = userId
+            'Dim userId As String = Membership.GetUser().UserName
+            'Dim username As String = user
 
             ods = oRed.RedesSociales_BuscarPorEmail(username)
 
@@ -1868,24 +1873,48 @@ Public Class FrmMiPerfil
 
                 ArchivoTipo = imagenfinal(0)
 
-                Dim MS As System.IO.MemoryStream = New System.IO.MemoryStream
-                Dim b64 As String = imagenfinal(1).ToString().Replace(" ", "+")
-                Dim b() As Byte
+                If ArchivoTipo = "data:image/jpeg;base64" Or ArchivoTipo = "data:image/jpg;base64" Or ArchivoTipo = "data:image/png;base64" Then
+                    Dim MS As System.IO.MemoryStream = New System.IO.MemoryStream
+                    Dim b64 As String = imagenfinal(1).ToString().Replace(" ", "+")
+                    Dim b() As Byte
 
-                b = Convert.FromBase64String(b64)
-                MS = New System.IO.MemoryStream(b)
-                img = System.Drawing.Image.FromStream(MS)
-                If Archivo <> Nothing Then
-                    Dim path__1 As [String] = HttpContext.Current.Server.MapPath("./ArchivoAdjunto//")
+                    b = Convert.FromBase64String(b64)
+                    MS = New System.IO.MemoryStream(b)
+                    img = System.Drawing.Image.FromStream(MS)
+                    If Archivo <> Nothing Then
+                        Dim path__1 As [String] = HttpContext.Current.Server.MapPath("./ArchivoAdjunto//")
+                        If Not System.IO.Directory.Exists(path__1) Then
+                            System.IO.Directory.CreateDirectory(path__1)
+                        End If
+
+                        Dim imageName As String = letraRandom & Convert.ToString(".png")
+
+                        Dim imgPath As String = Path.Combine(path__1, imageName)
+
+                        img.Save(imgPath, System.Drawing.Imaging.ImageFormat.Jpeg)
+
+                        Dim resultado As Integer
+                        Dim imagenUrl As String = "http://coovilros.com/rrhh/ArchivoAdjunto/" & imageName
+
+                        oObjeto2.Agregar(ID_PersonalLegajo, FechaDesde, FechaHasta, NivelAcademico, Institucion, Titulo, imagenUrl, Especialidad)
+                    End If
+
+                ElseIf ArchivoTipo = "data:application/pdf;base64" Then
+                    Dim path__1 As [String] = HttpContext.Current.Server.MapPath("./ArchivoAdjunto/")
                     If Not System.IO.Directory.Exists(path__1) Then
                         System.IO.Directory.CreateDirectory(path__1)
                     End If
 
-                    Dim imageName As String = letraRandom & Convert.ToString(".png")
+                    Dim imageName As String = letraRandom & Convert.ToString(".pdf")
 
                     Dim imgPath As String = Path.Combine(path__1, imageName)
 
-                    img.Save(imgPath, System.Drawing.Imaging.ImageFormat.Jpeg)
+                    'aca convertir el base 64 a url absoluta
+                    Dim fileContents As Byte() = Convert.FromBase64String(imagenfinal(1).ToString()), ruta As String = imgPath
+                    Dim fs As IO.FileStream
+                    fs = IO.File.Create(ruta)
+                    fs.Write(fileContents, 0, fileContents.Length)
+                    fs.Close()
 
                     Dim resultado As Integer
                     Dim imagenUrl As String = "http://coovilros.com/rrhh/ArchivoAdjunto/" & imageName
@@ -1907,6 +1936,95 @@ Public Class FrmMiPerfil
                 Return Error401("Error en el tipo de base 64")
             End If
 
+        Catch ex As Exception
+            Return Error401()
+        End Try
+    End Function
+#End Region
+
+#Region "GRUPO FAMILIAR"
+    <WebMethod()>
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    Public Shared Function GuardarGrupoFamiliar(ByVal cadena As String) As String
+        Try
+
+            Dim jss As New JavaScriptSerializer()
+            Dim dict = jss.Deserialize(Of List(Of GrupoFamiliarWs))("[" & cadena & "]")
+
+            Dim ApellidoGF As String = Convert.ToString(dict(0).Apellido)
+            Dim NombreGF As String = Convert.ToString(dict(0).Nombre)
+            Dim ID_Parentezco As String = Convert.ToString(dict(0).ID_Parentezco)
+            Dim FechaNac As String = Convert.ToString(dict(0).FechaNac)
+            Dim Ocupacion As String = Convert.ToString(dict(0).Ocupacion)
+            Dim Email As String = Convert.ToString(dict(0).Email)
+
+            Dim ods As New DataSet
+            Dim oObjeto As New Redes
+
+            Dim ods1 As New DataSet
+            Dim oObjeto1 As New PersonalLegajos
+
+            ods1 = oObjeto1.BuscarDatosDeUsuarioPorEmail(Email)
+
+            Dim Nombre As String = ods1.Tables(0).Rows(0).Item("Nombre").ToString
+            Dim Apellido As String = ods1.Tables(0).Rows(0).Item("Apellido").ToString
+            Dim ID_PersonalLegajo As Integer = ods1.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
+
+            oObjeto1.Agregar_GrupoFamiliar(ID_PersonalLegajo, ApellidoGF, NombreGF, ID_Parentezco, FechaNac, Ocupacion)
+
+            Dim data = New With {
+                Key .Status = "200"
+            }
+
+            Dim serializer = New JavaScriptSerializer()
+            Dim json = serializer.Serialize(data)
+            Return New JavaScriptSerializer().Serialize(data)
+        Catch ex As Exception
+            Return Error401()
+        End Try
+    End Function
+#End Region
+
+#Region "CURSOS"
+    <WebMethod()>
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    Public Shared Function GuardarCurso(ByVal cadena As String) As String
+        Try
+
+            Dim jss As New JavaScriptSerializer()
+            Dim dict = jss.Deserialize(Of List(Of CursosWs))("[" & cadena & "]")
+
+            Dim Desde As String = Convert.ToString(dict(0).Desde)
+            Dim Hasta As String = Convert.ToString(dict(0).Hasta)
+            Dim NombreCurso As String = Convert.ToString(dict(0).NombreCurso)
+            Dim Areas As String = Convert.ToString(dict(0).Areas)
+            Dim Horas As String = Convert.ToString(dict(0).Horas)
+            Dim Institución As String = Convert.ToString(dict(0).Institución)
+            Dim Comentarios As String = Convert.ToString(dict(0).Comentarios)
+            Dim Email As String = Convert.ToString(dict(0).Email)
+
+            Dim ods As New DataSet
+            Dim oObjeto As New Redes
+
+            Dim ods1 As New DataSet
+            Dim oObjeto1 As New PersonalLegajos
+            Dim oObjeto2 As New Cursos
+
+            ods1 = oObjeto1.BuscarDatosDeUsuarioPorEmail(Email)
+
+            Dim Nombre As String = ods1.Tables(0).Rows(0).Item("Nombre").ToString
+            Dim Apellido As String = ods1.Tables(0).Rows(0).Item("Apellido").ToString
+            Dim ID_PersonalLegajo As Integer = ods1.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
+
+            oObjeto2.Agregar(ID_PersonalLegajo, Desde, Hasta, NombreCurso, Areas, Horas, Institución, Comentarios)
+
+            Dim data = New With {
+                Key .Status = "200"
+            }
+
+            Dim serializer = New JavaScriptSerializer()
+            Dim json = serializer.Serialize(data)
+            Return New JavaScriptSerializer().Serialize(data)
         Catch ex As Exception
             Return Error401()
         End Try
