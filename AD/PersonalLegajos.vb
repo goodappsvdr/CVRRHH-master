@@ -310,15 +310,18 @@ Public Class PersonalLegajos
 
     End Function
     Public Function EliminarDato_GrupoFamiliar(ID As Integer, ID_PersonalLegajo As Integer) As DataSet
-
         Try
-
             Return oDatabase.ExecuteDataSet("PersonalLegajo_GrupoFamiliar_EliminarDesdeCV", ID, ID_PersonalLegajo)
-
         Catch ex As System.Exception
             Throw ex
         End Try
-
+    End Function
+    Public Function Eliminar_GrupoFamiliarPorId(ID_PersonalLegajo_GrupoFamiliar As Integer) As DataSet
+        Try
+            Return oDatabase.ExecuteDataSet("PersonalLegajo_GrupoFamiliar_Eliminar", ID_PersonalLegajo_GrupoFamiliar)
+        Catch ex As System.Exception
+            Throw ex
+        End Try
     End Function
 
 

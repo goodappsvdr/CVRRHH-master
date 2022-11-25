@@ -455,15 +455,6 @@ Partial Public Class FrmMiPerfil
     Protected WithEvents TituloGF As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
-    '''Control GrillaGrupoFam.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents GrillaGrupoFam As Global.System.Web.UI.WebControls.GridView
-
-    '''<summary>
     '''Control TextBox4.
     '''</summary>
     '''<remarks>
@@ -698,22 +689,22 @@ Partial Public Class FrmMiPerfil
     Protected WithEvents TxtPeso As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control EnfermedadSI.
+    '''Control RbtTratSi.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents EnfermedadSI As Global.System.Web.UI.HtmlControls.HtmlInputCheckBox
+    Protected WithEvents RbtTratSi As Global.System.Web.UI.HtmlControls.HtmlInputRadioButton
 
     '''<summary>
-    '''Control EnfermedadNO.
+    '''Control RbtTratNo.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents EnfermedadNO As Global.System.Web.UI.HtmlControls.HtmlInputCheckBox
+    Protected WithEvents RbtTratNo As Global.System.Web.UI.HtmlControls.HtmlInputRadioButton
 
     '''<summary>
     '''Control TxtTratamiento.
@@ -725,22 +716,22 @@ Partial Public Class FrmMiPerfil
     Protected WithEvents TxtTratamiento As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control cirugiaSi.
+    '''Control RbtCirSi.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents cirugiaSi As Global.System.Web.UI.HtmlControls.HtmlInputCheckBox
+    Protected WithEvents RbtCirSi As Global.System.Web.UI.HtmlControls.HtmlInputRadioButton
 
     '''<summary>
-    '''Control CirugiaNo.
+    '''Control RbtCirNo.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents CirugiaNo As Global.System.Web.UI.HtmlControls.HtmlInputCheckBox
+    Protected WithEvents RbtCirNo As Global.System.Web.UI.HtmlControls.HtmlInputRadioButton
 
     '''<summary>
     '''Control TxtCirugia.
@@ -750,15 +741,6 @@ Partial Public Class FrmMiPerfil
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents TxtCirugia As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
-    '''Control BtnAgregarAntSalud.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents BtnAgregarAntSalud As Global.System.Web.UI.HtmlControls.HtmlInputButton
 
     '''<summary>
     '''Control H3.

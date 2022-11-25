@@ -25,7 +25,7 @@ Public Class FrmMiPerfil
             txtEmail.Text = email
 
             CargarGrilla()
-            CargarGrillaGrupoFamiliar()
+            'CargarGrillaGrupoFamiliar()
             CargarGrillaFormacionAcademica()
             CargarGrillaCursos()
             CargaDatosUsuarios()
@@ -148,84 +148,83 @@ Public Class FrmMiPerfil
 
 
     Private Sub CargarGrillaGrupoFamiliar()
-        Dim PruebaGalleta As HttpCookie
-        PruebaGalleta = Request.Cookies("datos")
+        'Dim PruebaGalleta As HttpCookie
+        'PruebaGalleta = Request.Cookies("datos")
 
-        'aca valido si hay cookies
-        If PruebaGalleta Is Nothing Then
-            Dim userId As String = Membership.GetUser().UserName
+        ''aca valido si hay cookies
+        'If PruebaGalleta Is Nothing Then
+        '    Dim userId As String = Membership.GetUser().UserName
 
-            Dim username As String = userId
-            Dim ods As New DataSet
+        '    Dim username As String = userId
+        '    Dim ods As New DataSet
 
-            Dim ods2 As New DataSet
-            Dim oobjeto2 As New PersonalLegajos
+        '    Dim ods2 As New DataSet
+        '    Dim oobjeto2 As New PersonalLegajos
 
-            ods2 = oobjeto2.BuscarDatosDeUsuarioPorEmail(username)
+        '    ods2 = oobjeto2.BuscarDatosDeUsuarioPorEmail(username)
 
-            GrillaGrupoFam.DataSource = ods2.Tables(2)
-            GrillaGrupoFam.DataBind()
+        '    GrillaGrupoFam.DataSource = ods2.Tables(2)
+        '    GrillaGrupoFam.DataBind()
 
-            For Each row As GridViewRow In GrillaGrupoFam.Rows
-                Dim ods3 As New DataSet
-                Dim oobjeto3 As New PersonalLegajos
+        '    For Each row As GridViewRow In GrillaGrupoFam.Rows
+        '        Dim ods3 As New DataSet
+        '        Dim oobjeto3 As New PersonalLegajos
 
-                ods3 = oobjeto3.BuscarDatosDeUsuarioPorEmail(username)
+        '        ods3 = oobjeto3.BuscarDatosDeUsuarioPorEmail(username)
 
-                If ods3.Tables(1).Rows.Count > 0 Then
-                    TituloGF.InnerHtml = "MIS DATOS GRUPO FAMILIAR"
-                Else
-                    TituloGF.InnerHtml = ""
-                End If
-                For i = 0 To ods3.Tables(2).Rows.Count - 1
-                    'Dim Valor As Button = TryCast(GrillaGrupoFam.Rows(i).Cells(1).Controls(1), Button)
+        '        If ods3.Tables(1).Rows.Count > 0 Then
+        '            TituloGF.InnerHtml = "MIS DATOS GRUPO FAMILIAR"
+        '        Else
+        '            TituloGF.InnerHtml = ""
+        '        End If
+        '        For i = 0 To ods3.Tables(2).Rows.Count - 1
+        '            'Dim Valor As Button = TryCast(GrillaGrupoFam.Rows(i).Cells(1).Controls(1), Button)
 
-                    'Valor.OnClientClick = ods3.Tables(1).Rows(i).Item("url").ToString
-                    'row.Cells(3).Attributes("Style") = "display:none"
-                    'row.Cells(6).Attributes("Style") = "display:none"
-                    'row.Cells(7).Attributes("Style") = "display:none"
-                    row.Cells(0).Attributes("Style") = "display:none"
-                Next
-            Next
-        Else
-            Dim Galleta As HttpCookie
-            Galleta = Request.Cookies("datos")
+        '            'Valor.OnClientClick = ods3.Tables(1).Rows(i).Item("url").ToString
+        '            'row.Cells(3).Attributes("Style") = "display:none"
+        '            'row.Cells(6).Attributes("Style") = "display:none"
+        '            'row.Cells(7).Attributes("Style") = "display:none"
+        '            row.Cells(0).Attributes("Style") = "display:none"
+        '        Next
+        '    Next
+        'Else
+        '    Dim Galleta As HttpCookie
+        '    Galleta = Request.Cookies("datos")
 
-            Dim ods2 As New DataSet
-            Dim oobjeto2 As New PersonalLegajos
+        '    Dim ods2 As New DataSet
+        '    Dim oobjeto2 As New PersonalLegajos
 
-            Dim name As String = Galleta.Values("nombre")
-            'Dim pass As String = Galleta.Values("pass")
-            Dim IdUser As String = Galleta.Values("userid")
-            ods2 = oobjeto2.BuscarDatosDeUsuarioPorEmail(name)
+        '    Dim name As String = Galleta.Values("nombre")
+        '    'Dim pass As String = Galleta.Values("pass")
+        '    Dim IdUser As String = Galleta.Values("userid")
+        '    ods2 = oobjeto2.BuscarDatosDeUsuarioPorEmail(name)
 
-            GrillaGrupoFam.DataSource = ods2.Tables(2)
-            GrillaGrupoFam.DataBind()
+        '    GrillaGrupoFam.DataSource = ods2.Tables(2)
+        '    GrillaGrupoFam.DataBind()
 
 
-            For Each row As GridViewRow In GrillaGrupoFam.Rows
-                Dim ods3 As New DataSet
-                Dim oobjeto3 As New PersonalLegajos
+        '    For Each row As GridViewRow In GrillaGrupoFam.Rows
+        '        Dim ods3 As New DataSet
+        '        Dim oobjeto3 As New PersonalLegajos
 
-                ods3 = oobjeto3.BuscarDatosDeUsuarioPorEmail(name)
+        '        ods3 = oobjeto3.BuscarDatosDeUsuarioPorEmail(name)
 
-                If ods3.Tables(1).Rows.Count > 0 Then
-                    TituloGF.InnerHtml = "MIS DATOS GRUPO FAMILIAR"
-                Else
-                    TituloGF.InnerHtml = ""
-                End If
-                For i = 0 To ods3.Tables(2).Rows.Count - 1
-                    'Dim Valor As Button = TryCast(GrillaGrupoFam.Rows(i).Cells(1).Controls(1), Button)
+        '        If ods3.Tables(1).Rows.Count > 0 Then
+        '            TituloGF.InnerHtml = "MIS DATOS GRUPO FAMILIAR"
+        '        Else
+        '            TituloGF.InnerHtml = ""
+        '        End If
+        '        For i = 0 To ods3.Tables(2).Rows.Count - 1
+        '            'Dim Valor As Button = TryCast(GrillaGrupoFam.Rows(i).Cells(1).Controls(1), Button)
 
-                    'Valor.OnClientClick = ods3.Tables(1).Rows(i).Item("url").ToString
-                    'row.Cells(3).Attributes("Style") = "display:none"
-                    'row.Cells(6).Attributes("Style") = "display:none"
-                    'row.Cells(7).Attributes("Style") = "display:none"
-                    row.Cells(0).Attributes("Style") = "display:none"
-                Next
-            Next
-        End If
-
+        '            'Valor.OnClientClick = ods3.Tables(1).Rows(i).Item("url").ToString
+        '            'row.Cells(3).Attributes("Style") = "display:none"
+        '            'row.Cells(6).Attributes("Style") = "display:none"
+        '            'row.Cells(7).Attributes("Style") = "display:none"
+        '            row.Cells(0).Attributes("Style") = "display:none"
+        '        Next
+        '    Next
+        'End If
     End Sub
     Private Sub CargarGrillaFormacionAcademica()
         Dim PruebaGalleta As HttpCookie
@@ -332,9 +331,9 @@ Public Class FrmMiPerfil
                 ods3 = oobjeto3.BuscarDatosDeUsuarioPorEmail(username)
 
                 If ods3.Tables(4).Rows.Count > 0 Then
-                    TituloGF.InnerHtml = "MIS CURSOS"
+                    'TituloGF.InnerHtml = "MIS CURSOS"
                 Else
-                    TituloGF.InnerHtml = ""
+                    'TituloGF.InnerHtml = ""
                 End If
                 For i = 0 To ods3.Tables(4).Rows.Count - 1
                     'Dim Valor As Button = TryCast(GrillaGrupoFam.Rows(i).Cells(1).Controls(1), Button)
@@ -973,17 +972,17 @@ Public Class FrmMiPerfil
             Dim ID_Resultado As Integer
             Dim Enfermedad As String
             Dim Cirugia As String
-            If EnfermedadSI.Checked = True Then
-                Enfermedad = 1
-            Else
-                Enfermedad = 0
-            End If
+            'If EnfermedadSI.Checked = True Then
+            '    Enfermedad = 1
+            'Else
+            '    Enfermedad = 0
+            'End If
 
-            If cirugiaSi.Checked = True Then
-                Cirugia = 1
-            Else
-                Cirugia = 0
-            End If
+            'If cirugiaSi.Checked = True Then
+            '    Cirugia = 1
+            'Else
+            '    Cirugia = 0
+            'End If
 
             If TxtAltura.Text <> "" And TxtPeso.Text <> "" Then
                 ID_Resultado = oObjeto.Agregar(ID_PersonalLegajo, TxtAltura.Text, TxtPeso.Text, Enfermedad, TxtTratamiento.Text, Cirugia, TxtCirugia.Text)
@@ -1012,17 +1011,17 @@ Public Class FrmMiPerfil
             Dim Enfermedad As String
             Dim Cirugia As String
 
-            If EnfermedadSI.Checked = True Then
-                Enfermedad = 1
-            Else
-                Enfermedad = 0
-            End If
+            'If EnfermedadSI.Checked = True Then
+            '    Enfermedad = 1
+            'Else
+            '    Enfermedad = 0
+            'End If
 
-            If cirugiaSi.Checked = True Then
-                Cirugia = 1
-            Else
-                Cirugia = 0
-            End If
+            'If cirugiaSi.Checked = True Then
+            '    Cirugia = 1
+            'Else
+            '    Cirugia = 0
+            'End If
 
             If TxtAltura.Text <> "" And TxtPeso.Text <> "" Then
                 ID_Resultado = oObjeto.Agregar(ID_PersonalLegajo, TxtAltura.Text, TxtPeso.Text, Enfermedad, TxtTratamiento.Text, Cirugia, TxtCirugia.Text)
@@ -1056,17 +1055,17 @@ Public Class FrmMiPerfil
             Dim ID_Resultado As Integer
             Dim Enfermedad As String
             Dim Cirugia As String
-            If EnfermedadSI.Checked = True Then
-                Enfermedad = 1
-            Else
-                Enfermedad = 0
-            End If
+            'If EnfermedadSI.Checked = True Then
+            '    Enfermedad = 1
+            'Else
+            '    Enfermedad = 0
+            'End If
 
-            If cirugiaSi.Checked = True Then
-                Cirugia = 1
-            Else
-                Cirugia = 0
-            End If
+            'If cirugiaSi.Checked = True Then
+            '    Cirugia = 1
+            'Else
+            '    Cirugia = 0
+            'End If
 
             If TxtAltura.Text <> "" And TxtPeso.Text <> "" Then
                 Dim ods3 As New DataSet
@@ -1100,17 +1099,17 @@ Public Class FrmMiPerfil
             Dim ID_Resultado As Integer
             Dim Enfermedad As String
             Dim Cirugia As String
-            If EnfermedadSI.Checked = True Then
-                Enfermedad = 1
-            Else
-                Enfermedad = 0
-            End If
+            'If EnfermedadSI.Checked = True Then
+            '    Enfermedad = 1
+            'Else
+            '    Enfermedad = 0
+            'End If
 
-            If cirugiaSi.Checked = True Then
-                Cirugia = 1
-            Else
-                Cirugia = 0
-            End If
+            'If cirugiaSi.Checked = True Then
+            '    Cirugia = 1
+            'Else
+            '    Cirugia = 0
+            'End If
 
             If TxtAltura.Text <> "" And TxtPeso.Text <> "" Then
                 Dim ods3 As New DataSet
@@ -1154,17 +1153,17 @@ Public Class FrmMiPerfil
             Dim Enfermedad As String
             Dim Cirugia As String
 
-            If EnfermedadSI.Checked = True Then
-                Enfermedad = 1
-            Else
-                Enfermedad = 0
-            End If
+            'If RbtTratSi.Checked = True Then
+            '    Enfermedad = 1
+            'Else
+            '    Enfermedad = 0
+            'End If
 
-            If cirugiaSi.Checked = True Then
-                Cirugia = 1
-            Else
-                Cirugia = 0
-            End If
+            'If RbtCirSi.Checked = True Then
+            '    Cirugia = 1
+            'Else
+            '    Cirugia = 0
+            'End If
 
             ods = oObjeto.BuscarDatosDeUsuarioPorEmail(username)
 
@@ -1176,10 +1175,27 @@ Public Class FrmMiPerfil
                 TxtTratamiento.Text = ods.Tables(5).Rows(0).Item("DescripcionEnfermedad").ToString
                 Cirugia = ods.Tables(5).Rows(0).Item("Cirugias").ToString
                 TxtCirugia.Text = ods.Tables(5).Rows(0).Item("DescripcionCirugias").ToString
-                BtnAgregarAntSalud.Value = "MODIFICAR DATOS"
+                'BtnAgregarAntSalud.Value = "MODIFICAR DATOS"
+
+                If Enfermedad = "1" Then
+                    RbtTratSi.Checked = True
+                    RbtTratNo.Checked = False
+                Else
+                    RbtTratSi.Checked = False
+                    RbtTratNo.Checked = True
+                End If
+
+                If Cirugia = "1" Then
+                    RbtCirSi.Checked = True
+                    RbtCirNo.Checked = False
+                Else
+                    RbtCirSi.Checked = False
+                    RbtCirNo.Checked = True
+                End If
+
             Else
                 h3AntecedeSalud.InnerHtml = "AGREGAR ANTECEDENTES SALUD"
-                BtnAgregarAntSalud.Value = "AGREGAR DATOS"
+                'BtnAgregarAntSalud.Value = "AGREGAR DATOS"
             End If
         Else
             Dim Galleta As HttpCookie
@@ -1205,13 +1221,13 @@ Public Class FrmMiPerfil
                 Dim Enfermedad As String
                 Dim Cirugia As String
 
-                If EnfermedadSI.Checked = True Then
+                If RbtTratSi.Checked = True Then
                     Enfermedad = 1
                 Else
                     Enfermedad = 0
                 End If
 
-                If cirugiaSi.Checked = True Then
+                If RbtCirSi.Checked = True Then
                     Cirugia = 1
                 Else
                     Cirugia = 0
@@ -1227,10 +1243,10 @@ Public Class FrmMiPerfil
                     TxtTratamiento.Text = ods.Tables(5).Rows(0).Item("DescripcionEnfermedad").ToString
                     Cirugia = ods.Tables(5).Rows(0).Item("Cirugias").ToString
                     TxtCirugia.Text = ods.Tables(5).Rows(0).Item("DescripcionCirugias").ToString
-                    BtnAgregarAntSalud.Value = "MODIFICAR DATOS"
+                    'BtnAgregarAntSalud.Value = "MODIFICAR DATOS"
                 Else
                     h3AntecedeSalud.InnerHtml = "AGREGAR ANTECEDENTES SALUD"
-                    BtnAgregarAntSalud.Value = "AGREGAR DATOS"
+                    'BtnAgregarAntSalud.Value = "AGREGAR DATOS"
                 End If
             Else
                 Galleta = Request.Cookies("datos")
@@ -1258,11 +1274,11 @@ Public Class FrmMiPerfil
     'GuardarDatosGrupofamiliar()
     'End Sub
 
-    Private Sub GrillaGrupoFam_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GrillaGrupoFam.RowCreated
-        e.Row.Cells(6).Visible = False
-        e.Row.Cells(7).Visible = False
-        e.Row.Cells(0).Visible = False
-    End Sub
+    'Private Sub GrillaGrupoFam_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GrillaGrupoFam.RowCreated
+    '    e.Row.Cells(6).Visible = False
+    '    e.Row.Cells(7).Visible = False
+    '    e.Row.Cells(0).Visible = False
+    'End Sub
 
     'Private Sub BtnFormacionAca_ServerClick(sender As Object, e As EventArgs) Handles BtnFormacionAca.ServerClick
     'GuardarFormacionAcademica()
@@ -1284,72 +1300,72 @@ Public Class FrmMiPerfil
         e.Row.Cells(0).Visible = False
     End Sub
 
-    Private Sub BtnAgregarAntSalud_ServerClick(sender As Object, e As EventArgs) Handles BtnAgregarAntSalud.ServerClick
-        Dim PruebaGalleta As HttpCookie
-        PruebaGalleta = Request.Cookies("datos")
+    'Private Sub BtnAgregarAntSalud_ServerClick(sender As Object, e As EventArgs) Handles BtnAgregarAntSalud.ServerClick
+    '    Dim PruebaGalleta As HttpCookie
+    '    PruebaGalleta = Request.Cookies("datos")
 
-        'aca valido si hay cookies
-        If PruebaGalleta Is Nothing Then
+    '    'aca valido si hay cookies
+    '    If PruebaGalleta Is Nothing Then
 
-            Dim ods2 As New DataSet
-            Dim Objeto2 As New PersonalLegajos
+    '        Dim ods2 As New DataSet
+    '        Dim Objeto2 As New PersonalLegajos
 
-            Dim userId As String = Membership.GetUser().UserName
-            Dim username As String = userId
+    '        Dim userId As String = Membership.GetUser().UserName
+    '        Dim username As String = userId
 
-            ods2 = Objeto2.BuscarDatosDeUsuarioPorEmail(username)
+    '        ods2 = Objeto2.BuscarDatosDeUsuarioPorEmail(username)
 
-            Dim Nombre As String = ods2.Tables(0).Rows(0).Item("Nombre").ToString
-            Dim Apellido As String = ods2.Tables(0).Rows(0).Item("Apellido").ToString
-            Dim ID_PersonalLegajo As Integer = ods2.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
+    '        Dim Nombre As String = ods2.Tables(0).Rows(0).Item("Nombre").ToString
+    '        Dim Apellido As String = ods2.Tables(0).Rows(0).Item("Apellido").ToString
+    '        Dim ID_PersonalLegajo As Integer = ods2.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
 
-            Dim ods3 As New DataSet
-            Dim oObjeto3 As New PersonalLegajos
+    '        Dim ods3 As New DataSet
+    '        Dim oObjeto3 As New PersonalLegajos
 
-            ods3 = oObjeto3.BuscarDatosDeUsuarioPorEmail(username)
+    '        ods3 = oObjeto3.BuscarDatosDeUsuarioPorEmail(username)
 
-            If ods3.Tables(5).Rows.Count > 0 Then
-                'BUSCO EL ID
-                Dim ID As String = ods3.Tables(5).Rows(0).Item("ID_AntecedentesSalud").ToString
-            End If
-            If ID <> "" Then
-                ModificarDatosAntecedentesSalud()
-            Else
-                GuardarAntecedentesSalud()
-            End If
+    '        If ods3.Tables(5).Rows.Count > 0 Then
+    '            'BUSCO EL ID
+    '            Dim ID As String = ods3.Tables(5).Rows(0).Item("ID_AntecedentesSalud").ToString
+    '        End If
+    '        If ID <> "" Then
+    '            ModificarDatosAntecedentesSalud()
+    '        Else
+    '            GuardarAntecedentesSalud()
+    '        End If
 
-        Else
-            Dim ods2 As New DataSet
-            Dim Objeto2 As New PersonalLegajos
+    '    Else
+    '        Dim ods2 As New DataSet
+    '        Dim Objeto2 As New PersonalLegajos
 
-            Dim Galleta As HttpCookie
-            Galleta = Request.Cookies("datos")
+    '        Dim Galleta As HttpCookie
+    '        Galleta = Request.Cookies("datos")
 
-            Dim ods3 As New DataSet
-            Dim oobjeto3 As New PersonalLegajos
+    '        Dim ods3 As New DataSet
+    '        Dim oobjeto3 As New PersonalLegajos
 
-            Dim name As String = Galleta.Values("nombre")
-            'Dim pass As String = Galleta.Values("pass")
-            Dim IdUser As String = Galleta.Values("userid")
-            ods3 = oobjeto3.BuscarDatosDeUsuarioPorEmail(name)
+    '        Dim name As String = Galleta.Values("nombre")
+    '        'Dim pass As String = Galleta.Values("pass")
+    '        Dim IdUser As String = Galleta.Values("userid")
+    '        ods3 = oobjeto3.BuscarDatosDeUsuarioPorEmail(name)
 
-            Dim Nombre As String = ods3.Tables(0).Rows(0).Item("Nombre").ToString
-            Dim Apellido As String = ods3.Tables(0).Rows(0).Item("Apellido").ToString
-            Dim ID_PersonalLegajo As Integer = ods3.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
+    '        Dim Nombre As String = ods3.Tables(0).Rows(0).Item("Nombre").ToString
+    '        Dim Apellido As String = ods3.Tables(0).Rows(0).Item("Apellido").ToString
+    '        Dim ID_PersonalLegajo As Integer = ods3.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
 
-            ods3 = oobjeto3.BuscarDatosDeUsuarioPorEmail(name)
+    '        ods3 = oobjeto3.BuscarDatosDeUsuarioPorEmail(name)
 
-            If ods3.Tables(5).Rows.Count > 0 Then
-                'BUSCO EL ID
-                Dim ID As String = ods3.Tables(5).Rows(0).Item("ID_AntecedentesSalud").ToString
-                If ID <> " " Then
-                    ModificarDatosAntecedentesSalud()
-                End If
-            Else
-                GuardarAntecedentesSalud()
-            End If
-        End If
-    End Sub
+    '        If ods3.Tables(5).Rows.Count > 0 Then
+    '            'BUSCO EL ID
+    '            Dim ID As String = ods3.Tables(5).Rows(0).Item("ID_AntecedentesSalud").ToString
+    '            If ID <> " " Then
+    '                ModificarDatosAntecedentesSalud()
+    '            End If
+    '        Else
+    '            GuardarAntecedentesSalud()
+    '        End If
+    '    End If
+    'End Sub
 
     Private Sub irAPerfil_ServerClick(sender As Object, e As System.EventArgs) Handles irAPerfil.ServerClick
         Dim PruebaGalleta As HttpCookie
@@ -1983,6 +1999,73 @@ Public Class FrmMiPerfil
             Return Error401()
         End Try
     End Function
+
+    <WebMethod()>
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    Public Shared Function CargarGrupoFam(ByVal cadena As String) As String
+        Try
+
+            Dim jss As New JavaScriptSerializer()
+            Dim dict = jss.Deserialize(Of List(Of GrupoFamiliarWs))("[" & cadena & "]")
+
+            Dim username = Convert.ToString(dict(0).Email)
+
+            Dim ods As New DataSet
+            Dim oobjeto As New PersonalLegajos
+
+            ods = oobjeto.BuscarDatosDeUsuarioPorEmail(username)
+
+            Dim e As GrupoFamiliarWs() = New GrupoFamiliarWs(ods.Tables(2).Rows.Count - 1) {}
+
+            For i = 0 To ods.Tables(2).Rows.Count - 1
+                e(i) = New GrupoFamiliarWs()
+                e(i).ID_GrupoFamiliar = ods.Tables(2).Rows(i).Item("ID_PersonalLegajo_GrupoFamiliar").ToString
+                e(i).Nombre = ods.Tables(2).Rows(i).Item("NombreApellido").ToString
+                e(i).Parentezco = ods.Tables(2).Rows(i).Item("TipoFamiliar").ToString
+                e(i).FechaNac = ods.Tables(2).Rows(i).Item("Nacimiento").ToString
+                e(i).Ocupacion = ods.Tables(2).Rows(i).Item("Ocupacion").ToString
+            Next
+
+            Dim data = New With {
+                         Key .Status = "200",
+                         Key .Data = e
+                 }
+
+            Dim serializer = New JavaScriptSerializer()
+            Dim json = serializer.Serialize(data)
+            Return New JavaScriptSerializer().Serialize(data)
+        Catch ex As Exception
+            Return Error401()
+        End Try
+    End Function
+
+    <WebMethod()>
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    Public Shared Function EliminarGrupoFam(ByVal cadena As String) As String
+        Try
+
+            Dim jss As New JavaScriptSerializer()
+            Dim dict = jss.Deserialize(Of List(Of GrupoFamiliarWs))("[" & cadena & "]")
+
+            Dim ID_GrupoFamiliar As String
+            ID_GrupoFamiliar = Convert.ToString(dict(0).ID_GrupoFamiliar)
+
+            Dim ods As New DataSet
+            Dim oObjeto As New PersonalLegajos
+
+            ods = oObjeto.Eliminar_GrupoFamiliarPorId(ID_GrupoFamiliar)
+
+            Dim data = New With {
+                Key .Status = "200"
+            }
+
+            Dim serializer = New JavaScriptSerializer()
+            Dim json = serializer.Serialize(data)
+            Return New JavaScriptSerializer().Serialize(data)
+        Catch ex As Exception
+            Return Error401()
+        End Try
+    End Function
 #End Region
 
 #Region "CURSOS"
@@ -2017,6 +2100,50 @@ Public Class FrmMiPerfil
             Dim ID_PersonalLegajo As Integer = ods1.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
 
             oObjeto2.Agregar(ID_PersonalLegajo, Desde, Hasta, NombreCurso, Areas, Horas, Institución, Comentarios)
+
+            Dim data = New With {
+                Key .Status = "200"
+            }
+
+            Dim serializer = New JavaScriptSerializer()
+            Dim json = serializer.Serialize(data)
+            Return New JavaScriptSerializer().Serialize(data)
+        Catch ex As Exception
+            Return Error401()
+        End Try
+    End Function
+#End Region
+
+#Region "ANTECEDENTE DE SALUD"
+    <WebMethod()>
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    Public Shared Function GuardarAntecedente(ByVal cadena As String) As String
+        Try
+
+            Dim jss As New JavaScriptSerializer()
+            Dim dict = jss.Deserialize(Of List(Of AntecedentesSaludWs))("[" & cadena & "]")
+
+            Dim Altura As String = Convert.ToString(dict(0).Altura)
+            Dim Peso As String = Convert.ToString(dict(0).Peso)
+            Dim Enfermedad As String = Convert.ToString(dict(0).Enfermedad)
+            Dim Tratamiento As String = Convert.ToString(dict(0).Tratamiento)
+            Dim Cir As String = Convert.ToString(dict(0).Cir)
+            Dim Cirujia As String = Convert.ToString(dict(0).Cirugia)
+            Dim Email As String = Convert.ToString(dict(0).Email)
+
+            Dim ods As New DataSet
+            Dim oObjeto As New AntecedentesSalud
+
+            Dim ods1 As New DataSet
+            Dim oObjeto1 As New PersonalLegajos
+
+            ods1 = oObjeto1.BuscarDatosDeUsuarioPorEmail(Email)
+
+            Dim Nombre As String = ods1.Tables(0).Rows(0).Item("Nombre").ToString
+            Dim Apellido As String = ods1.Tables(0).Rows(0).Item("Apellido").ToString
+            Dim ID_PersonalLegajo As Integer = ods1.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
+
+            oObjeto.Agregar(ID_PersonalLegajo, Altura, Peso, Enfermedad, Tratamiento, Cir, Cirujia)
 
             Dim data = New With {
                 Key .Status = "200"

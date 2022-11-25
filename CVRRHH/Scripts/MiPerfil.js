@@ -562,7 +562,8 @@ function agregarGrupoFam() {
                         'success',
                         'CONTINUAR',
                     ).then(function () {
-                        window.location.href = 'FrmMiPerfil.aspx'
+                        //window.location.href = 'FrmMiPerfil.aspx'
+                        cargarGrupoFam();
                     })
                 } else if (status = 401) {
                     swal('', 'Ocurrió un error', 'warning');
@@ -581,6 +582,128 @@ function agregarGrupoFam() {
             }
         })
     }
+}
+
+function cargarGrupoFam() {
+    var Email = $("#txtEmail").val();
+
+    var parametro = { Email };
+    var Json = { cadena: JSON.stringify(parametro) };
+
+    $.ajax({
+        type: "POST",
+        "url": "FrmMiPerfil.aspx/CargarGrupoFam",
+        data: JSON.stringify(Json),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+
+            var json = $.parseJSON(data.d);
+            var status = json.Status;
+
+            if (status == 200) {
+                $('#DivGF').empty();
+                if (json.Data.length > 0) {
+                    $('#TituloGF').html("MI GRUPO FAMILIAR");
+                    for (var i = 0; i < json.Data.length; i++) {
+                        $('#DivGF').append(`<div class= "row" style="margin-bottom: 15px; width: 100%;">
+                            <div class= "col-md-3">
+                                <span>${json.Data[i].Nombre}</span>
+                            </div>
+                            <div class="col-md-2">
+                                <span>${json.Data[i].Parentezco}</span>
+                            </div>
+                            <div class="col-md-2">
+                                <span>${json.Data[i].FechaNac}</span>
+                            </div>
+                            <div class="col-md-3">
+                                <span>${json.Data[i].Ocupacion}</span>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" onclick="ValidarEliminarFamiliar(${json.Data[i].ID_GrupoFamiliar})" class="btn-danger" style="border-radius: 5px; color: #fff; border: 1px solid #dc3545;">
+                                Eliminar
+                                </button>
+                            </div>
+                            <hr style="width: 100%;">`
+                        );
+                    }
+                }
+                
+            }
+        },
+        error: function (xmlHttpRequest, textStatus, errorThrown) {
+            console.log(xmlHttpRequest.responseText);
+            console.log(textStatus);
+            console.log(errorThrown);
+
+        },
+        beforeSend: function () {
+
+        },
+        complete: function () {
+
+        }
+    })
+}
+
+function ValidarEliminarFamiliar(ID_GrupoFamiliar) {
+    swal({
+        title: "¿Estás seguro/a de eliminar el familiar?",
+        type: "question",
+        showCancelButton: true,
+        cancelButtonText: 'CANCELAR',
+        reverseButtons: true,
+        confirmButtonText: 'ACEPTAR',
+        confirmButtonColor: '#E01212',
+        closeOnConfirm: false,
+        showLoaderOnConfirm: true,
+        allowOutsideClick: false,
+        preConfirm: function () {
+            EliminarFamiliar(ID_GrupoFamiliar);
+        }
+    });
+}
+
+function EliminarFamiliar(ID_GrupoFamiliar) {
+    var par = "{\"ID_GrupoFamiliar\":\"" + ID_GrupoFamiliar + "\"}";
+
+    var payload = { cadena: par };
+
+    $.ajax({
+        type: "POST",
+        "url": "FrmMiPerfil.aspx/EliminarGrupoFam",
+        data: JSON.stringify(payload),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+
+            var json = $.parseJSON(data.d);
+            var status = json.Status;
+
+            if (status == 200) {
+                swal('',
+                    'Familiar eliminado con éxito',
+                    'success',
+                    'CONTINUAR',
+                ).then(function () {
+                    cargarGrupoFam();
+                })
+            } else if (status = 401) {
+                swal('', 'Ocurrió un error', 'warning');
+            }
+        },
+        error: function (xmlHttpRequest, textStatus, errorThrown) {
+            console.log(xmlHttpRequest.responseText);
+            console.log(textStatus);
+            console.log(errorThrown);
+
+        },
+        beforeSend: function () {
+        },
+        complete: function () {
+            $(".se-pre-con").fadeOut("slow");
+        }
+    })
 }
 
 
@@ -651,6 +774,84 @@ function agregarCurso() {
         })
     }
 }
+
+
+//ANTECEDENTES DE SALUD
+function agregarAntecedentesDeSalud() {
+    var altura = $("#TxtAltura").val();
+    var peso = $("#TxtPeso").val();
+    var tratSi = $("#RbtTratSi").is(':checked');
+    var tratNo = $("#RbtTratNo").is(':checked');
+    var tratamiento = $("#TxtTratamiento").val();
+    var cirSi = $("#RbtCirSi").is(':checked');
+    var cirNo = $("#RbtCirNo").is(':checked');
+    var cirugia = $("#TxtCirugia").val();
+    var email = $("#txtEmail").val();
+
+    var enfermedad;
+    if (tratSi == true) {
+        enfermedad = "1"
+    } else {
+        enfermedad = "0"
+    }
+    var cir;
+    if (cirSi == true) {
+        cir = "1"
+    } else {
+        cir = "0"
+    }
+
+    if (altura == '') {
+        swal('', 'El campo altura no puede estar vacío', 'info')
+    } else if (peso == '') {
+        swal('', 'El campo peso no puede estar vacío', 'info')
+    } else if (tratSi == true && tratamiento == "") {
+        swal('', 'El campo tratamiento no puede estar vacío', 'info')
+    } else if (cirSi == true && cirugia == "") {
+        swal('', 'El campo cirujia no puede estar vacío', 'info')
+    } else {
+
+        var par = { Altura: altura, Peso: peso, Enfermedad: enfermedad, Tratamiento: tratamiento, Cir: cir, Cirugia: cirugia, Email: email };
+        var payload = { cadena: JSON.stringify(par) };
+
+        $.ajax({
+            type: "POST",
+            "url": "FrmMiPerfil.aspx/GuardarAntecedente",
+            data: JSON.stringify(payload),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+
+                var json = $.parseJSON(data.d);
+                var status = json.Status;
+
+                if (status == 200) {
+                    swal('',
+                        'Familiar guardado con éxito',
+                        'success',
+                        'CONTINUAR',
+                    ).then(function () {
+                        window.location.href = 'FrmMiPerfil.aspx'
+                    })
+                } else if (status = 401) {
+                    swal('', 'Ocurrió un error', 'warning');
+                }
+            },
+            error: function (xmlHttpRequest, textStatus, errorThrown) {
+                console.log(xmlHttpRequest.responseText);
+                console.log(textStatus);
+                console.log(errorThrown);
+            },
+            beforeSend: function () {
+                //$('#ImagenloaderM').show();
+            },
+            complete: function () {
+                $(".se-pre-con").fadeOut("slow");;
+            }
+        })
+    }
+}
+
 
 
 function ActualizarCampos() {

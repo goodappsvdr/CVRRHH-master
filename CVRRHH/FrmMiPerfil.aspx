@@ -550,7 +550,7 @@
 
                             </div>
 
-                            <div class="card-body" id="DivRedes" style="border:1px solid #fff;width:100%;border-radius:3px" >
+                            <div class="card-body" id="DivRedes" style="border: 1px solid #fff; width: 100%; border-radius: 3px">
                                 <!---aca las redes--->
                                 <%--<asp:Repeater ID="RepeaterRedes" runat="server">
                                     <ItemTemplate>
@@ -591,9 +591,9 @@
 
                                     <div class="col-md-4" style="margin-bottom: 20px;">
                                         <div class="row" style="margin-top: 24px; border: 1px solid #CED4DA; border-radius: 2px; padding: 2px;">
-                                            <div class="col-md-12" style="display:flex;">
-                                                <label style="width:60%;">Aún Activo en la Empresa</label>
-                                                <input style="width:10%; margin-top: 7px;" onclick="desactivarHasta()" type="checkbox" class="form-control" id="ChkActivo" runat="server" />
+                                            <div class="col-md-12" style="display: flex;">
+                                                <label style="width: 60%;">Aún Activo en la Empresa</label>
+                                                <input style="width: 10%; margin-top: 7px;" onclick="desactivarHasta()" type="checkbox" class="form-control" id="ChkActivo" runat="server" />
                                             </div>
                                         </div>
                                     </div>
@@ -674,7 +674,7 @@
                                 <center>
                                     <button id="BtnRefLab" onclick="agregarRefLab()" type="button" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px; cursor: pointer;">Guardar</button>
                                 </center>
-                                                                   
+
                                 <br />
 
                             </div>
@@ -751,7 +751,6 @@
                                     <div class="col-md-4" style="margin-bottom: 20px;">
                                         <label>Parentezco</label>
                                         <select id="ComboPrentezco" name="select" runat="server" class="form-control">
-                                            
                                         </select>
                                     </div>
 
@@ -783,44 +782,32 @@
                             <center>
                                 <h4 id="TituloGF" runat="server"></h4>
                             </center>
-                            <asp:GridView ID="GrillaGrupoFam" runat="server" CellPadding="8" ForeColor="#000000"
+                            <div class="card-body" id="DivGF" style="border: 1px solid #fff; width: 100%; border-radius: 3px">
+                            </div>
+                            <%--<asp:GridView ID="GrillaGrupoFam" runat="server" CellPadding="8" ForeColor="#000000"
                                 GridLines="none"
                                 FooterStyle-BackColor="#6699FF" CellSpacing="8" AllowPaging="False"
                                 PageSize="10" HorizontalAlign="Center" BorderColor="#000000">
-
                                 <AlternatingRowStyle BackColor="White" />
-
                                 <Columns>
                                     <asp:TemplateField HeaderText="Seleccionar">
                                         <ItemTemplate>
                                             <center>
                                                 <asp:CheckBox ID="ChkProfesional" runat="server" CssClass="BigCheckBox" Style="height: 40px; margin-top: 20px; font-size: 40px" /></center>
-
-
                                         </ItemTemplate>
-
                                     </asp:TemplateField>
-
-
-
                                     <asp:TemplateField HeaderText="Eliminar">
                                         <ItemTemplate>
-                                            <%--<asp:TextBox ID="" runat="server" class="form-control" ></asp:TextBox>--%>
                                             <asp:Button ID="TxtEliminar" class="btn btn-danger" runat="server" Text="Eliminar" PostBackUrl='<%#Eval("urlEliminar").ToString()%>' />
                                         </ItemTemplate>
                                     </asp:TemplateField>
-
-
                                     <asp:TemplateField HeaderText="Modificar">
                                         <ItemTemplate>
-                                            <%--<asp:TextBox ID="" runat="server" class="form-control" ></asp:TextBox>--%>
                                             <asp:Button ID="TxtModificar" class="btn btn-success" runat="server" Text="Modificar" PostBackUrl='<%#Eval("urlEditar").ToString()%>' />
                                         </ItemTemplate>
                                     </asp:TemplateField>
-
                                 </Columns>
-
-                            </asp:GridView>
+                            </asp:GridView>--%>
                         </div>
                         <center>
                         </center>
@@ -975,7 +962,7 @@
 
                                 <center>
                                     <button id="BtnFormacionAca" onclick="agregarFormAcademica()" type="button" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px; cursor: pointer;">Guardar</button></center>
-                                    
+
                                 <br />
 
                             </div>
@@ -1102,7 +1089,7 @@
 
                                     <div class="col-md-12" style="margin-bottom: 20px;">
                                         <label>Comentarios</label>
-                                        <asp:TextBox ID="TxtComentarios" maxlength="100" type="text" TextMode="MultiLine" runat="server" ForeColor="Black"
+                                        <asp:TextBox ID="TxtComentarios" MaxLength="100" type="text" TextMode="MultiLine" runat="server" ForeColor="Black"
                                             class="form-control" Height="80px" Width="100%" placeholder="Comentarios"></asp:TextBox>
                                     </div>
 
@@ -1204,29 +1191,42 @@
                                             class="form-control" Height="40px" Width="100%"></asp:TextBox>
                                     </div>
 
-                                    <div class="col-md-7" style="margin-bottom: 20px;">
+                                    <%--<div class="col-md-7" style="margin-bottom: 20px;">
                                         <label>¿Padece alguna enfermedad crónica y/o esta bajo tratamiento?</label>
-                                        <%-- SI <asp:RadioButton ID="RadioBEnfSi" runat="server" />
-    NO <asp:RadioButton ID="RadioBEnfNo" runat="server" />--%>
                                         <br />
                                         <input type="checkbox" value="1" id="EnfermedadSI" name="check" onchange="comprobar(this)" cssclass="BigCheckBox" runat="server" />SI<br />
                                         <input type="checkbox" value="0" id="EnfermedadNO" name="check" onchange="comprobar(this)" cssclass="BigCheckBox" checked="checked" runat="server" />NO<br />
+                                    </div>--%>
 
+                                    <div class="col col-md-7" style="margin-bottom: 20px;">
+                                        <label>¿Padece alguna enfermedad crónica y/o esta bajo tratamiento?</label>
+                                        <br />
+                                        <input type="Radio" class="radiobtn" id="RbtTratSi" runat="server" name="grupo" style="float: left; cursor: pointer;" onclick="mostrarTrat()" /><label for="RbtTratSi" style="margin-left: 5px; margin-top: -7px; float: left; cursor: pointer;">SI</label>
+                                        <br />
+                                        <br />
+                                        <input type="Radio" class="radiobtn" id="RbtTratNo" runat="server" name="grupo" style="float: left; cursor: pointer; margin-top: -25px;" onclick="mostrarTrat()" /><label for="RbtTratNo" style="margin-left: 18px; margin-top: -31px; float: left; cursor: pointer;">NO</label>
                                     </div>
 
-                                    <div class="col-md-6" id="tratamiento" style="display: none">
+                                    <div class="col-md-6" id="tratamiento" style="display: none;">
                                         <label>Descripción y detalle tratamiento</label>
                                         <asp:TextBox ID="TxtTratamiento" type="text" runat="server" ForeColor="Black"
                                             class="form-control" Height="80px" Width="100%" placeholder="Descripcion y detalle tratamiento" TextMode="MultiLine"></asp:TextBox>
                                     </div>
-                                    <div class="col-md-7">
+
+                                    <%--<div class="col-md-7">
                                         <label>¿Tiene intervenciones quirurgicas y/o cirugias?</label>
-                                        <%-- SI <asp:RadioButton ID="RadioBEnfSi" runat="server" />
-    NO <asp:RadioButton ID="RadioBEnfNo" runat="server" />--%>
                                         <br />
                                         <input type="checkbox" value="1" id="cirugiaSi" name="check" onchange="comprobar2(this)" cssclass="BigCheckBox" runat="server" />SI<br />
                                         <input type="checkbox" value="0" id="CirugiaNo" name="check" onchange="comprobar2(this)" cssclass="BigCheckBox" checked="checked" runat="server" />NO<br />
+                                    </div>--%>
 
+                                    <div class="col col-md-7" style="margin-bottom: 10px;">
+                                        <label>¿Tiene intervenciones quirurgicas y/o cirugias?</label>
+                                        <br />
+                                        <input type="Radio" class="radiobtn2" id="RbtCirSi" runat="server" name="grupo2" style="float: left; cursor: pointer;" onclick="mostrarCir()" /><label for="RbtCirSi" style="margin-left: 5px; margin-top: -7px; float: left; cursor: pointer;">SI</label>
+                                        <br />
+                                        <br />
+                                        <input type="Radio" class="radiobtn2" id="RbtCirNo" runat="server" name="grupo2" style="float: left; cursor: pointer; margin-top: -25px;" onclick="mostrarCir()" /><label for="RbtCirNo" style="margin-left: 18px; margin-top: -31px; float: left; cursor: pointer;">NO</label>
                                     </div>
 
                                     <div class="col-md-6" id="cirugia" style="display: none">
@@ -1241,13 +1241,12 @@
                                 <br />
 
                                 <center>
-                                    <input type="button" id="BtnAgregarAntSalud" runat="server" value="AGREGAR DATOS" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px" onmouseup="AlertCursos();" /></center>
+                                    <button id="BtnAgregarAntSalud" onclick="agregarAntecedentesDeSalud()" type="button" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px; cursor: pointer;">Guardar</button></center>
                                 <br />
 
                             </div>
                         </div>
                     </div>
-
                     <div class="card-body" style="border: 1px solid #fff; width: 100%; border-radius: 3px">
                         <center>
                             <h4 id="H3" runat="server"></h4>
@@ -1342,25 +1341,44 @@
     </form>
 
     <script type="text/javascript">
-        function comprobar(checkbox) {
-            otro = checkbox.parentNode.querySelector("[type=checkbox]:not(#" + checkbox.id + ")");
-            console.log(checkbox.id);
-            if (otro.checked) {
-                otro.checked = false;
-            }
-            if (checkbox.id = "EnfermedadSI") {
+        //function comprobar(checkbox) {
+        //    otro = checkbox.parentNode.querySelector("[type=checkbox]:not(#" + checkbox.id + ")");
+        //    console.log(checkbox.id);
+        //    if (otro.checked) {
+        //        otro.checked = false;
+        //    }
+        //    if (checkbox.id = "EnfermedadSI") {
+        //        document.getElementById("tratamiento").style = "display:block";
+        //    }
+        //}
+
+        //function comprobar2(checkbox) {
+        //    otro = checkbox.parentNode.querySelector("[type=checkbox]:not(#" + checkbox.id + ")");
+        //    console.log(checkbox.id);
+        //    if (otro.checked) {
+        //        otro.checked = false;
+        //    }
+        //    if (checkbox.id = "cirugiaSi") {
+        //        document.getElementById("cirugia").style = "display:block";
+        //    }
+        //}
+
+        function mostrarTrat() {
+            if (document.getElementById('RbtTratSi').checked) {
                 document.getElementById("tratamiento").style = "display:block";
+                document.getElementById("tratamiento").style = "margin-bottom:20px";
+            }
+            if (document.getElementById('RbtTratNo').checked) {
+                document.getElementById("tratamiento").style = "display:none";
             }
         }
-
-        function comprobar2(checkbox) {
-            otro = checkbox.parentNode.querySelector("[type=checkbox]:not(#" + checkbox.id + ")");
-            console.log(checkbox.id);
-            if (otro.checked) {
-                otro.checked = false;
-            }
-            if (checkbox.id = "cirugiaSi") {
+        function mostrarCir() {
+            if (document.getElementById('RbtCirSi').checked) {
                 document.getElementById("cirugia").style = "display:block";
+                document.getElementById("cirugia").style = "margin-bottom:20px";
+            }
+            if (document.getElementById('RbtCirNo').checked) {
+                document.getElementById("cirugia").style = "display:none";
             }
         }
 
@@ -1440,7 +1458,7 @@
     </script>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
-    
+
     <script type="text/javascript" src="Scripts/MiPerfil.js"></script>
 
     <script type="text/javascript" src="Scripts/Redes.js"></script>
@@ -1453,6 +1471,9 @@
             CargarRedes();
             $('#TxtLinkRedsocial').val("");
             $('#ComboRedes').val("SELECCIONE...");
+
+
+            cargarGrupoFam();
         });
     </script>
 

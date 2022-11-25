@@ -6,4 +6,6 @@
     Public Property FechaNac As String
     Public Property Ocupacion As String
     Public Property Email As String
+
+    Public Property Parentezco As String
 End Class
