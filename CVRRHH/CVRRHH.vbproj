@@ -105,6 +105,9 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\grafico.css" />
+    <Content Include="css\style.css" />
     <Content Include="Default.aspx" />
     <Content Include="FrmConfirmarEliminarCursos.aspx" />
     <Content Include="FrmConfirmarEliminarDatoGrupoFamiliar.aspx" />

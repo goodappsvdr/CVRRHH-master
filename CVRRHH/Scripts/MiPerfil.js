@@ -933,6 +933,107 @@ function agregarCurriculum() {
 }
 
 
+//BUSCAR USUARIO Y ENVIAR EMAIL
+function BuscarUserId() {
+    var Email = $('#txtEmail').val();
+    var Porcentaje = $('#porcentaje').innerHTML();
+    var par = { Email: Email, Porcentaje: Porcentaje };
+    var payload = { cadena: JSON.stringify(par) };
+
+    $.ajax({
+        type: "POST",
+        "url": "FrmMiPerfil.aspx/BuscarUserId",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(payload),
+        dataType: "json",
+        success: function (data) {
+
+            var json = $.parseJSON(data.d);
+            var status = json.Status;
+
+            if (status == 200) {
+                var userId = json.UserId;
+                var resultado = json.Resultado;
+                if (resultado == "100") {
+                    localStorage.setItem("UsuarioId", userId);
+                    CheckEmail100()
+                }
+                
+            } else {
+                (status == 400)
+            }
+        },
+        error: function (xmlHttpRequest, textStatus, errorThrown) {
+            console.log(xmlHttpRequest.responseText);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        beforeSend: function () {
+        },
+        complete: function () {
+        }
+    })
+}
+
+function CheckEmail100() {
+    if (localStorage.getItem('Email100')) {
+        return;
+    }
+    
+    var par = { EmailTipo: 2 };
+    var payload = { cadena: JSON.stringify(par) }
+
+    $.ajax({
+        type: "POST",
+        "url": "FrmMiPerfil.aspx/SendEmail",
+        data: JSON.stringify(payload),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+
+            var json = $.parseJSON(data.d);
+            var status = json.Status;
+
+            var userId = localStorage.getItem("UsuarioId");
+
+            if (status == 200) {
+                localStorage.setItem('Email100', true);
+                swal({
+                    backdrop: true,
+                    allowOutsideClick: false,
+                    title: 'Felicidades! Has completado el 100% de tu CV',
+                    text: 'Recordá mantener actualizados tus datos, ingresando a nuestra plataforma periodicamente.',
+                    type: 'success',
+                    confirmButtonText: 'CONTINUAR',
+                    showCancelButton: true,
+                    cancelButtonText: "VER MI PERFIL"
+                },
+                    function (isConfirm) {
+                        if (isConfirm) {
+                            swal.close()
+                        } else {
+                            //swal("Cancelled", "Is safe :)", "success");
+                            window.location.href = 'VerMiperfil.aspx?Token=' + userId;
+                        }
+                    });
+            } else if (status == 401) {
+                swal("Error", "No se pudo encvier el email", "warning");
+                console.log('error');
+            }
+        },
+        error: function (xmlHttpRequest, textStatus, errorThrown) {
+            console.log(xmlHttpRequest.responseText);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        beforeSend: function () {
+        },
+        complete: function () {
+        }
+    })
+}
+
+
 function ActualizarCampos() {
     $("#TxtFechaDesde").val() = '';
     $('#ChkActivo').prop('checked') = false

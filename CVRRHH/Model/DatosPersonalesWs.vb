@@ -10,4 +10,5 @@
     Public Property Cuil() As String
     Public Property Imagen() As String
     Public Property Email() As String
+    Public Property Porcentaje() As String
 End Class

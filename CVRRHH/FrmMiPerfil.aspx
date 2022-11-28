@@ -17,6 +17,8 @@
     <link href="https://fonts.googleapis.com/css?family=Staatliches" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Exo+2" rel="stylesheet">
 
+    <!--grafico-->
+    <link href="css/grafico.css" rel="stylesheet" />
 
     <!-- alerts -->
     <script type="text/javascript" src="Scripts/Alertas/sweetalert2@9.js"></script>
@@ -26,7 +28,6 @@
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
         rel="stylesheet">
-    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
 </head>
 
 <style>
@@ -182,27 +183,9 @@
             }
         </style>
 
-        <script type="text/javascript">
-            $(function () {
-                $('a[href*="#"]:not([href="#"])').click(function () {
-                    if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
-                        var target = $(this.hash);
-                        target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-                        if (target.length) {
-                            $('html, body').animate({
-                                scrollTop: target.offset().top
-                            }, 3000);
-                            return false;
-                        }
-                    }
-                });
-            });
-        </script>
-
-
         <div style="width: 100%; height: auto; background: #fff">
 
-            <div style="display: block;" class="col-md-4">
+            <div style="display: none;" class="col-md-4">
                 <asp:TextBox ID="txtEmail" type="text" runat="server" ForeColor="#495057"
                     class="form-control" Height="40px" Width="100%" Style=""></asp:TextBox>
             </div>
@@ -210,16 +193,36 @@
             <br />
 
             <div class="container" id="up">
-                <center>
+                <%--<center>
                     <h4 id="UserPerfil" runat="server"></h4>
                     <p class="card-text" style="padding: 10px; margin: 30px; font-size: 20px">
                         Recuerda completar los datos Obligatorios, para que podamos encontrarte más rapido. 
-   <br />
+                        <br />
                         Y mantene actualizado tu perfil.
                     </p>
 
-                </center>
+                </center>--%>
 
+                <div class="row" style="margin-bottom: 150px;">
+                    <div class="col-md-6 col-sm-12">
+                        <div style="font-size: 13px; line-height: 1.4286 !important">
+                            <h8 id="UserPerfil" runat="server"></h8>
+                            <div id="porcentajeClass" runat="server" class="c100 p40">
+                                <span id="porcentaje" runat="server"></span>
+                                <div class="slice">
+                                    <div class="bar"></div>
+                                    <div class="fill"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-12">
+                        <div style="font-size: 13px; line-height: 1.4286 !important">
+                            <h8><span style="font-weight:600;font-size:20px !important">Hola</span></h8>
+                        </div>
+                    </div>
+                </div>
 
                 <div class="row">
 
@@ -1470,6 +1473,23 @@
     </script>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.js"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            $('a[href*="#"]:not([href="#"])').click(function () {
+                if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+                    var target = $(this.hash);
+                    target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+                    if (target.length) {
+                        $('html, body').animate({
+                            scrollTop: target.offset().top
+                        }, 3000);
+                        return false;
+                    }
+                }
+            });
+        });
+    </script>
 
     <script type="text/javascript" src="Scripts/MiPerfil.js"></script>
 
