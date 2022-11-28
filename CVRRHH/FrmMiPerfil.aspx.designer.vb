@@ -122,6 +122,15 @@ Partial Public Class FrmMiPerfil
     Protected WithEvents porcentaje As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
+    '''Control btnModal.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents btnModal As Global.System.Web.UI.HtmlControls.HtmlInputButton
+
+    '''<summary>
     '''Control bienvenida.
     '''</summary>
     '''<remarks>

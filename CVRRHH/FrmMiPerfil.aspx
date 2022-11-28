@@ -87,6 +87,52 @@
             display: none;
         }
     }
+
+    /*inscripcion*/
+    @media only screen and (min-width: 525px) {
+        #inscripcion {
+            display: none;
+        }
+    }
+
+    /*inscripcion*/
+    @media only screen and (max-width: 825px) {
+        #webcon {
+            display: none;
+        }
+    }
+
+    @media only screen and (max-width: 600px) {
+        #divsup {
+            background-size: cover;
+        }
+    }
+
+    .modal-dialog {
+        width: auto;
+        height: auto;
+        margin-left: auto;
+        padding: 20px;
+    }
+
+    .modal-content {
+        height: auto;
+        border-radius: 10px;
+    }
+
+    .contentCabecera {
+        margin-bottom: 150px;
+    }
+
+    @media only screen and (max-width: 767px) {
+        .contentGrafico {
+            margin-bottom: 140px;
+        }
+
+        .contentCabecera {
+            margin-bottom: 0;
+        }
+    }
 </style>
 
 <body>
@@ -106,49 +152,32 @@
     <!--End of Tawk.to Script-->
 
     <form runat="server" id="form1">
-        <nav class="navbar navbar-default navbar-fixed-top" style="height: 120px; background-color: #519F34;">
-            <center>
-                <img src="https://goodapps.com.ar/RRHH/Imagenes/Isologotipo_Coovilros_horizontal_blanco_total.png" runat="server" id="imagenresp" style="height: auto; max-height: 60px; margin-top: 10px;" alt="">
-                <p id="imagenresp2" style="font-family: 'Bitter',serif; margin-top: -30px">
-                    <a href="" runat="server" id="iraperfilmovil"><i class="material-icons" style="margin-top: 30px; color: #fff; cursor: pointer; font-size: 40px; margin-left: 35px" data-toggle="tooltip" title="Ver Mi Perfil">assignment
-                    </i></a>
-                </p>
-
-            </center>
+        <nav class="navbar navbar-default navbar-fixed-top" style="height: 120px; background-color: #187C45;">
+            <img src="https://www.coovilros.com/Imagenes/logo-dark.png" runat="server" id="imagenresp" style="height: auto; max-height: 60px; margin-top: 10px;" alt="">
+            <p id="imagenresp2" style="font-family: 'Bitter',serif; margin-top: -30px">
+                <a href="" runat="server" id="iraperfilmovil"><i class="material-icons" style="margin-top: 30px; color: #fff; cursor: pointer; font-size: 40px; margin-left: 35px" data-toggle="tooltip" title="Ver Mi Perfil">assignment
+                </i></a>
+            </p>
             <div class="container">
                 <div class="row" id="borrarimagenes">
                     <div class="col-md-4">
-
-
-                        <center>
-                            <img src="https://www.coovilros.com/Imagenes/logo-dark.png" runat="server" id="ImagenLogo" style="height: auto; max-height: 60px; margin-top: 10px" alt=""></center>
-
+                        <img src="https://www.coovilros.com/Imagenes/logo-dark.png" runat="server" id="ImagenLogo" style="height: auto; max-height: 60px; margin-top: 10px" alt="">
                     </div>
-
                     <div class="col-md-7">
                         <p id="webcon" style="float: right; margin-left: 800px; font-family: 'Bitter',serif; margin-top: -30px">
                             <a onserverclick="CerrarSesion" runat="server"><i class="material-icons" style="margin-top: 30px; color: #fff; cursor: pointer; font-size: 40px; margin-left: 35px" data-toggle="tooltip" title="Cerrar Sesión">power_settings_new
                             </i></a>
                         </p>
                     </div>
-
                     <div class="col-md-1">
                         <p id="P1" style="float: right; margin-left: 800px; font-family: 'Bitter',serif; margin-top: -30px">
-
                             <a href="" runat="server" id="irAPerfil">
-
                                 <i class="material-icons" style="margin-top: 30px; color: #fff; cursor: pointer; font-size: 40px; margin-left: 35px" data-toggle="tooltip" title="Ver Mi Perfil">assignment
                                 </i></a>
                         </p>
-
                     </div>
-
-
-
-
                 </div>
             </div>
-
             <br />
         </nav>
 
@@ -161,28 +190,6 @@
         <br />
         <br />
 
-        <style>
-            /*inscripcion*/
-            @media only screen and (min-width: 525px) {
-                #inscripcion {
-                    display: none;
-                }
-            }
-
-            /*inscripcion*/
-            @media only screen and (max-width: 825px) {
-                #webcon {
-                    display: none;
-                }
-            }
-
-            @media only screen and (max-width: 600px) {
-                #divsup {
-                    background-size: cover;
-                }
-            }
-        </style>
-
         <div style="width: 100%; height: auto; background: #fff">
 
             <div style="display: none;" class="col-md-4">
@@ -192,7 +199,6 @@
                     class="form-control" Height="40px" Width="100%" Style=""></asp:TextBox>
             </div>
 
-            <br />
 
             <div class="container" id="up">
                 <%--<center>
@@ -205,25 +211,49 @@
 
                 </center>--%>
 
-                <div class="row" style="margin-bottom: 150px;">
-                    <div class="col-md-6 col-sm-12">
-                        <div style="font-size: 13px; line-height: 1.4286 !important">
-                            <h8 id="UserPerfil" runat="server"></h8>
-                            <div id="porcentajeClass" runat="server" class="c100 p40">
-                                <span id="porcentaje" runat="server"></span>
-                                <div class="slice">
-                                    <div class="bar"></div>
-                                    <div class="fill"></div>
-                                </div>
+                <div class="row contentCabecera">
+
+                    <div class="col-md-3 col-sm-12 contentGrafico">
+                        <h8 id="UserPerfil" runat="server"></h8>
+                        <div id="porcentajeClass" runat="server" class="col-md-4 c100 p40">
+                            <span id="porcentaje" runat="server"></span>
+                            <div class="slice">
+                                <div class="bar"></div>
+                                <div class="fill"></div>
                             </div>
                         </div>
                     </div>
 
-                    <%--<div class="col-md-6 col-sm-12">
+                    <div class="col-md-6 col-sm-12">
                         <div style="font-size: 13px; line-height: 1.4286 !important">
-                            <h8><span style="font-weight:600;font-size:20px !important">Hola</span></h8>
                         </div>
-                    </div>--%>
+                    </div>
+
+                    <div class="col-md-3 col-sm-12">
+                        <div>
+                            <a href="#" onclick="buscarDatosFaltantes()">
+                                <input type="button" id="btnModal" runat="server" value="VER DATOS FALTANTES" style="background: #187C45; color: #fff; cursor: pointer; border-radius: 4px; border: none; height: 40px" /></a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="modal fade" id="modalDatosFaltantes" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalCenterTitle">DATOS FALTANTES</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span onclick="cerrarModal()" aria-hidden="true">×</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row" id="contentModal" style="display: flex; flex-wrap: wrap; flex-direction: column; padding: 10px;">
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="row">
@@ -1514,6 +1544,46 @@
             //    BuscarUserId();
             //}, 1500);
         });
+
+        function cerrarModal() {
+            $('#modalDatosFaltantes').modal('toggle');
+        }
+
+        function buscarDatosFaltantes() {
+            var Email = $('#txtEmail').val();
+            var par = { Email: Email };
+            var payload = { cadena: JSON.stringify(par) };
+
+            $.ajax({
+                type: "POST",
+                "url": "FrmMiPerfil.aspx/BuscarDatosFaltantes",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(payload),
+                dataType: "json",
+                success: function (data) {
+
+                    var json = $.parseJSON(data.d);
+                    var status = json.Status;
+
+                    if (status == 200) {
+                        $('#contentModal').empty();
+                        $('#contentModal').append(`${json.Contenido}`)
+                        $('#modalDatosFaltantes').appendTo("body").modal('show');
+                    } else {
+                        (status == 400)
+                    }
+                },
+                error: function (xmlHttpRequest, textStatus, errorThrown) {
+                    console.log(xmlHttpRequest.responseText);
+                    console.log(textStatus);
+                    console.log(errorThrown);
+                },
+                beforeSend: function () {
+                },
+                complete: function () {
+                }
+            })
+        }
     </script>
 
 </body>

@@ -334,6 +334,10 @@ Public Class FrmMiPerfil
 
                 txtPorcentaje.Text = Resultado
 
+                If Resultado = 100 Then
+                    btnModal.Visible = False
+                End If
+
                 TituloPaginaWeb.Text = "CV " & Nombre & " " & Apellido
                 srcFoto.InnerHtml = ods.Tables(0).Rows(0).Item("Foto").ToString
                 ImgPersonal.Src = ods.Tables(0).Rows(0).Item("Foto").ToString
@@ -748,6 +752,91 @@ Public Class FrmMiPerfil
             Dim serializer = New JavaScriptSerializer()
             Dim json = serializer.Serialize(data)
             Return New JavaScriptSerializer().Serialize(data)
+        Catch ex As Exception
+            Return Error401()
+        End Try
+    End Function
+
+    <WebMethod()>
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    Public Shared Function BuscarDatosFaltantes(ByVal cadena As String) As String
+        Try
+            Dim jss As New JavaScriptSerializer()
+            Dim dict = jss.Deserialize(Of List(Of DatosPersonalesWs))("[" & cadena & "]")
+
+            Dim Email As String = Convert.ToString(dict(0).Email)
+
+            Dim ods As New DataSet
+            Dim oObjeto As New PersonalLegajos
+
+            ods = oObjeto.BuscarDatosDeUsuarioPorEmail(Email)
+
+            If ods.Tables(0).Rows.Count > 0 Then
+                Dim ID_PersonalLegajo As String = ods.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
+                Dim UserId As String = ods.Tables(0).Rows(0).Item("Userid").ToString
+
+                Dim ods2 As New DataSet
+                ods2 = oObjeto.Postulantes_BuscarDatosCargadosParaProgressBar(ID_PersonalLegajo)
+
+                Dim TotalRedes As Integer = ods2.Tables(0).Rows.Count
+                Dim TotalAntLab As Integer = ods2.Tables(1).Rows.Count
+                Dim TotalNumDoc As Integer = ods2.Tables(2).Rows(0).Item("NroDocumento")
+                Dim TotalFoto As Integer = ods2.Tables(3).Rows(0).Item("Foto")
+                Dim TotalFormAca As Integer = ods2.Tables(4).Rows.Count
+                Dim TotalCurso As Integer = ods2.Tables(5).Rows.Count
+                Dim TotalAntecedentes As Integer = ods2.Tables(6).Rows.Count
+                Dim TotalCurriculum As Integer = ods2.Tables(7).Rows.Count
+                If TotalNumDoc = 0 Then
+                    TotalNumDoc = 0
+                Else
+                    TotalNumDoc = ods2.Tables(2).Rows.Count
+                End If
+                If TotalFoto = 0 Then
+                    TotalFoto = 0
+                Else
+                    TotalFoto = ods2.Tables(3).Rows.Count
+                End If
+
+                Dim contenido As String = "<p>Te faltan cargar datos en los siguientes módulos:</p>"
+
+                If TotalRedes = 0 Then
+                    contenido += "<p>Redes sociales</p>"
+                End If
+                If TotalAntLab = 0 Then
+                    contenido += "<p>Antecedentes laborales</p>"
+                End If
+                If TotalNumDoc = 0 Then
+                    contenido += "<p>Datos personales: Número de docuemtno</p>"
+                End If
+                If TotalFoto = 0 Then
+                    contenido += "<p>Datos personales: Foto</p>"
+                End If
+                If TotalFormAca = 0 Then
+                    contenido += "<p>Formación academica</p>"
+                End If
+                If TotalCurso = 0 Then
+                    contenido += "<p>Cursos y seminarios</p>"
+                End If
+                If TotalAntecedentes = 0 Then
+                    contenido += "<p>Antecedentes de salud</p>"
+                End If
+                If TotalCurriculum = 0 Then
+                    contenido += "<p>Curriculum</p>"
+                End If
+
+                Dim data = New With {
+                    Key .Status = "200",
+                    Key .UserId = UserId,
+                    Key .Contenido = contenido
+                }
+
+                Dim serializer = New JavaScriptSerializer()
+                Dim json = serializer.Serialize(data)
+                Return New JavaScriptSerializer().Serialize(data)
+            Else
+                Return Error401()
+            End If
+
         Catch ex As Exception
             Return Error401()
         End Try
