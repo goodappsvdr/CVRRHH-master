@@ -91,6 +91,7 @@
     <Compile Include="Avisos.vb" />
     <Compile Include="Categorias.vb" />
     <Compile Include="Class1.vb" />
+    <Compile Include="Curriculum.vb" />
     <Compile Include="Cursos.vb" />
     <Compile Include="FormacionAcademica.vb" />
     <Compile Include="Localidades.vb" />

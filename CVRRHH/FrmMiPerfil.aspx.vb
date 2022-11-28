@@ -37,6 +37,7 @@ Public Class FrmMiPerfil
             CargarCboSexos()
             CargarCboParentezco()
             BuscarAntecedentesSalud()
+            CargarCurriculum()
 
             Dim PruebaGalleta As HttpCookie
             PruebaGalleta = Request.Cookies("datos")
@@ -627,6 +628,7 @@ Public Class FrmMiPerfil
 
         End If
     End Sub
+
     Protected Sub CerrarSesion(sender As Object, e As EventArgs)
         Dim Galleta As HttpCookie
         Galleta = Request.Cookies("datos")
@@ -1127,8 +1129,6 @@ Public Class FrmMiPerfil
         End If
     End Sub
 
-
-
     Public Sub BuscarAntecedentesSalud()
         Dim ods2 As New DataSet
         Dim Objeto2 As New PersonalLegajos
@@ -1217,21 +1217,6 @@ Public Class FrmMiPerfil
 
                 Dim ods As New DataSet
                 Dim oObjeto As New PersonalLegajos
-                Dim ID_Resultado As Integer
-                Dim Enfermedad As String
-                Dim Cirugia As String
-
-                If RbtTratSi.Checked = True Then
-                    Enfermedad = 1
-                Else
-                    Enfermedad = 0
-                End If
-
-                If RbtCirSi.Checked = True Then
-                    Cirugia = 1
-                Else
-                    Cirugia = 0
-                End If
 
                 ods = oObjeto.BuscarDatosDeUsuarioPorEmail(name)
 
@@ -1239,9 +1224,9 @@ Public Class FrmMiPerfil
                     h3AntecedeSalud.InnerHtml = "MODIFICAR DATOS ANTECEDENTES SALUD"
                     TxtAltura.Text = ods.Tables(5).Rows(0).Item("Altura").ToString
                     TxtPeso.Text = ods.Tables(5).Rows(0).Item("Peso").ToString
-                    Enfermedad = ods.Tables(5).Rows(0).Item("Enfermedad").ToString
+                    RbtTratSi.Checked = ods.Tables(5).Rows(0).Item("Enfermedad").ToString
                     TxtTratamiento.Text = ods.Tables(5).Rows(0).Item("DescripcionEnfermedad").ToString
-                    Cirugia = ods.Tables(5).Rows(0).Item("Cirugias").ToString
+                    RbtCirSi.Checked = ods.Tables(5).Rows(0).Item("Cirugias").ToString
                     TxtCirugia.Text = ods.Tables(5).Rows(0).Item("DescripcionCirugias").ToString
                     'BtnAgregarAntSalud.Value = "MODIFICAR DATOS"
                 Else
@@ -1257,6 +1242,59 @@ Public Class FrmMiPerfil
                 Roles.DeleteCookie()
                 Response.Redirect("FrmIngreso.aspx")
             End If
+        End If
+    End Sub
+
+    Public Sub CargarCurriculum()
+        Dim PruebaGalleta As HttpCookie
+        PruebaGalleta = Request.Cookies("datos")
+
+        'aca valido si hay cookies
+        If PruebaGalleta Is Nothing Then
+            Dim userId As String = Membership.GetUser().UserName
+            Dim username As String = userId
+
+            Dim ods As New DataSet
+            Dim Objeto As New Curriculum
+
+            ods = Objeto.BuscarPorEmail(username)
+
+            If ods.Tables(0).Rows.Count > 0 Then
+                Dim Nombre As String = ods.Tables(0).Rows(0).Item("Nombre").ToString
+                Dim Apellido As String = ods.Tables(0).Rows(0).Item("Apellido").ToString
+                Dim ID_PersonalLegajo As Integer = ods.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
+
+                Dim odsNew As New DataSet
+                Dim ObjNew As New Curriculum
+                odsNew = ObjNew.BuscarPorId_PL(ID_PersonalLegajo)
+
+                srcArchivo.Src = ods.Tables(0).Rows(0).Item("Archivo").ToString
+                srcCurriculum.InnerHtml = ods.Tables(0).Rows(0).Item("Archivo").ToString
+            End If
+        Else
+            Dim Galleta As HttpCookie
+            Galleta = Request.Cookies("datos")
+
+            Dim ods As New DataSet
+            Dim oobjeto As New PersonalLegajos
+
+            Dim name As String = Galleta.Values("nombre")
+            Dim IdUser As String = Galleta.Values("userid")
+            ods = oobjeto.BuscarDatosDeUsuarioPorEmail(name)
+
+            If ods.Tables(0).Rows.Count > 0 Then
+                Dim Nombre As String = ods.Tables(0).Rows(0).Item("Nombre").ToString
+                Dim Apellido As String = ods.Tables(0).Rows(0).Item("Apellido").ToString
+                Dim ID_PersonalLegajo As Integer = ods.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
+
+                Dim ods2 As New DataSet
+                Dim Obj2 As New Curriculum
+                ods2 = Obj2.BuscarPorId_PL(ID_PersonalLegajo)
+
+                srcArchivo.Src = ods2.Tables(0).Rows(0).Item("Archivo").ToString
+                srcCurriculum.InnerHtml = ods2.Tables(0).Rows(0).Item("Archivo").ToString
+            End If
+
         End If
     End Sub
 
@@ -2152,6 +2190,101 @@ Public Class FrmMiPerfil
             Dim serializer = New JavaScriptSerializer()
             Dim json = serializer.Serialize(data)
             Return New JavaScriptSerializer().Serialize(data)
+        Catch ex As Exception
+            Return Error401()
+        End Try
+    End Function
+#End Region
+
+#Region "CURRICULUM"
+    <WebMethod()>
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    Public Shared Function GuardarCurriculum(ByVal cadena As String) As String
+        Try
+
+            Dim jss As New JavaScriptSerializer()
+            jss.MaxJsonLength = 900000000
+            Dim dict = jss.Deserialize(Of List(Of CurriculumWs))("[" & cadena & "]")
+
+            Dim Archivo As String = Convert.ToString(dict(0).Archivo)
+            Dim Email As String = Convert.ToString(dict(0).Email)
+
+            Dim ods As New DataSet
+            Dim ods2 As New DataSet
+            Dim oObjeto As New PersonalLegajos
+            Dim oObjeto2 As New Curriculum
+
+            ods = oObjeto.BuscarDatosDeUsuarioPorEmail(Email)
+
+            Dim Nombre As String = ods.Tables(0).Rows(0).Item("Nombre").ToString
+            Dim Apellido As String = ods.Tables(0).Rows(0).Item("Apellido").ToString
+            Dim ID_PersonalLegajo As Integer = ods.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
+
+            'busco para ver si existe lo modifico, si no lo agrego
+            ods2 = oObjeto2.BuscarPorEmail(Email)
+
+            Dim ArchivoTipo As String = ""
+            'genero letra random para el nombre de la img
+            Dim s As String = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+            Dim r As New Random
+            Dim sb As New StringBuilder
+            For i As Integer = 1 To 8
+                Dim idx As Integer = r.Next(0, 35)
+                sb.Append(s.Substring(idx, 1))
+            Next
+            Dim letraRandom As String = sb.ToString
+
+            Dim imagenfinal() As String
+            Dim img As System.Drawing.Image
+
+            'empiezo a convertir la img
+            If Archivo <> Nothing Then
+                imagenfinal = Archivo.Split(",")
+                imagenfinal(1).ToString()
+
+                ArchivoTipo = imagenfinal(0)
+
+                If ArchivoTipo = "data:application/pdf;base64" Then
+                    Dim path__1 As [String] = HttpContext.Current.Server.MapPath("./ArchivoCurriculum/")
+                    If Not System.IO.Directory.Exists(path__1) Then
+                        System.IO.Directory.CreateDirectory(path__1)
+                    End If
+
+                    Dim archivoName As String = letraRandom & Convert.ToString(".pdf")
+
+                    Dim archivoPath As String = Path.Combine(path__1, archivoName)
+
+                    'aca convertir el base 64 a url absoluta
+                    Dim fileContents As Byte() = Convert.FromBase64String(imagenfinal(1).ToString()), ruta As String = archivoPath
+                    Dim fs As IO.FileStream
+                    fs = IO.File.Create(ruta)
+                    fs.Write(fileContents, 0, fileContents.Length)
+                    fs.Close()
+
+                    Dim archivoUrl As String = "http://coovilros.com/RRHHCV/ArchivoCurriculum/" & archivoName
+
+                    If ods2.Tables(0).Rows.Count > 0 Then
+                        oObjeto2.Modificar(ods2.Tables(0).Rows(0).Item("ID_Curriculum"), ID_PersonalLegajo, Email, archivoUrl)
+                    Else
+                        oObjeto2.Agregar(ID_PersonalLegajo, Email, archivoUrl)
+                    End If
+
+                End If
+
+                Dim data = New With {
+                    Key .Status = "200"
+                }
+
+                Dim serializer = New JavaScriptSerializer()
+                serializer.MaxJsonLength = 900000000
+                Dim json = serializer.Serialize(data)
+
+                Return New JavaScriptSerializer().Serialize(data)
+
+            Else
+                Return Error401("No hay archivos seleccionados")
+            End If
+
         Catch ex As Exception
             Return Error401()
         End Try

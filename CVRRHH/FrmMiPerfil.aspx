@@ -372,6 +372,23 @@
                             </a>
                         </div>
 
+                        <!--CURRICULUM-->
+                        <div class="col-md-4">
+                            <a href="#DatosCurriculum" onclick="MostrarCurriculum();">
+                                <div class="card" style="width: 100%; margin: 10px auto">
+                                    <img class="card-img-top" src="https://crear.net.ar/CLIENTES/MAGICFLOORS/MagicFloors/experiments.png" alt="Card image cap">
+                                    <div class="card-body">
+                                        <center>
+                                            <h5 class="card-title">CURRICULUM</h5>
+                                            <br />
+                                            <i class="material-icons" style="margin-top: 30px; color: #000; cursor: pointer; font-size: 40px;" data-toggle="tooltip" title="Modificar mis datos">create
+                                            </i>
+                                        </center>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+
                         <!--OTROS CONOCIMIENTOS-->
                         <div class="col-md-4" style="display: none">
                             <a href="#DatosOtrosCon" onclick="MostrarOtrosCon();">
@@ -452,7 +469,7 @@
 
                                 <center>
                                     <div alt="Cargando Imagen..." style="background-image: url('https://crear.net.ar/CLIENTES/PIN/Pin/camara-fotografica.png'); background-size: cover; height: 50px; width: 50px; cursor: pointer; decoration: none;" required="" name="imagen" id="files" type="file" accept="image/*">
-                                        <asp:FileUpload Style="background-image: url('Imagenes/ErrorTickets.png'); background-size: cover; opacity: 0; height: 80px; width: 80px; cursor: pointer; margin-top: -5px; decoration: none;" runat="server" ID="btnSubirImgEmpleado" onchange="readURL(this);" runat="server"></asp:FileUpload>
+                                        <asp:FileUpload Style="opacity: 0; height: 80px; width: 80px; cursor: pointer; margin-top: -5px;" runat="server" ID="btnSubirImgEmpleado" onchange="readURL(this);" runat="server"></asp:FileUpload>
                                     </div>
                                 </center>
                             </div>
@@ -943,7 +960,7 @@
 
                                                 <div alt="Cargando Imagen..." style="background-image: url('https://crear.net.ar/CLIENTES/PIN/Pin/camara-fotografica.png'); background-size: cover; height: 50px; width: 50px; cursor: pointer; decoration: none;" required="" name="imagen" id="Div1" type="file" accept="image/*">
                                                     <center>
-                                                        <asp:FileUpload Style="background-image: url('https://cuota-facil.com.ar/Imagenes/ErrorTickets.png'); background-size: cover; opacity: 0; height: 80px; width: 80px; cursor: pointer; margin-top: -5px; decoration: none;" runat="server" ID="SubirRecibo" accept="application/pdf,image/*" onchange="return validarExt2();" runat="server"></asp:FileUpload></center>
+                                                        <asp:FileUpload Style="opacity: 0; height: 80px; width: 80px; cursor: pointer; margin-top: -5px;" runat="server" ID="SubirRecibo" accept="application/pdf,image/*" onchange="return validarExt2();" runat="server"></asp:FileUpload></center>
                                                 </div>
 
                                                 <div id="visorArchivo">
@@ -1191,13 +1208,6 @@
                                             class="form-control" Height="40px" Width="100%"></asp:TextBox>
                                     </div>
 
-                                    <%--<div class="col-md-7" style="margin-bottom: 20px;">
-                                        <label>¿Padece alguna enfermedad crónica y/o esta bajo tratamiento?</label>
-                                        <br />
-                                        <input type="checkbox" value="1" id="EnfermedadSI" name="check" onchange="comprobar(this)" cssclass="BigCheckBox" runat="server" />SI<br />
-                                        <input type="checkbox" value="0" id="EnfermedadNO" name="check" onchange="comprobar(this)" cssclass="BigCheckBox" checked="checked" runat="server" />NO<br />
-                                    </div>--%>
-
                                     <div class="col col-md-7" style="margin-bottom: 20px;">
                                         <label>¿Padece alguna enfermedad crónica y/o esta bajo tratamiento?</label>
                                         <br />
@@ -1212,13 +1222,6 @@
                                         <asp:TextBox ID="TxtTratamiento" type="text" runat="server" ForeColor="Black"
                                             class="form-control" Height="80px" Width="100%" placeholder="Descripcion y detalle tratamiento" TextMode="MultiLine"></asp:TextBox>
                                     </div>
-
-                                    <%--<div class="col-md-7">
-                                        <label>¿Tiene intervenciones quirurgicas y/o cirugias?</label>
-                                        <br />
-                                        <input type="checkbox" value="1" id="cirugiaSi" name="check" onchange="comprobar2(this)" cssclass="BigCheckBox" runat="server" />SI<br />
-                                        <input type="checkbox" value="0" id="CirugiaNo" name="check" onchange="comprobar2(this)" cssclass="BigCheckBox" checked="checked" runat="server" />NO<br />
-                                    </div>--%>
 
                                     <div class="col col-md-7" style="margin-bottom: 10px;">
                                         <label>¿Tiene intervenciones quirurgicas y/o cirugias?</label>
@@ -1247,52 +1250,46 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card-body" style="border: 1px solid #fff; width: 100%; border-radius: 3px">
-                        <center>
-                            <h4 id="H3" runat="server"></h4>
-                        </center>
-                        <asp:GridView ID="GridView1" runat="server" CellPadding="8" ForeColor="#000000"
-                            GridLines="none"
-                            FooterStyle-BackColor="#6699FF" CellSpacing="8" AllowPaging="False"
-                            PageSize="10" HorizontalAlign="Center" BorderColor="#000000">
 
-                            <AlternatingRowStyle BackColor="White" />
-
-                            <Columns>
-                                <asp:TemplateField HeaderText="Seleccionar">
-                                    <ItemTemplate>
-                                        <center>
-                                            <asp:CheckBox ID="ChkProfesional" runat="server" CssClass="BigCheckBox" Style="height: 40px; margin-top: 20px; font-size: 40px" /></center>
-
-
-                                    </ItemTemplate>
-
-                                </asp:TemplateField>
-
-
-
-                                <asp:TemplateField HeaderText="Eliminar">
-                                    <ItemTemplate>
-                                        <%--<asp:TextBox ID="" runat="server" class="form-control" ></asp:TextBox>--%>
-                                        <asp:Button ID="TxtEliminar" class="btn btn-danger" runat="server" Text="Eliminar" PostBackUrl='<%#Eval("urlEliminar").ToString()%>' />
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-
-
-                                <asp:TemplateField HeaderText="Modificar">
-                                    <ItemTemplate>
-                                        <%--<asp:TextBox ID="" runat="server" class="form-control" ></asp:TextBox>--%>
-                                        <asp:Button ID="TxtModificar" class="btn btn-success" runat="server" Text="Modificar" PostBackUrl='<%#Eval("urlEditar").ToString()%>' />
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-
-                            </Columns>
-
-                        </asp:GridView>
-                    </div>
-                    <center>
-                    </center>
                     <br />
+
+
+                    <div class="col-md-12" id="DatosCurriculum" style="display: none">
+                        <div class="card" style="width: 100%;">
+                            <div class="card-body">
+                                <h3 align="center" id="h3" runat="server">AGREGAR CURRICULUM</h3>
+                                <div class="row">
+
+                                    <div class="col col-md-12" style="margin-bottom: 20px;">
+                                        <center><span style="color: #203f56; font-size: 18px;">Adjuntar archivo del curriculum(PDF)</span></center>
+                                        <div style="padding-top: 20px; padding-bottom: 20px; margin: 10px; border: 1px solid #E3E3E3; border-radius: 4px;">
+                                            <center>
+                                                <div alt="Cargando Imagen..." style="background-image: url('https://crear.net.ar/CLIENTES/PIN/Pin/camara-fotografica.png'); background-size: cover; height: 50px; width: 50px; cursor: pointer; decoration: none;" required="" name="imagen" id="Div1" type="file" accept="image/*">
+                                                    <asp:FileUpload Style="opacity: 0; height: 80px; width: 80px; cursor: pointer; margin-top: -5px;" runat="server" ID="SubirCurriculum" accept="application/pdf,image/*" onchange="return validarExt3();" runat="server"></asp:FileUpload>
+                                                </div>
+                                                <p id="srcCurriculum" style="display: none;" runat="server"></p>
+                                                <div class="col-md-12" id="contentArchivo" style="margin-bottom: 8px;">
+                                                    <embed id="srcArchivo" runat="server" src="" width="400" height="440" />
+                                                </div>
+
+                                                <div id="visorArchivoC">
+                                                    <!--Aqui se desplegará el fichero-->
+                                                </div>
+
+                                            </center>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <center>
+                                    <button id="" onclick="agregarCurriculum()" type="button" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px; cursor: pointer;">Guardar</button></center>
+                                <br />
+
+                            </div>
+                        </div>
+                    </div>
+
 
                     <asp:TextBox ID="TextBox10" runat="server" Style="display: none"></asp:TextBox><br />
 
@@ -1390,6 +1387,7 @@
             document.getElementById("DatosForma").style = "display:none";
             document.getElementById("DatosCursos").style = "display:none";
             document.getElementById("DatosAntSal").style = "display:none";
+            document.getElementById("DatosCurriculum").style = "display:none";
             document.getElementById("subir").style = "display:block;float:right; width:80px;height:100px;margin-top:-200px;z-index:999999";
         }
         function MostrarDatosContacto() {
@@ -1400,6 +1398,7 @@
             document.getElementById("DatosForma").style = "display:none";
             document.getElementById("DatosCursos").style = "display:none";
             document.getElementById("DatosAntSal").style = "display:none";
+            document.getElementById("DatosCurriculum").style = "display:none";
             document.getElementById("subir").style = "display:block;float:right; width:80px;height:100px;margin-top:-200px;z-index:999999";
         }
         function MostrarRefLab() {
@@ -1410,6 +1409,7 @@
             document.getElementById("DatosForma").style = "display:none";
             document.getElementById("DatosCursos").style = "display:none";
             document.getElementById("DatosAntSal").style = "display:none";
+            document.getElementById("DatosCurriculum").style = "display:none";
             document.getElementById("subir").style = "display:block;float:right; width:80px;height:100px;margin-top:-200px;z-index:999999";
         }
         function MostrarGrupoFam() {
@@ -1420,6 +1420,7 @@
             document.getElementById("DatosForma").style = "display:none";
             document.getElementById("DatosCursos").style = "display:none";
             document.getElementById("DatosAntSal").style = "display:none";
+            document.getElementById("DatosCurriculum").style = "display:none";
             document.getElementById("subir").style = "display:block;float:right; width:80px;height:100px;margin-top:-200px;z-index:999999";
         }
         function MostrarFromAca() {
@@ -1430,8 +1431,8 @@
             document.getElementById("DatosForma").style = "display:block";
             document.getElementById("DatosCursos").style = "display:none";
             document.getElementById("DatosAntSal").style = "display:none";
+            document.getElementById("DatosCurriculum").style = "display:none";
             document.getElementById("subir").style = "display:block;float:right; width:80px;height:100px;margin-top:-200px;z-index:999999";
-
         }
         function MostrarCursos() {
             document.getElementById("DatosRefLab").style = "display:none";
@@ -1441,8 +1442,8 @@
             document.getElementById("DatosForma").style = "display:none";
             document.getElementById("DatosCursos").style = "display:block";
             document.getElementById("DatosAntSal").style = "display:none";
+            document.getElementById("DatosCurriculum").style = "display:none";
             document.getElementById("subir").style = "display:block;float:right; width:80px;height:100px;margin-top:-200px;z-index:999999";
-
         }
         function MostrarAntSal() {
             document.getElementById("DatosRefLab").style = "display:none";
@@ -1452,8 +1453,19 @@
             document.getElementById("DatosForma").style = "display:none";
             document.getElementById("DatosCursos").style = "display:none";
             document.getElementById("DatosAntSal").style = "display:block";
+            document.getElementById("DatosCurriculum").style = "display:none";
             document.getElementById("subir").style = "display:block;float:right; width:80px;height:100px;margin-top:-200px;z-index:999999";
-
+        }
+        function MostrarCurriculum() {
+            document.getElementById("DatosRefLab").style = "display:none";
+            document.getElementById("DatosContactoHide").style = "display:none";
+            document.getElementById("primero").style = "display:none";
+            document.getElementById("DatosGrupoFam").style = "display:none";
+            document.getElementById("DatosForma").style = "display:none";
+            document.getElementById("DatosCursos").style = "display:none";
+            document.getElementById("DatosAntSal").style = "display:none";
+            document.getElementById("DatosCurriculum").style = "display:block";
+            document.getElementById("subir").style = "display:block;float:right; width:80px;height:100px;margin-top:-200px;z-index:999999";
         }
     </script>
 
@@ -1474,6 +1486,8 @@
 
 
             cargarGrupoFam();
+            mostrarTrat();
+            mostrarCir();
         });
     </script>
 

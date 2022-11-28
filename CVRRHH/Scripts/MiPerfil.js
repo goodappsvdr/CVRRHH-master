@@ -1,5 +1,6 @@
 ﻿var visorImg;
 var visorFormacionAcademica;
+var visorCurriculum;
 
 window.onload = function () {
     var fecha = new Date(); //Fecha actual
@@ -176,6 +177,29 @@ function validarExt2() {
     }
 }
 
+function validarExt3() {
+    var archivoInput = document.getElementById('SubirCurriculum');
+    var archivoRuta = archivoInput.value;
+    var extPermitidas = /(.PDF|.pdf)$/i;
+    if (!extPermitidas.exec(archivoRuta)) {
+        alert('Asegurese de haber seleccionado un archivo permitido');
+        archivoInput.value = '';
+        return false;
+    }
+    else {
+        //PRevio del PDF
+        if (archivoInput.files && archivoInput.files[0]) {
+            var visor = new FileReader();
+            visor.onload = function (e) {
+                document.getElementById('contentArchivo').style.display = "none";
+                document.getElementById('visorArchivoC').innerHTML =
+                    '<embed src="' + e.target.result + '" width="400" height="440" />';
+            };
+            visor.readAsDataURL(archivoInput.files[0]);
+            visorCurriculum = visor;
+        }
+    }
+}
 //DATOS PERSONALES
 function guardarDatPers() {
     var tipoDoc = $("#CboTipoDoc").val();
@@ -455,7 +479,7 @@ function agregarFormAcademica() {
         swal('', 'Debes seleccionar una institución', 'info')
         return;
     }
-    
+
     if (fechaDesde == '') {
         swal('', 'Debes seleccionar una fecha desde', 'info');
     } else if (fechaHasta == '') {
@@ -628,7 +652,7 @@ function cargarGrupoFam() {
                         );
                     }
                 }
-                
+
             }
         },
         error: function (xmlHttpRequest, textStatus, errorThrown) {
@@ -728,7 +752,7 @@ function agregarCurso() {
         swal('', 'Debes seleccionar una área', 'info')
     } else if (horas == "") {
         swal('', 'El campo horas no puede estar vacío', 'info')
-    }  else if (institución == "") {
+    } else if (institución == "") {
         swal('', 'El campo institución no puede estar vacío', 'info')
     } else if (comentarios == "") {
         swal('', 'El campo ocupacion no puede estar vacío', 'info')
@@ -852,6 +876,61 @@ function agregarAntecedentesDeSalud() {
     }
 }
 
+
+//CURRICULUM
+function agregarCurriculum() {
+    var email = $("#txtEmail").val();
+    var archivoInput = document.getElementById('SubirCurriculum');
+    var archivoRuta = archivoInput.value;
+    var extPermitidas = /(.PDF|.pdf)$/i;
+    if (!extPermitidas.exec(archivoRuta)) {
+        if (srcCurriculum.innerHTML == "") {
+            swal("", "Seleccione un documento para subir", "info");
+            return;
+        }
+    } else {
+        var pdfCurriculum = visorCurriculum.result;
+
+        var par = { Archivo: pdfCurriculum, Email: email };
+        var payload = { cadena: JSON.stringify(par) };
+
+        $.ajax({
+            type: "POST",
+            "url": "FrmMiPerfil.aspx/GuardarCurriculum",
+            data: JSON.stringify(payload),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+
+                var json = $.parseJSON(data.d);
+                var status = json.Status;
+
+                if (status == 200) {
+                    swal('',
+                        'Curriculum guardado con éxito',
+                        'success',
+                        'CONTINUAR',
+                    ).then(function () {
+                        window.location.href = 'FrmMiPerfil.aspx'
+                    })
+                } else if (status = 401) {
+                    swal('', 'Ocurrió un error', 'warning');
+                }
+            },
+            error: function (xmlHttpRequest, textStatus, errorThrown) {
+                console.log(xmlHttpRequest.responseText);
+                console.log(textStatus);
+                console.log(errorThrown);
+            },
+            beforeSend: function () {
+            },
+            complete: function () {
+                $(".se-pre-con").fadeOut("slow");;
+            }
+        })
+    }
+
+}
 
 
 function ActualizarCampos() {

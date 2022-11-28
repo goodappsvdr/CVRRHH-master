@@ -743,22 +743,40 @@ Partial Public Class FrmMiPerfil
     Protected WithEvents TxtCirugia As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control H3.
+    '''Control h3.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents H3 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+    Protected WithEvents h3 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
-    '''Control GridView1.
+    '''Control SubirCurriculum.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents GridView1 As Global.System.Web.UI.WebControls.GridView
+    Protected WithEvents SubirCurriculum As Global.System.Web.UI.WebControls.FileUpload
+
+    '''<summary>
+    '''Control srcCurriculum.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents srcCurriculum As Global.System.Web.UI.HtmlControls.HtmlGenericControl
+
+    '''<summary>
+    '''Control srcArchivo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents srcArchivo As Global.System.Web.UI.HtmlControls.HtmlEmbed
 
     '''<summary>
     '''Control TextBox10.

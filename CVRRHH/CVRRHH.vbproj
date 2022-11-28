@@ -270,6 +270,7 @@
     </Compile>
     <Compile Include="globalWS.vb" />
     <Compile Include="Model\AntecedentesSaludWs.vb" />
+    <Compile Include="Model\CurriculumWs.vb" />
     <Compile Include="Model\CursosWs.vb" />
     <Compile Include="Model\DatosContactoWs.vb" />
     <Compile Include="Model\DatosPersonalesWs.vb" />
@@ -342,6 +343,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="ArchivoAdjunto\" />
+    <Folder Include="ArchivoCurriculum\" />
     <Folder Include="ImagenesPersonales\" />
   </ItemGroup>
   <ItemGroup>
