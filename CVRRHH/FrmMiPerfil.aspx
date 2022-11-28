@@ -153,7 +153,7 @@
 
     <form runat="server" id="form1">
         <nav class="navbar navbar-default navbar-fixed-top" style="height: 120px; background-color: #187C45;">
-            <img src="https://www.coovilros.com/Imagenes/logo-dark.png" runat="server" id="imagenresp" style="height: auto; max-height: 60px; margin-top: 10px;" alt="">
+            <img src="https://www.coovilros.com/RRHHAdmin/Imagenes/Isologotipo_Coovilros_horizontal_blanco_total.png" runat="server" id="imagenresp" style="width: 220px; height: auto; max-height: 60px; margin-top: 10px;" alt="">
             <p id="imagenresp2" style="font-family: 'Bitter',serif; margin-top: -30px">
                 <a href="" runat="server" id="iraperfilmovil"><i class="material-icons" style="margin-top: 30px; color: #fff; cursor: pointer; font-size: 40px; margin-left: 35px" data-toggle="tooltip" title="Ver Mi Perfil">assignment
                 </i></a>
@@ -161,7 +161,7 @@
             <div class="container">
                 <div class="row" id="borrarimagenes">
                     <div class="col-md-4">
-                        <img src="https://www.coovilros.com/Imagenes/logo-dark.png" runat="server" id="ImagenLogo" style="height: auto; max-height: 60px; margin-top: 10px" alt="">
+                        <img src="https://www.coovilros.com/RRHHAdmin/Imagenes/Isologotipo_Coovilros_horizontal_blanco_total.png" runat="server" id="ImagenLogo" style="width: 220px; height: auto; max-height: 60px; margin-top: 10px" alt="">
                     </div>
                     <div class="col-md-7">
                         <p id="webcon" style="float: right; margin-left: 800px; font-family: 'Bitter',serif; margin-top: -30px">
