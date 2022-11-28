@@ -86,6 +86,15 @@ Partial Public Class FrmMiPerfil
     Protected WithEvents txtEmail As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
+    '''Control txtPorcentaje.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents txtPorcentaje As Global.System.Web.UI.WebControls.TextBox
+
+    '''<summary>
     '''Control UserPerfil.
     '''</summary>
     '''<remarks>

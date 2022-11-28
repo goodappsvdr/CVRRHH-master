@@ -106,7 +106,7 @@
     <!--End of Tawk.to Script-->
 
     <form runat="server" id="form1">
-        <nav class="navbar navbar-default navbar-fixed-top" style="height: 120px; background-color: #047537">
+        <nav class="navbar navbar-default navbar-fixed-top" style="height: 120px; background-color: #519F34;">
             <center>
                 <img src="https://goodapps.com.ar/RRHH/Imagenes/Isologotipo_Coovilros_horizontal_blanco_total.png" runat="server" id="imagenresp" style="height: auto; max-height: 60px; margin-top: 10px;" alt="">
                 <p id="imagenresp2" style="font-family: 'Bitter',serif; margin-top: -30px">
@@ -188,6 +188,8 @@
             <div style="display: none;" class="col-md-4">
                 <asp:TextBox ID="txtEmail" type="text" runat="server" ForeColor="#495057"
                     class="form-control" Height="40px" Width="100%" Style=""></asp:TextBox>
+                <asp:TextBox ID="txtPorcentaje" type="text" runat="server" ForeColor="#495057"
+                    class="form-control" Height="40px" Width="100%" Style=""></asp:TextBox>
             </div>
 
             <br />
@@ -217,11 +219,11 @@
                         </div>
                     </div>
 
-                    <div class="col-md-6 col-sm-12">
+                    <%--<div class="col-md-6 col-sm-12">
                         <div style="font-size: 13px; line-height: 1.4286 !important">
                             <h8><span style="font-weight:600;font-size:20px !important">Hola</span></h8>
                         </div>
-                    </div>
+                    </div>--%>
                 </div>
 
                 <div class="row">
@@ -427,7 +429,7 @@
                                     </div>
 
                                     <div class="col-md-4" style="margin-bottom: 20px;">
-                                        <label>Número Doc</label>
+                                        <label>Número Documento</label>
                                         <input type="text" class="form-control" id="TxtNumeroDoc" runat="server" />
                                     </div>
 
@@ -604,7 +606,7 @@
                                 <div class="row">
 
                                     <div class="col-md-4" style="margin-bottom: 20px;">
-                                        <label>Desde</label>
+                                        <label>Fecha Desde</label>
                                         <asp:TextBox ID="TxtFechaDesde" type="date" runat="server" ForeColor="Black"
                                             class="form-control" Height="40px" Width="100%" Style="margin-top: -10px"></asp:TextBox>
                                     </div>
@@ -619,7 +621,7 @@
                                     </div>
 
                                     <div class="col-md-4" style="margin-bottom: 20px;">
-                                        <label>Hasta</label>
+                                        <label>Fecha Hasta</label>
                                         <asp:TextBox ID="TxtFechaHasta" type="date" runat="server" ForeColor="Black"
                                             class="form-control" Height="40px" Width="100%" Style="margin-top: -10px"></asp:TextBox>
                                     </div>
@@ -848,13 +850,13 @@
                                 <h3 align="center">AGREGAR FORMACION ACADEMICA</h3>
                                 <div class="row">
                                     <div class="col-md-4" style="margin-bottom: 20px;">
-                                        <label>Desde (Aprox.)</label>
+                                        <label>Fecha Desde (Aprox.)</label>
                                         <asp:TextBox ID="TxtDesdeFA" type="date" runat="server" ForeColor="Black"
                                             class="form-control" Height="40px" Width="100%"></asp:TextBox>
                                     </div>
 
                                     <div class="col-md-4" style="margin-bottom: 20px;">
-                                        <label>Hasta (Aprox.)</label>
+                                        <label>Fecha Hasta (Aprox.)</label>
                                         <asp:TextBox ID="TxtHastaFA" type="date" runat="server" ForeColor="Black"
                                             class="form-control" Height="40px" Width="100%"></asp:TextBox>
                                     </div>
@@ -1056,13 +1058,13 @@
                                 <h3 align="center">AGREGAR CURSOS</h3>
                                 <div class="row">
                                     <div class="col-md-4" style="margin-bottom: 20px;">
-                                        <label>Desde (Aprox.)</label>
+                                        <label>Fecha Desde (Aprox.)</label>
                                         <asp:TextBox ID="TxtFechaDesdeCurso" type="date" runat="server" ForeColor="Black"
                                             class="form-control" Height="40px" Width="100%"></asp:TextBox>
                                     </div>
 
                                     <div class="col-md-4" style="margin-bottom: 20px;">
-                                        <label>Hasta (Aprox.)</label>
+                                        <label>Fecha Hasta (Aprox.)</label>
                                         <asp:TextBox ID="TxtFechaHastaCurso" type="date" runat="server" ForeColor="Black"
                                             class="form-control" Height="40px" Width="100%"></asp:TextBox>
                                     </div>
@@ -1312,12 +1314,12 @@
             <br />
             <br />
 
-            <a href="#up">
+            <%--<a href="#up">
                 <div id="subir" style="display: none; float: right; width: 80px; height: 80px; position: relative">
                     <i class="material-icons" style="font-size: 40px; color: red; cursor: pointer">arrow_upward
                     </i>
                 </div>
-            </a>
+            </a>--%>
 
             <footer>
                 <!--#footer-->
@@ -1504,10 +1506,13 @@
             $('#TxtLinkRedsocial').val("");
             $('#ComboRedes').val("SELECCIONE...");
 
-
             cargarGrupoFam();
             mostrarTrat();
             mostrarCir();
+            BuscarUserId();
+            //setTimeout(() => {
+            //    BuscarUserId();
+            //}, 1500);
         });
     </script>
 

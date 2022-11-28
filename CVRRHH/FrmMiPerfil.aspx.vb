@@ -332,6 +332,8 @@ Public Class FrmMiPerfil
                 porcentajeClass.Attributes("class") = "c100 p" & Resultado
                 UserPerfil.Style.Add("color", "#495057")
 
+                txtPorcentaje.Text = Resultado
+
                 TituloPaginaWeb.Text = "CV " & Nombre & " " & Apellido
                 srcFoto.InnerHtml = ods.Tables(0).Rows(0).Item("Foto").ToString
                 ImgPersonal.Src = ods.Tables(0).Rows(0).Item("Foto").ToString
