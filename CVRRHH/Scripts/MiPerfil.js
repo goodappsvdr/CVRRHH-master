@@ -200,6 +200,8 @@ function validarExt3() {
         }
     }
 }
+
+
 //DATOS PERSONALES
 function guardarDatPers() {
     var tipoDoc = $("#CboTipoDoc").val();
@@ -266,7 +268,8 @@ function guardarDatPers() {
                                 'success',
                                 'CONTINUAR',
                             ).then(function () {
-                                window.location.href = 'FrmMiPerfil.aspx'
+                                //window.location.href = 'FrmMiPerfil.aspx'
+                                cargarDatosUsuario();
                             })
                         } else if (status = 401) {
                             swal('', 'Ocurrió un error', 'warning');
@@ -308,7 +311,8 @@ function guardarDatPers() {
                             'success',
                             'CONTINUAR',
                         ).then(function () {
-                            window.location.href = 'FrmMiPerfil.aspx'
+                            //window.location.href = 'FrmMiPerfil.aspx'
+                            cargarDatosUsuario();
                         })
                     } else if (status = 401) {
                         swal('', 'Ocurrió un error', 'warning');
@@ -466,8 +470,156 @@ function agregarRefLab() {
     }
 }
 
+function cargarRefLab() {
+    var Email = $("#txtEmail").val();
 
-//ANTECEDENTES LABORALES
+    var parametro = { Email };
+    var Json = { cadena: JSON.stringify(parametro) };
+
+    $.ajax({
+        type: "POST",
+        "url": "FrmMiPerfil.aspx/CargarRefLab",
+        data: JSON.stringify(Json),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+
+            var json = $.parseJSON(data.d);
+            var status = json.Status;
+
+            if (status == 200) {
+                $('#DivRL').empty();
+                if (json.Data.length > 0) {
+                    $('#TituloRL').html("MIS DATOS LABORALES");
+                    for (var i = 0; i < json.Data.length; i++) {
+                        if (i == 0) {
+                            $('#DivRL').append(`<div class= "row" style="margin-bottom: 15px; width: 100%;">
+                            <div class= "col-md-3" style="display: flex; flex-direction: column;">
+                                <p>Area</p>
+                                <span>${json.Data[i].Area}</span>
+                            </div>
+                            <div class="col-md-3" style="display: flex; flex-direction: column;">
+                                <p>Empresa</p>
+                                <span>${json.Data[i].Empresa}</span>
+                            </div>
+                            <div class="col-md-2" style="display: flex; flex-direction: column;">
+                                <p>Modificar</p>
+                                <a href="${json.Data[i].urlMod}" class="btn-success" style="border-radius: 5px; color: #fff; border: 1px solid #218838; text-decoration: none; text-align: center;">
+                                Modificar
+                                </a>
+                            </div>
+                            <div class="col-md-2" style="display: flex; flex-direction: column;">
+                                <p>Eliminar</p>
+                                <button type="button" onclick="ValidarEliminarRefLab(${json.Data[i].ID})" class="btn-danger" style="border-radius: 5px; color: #fff; border: 1px solid #dc3545;">
+                                Eliminar
+                                </button>
+                            </div>
+                            <hr style="width: 100%;">`
+                            );
+                        } else {
+                            $('#DivRL').append(`<div class= "row" style="margin-bottom: 15px; width: 100%;">
+                            <div class= "col-md-3">
+                                <span>${json.Data[i].Area}</span>
+                            </div>
+                            <div class="col-md-3">
+                                <span>${json.Data[i].Empresa}</span>
+                            </div>
+                            <div class="col-md-2">
+                                <a href="${json.Data[i].urlMod}" class="btn-success" style="border-radius: 5px; color: #fff; border: 1px solid #218838; text-decoration: none; text-align: center;">
+                                Modificar
+                                </a>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" onclick="ValidarEliminarRefLab(${json.Data[i].ID})" class="btn-danger" style="border-radius: 5px; color: #fff; border: 1px solid #dc3545;">
+                                Eliminar
+                                </button>
+                            </div>
+                            <hr style="width: 100%;">`
+                            );
+                        }
+                        
+                    }
+                }
+
+            }
+        },
+        error: function (xmlHttpRequest, textStatus, errorThrown) {
+            console.log(xmlHttpRequest.responseText);
+            console.log(textStatus);
+            console.log(errorThrown);
+
+        },
+        beforeSend: function () {
+
+        },
+        complete: function () {
+
+        }
+    })
+}
+
+function ValidarEliminarRefLab(ID_RefLab) {
+    swal({
+        title: "¿Estás seguro/a de eliminar la referencia laboral?",
+        type: "question",
+        showCancelButton: true,
+        cancelButtonText: 'CANCELAR',
+        reverseButtons: true,
+        confirmButtonText: 'ACEPTAR',
+        confirmButtonColor: '#E01212',
+        closeOnConfirm: false,
+        showLoaderOnConfirm: true,
+        allowOutsideClick: false,
+        preConfirm: function () {
+            EliminarRefLab(ID_RefLab);
+        }
+    });
+}
+
+function EliminarRefLab(ID_RefLab) {
+    var par = "{\"ID\":\"" + ID_RefLab + "\"}";
+
+    var payload = { cadena: par };
+
+    $.ajax({
+        type: "POST",
+        "url": "FrmMiPerfil.aspx/EliminarRefLab",
+        data: JSON.stringify(payload),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+
+            var json = $.parseJSON(data.d);
+            var status = json.Status;
+
+            if (status == 200) {
+                swal('',
+                    'Referencia laboral eliminada con éxito',
+                    'success',
+                    'CONTINUAR',
+                ).then(function () {
+                    cargarRefLab();
+                })
+            } else if (status = 401) {
+                swal('', 'Ocurrió un error', 'warning');
+            }
+        },
+        error: function (xmlHttpRequest, textStatus, errorThrown) {
+            console.log(xmlHttpRequest.responseText);
+            console.log(textStatus);
+            console.log(errorThrown);
+
+        },
+        beforeSend: function () {
+        },
+        complete: function () {
+            $(".se-pre-con").fadeOut("slow");
+        }
+    })
+}
+
+
+//FORMACION ACADEMICA
 function agregarFormAcademica() {
     var fechaDesde = $("#TxtDesdeFA").val();
     var fechaHasta = $("#TxtHastaFA").val();
@@ -553,6 +705,154 @@ function agregarFormAcademica() {
             })
         }
     }
+}
+
+function cargarFormAcademica() {
+    var Email = $("#txtEmail").val();
+
+    var parametro = { Email };
+    var Json = { cadena: JSON.stringify(parametro) };
+
+    $.ajax({
+        type: "POST",
+        "url": "FrmMiPerfil.aspx/CargarFormAcademica",
+        data: JSON.stringify(Json),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+
+            var json = $.parseJSON(data.d);
+            var status = json.Status;
+
+            if (status == 200) {
+                $('#DivFA').empty();
+                if (json.Data.length > 0) {
+                    $('#TituloFA').html("MIS DATOS ACADÉMICOS");
+                    for (var i = 0; i < json.Data.length; i++) {
+                        if (i == 0) {
+                            $('#DivFA').append(`<div class= "row" style="margin-bottom: 15px; width: 100%;">
+                            <div class= "col-md-3" style="display: flex; flex-direction: column;">
+                                <p>Título</p>
+                                <span>${json.Data[i].Titulo}</span>
+                            </div>
+                            <div class="col-md-3" style="display: flex; flex-direction: column;">
+                                <p>Institución</p>
+                                <span>${json.Data[i].Institucion}</span>
+                            </div>
+                            <div class="col-md-2" style="display: flex; flex-direction: column;">
+                                <p>Modificar</p>
+                                <a href="${json.Data[i].urlMod}" class="btn-success" style="border-radius: 5px; color: #fff; border: 1px solid #218838; text-decoration: none; text-align: center;">
+                                Modificar
+                                </a>
+                            </div>
+                            <div class="col-md-2" style="display: flex; flex-direction: column;">
+                                <p>Eliminar</p>
+                                <button type="button" onclick="ValidarEliminarFormAcademica(${json.Data[i].ID})" class="btn-danger" style="border-radius: 5px; color: #fff; border: 1px solid #dc3545;">
+                                Eliminar
+                                </button>
+                            </div>
+                            <hr style="width: 100%;">`
+                            );
+                        } else {
+                            $('#DivRL').append(`<div class= "row" style="margin-bottom: 15px; width: 100%;">
+                            <div class= "col-md-3">
+                                <span>${json.Data[i].Titulo}</span>
+                            </div>
+                            <div class="col-md-3">
+                                <span>${json.Data[i].Institucion}</span>
+                            </div>
+                            <div class="col-md-2">
+                                <a href="${json.Data[i].urlMod}" class="btn-success" style="border-radius: 5px; color: #fff; border: 1px solid #218838; text-decoration: none; text-align: center;">
+                                Modificar
+                                </a>
+                            </div>
+                            <div class="col-md-2">
+                                <button type="button" onclick="ValidarEliminarFormAcademica(${json.Data[i].ID})" class="btn-danger" style="border-radius: 5px; color: #fff; border: 1px solid #dc3545;">
+                                Eliminar
+                                </button>
+                            </div>
+                            <hr style="width: 100%;">`
+                            );
+                        }
+
+                    }
+                }
+
+            }
+        },
+        error: function (xmlHttpRequest, textStatus, errorThrown) {
+            console.log(xmlHttpRequest.responseText);
+            console.log(textStatus);
+            console.log(errorThrown);
+
+        },
+        beforeSend: function () {
+
+        },
+        complete: function () {
+
+        }
+    })
+}
+
+function ValidarEliminarFormAcademica(ID_FromAcademica) {
+    swal({
+        title: "¿Estás seguro/a de eliminar la formación académica?",
+        type: "question",
+        showCancelButton: true,
+        cancelButtonText: 'CANCELAR',
+        reverseButtons: true,
+        confirmButtonText: 'ACEPTAR',
+        confirmButtonColor: '#E01212',
+        closeOnConfirm: false,
+        showLoaderOnConfirm: true,
+        allowOutsideClick: false,
+        preConfirm: function () {
+            EliminarFormAcademica(ID_FromAcademica);
+        }
+    });
+}
+
+function EliminarFormAcademica(ID_FromAcademica) {
+    var par = "{\"ID\":\"" + ID_FromAcademica + "\"}";
+
+    var payload = { cadena: par };
+
+    $.ajax({
+        type: "POST",
+        "url": "FrmMiPerfil.aspx/EliminarFormAcademica",
+        data: JSON.stringify(payload),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+
+            var json = $.parseJSON(data.d);
+            var status = json.Status;
+
+            if (status == 200) {
+                swal('',
+                    'Formación académica eliminada con éxito',
+                    'success',
+                    'CONTINUAR',
+                ).then(function () {
+                    cargarFormAcademica();
+                })
+            } else if (status = 401) {
+                swal('', 'Ocurrió un error', 'warning');
+            }
+        },
+        error: function (xmlHttpRequest, textStatus, errorThrown) {
+            console.log(xmlHttpRequest.responseText);
+            console.log(textStatus);
+            console.log(errorThrown);
+
+        },
+        beforeSend: function () {
+        },
+        complete: function () {
+            $(".se-pre-con").fadeOut("slow");
+        }
+    })
 }
 
 
@@ -806,6 +1106,154 @@ function agregarCurso() {
             }
         })
     }
+}
+
+function cargarCurso() {
+    var Email = $("#txtEmail").val();
+
+    var parametro = { Email };
+    var Json = { cadena: JSON.stringify(parametro) };
+
+    $.ajax({
+        type: "POST",
+        "url": "FrmMiPerfil.aspx/CargarCurso",
+        data: JSON.stringify(Json),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+
+            var json = $.parseJSON(data.d);
+            var status = json.Status;
+
+            if (status == 200) {
+                $('#DivC').empty();
+                if (json.Data.length > 0) {
+                    $('#TituloC').html("MIS CURSOS");
+                    for (var i = 0; i < json.Data.length; i++) {
+                        if (i == 0) {
+                            $('#DivC').append(`<div class= "row" style="margin-bottom: 15px; width: 100%;">
+                            <div class= "col-md-3" style="display: flex; flex-direction: column;">
+                                <p>Curso</p>
+                                <span>${json.Data[i].Curso}</span>
+                            </div>
+                            <div class="col-md-3" style="display: flex; flex-direction: column;">
+                                <p>Institución</p>
+                                <span>${json.Data[i].Institucion}</span>
+                            </div>
+                            <div class="col-md-2" style="display: flex; flex-direction: column;">
+                                <p>Modificar</p>
+                                <a href="${json.Data[i].urlMod}" class="btn-success" style="border-radius: 5px; color: #fff; border: 1px solid #218838; text-decoration: none; text-align: center;">
+                                Modificar
+                                </a>
+                            </div>
+                            <div class="col-md-2" style="display: flex; flex-direction: column;">
+                                <p>Eliminar</p>
+                                <button type="button" onclick="ValidarEliminarCurso(${json.Data[i].ID_Curso})" class="btn-danger" style="border-radius: 5px; color: #fff; border: 1px solid #dc3545;">
+                                Eliminar
+                                </button>
+                            </div>
+                            <hr style="width: 100%;">`
+                            );
+                        } else {
+                            $('#DivC').append(`<div class= "row" style="margin-bottom: 15px; width: 100%;">
+                            <div class= "col-md-3">
+                                <span>${json.Data[i].Curso}</span>
+                            </div>
+                            <div class="col-md-3">
+                                <span>${json.Data[i].Institucion}</span>
+                            </div>
+                            <div class="col-md-2" style="display: flex; flex-direction: column;">
+                                <a href="${json.Data[i].urlMod}" class="btn-success" style="border-radius: 5px; color: #fff; border: 1px solid #218838; text-decoration: none; text-align: center;">
+                                Modificar
+                                </a>
+                            </div>
+                            <div class="col-md-2" style="display: flex; flex-direction: column;">
+                                <button type="button" onclick="ValidarEliminarCurso(${json.Data[i].ID_Curso})" class="btn-danger" style="border-radius: 5px; color: #fff; border: 1px solid #dc3545;">
+                                Eliminar
+                                </button>
+                            </div>
+                            <hr style="width: 100%;">`
+                            );
+                        }
+
+                    }
+                }
+
+            }
+        },
+        error: function (xmlHttpRequest, textStatus, errorThrown) {
+            console.log(xmlHttpRequest.responseText);
+            console.log(textStatus);
+            console.log(errorThrown);
+
+        },
+        beforeSend: function () {
+
+        },
+        complete: function () {
+
+        }
+    })
+}
+
+function ValidarEliminarCurso(ID_Curso) {
+    swal({
+        title: "¿Estás seguro/a de eliminar el curso?",
+        type: "question",
+        showCancelButton: true,
+        cancelButtonText: 'CANCELAR',
+        reverseButtons: true,
+        confirmButtonText: 'ACEPTAR',
+        confirmButtonColor: '#E01212',
+        closeOnConfirm: false,
+        showLoaderOnConfirm: true,
+        allowOutsideClick: false,
+        preConfirm: function () {
+            EliminarCurso(ID_Curso);
+        }
+    });
+}
+
+function EliminarCurso(ID_Curso) {
+    var par = "{\"ID_Curso\":\"" + ID_Curso + "\"}";
+
+    var payload = { cadena: par };
+
+    $.ajax({
+        type: "POST",
+        "url": "FrmMiPerfil.aspx/EliminarCurso",
+        data: JSON.stringify(payload),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function (data) {
+
+            var json = $.parseJSON(data.d);
+            var status = json.Status;
+
+            if (status == 200) {
+                swal('',
+                    'Curso eliminado con éxito',
+                    'success',
+                    'CONTINUAR',
+                ).then(function () {
+                    cargarCurso();
+                })
+            } else if (status = 401) {
+                swal('', 'Ocurrió un error', 'warning');
+            }
+        },
+        error: function (xmlHttpRequest, textStatus, errorThrown) {
+            console.log(xmlHttpRequest.responseText);
+            console.log(textStatus);
+            console.log(errorThrown);
+
+        },
+        beforeSend: function () {
+        },
+        complete: function () {
+            $(".se-pre-con").fadeOut("slow");
+        }
+    })
 }
 
 
@@ -1077,4 +1525,89 @@ function ActualizarCampos() {
     $("#TxtDatosRef").val() = '';
     $("#TxtRefCoov").val() = '';
     $("#cboSecciones").val() = 'SELECCIONAR';
+}
+
+
+//GRAFICO
+function cargarDatosUsuario() {
+    var Email = $('#txtEmail').val();
+    var par = { Email: Email };
+    var payload = { cadena: JSON.stringify(par) };
+
+    $.ajax({
+        type: "POST",
+        "url": "FrmMiPerfil.aspx/CargarDatosUsuario",
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(payload),
+        dataType: "json",
+        success: function (data) {
+
+            var json = $.parseJSON(data.d);
+            var status = json.Status;
+            var grafico = json.Grafico
+            var porcentajeClass = json.PorcentajeClass
+            var porcentaje = json.Porcentaje
+
+            if (status == 200) {
+                //CARGO VALORES PARA EL GRAFICO
+                $('#UserPerfil').empty();
+                $('#porcentaje').empty();
+
+                $('#UserPerfil').append(grafico);
+                $('#UserPerfil').css('color', '#495057');
+
+                $('#porcentajeClass').addClass(porcentajeClass);
+                $('#porcentaje').append(porcentaje);
+
+                if (json.Resultado == 100) {
+                    $('#btnModal').hide();
+                } else {
+                    $('#btnModal').show();
+                }
+
+                //CARGO DATOS EN LOS INPUTS
+                $("#srcFoto").text(json.srcFoto);
+                $("#ImgPersonal").attr("src", json.ImgPersonal);
+                $("#TxtCalle").val(json.TxtCalle);
+                $("#TxtCuil").val(json.TxtCuil);
+                $("#TxtDepto").val(json.TxtDepto);
+                $("#TxtNumeroCalle").val(json.TxtNumeroCalle);
+                $("#TxtPiso").val(json.TxtPiso);
+                $("#TxtTelefonoFijo").val(json.TxtTelefonoFijo);
+                $("#TxtTelefonMovil").val(json.TxtTelefonMovil);
+                $("#CboTipoDoc").val(json.CboTipoDoc);
+                $("#CboNivelFormacion").val(json.CboNivelFormacion);
+                $("#TxtFechaNac").val(json.TxtFechaNac);
+                $("#CboNacionalidad").val(json.CboNacionalidad);
+                $("#CboLocalidad").val(json.CboLocalidad);
+                $("#TxtNumeroDoc").val(json.TxtNumeroDoc);
+                $("#CboEstadoCivil").val(json.CboEstadoCivil);
+                $("#CboSexo").val(json.CboSexo);
+
+                if (json.TxtNumeroDoc != "") {
+                    $('#bienvenida').hide()
+                } else {
+                    $('#bienvenida').show()
+                }
+
+                if (json.SeccionTrabajar != "") {
+                    $('#cboSecciones').attr('disabled', 'disabled');
+                } else {
+                    $('#cboSecciones').removeAttr("disabled");
+                }
+
+            } else {
+                (status == 400)
+            }
+        },
+        error: function (xmlHttpRequest, textStatus, errorThrown) {
+            console.log(xmlHttpRequest.responseText);
+            console.log(textStatus);
+            console.log(errorThrown);
+        },
+        beforeSend: function () {
+        },
+        complete: function () {
+        }
+    })
 }

@@ -274,15 +274,19 @@ Public Class PersonalLegajos
     End Function
 
     Public Function AntecedentesLaborales_EliminarPorIDyPorEmail(ID_AntecedentesLaborales As Integer, Email As String) As DataSet
-
         Try
-
             Return oDatabase.ExecuteDataSet("AntecedentesLaborales_EliminarPorIDyPorEmail", ID_AntecedentesLaborales, Email)
-
         Catch ex As System.Exception
             Throw ex
         End Try
+    End Function
 
+    Public Function AntecedentesLaborales_EliminarPorID(ID_AntecedentesLaborales As Integer) As DataSet
+        Try
+            Return oDatabase.ExecuteDataSet("AntecedentesLaborales_EliminarPorID", ID_AntecedentesLaborales)
+        Catch ex As System.Exception
+            Throw ex
+        End Try
     End Function
 
     Public Function Agregar_GrupoFamiliar(ID_PersonalLegajo As Integer, Apellido As String, Nombre As String, TipoFamiliar As String, Fecha_Alta As String, Ocupacion As String) As Double

@@ -54,15 +54,19 @@ Public Class Cursos
 
     End Function
     Public Function Eliminar(ByVal ID_Curso As Integer, ByVal ID_PersonalLegajo As Integer) As DataSet
-
         Try
-
             Return oDatabase.ExecuteDataSet("Cursos_Eliminar", ID_Curso, ID_PersonalLegajo)
-
         Catch ex As System.Exception
             Throw ex
         End Try
+    End Function
 
+    Public Function EliminarPorId(ByVal ID_Curso As Integer) As DataSet
+        Try
+            Return oDatabase.ExecuteDataSet("Cursos_EliminarPorId", ID_Curso)
+        Catch ex As System.Exception
+            Throw ex
+        End Try
     End Function
 
 End Class

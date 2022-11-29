@@ -410,22 +410,13 @@ Partial Public Class FrmMiPerfil
     Protected WithEvents cboSecciones As Global.System.Web.UI.HtmlControls.HtmlSelect
 
     '''<summary>
-    '''Control MisReferencias.
+    '''Control TituloRL.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents MisReferencias As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
-    '''<summary>
-    '''Control Grilla.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents Grilla As Global.System.Web.UI.WebControls.GridView
+    Protected WithEvents TituloRL As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''Control TxtID.
@@ -581,22 +572,13 @@ Partial Public Class FrmMiPerfil
     Protected WithEvents SubirRecibo As Global.System.Web.UI.WebControls.FileUpload
 
     '''<summary>
-    '''Control H1.
+    '''Control TituloFA.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents H1 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
-    '''<summary>
-    '''Control GrillaFA.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents GrillaFA As Global.System.Web.UI.WebControls.GridView
+    Protected WithEvents TituloFA As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''Control TextBox6.
@@ -671,22 +653,13 @@ Partial Public Class FrmMiPerfil
     Protected WithEvents TxtComentarios As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''Control H2.
+    '''Control TituloC.
     '''</summary>
     '''<remarks>
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents H2 As Global.System.Web.UI.HtmlControls.HtmlGenericControl
-
-    '''<summary>
-    '''Control GrillaCurso.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents GrillaCurso As Global.System.Web.UI.WebControls.GridView
+    Protected WithEvents TituloC As Global.System.Web.UI.HtmlControls.HtmlGenericControl
 
     '''<summary>
     '''Control TextBox7.

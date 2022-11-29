@@ -54,15 +54,20 @@ Public Class FormacionAcademica
 
 
     Public Function Elimiar(ID_FormacionAcademica As Integer, ID_PersonalLegajo As Integer) As DataSet
-
         Try
-
             Return oDatabase.ExecuteDataSet("FormacionAcademica_Eliminar", ID_FormacionAcademica, ID_PersonalLegajo)
-
         Catch ex As System.Exception
             Throw ex
         End Try
+    End Function
 
+
+    Public Function ElimiarPorId(ID_FormacionAcademica As Integer) As DataSet
+        Try
+            Return oDatabase.ExecuteDataSet("FormacionAcademica_EliminarPorId", ID_FormacionAcademica)
+        Catch ex As System.Exception
+            Throw ex
+        End Try
     End Function
 
     Public Function ModificarArchivoAjunto(ID_FormacionAcademica As Integer, Archivo As String) As DataSet

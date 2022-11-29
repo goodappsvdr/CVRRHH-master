@@ -24,11 +24,6 @@ Public Class FrmMiPerfil
             Dim email As String = GalletaEmail.Values("nombre")
             txtEmail.Text = email
 
-            CargarGrilla()
-            'CargarGrillaGrupoFamiliar()
-            CargarGrillaFormacionAcademica()
-            CargarGrillaCursos()
-            CargaDatosUsuarios()
             CargarLocalidades()
             CargarTipoDNI()
             CargarCboNivelFormacion()
@@ -64,126 +59,6 @@ Public Class FrmMiPerfil
                     Dim ID_PersonalLegajo As Integer = ods.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
                 End If
             End If
-
-        End If
-    End Sub
-
-    Private Sub CargarGrilla()
-        Dim PruebaGalleta As HttpCookie
-        PruebaGalleta = Request.Cookies("datos")
-
-        'aca valido si hay cookies
-        If PruebaGalleta Is Nothing Then
-
-        Else
-            Dim Galleta As HttpCookie
-            Galleta = Request.Cookies("datos")
-
-            Dim ods2 As New DataSet
-            Dim oobjeto2 As New PersonalLegajos
-
-            Dim name As String = Galleta.Values("nombre")
-            Dim IdUser As String = Galleta.Values("userid")
-            ods2 = oobjeto2.BuscarDatosDeUsuarioPorEmail(name)
-
-            Grilla.DataSource = ods2.Tables(1)
-            Grilla.DataBind()
-
-            For Each row As GridViewRow In Grilla.Rows
-                Dim ods3 As New DataSet
-                Dim oobjeto3 As New PersonalLegajos
-
-                ods3 = oobjeto3.BuscarDatosDeUsuarioPorEmail(name)
-
-                If ods3.Tables(1).Rows.Count > 0 Then
-                    MisReferencias.InnerHtml = "MIS DATOS LABORALES"
-                End If
-                For i = 0 To ods3.Tables(1).Rows.Count - 1
-                    row.Cells(3).Attributes("Style") = "display:none"
-                    row.Cells(6).Attributes("Style") = "display:none"
-                    row.Cells(7).Attributes("Style") = "display:none"
-                    row.Cells(0).Attributes("Style") = "display:none"
-                Next
-            Next
-        End If
-    End Sub
-
-    Private Sub CargarGrillaFormacionAcademica()
-        Dim PruebaGalleta As HttpCookie
-        PruebaGalleta = Request.Cookies("datos")
-
-        'aca valido si hay cookies
-        If PruebaGalleta Is Nothing Then
-
-        Else
-            Dim Galleta As HttpCookie
-            Galleta = Request.Cookies("datos")
-
-            Dim ods2 As New DataSet
-            Dim oobjeto2 As New PersonalLegajos
-
-            Dim name As String = Galleta.Values("nombre")
-            Dim IdUser As String = Galleta.Values("userid")
-            ods2 = oobjeto2.BuscarDatosDeUsuarioPorEmail(name)
-
-            GrillaFA.DataSource = ods2.Tables(3)
-            GrillaFA.DataBind()
-
-            For Each row As GridViewRow In GrillaFA.Rows
-                Dim ods3 As New DataSet
-                Dim oobjeto3 As New PersonalLegajos
-
-                ods3 = oobjeto3.BuscarDatosDeUsuarioPorEmail(name)
-
-                If ods3.Tables(3).Rows.Count > 0 Then
-                    TituloGF.InnerHtml = "MIS DATOS ACADEMICOS"
-                Else
-                    TituloGF.InnerHtml = ""
-                End If
-                For i = 0 To ods3.Tables(3).Rows.Count - 1
-                    row.Cells(0).Attributes("Style") = "display:none"
-                Next
-            Next
-        End If
-    End Sub
-
-    Private Sub CargarGrillaCursos()
-
-        Dim PruebaGalleta As HttpCookie
-        PruebaGalleta = Request.Cookies("datos")
-
-        'aca valido si hay cookies
-        If PruebaGalleta Is Nothing Then
-
-        Else
-            Dim Galleta As HttpCookie
-            Galleta = Request.Cookies("datos")
-
-            Dim ods2 As New DataSet
-            Dim oobjeto2 As New PersonalLegajos
-
-            Dim name As String = Galleta.Values("nombre")
-            Dim IdUser As String = Galleta.Values("userid")
-            ods2 = oobjeto2.BuscarDatosDeUsuarioPorEmail(name)
-
-            GrillaCurso.DataSource = ods2.Tables(4)
-            GrillaCurso.DataBind()
-
-            For Each row As GridViewRow In GrillaCurso.Rows
-                Dim ods3 As New DataSet
-                Dim oobjeto3 As New PersonalLegajos
-
-                ods3 = oobjeto3.BuscarDatosDeUsuarioPorEmail(name)
-
-                If ods3.Tables(4).Rows.Count > 0 Then
-                    TituloGF.InnerHtml = "MIS CURSOS"
-                Else
-                    TituloGF.InnerHtml = ""
-                End If
-                For i = 0 To ods3.Tables(4).Rows.Count - 1
-                    row.Cells(0).Attributes("Style") = "display:none"
-                Next
-            Next
 
         End If
     End Sub
@@ -267,116 +142,6 @@ Public Class FrmMiPerfil
         ComboPrentezco.DataBind()
     End Sub
 #End Region
-
-    Private Sub CargaDatosUsuarios()
-        'If User.Identity.IsAuthenticated = True Then
-        Dim PruebaGalleta As HttpCookie
-        PruebaGalleta = Request.Cookies("datos")
-
-        'aca valido si hay cookies
-        If PruebaGalleta Is Nothing Then
-
-        Else
-            Dim Galleta As HttpCookie
-            Galleta = Request.Cookies("datos")
-
-            Dim ods As New DataSet
-            Dim oobjeto As New PersonalLegajos
-
-            Dim name As String = Galleta.Values("nombre")
-            'Dim pass As String = Galleta.Values("pass")
-            Dim IdUser As String = Galleta.Values("userid")
-            ods = oobjeto.BuscarDatosDeUsuarioPorEmail(name)
-
-            If ods.Tables(0).Rows.Count > 0 Then
-                Dim Nombre As String = ods.Tables(0).Rows(0).Item("Nombre").ToString
-                Dim Apellido As String = ods.Tables(0).Rows(0).Item("Apellido").ToString
-                Dim ID_PersonalLegajo As Integer = ods.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
-
-                Dim odsNew As New DataSet
-                Dim ObjNew As New PersonalLegajos
-                odsNew = ObjNew.Postulantes_BuscarDatosCargadosParaProgressBar(ID_PersonalLegajo)
-
-                Dim TotalRedes As Integer = odsNew.Tables(0).Rows.Count
-                Dim TotalAntLab As Integer = odsNew.Tables(1).Rows.Count
-                Dim TotalNumDoc As Integer = odsNew.Tables(2).Rows(0).Item("NroDocumento")
-                Dim TotalFoto As Integer = odsNew.Tables(3).Rows(0).Item("Foto")
-                Dim TotalFormAca As Integer = odsNew.Tables(4).Rows.Count
-                Dim TotalCurso As Integer = odsNew.Tables(5).Rows.Count
-                Dim TotalAntecedentes As Integer = odsNew.Tables(6).Rows.Count
-                Dim TotalCurriculum As Integer = odsNew.Tables(7).Rows.Count
-
-                If TotalNumDoc = 0 Then
-                    TotalNumDoc = 0
-                Else
-                    TotalNumDoc = odsNew.Tables(2).Rows.Count
-                End If
-
-                If TotalFoto = 0 Then
-                    TotalFoto = 0
-                Else
-                    TotalFoto = odsNew.Tables(3).Rows.Count
-                End If
-
-                Dim TotalAlcanzado As Integer = TotalRedes + TotalAntLab + TotalNumDoc + TotalFoto + TotalFormAca + TotalCurso + TotalAntecedentes + TotalCurriculum
-                Dim TotalPermitido As Integer = 8
-                Dim Resultado As Integer = TotalAlcanzado * 100 / TotalPermitido
-
-                If TotalAlcanzado < 1 Then
-                    UserPerfil.InnerHtml = "<span style='font-weight:600;font-size:20px !important'>Hola " & Nombre & "!</span><p class='quitarpuntolista'> Completá los datos requeridos(*) por favor</p>"
-                Else
-                    UserPerfil.InnerHtml = "<span style='font-weight:600;font-size:20px !important'>Hola " & Nombre & "!</span><p class='quitarpuntolista'> Tu CV está cargado al </p>"
-                End If
-
-                porcentaje.InnerHtml = Resultado & "%"
-                porcentajeClass.Attributes("class") = "c100 p" & Resultado
-                UserPerfil.Style.Add("color", "#495057")
-
-                txtPorcentaje.Text = Resultado
-
-                If Resultado = 100 Then
-                    btnModal.Visible = False
-                End If
-
-                TituloPaginaWeb.Text = "CV " & Nombre & " " & Apellido
-                srcFoto.InnerHtml = ods.Tables(0).Rows(0).Item("Foto").ToString
-                ImgPersonal.Src = ods.Tables(0).Rows(0).Item("Foto").ToString
-                TxtCalle.Value = ods.Tables(0).Rows(0).Item("Calle").ToString
-                TxtCuil.Value = ods.Tables(0).Rows(0).Item("Cuil").ToString
-                TxtDepto.Value = ods.Tables(0).Rows(0).Item("Depto").ToString
-                TxtNumeroCalle.Value = ods.Tables(0).Rows(0).Item("Nro").ToString
-                TxtPiso.Value = ods.Tables(0).Rows(0).Item("Piso").ToString
-                TxtTelefonoFijo.Value = ods.Tables(0).Rows(0).Item("Telefono").ToString
-                TxtTelefonMovil.Value = ods.Tables(0).Rows(0).Item("Movil").ToString
-                CboTipoDoc.SelectedValue = ods.Tables(0).Rows(0).Item("ID_DocumentoTipo").ToString
-                CboNivelFormacion.SelectedValue = ods.Tables(0).Rows(0).Item("ID_NivelFormacion").ToString
-                TxtFechaNac.Text = ods.Tables(0).Rows(0).Item("Nacimiento").ToString
-                CboNacionalidad.SelectedValue = ods.Tables(0).Rows(0).Item("ID_Nacionalidad").ToString
-                CboLocalidad.SelectedValue = ods.Tables(0).Rows(0).Item("ID_Localidad").ToString
-                TxtNumeroDoc.Value = ods.Tables(0).Rows(0).Item("NroDocumento").ToString
-                CboEstadoCivil.SelectedValue = ods.Tables(0).Rows(0).Item("ID_EstadoCivil").ToString
-                CboSexo.SelectedValue = ods.Tables(0).Rows(0).Item("Sexo").ToString
-
-                Dim ods2 As New DataSet
-                Dim obj2 As New SeccionTrabajar
-                ods2 = obj2.BuscarPorId_Legajo(ID_PersonalLegajo)
-                If ods2.Tables(0).Rows.Count > 0 Then
-                    cboSecciones.Value = ods2.Tables(0).Rows(0).Item("Descripcion")
-                    cboSecciones.Disabled = True
-                Else
-
-                End If
-
-            End If
-
-            If TxtNumeroDoc.Value <> "" Then
-                bienvenida.Visible = False
-            Else
-                bienvenida.Visible = True
-            End If
-
-        End If
-    End Sub
 
     Protected Sub CerrarSesion(sender As Object, e As EventArgs)
         Dim Galleta As HttpCookie
@@ -563,24 +328,6 @@ Public Class FrmMiPerfil
         End If
     End Sub
 
-    Private Sub Grilla_RowCreated(sender As Object, e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles Grilla.RowCreated
-        e.Row.Cells(6).Visible = False
-        e.Row.Cells(7).Visible = False
-        e.Row.Cells(0).Visible = False
-    End Sub
-
-    Private Sub GrillaFA_RowCreated(sender As Object, e As GridViewRowEventArgs) Handles GrillaFA.RowCreated
-        e.Row.Cells(5).Visible = False
-        e.Row.Cells(6).Visible = False
-        e.Row.Cells(0).Visible = False
-    End Sub
-
-    Private Sub GrillaCurso_RowCreated(sender As Object, e As GridViewRowEventArgs) Handles GrillaCurso.RowCreated
-        e.Row.Cells(5).Visible = False
-        e.Row.Cells(6).Visible = False
-        e.Row.Cells(0).Visible = False
-    End Sub
-
     Private Sub irAPerfil_ServerClick(sender As Object, e As System.EventArgs) Handles irAPerfil.ServerClick
         Dim PruebaGalleta As HttpCookie
         PruebaGalleta = Request.Cookies("datos")
@@ -645,7 +392,221 @@ Public Class FrmMiPerfil
     End Sub
 
     'WEB METHODS
-#Region "BUSCAR USER ID"
+#Region "BUSCAR DATOS DEL USUARIO + GRAFICO"
+    <WebMethod()>
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    Public Shared Function CargarDatosUsuario(ByVal cadena As String) As String
+        Try
+            Dim jss As New JavaScriptSerializer()
+            Dim dict = jss.Deserialize(Of List(Of DatosPersonalesWs))("[" & cadena & "]")
+
+            Dim Email As String = Convert.ToString(dict(0).Email)
+
+            Dim ods As New DataSet
+            Dim oObjeto As New PersonalLegajos
+
+            ods = oObjeto.BuscarDatosDeUsuarioPorEmail(Email)
+
+            If ods.Tables(0).Rows.Count > 0 Then
+                Dim Nombre As String = ods.Tables(0).Rows(0).Item("Nombre").ToString
+                Dim Apellido As String = ods.Tables(0).Rows(0).Item("Apellido").ToString
+                Dim ID_PersonalLegajo As Integer = ods.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
+                Dim UserId As String = ods.Tables(0).Rows(0).Item("Userid").ToString
+
+                Dim ods2 As New DataSet
+                Dim Obj2 As New PersonalLegajos
+                ods2 = Obj2.Postulantes_BuscarDatosCargadosParaProgressBar(ID_PersonalLegajo)
+
+                'CARGO VALORES PARA EL GRAFICO DE PORCENTAJES
+                Dim TotalRedes As Integer = ods2.Tables(0).Rows.Count
+                Dim TotalAntLab As Integer = ods2.Tables(1).Rows.Count
+                Dim TotalNumDoc As Integer = ods2.Tables(2).Rows(0).Item("NroDocumento")
+                Dim TotalFoto As Integer = ods2.Tables(3).Rows(0).Item("Foto")
+                Dim TotalFormAca As Integer = ods2.Tables(4).Rows.Count
+                Dim TotalCurso As Integer = ods2.Tables(5).Rows.Count
+                Dim TotalAntecedentes As Integer = ods2.Tables(6).Rows.Count
+                Dim TotalCurriculum As Integer = ods2.Tables(7).Rows.Count
+
+                If TotalNumDoc = 0 Then
+                    TotalNumDoc = 0
+                Else
+                    TotalNumDoc = ods2.Tables(2).Rows.Count
+                End If
+                If TotalFoto = 0 Then
+                    TotalFoto = 0
+                Else
+                    TotalFoto = ods2.Tables(3).Rows.Count
+                End If
+
+                Dim TotalAlcanzado As Integer = TotalRedes + TotalAntLab + TotalNumDoc + TotalFoto + TotalFormAca + TotalCurso + TotalAntecedentes + TotalCurriculum
+                Dim TotalPermitido As Integer = 8
+                Dim Resultado As Integer = TotalAlcanzado * 100 / TotalPermitido
+                Dim Grafico As String
+                If TotalAlcanzado < 1 Then
+                    Grafico = "<span style='font-weight:600;font-size:20px !important'>Hola " & Nombre & "!</span><p class='quitarpuntolista'> Completá los datos requeridos(*) por favor</p>"
+                Else
+                    Grafico = "<span style='font-weight:600;font-size:20px !important'>Hola " & Nombre & "!</span><p class='quitarpuntolista'> Tu CV está cargado al </p>"
+                End If
+
+                Dim Porcentaje = Resultado & "%"
+                Dim PorcentajeClass = "c100 p" & Resultado
+
+                'AHORA CARGO LOS CAMPOS DE LOS INPUTS
+                Dim TituloPaginaWeb = "CV " & Nombre & " " & Apellido
+                Dim srcFoto = ods.Tables(0).Rows(0).Item("Foto").ToString
+                Dim ImgPersonal = ods.Tables(0).Rows(0).Item("Foto").ToString
+                Dim TxtCalle = ods.Tables(0).Rows(0).Item("Calle").ToString
+                Dim TxtCuil = ods.Tables(0).Rows(0).Item("Cuil").ToString
+                Dim TxtDepto = ods.Tables(0).Rows(0).Item("Depto").ToString
+                Dim TxtNumeroCalle = ods.Tables(0).Rows(0).Item("Nro").ToString
+                Dim TxtPiso = ods.Tables(0).Rows(0).Item("Piso").ToString
+                Dim TxtTelefonoFijo = ods.Tables(0).Rows(0).Item("Telefono").ToString
+                Dim TxtTelefonMovil = ods.Tables(0).Rows(0).Item("Movil").ToString
+                Dim CboTipoDoc = ods.Tables(0).Rows(0).Item("ID_DocumentoTipo").ToString
+                Dim CboNivelFormacion = ods.Tables(0).Rows(0).Item("ID_NivelFormacion").ToString
+                Dim TxtFechaNac = ods.Tables(0).Rows(0).Item("Nacimiento").ToString
+                Dim CboNacionalidad = ods.Tables(0).Rows(0).Item("ID_Nacionalidad").ToString
+                Dim CboLocalidad = ods.Tables(0).Rows(0).Item("ID_Localidad").ToString
+                Dim TxtNumeroDoc = ods.Tables(0).Rows(0).Item("NroDocumento").ToString
+                Dim CboEstadoCivil = ods.Tables(0).Rows(0).Item("ID_EstadoCivil").ToString
+                Dim CboSexo = ods.Tables(0).Rows(0).Item("Sexo").ToString
+
+                Dim ods3 As New DataSet
+                Dim obj3 As New SeccionTrabajar
+                Dim SeccionTrabajar As String
+                ods3 = obj3.BuscarPorId_Legajo(ID_PersonalLegajo)
+                If ods3.Tables(0).Rows.Count > 0 Then
+                    SeccionTrabajar = ods3.Tables(0).Rows(0).Item("Descripcion")
+                Else
+                End If
+
+                Dim data = New With {
+                    Key .Status = "200",
+                    Key .Grafico = Grafico,
+                    Key .Porcentaje = Porcentaje,
+                    Key .PorcentajeClass = PorcentajeClass,
+                    Key .Resultado = Resultado,
+                    Key .srcFoto = srcFoto,
+                    Key .ImgPersonal = ImgPersonal,
+                    Key .TxtCalle = TxtCalle,
+                    Key .TxtCuil = TxtCuil,
+                    Key .TxtDepto = TxtDepto,
+                    Key .TxtNumeroCalle = TxtNumeroCalle,
+                    Key .TxtPiso = TxtPiso,
+                    Key .TxtTelefonoFijo = TxtTelefonoFijo,
+                    Key .TxtTelefonMovil = TxtTelefonMovil,
+                    Key .CboTipoDoc = CboTipoDoc,
+                    Key .CboNivelFormacion = CboNivelFormacion,
+                    Key .TxtFechaNac = TxtFechaNac,
+                    Key .CboNacionalidad = CboNacionalidad,
+                    Key .CboLocalidad = CboLocalidad,
+                    Key .TxtNumeroDoc = TxtNumeroDoc,
+                    Key .CboEstadoCivil = CboEstadoCivil,
+                    Key .CboSexo = CboSexo,
+                    Key .SeccionTrabajar = SeccionTrabajar
+                }
+
+                Dim serializer = New JavaScriptSerializer()
+                Dim json = serializer.Serialize(data)
+                Return New JavaScriptSerializer().Serialize(data)
+            Else
+                Return Error401()
+            End If
+
+        Catch ex As Exception
+            Return Error401()
+        End Try
+    End Function
+
+    <WebMethod()>
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    Public Shared Function BuscarDatosFaltantes(ByVal cadena As String) As String
+        Try
+            Dim jss As New JavaScriptSerializer()
+            Dim dict = jss.Deserialize(Of List(Of DatosPersonalesWs))("[" & cadena & "]")
+
+            Dim Email As String = Convert.ToString(dict(0).Email)
+
+            Dim ods As New DataSet
+            Dim oObjeto As New PersonalLegajos
+
+            ods = oObjeto.BuscarDatosDeUsuarioPorEmail(Email)
+
+            If ods.Tables(0).Rows.Count > 0 Then
+                Dim ID_PersonalLegajo As String = ods.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
+                Dim UserId As String = ods.Tables(0).Rows(0).Item("Userid").ToString
+
+                Dim ods2 As New DataSet
+                ods2 = oObjeto.Postulantes_BuscarDatosCargadosParaProgressBar(ID_PersonalLegajo)
+
+                Dim TotalRedes As Integer = ods2.Tables(0).Rows.Count
+                Dim TotalAntLab As Integer = ods2.Tables(1).Rows.Count
+                Dim TotalNumDoc As Integer = ods2.Tables(2).Rows(0).Item("NroDocumento")
+                Dim TotalFoto As Integer = ods2.Tables(3).Rows(0).Item("Foto")
+                Dim TotalFormAca As Integer = ods2.Tables(4).Rows.Count
+                Dim TotalCurso As Integer = ods2.Tables(5).Rows.Count
+                Dim TotalAntecedentes As Integer = ods2.Tables(6).Rows.Count
+                Dim TotalCurriculum As Integer = ods2.Tables(7).Rows.Count
+                If TotalNumDoc = 0 Then
+                    TotalNumDoc = 0
+                Else
+                    TotalNumDoc = ods2.Tables(2).Rows.Count
+                End If
+                If TotalFoto = 0 Then
+                    TotalFoto = 0
+                Else
+                    TotalFoto = ods2.Tables(3).Rows.Count
+                End If
+
+                Dim contenido As String = "<p>Te faltan cargar datos en los siguientes módulos:</p>"
+                If TotalNumDoc = 0 And TotalFoto = 0 Then
+                    contenido += "<p>Datos personales</p>"
+                ElseIf TotalNumDoc = 0 Then
+                    contenido += "<p>Datos personales</p>"
+                ElseIf TotalFoto = 0 Then
+                    contenido += "<p>Datos personales</p>"
+                End If
+                If TotalRedes = 0 Then
+                    contenido += "<p>Redes sociales</p>"
+                End If
+                If TotalAntLab = 0 Then
+                    contenido += "<p>Antecedentes laborales</p>"
+                End If
+
+                If TotalFormAca = 0 Then
+                    contenido += "<p>Formación academica</p>"
+                End If
+                If TotalCurso = 0 Then
+                    contenido += "<p>Cursos y seminarios</p>"
+                End If
+                If TotalAntecedentes = 0 Then
+                    contenido += "<p>Antecedentes de salud</p>"
+                End If
+                If TotalCurriculum = 0 Then
+                    contenido += "<p>Curriculum</p>"
+                End If
+
+                Dim data = New With {
+                    Key .Status = "200",
+                    Key .UserId = UserId,
+                    Key .Contenido = contenido
+                }
+
+                Dim serializer = New JavaScriptSerializer()
+                Dim json = serializer.Serialize(data)
+                Return New JavaScriptSerializer().Serialize(data)
+            Else
+                Return Error401()
+            End If
+
+        Catch ex As Exception
+            Return Error401()
+        End Try
+    End Function
+#End Region
+
+
+#Region "BUSCAR PARA VER SI COMPLETO TODOS LOS DATOS Y ENVIAR MAIL(POR AHORA NO MANDO)"
     <WebMethod()>
     <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
     Public Shared Function BuscarUserId(ByVal cadena As String) As String
@@ -753,92 +714,6 @@ Public Class FrmMiPerfil
             Dim serializer = New JavaScriptSerializer()
             Dim json = serializer.Serialize(data)
             Return New JavaScriptSerializer().Serialize(data)
-        Catch ex As Exception
-            Return Error401()
-        End Try
-    End Function
-
-    <WebMethod()>
-    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
-    Public Shared Function BuscarDatosFaltantes(ByVal cadena As String) As String
-        Try
-            Dim jss As New JavaScriptSerializer()
-            Dim dict = jss.Deserialize(Of List(Of DatosPersonalesWs))("[" & cadena & "]")
-
-            Dim Email As String = Convert.ToString(dict(0).Email)
-
-            Dim ods As New DataSet
-            Dim oObjeto As New PersonalLegajos
-
-            ods = oObjeto.BuscarDatosDeUsuarioPorEmail(Email)
-
-            If ods.Tables(0).Rows.Count > 0 Then
-                Dim ID_PersonalLegajo As String = ods.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
-                Dim UserId As String = ods.Tables(0).Rows(0).Item("Userid").ToString
-
-                Dim ods2 As New DataSet
-                ods2 = oObjeto.Postulantes_BuscarDatosCargadosParaProgressBar(ID_PersonalLegajo)
-
-                Dim TotalRedes As Integer = ods2.Tables(0).Rows.Count
-                Dim TotalAntLab As Integer = ods2.Tables(1).Rows.Count
-                Dim TotalNumDoc As Integer = ods2.Tables(2).Rows(0).Item("NroDocumento")
-                Dim TotalFoto As Integer = ods2.Tables(3).Rows(0).Item("Foto")
-                Dim TotalFormAca As Integer = ods2.Tables(4).Rows.Count
-                Dim TotalCurso As Integer = ods2.Tables(5).Rows.Count
-                Dim TotalAntecedentes As Integer = ods2.Tables(6).Rows.Count
-                Dim TotalCurriculum As Integer = ods2.Tables(7).Rows.Count
-                If TotalNumDoc = 0 Then
-                    TotalNumDoc = 0
-                Else
-                    TotalNumDoc = ods2.Tables(2).Rows.Count
-                End If
-                If TotalFoto = 0 Then
-                    TotalFoto = 0
-                Else
-                    TotalFoto = ods2.Tables(3).Rows.Count
-                End If
-
-                Dim contenido As String = "<p>Te faltan cargar datos en los siguientes módulos:</p>"
-                If TotalNumDoc = 0 And TotalFoto = 0 Then
-                    contenido += "<p>Datos personales</p>"
-                ElseIf TotalNumDoc = 0 Then
-                    contenido += "<p>Datos personales</p>"
-                ElseIf TotalFoto = 0 Then
-                    contenido += "<p>Datos personales</p>"
-                End If
-                If TotalRedes = 0 Then
-                    contenido += "<p>Redes sociales</p>"
-                End If
-                If TotalAntLab = 0 Then
-                    contenido += "<p>Antecedentes laborales</p>"
-                End If
-
-                If TotalFormAca = 0 Then
-                    contenido += "<p>Formación academica</p>"
-                End If
-                If TotalCurso = 0 Then
-                    contenido += "<p>Cursos y seminarios</p>"
-                End If
-                If TotalAntecedentes = 0 Then
-                    contenido += "<p>Antecedentes de salud</p>"
-                End If
-                If TotalCurriculum = 0 Then
-                    contenido += "<p>Curriculum</p>"
-                End If
-
-                Dim data = New With {
-                    Key .Status = "200",
-                    Key .UserId = UserId,
-                    Key .Contenido = contenido
-                }
-
-                Dim serializer = New JavaScriptSerializer()
-                Dim json = serializer.Serialize(data)
-                Return New JavaScriptSerializer().Serialize(data)
-            Else
-                Return Error401()
-            End If
-
         Catch ex As Exception
             Return Error401()
         End Try
@@ -1222,6 +1097,72 @@ Public Class FrmMiPerfil
             Return Error401()
         End Try
     End Function
+
+    <WebMethod()>
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    Public Shared Function CargarRefLab(ByVal cadena As String) As String
+        Try
+
+            Dim jss As New JavaScriptSerializer()
+            Dim dict = jss.Deserialize(Of List(Of ReferenciasLaboralesWs))("[" & cadena & "]")
+
+            Dim username = Convert.ToString(dict(0).Email)
+
+            Dim ods As New DataSet
+            Dim oobjeto As New PersonalLegajos
+
+            ods = oobjeto.BuscarDatosDeUsuarioPorEmail(username)
+
+            Dim e As ReferenciasLaboralesWs() = New ReferenciasLaboralesWs(ods.Tables(1).Rows.Count - 1) {}
+
+            For i = 0 To ods.Tables(1).Rows.Count - 1
+                e(i) = New ReferenciasLaboralesWs()
+                e(i).ID = ods.Tables(1).Rows(i).Item("ID_Ant").ToString
+                e(i).Area = ods.Tables(1).Rows(i).Item("Area").ToString
+                e(i).Empresa = ods.Tables(1).Rows(i).Item("Empresa").ToString
+                e(i).urlMod = ods.Tables(1).Rows(i).Item("urlEditar").ToString
+            Next
+
+            Dim data = New With {
+                Key .Status = "200",
+                Key .Data = e
+            }
+
+            Dim serializer = New JavaScriptSerializer()
+            Dim json = serializer.Serialize(data)
+            Return New JavaScriptSerializer().Serialize(data)
+        Catch ex As Exception
+            Return Error401()
+        End Try
+    End Function
+
+    <WebMethod()>
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    Public Shared Function EliminarRefLab(ByVal cadena As String) As String
+        Try
+
+            Dim jss As New JavaScriptSerializer()
+            Dim dict = jss.Deserialize(Of List(Of ReferenciasLaboralesWs))("[" & cadena & "]")
+
+            Dim ID_ReferenciaLaboral As String
+            ID_ReferenciaLaboral = Convert.ToString(dict(0).ID)
+
+            Dim ods As New DataSet
+            Dim oObjeto As New PersonalLegajos
+
+            ods = oObjeto.AntecedentesLaborales_EliminarPorID(ID_ReferenciaLaboral)
+
+            Dim data = New With {
+                Key .Status = "200"
+            }
+
+            Dim serializer = New JavaScriptSerializer()
+            Dim json = serializer.Serialize(data)
+            Return New JavaScriptSerializer().Serialize(data)
+        Catch ex As Exception
+            Return Error401()
+        End Try
+    End Function
 #End Region
 
 #Region "FORMACION ACADEMICA"
@@ -1338,6 +1279,72 @@ Public Class FrmMiPerfil
                 Return Error401("Error en el tipo de base 64")
             End If
 
+        Catch ex As Exception
+            Return Error401()
+        End Try
+    End Function
+
+    <WebMethod()>
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    Public Shared Function CargarFormAcademica(ByVal cadena As String) As String
+        Try
+
+            Dim jss As New JavaScriptSerializer()
+            Dim dict = jss.Deserialize(Of List(Of FormacionAcademicaWs))("[" & cadena & "]")
+
+            Dim username = Convert.ToString(dict(0).Email)
+
+            Dim ods As New DataSet
+            Dim oobjeto As New PersonalLegajos
+
+            ods = oobjeto.BuscarDatosDeUsuarioPorEmail(username)
+
+            Dim e As FormacionAcademicaWs() = New FormacionAcademicaWs(ods.Tables(3).Rows.Count - 1) {}
+
+            For i = 0 To ods.Tables(3).Rows.Count - 1
+                e(i) = New FormacionAcademicaWs()
+                e(i).ID = ods.Tables(3).Rows(i).Item("ID_FormacionAcademica").ToString
+                e(i).Titulo = ods.Tables(3).Rows(i).Item("Título").ToString
+                e(i).Institucion = ods.Tables(3).Rows(i).Item("Institución").ToString
+                e(i).urlMod = ods.Tables(3).Rows(i).Item("urlEditar").ToString
+            Next
+
+            Dim data = New With {
+                Key .Status = "200",
+                Key .Data = e
+            }
+
+            Dim serializer = New JavaScriptSerializer()
+            Dim json = serializer.Serialize(data)
+            Return New JavaScriptSerializer().Serialize(data)
+        Catch ex As Exception
+            Return Error401()
+        End Try
+    End Function
+
+    <WebMethod()>
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    Public Shared Function EliminarFormAcademica(ByVal cadena As String) As String
+        Try
+
+            Dim jss As New JavaScriptSerializer()
+            Dim dict = jss.Deserialize(Of List(Of FormacionAcademicaWs))("[" & cadena & "]")
+
+            Dim ID_FormacionAcademica As String
+            ID_FormacionAcademica = Convert.ToString(dict(0).ID)
+
+            Dim ods As New DataSet
+            Dim oObjeto As New FormacionAcademica
+
+            ods = oObjeto.ElimiarPorId(ID_FormacionAcademica)
+
+            Dim data = New With {
+                Key .Status = "200"
+            }
+
+            Dim serializer = New JavaScriptSerializer()
+            Dim json = serializer.Serialize(data)
+            Return New JavaScriptSerializer().Serialize(data)
         Catch ex As Exception
             Return Error401()
         End Try
@@ -1486,6 +1493,72 @@ Public Class FrmMiPerfil
             Dim ID_PersonalLegajo As Integer = ods1.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
 
             oObjeto2.Agregar(ID_PersonalLegajo, Desde, Hasta, NombreCurso, Areas, Horas, Institución, Comentarios)
+
+            Dim data = New With {
+                Key .Status = "200"
+            }
+
+            Dim serializer = New JavaScriptSerializer()
+            Dim json = serializer.Serialize(data)
+            Return New JavaScriptSerializer().Serialize(data)
+        Catch ex As Exception
+            Return Error401()
+        End Try
+    End Function
+
+    <WebMethod()>
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    Public Shared Function CargarCurso(ByVal cadena As String) As String
+        Try
+
+            Dim jss As New JavaScriptSerializer()
+            Dim dict = jss.Deserialize(Of List(Of CursosWs))("[" & cadena & "]")
+
+            Dim username = Convert.ToString(dict(0).Email)
+
+            Dim ods As New DataSet
+            Dim oobjeto As New PersonalLegajos
+
+            ods = oobjeto.BuscarDatosDeUsuarioPorEmail(username)
+
+            Dim e As CursosWs() = New CursosWs(ods.Tables(4).Rows.Count - 1) {}
+
+            For i = 0 To ods.Tables(4).Rows.Count - 1
+                e(i) = New CursosWs()
+                e(i).ID_Curso = ods.Tables(4).Rows(i).Item("ID_Curso").ToString
+                e(i).Curso = ods.Tables(4).Rows(i).Item("Curso").ToString
+                e(i).Institucion = ods.Tables(4).Rows(i).Item("Institución").ToString
+                e(i).urlMod = ods.Tables(4).Rows(i).Item("urlEditar").ToString
+            Next
+
+            Dim data = New With {
+                Key .Status = "200",
+                Key .Data = e
+            }
+
+            Dim serializer = New JavaScriptSerializer()
+            Dim json = serializer.Serialize(data)
+            Return New JavaScriptSerializer().Serialize(data)
+        Catch ex As Exception
+            Return Error401()
+        End Try
+    End Function
+
+    <WebMethod()>
+    <ScriptMethod(ResponseFormat:=ResponseFormat.Json)>
+    Public Shared Function EliminarCurso(ByVal cadena As String) As String
+        Try
+
+            Dim jss As New JavaScriptSerializer()
+            Dim dict = jss.Deserialize(Of List(Of CursosWs))("[" & cadena & "]")
+
+            Dim ID_Curso As String
+            ID_Curso = Convert.ToString(dict(0).ID_Curso)
+
+            Dim ods As New DataSet
+            Dim oObjeto As New Cursos
+
+            ods = oObjeto.EliminarPorId(ID_Curso)
 
             Dim data = New With {
                 Key .Status = "200"

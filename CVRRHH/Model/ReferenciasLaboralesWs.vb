@@ -10,5 +10,7 @@
     Public Property DatosReferentes() As String
     Public Property RefCoov() As String
     Public Property SeccionCoov() As String
+    Public Property urlMod() As String
+    Public Property urlDelete() As String
     Public Property Email() As String
 End Class

@@ -182,9 +182,9 @@
         </nav>
 
         <script type="text/javascript">
-            $(document).ready(function () {
-                $('[data-toggle="tooltip"]').tooltip();
-            });
+            //$(document).ready(function () {
+            //    $('[data-toggle="tooltip"]').tooltip();
+            //});
         </script>
 
         <br />
@@ -215,7 +215,7 @@
 
                     <div class="col-md-3 col-sm-12 contentGrafico">
                         <h8 id="UserPerfil" runat="server"></h8>
-                        <div id="porcentajeClass" runat="server" class="col-md-4 c100 p40">
+                        <div id="porcentajeClass" runat="server" class="">
                             <span id="porcentaje" runat="server"></span>
                             <div class="slice">
                                 <div class="bar"></div>
@@ -232,7 +232,7 @@
                     <div class="col-md-3 col-sm-12">
                         <div>
                             <a href="#" onclick="buscarDatosFaltantes()">
-                                <input type="button" id="btnModal" runat="server" value="VER DATOS FALTANTES" style="background: #187C45; color: #fff; cursor: pointer; border-radius: 4px; border: none; height: 40px" /></a>
+                                <input type="button" id="btnModal" runat="server" value="VER DATOS FALTANTES" style="display: none; background: #187C45; color: #fff; cursor: pointer; border-radius: 4px; border: none; height: 40px" /></a>
                         </div>
                     </div>
 
@@ -742,9 +742,11 @@
 
                         <div class="card-body" style="border: 1px solid #fff; width: 100%; border-radius: 3px">
                             <center>
-                                <h4 id="MisReferencias" runat="server"></h4>
+                                <h4 id="TituloRL" runat="server"></h4>
                             </center>
-                            <asp:GridView ID="Grilla" runat="server" CellPadding="8" ForeColor="#000000"
+                            <div class="card-body" id="DivRL" style="border: 1px solid #fff; width: 100%; border-radius: 3px">
+                            </div>
+                            <%--<asp:GridView ID="Grilla" runat="server" CellPadding="8" ForeColor="#000000"
                                 GridLines="none"
                                 FooterStyle-BackColor="#6699FF" CellSpacing="8" AllowPaging="False"
                                 PageSize="10" HorizontalAlign="Center" BorderColor="#000000">
@@ -761,20 +763,18 @@
 
                                     <asp:TemplateField HeaderText="Eliminar">
                                         <ItemTemplate>
-                                            <%--<asp:TextBox ID="" runat="server" class="form-control" ></asp:TextBox>--%>
                                             <asp:Button ID="TxtEliminar" class="btn btn-danger" runat="server" Text="Eliminar" PostBackUrl='<%#Eval("urlEliminar").ToString()%>' />
                                         </ItemTemplate>
                                     </asp:TemplateField>
 
                                     <asp:TemplateField HeaderText="Modificar">
                                         <ItemTemplate>
-                                            <%--<asp:TextBox ID="" runat="server" class="form-control" ></asp:TextBox>--%>
                                             <asp:Button ID="TxtModificar" class="btn btn-success" runat="server" Text="Modificar" PostBackUrl='<%#Eval("urlEditar").ToString()%>' />
                                         </ItemTemplate>
                                     </asp:TemplateField>
                                 </Columns>
 
-                            </asp:GridView>
+                            </asp:GridView>--%>
                         </div>
                         <center>
                         </center>
@@ -1029,9 +1029,11 @@
                         </div>
                         <div class="card-body" style="border: 1px solid #fff; width: 100%; border-radius: 3px">
                             <center>
-                                <h4 id="H1" runat="server"></h4>
+                                <h4 id="TituloFA" runat="server"></h4>
                             </center>
-                            <asp:GridView ID="GrillaFA" runat="server" CellPadding="8" ForeColor="#000000"
+                            <div class="card-body" id="DivFA" style="border: 1px solid #fff; width: 100%; border-radius: 3px">
+                            </div>
+                            <%--<asp:GridView ID="GrillaFA" runat="server" CellPadding="8" ForeColor="#000000"
                                 GridLines="none"
                                 FooterStyle-BackColor="#6699FF" CellSpacing="8" AllowPaging="False"
                                 PageSize="10" HorizontalAlign="Center" BorderColor="#000000">
@@ -1051,7 +1053,6 @@
 
                                     <asp:TemplateField HeaderText="Eliminar">
                                         <ItemTemplate>
-                                            <%--<asp:TextBox ID="" runat="server" class="form-control" ></asp:TextBox>--%>
                                             <asp:Button ID="TxtEliminar" class="btn btn-danger" runat="server" Text="Eliminar" PostBackUrl='<%#Eval("urlEliminar").ToString()%>' />
                                         </ItemTemplate>
                                     </asp:TemplateField>
@@ -1059,14 +1060,13 @@
 
                                     <asp:TemplateField HeaderText="Modificar">
                                         <ItemTemplate>
-                                            <%--<asp:TextBox ID="" runat="server" class="form-control" ></asp:TextBox>--%>
                                             <asp:Button ID="TxtModificar" class="btn btn-success" runat="server" Text="Modificar" PostBackUrl='<%#Eval("urlEditar").ToString()%>' />
                                         </ItemTemplate>
                                     </asp:TemplateField>
 
                                 </Columns>
 
-                            </asp:GridView>
+                            </asp:GridView>--%>
                         </div>
                         <center>
                         </center>
@@ -1168,9 +1168,11 @@
                         </div>
                         <div class="card-body" style="border: 1px solid #fff; width: 100%; border-radius: 3px">
                             <center>
-                                <h4 id="H2" runat="server"></h4>
+                                <h4 id="TituloC" runat="server"></h4>
                             </center>
-                            <asp:GridView ID="GrillaCurso" runat="server" CellPadding="8" ForeColor="#000000"
+                            <div class="card-body" id="DivC" style="border: 1px solid #fff; width: 100%; border-radius: 3px">
+                            </div>
+                            <%--<asp:GridView ID="GrillaCurso" runat="server" CellPadding="8" ForeColor="#000000"
                                 GridLines="none"
                                 FooterStyle-BackColor="#6699FF" CellSpacing="8" AllowPaging="False"
                                 PageSize="10" HorizontalAlign="Center" BorderColor="#000000">
@@ -1192,7 +1194,6 @@
 
                                     <asp:TemplateField HeaderText="Eliminar">
                                         <ItemTemplate>
-                                            <%--<asp:TextBox ID="" runat="server" class="form-control" ></asp:TextBox>--%>
                                             <asp:Button ID="TxtEliminar" class="btn btn-danger" runat="server" Text="Eliminar" PostBackUrl='<%#Eval("urlEliminar").ToString()%>' />
                                         </ItemTemplate>
                                     </asp:TemplateField>
@@ -1200,22 +1201,12 @@
 
                                     <asp:TemplateField HeaderText="Modificar">
                                         <ItemTemplate>
-                                            <%--<asp:TextBox ID="" runat="server" class="form-control" ></asp:TextBox>--%>
                                             <asp:Button ID="TxtModificar" class="btn btn-success" runat="server" Text="Modificar" PostBackUrl='<%#Eval("urlEditar").ToString()%>' />
                                         </ItemTemplate>
                                     </asp:TemplateField>
 
                                 </Columns>
-
-
-
-
-
-
-
-
-
-                            </asp:GridView>
+                            </asp:GridView>--%>
                         </div>
                         <center>
                         </center>
@@ -1430,7 +1421,7 @@
             document.getElementById("DatosCursos").style = "display:none";
             document.getElementById("DatosAntSal").style = "display:none";
             document.getElementById("DatosCurriculum").style = "display:none";
-            document.getElementById("subir").style = "display:block;float:right; width:80px;height:100px;margin-top:-200px;z-index:999999";
+            //document.getElementById("subir").style = "display:block;float:right; width:80px;height:100px;margin-top:-200px;z-index:999999";
         }
         function MostrarDatosContacto() {
             document.getElementById("DatosContactoHide").style = "display:block";
@@ -1441,7 +1432,7 @@
             document.getElementById("DatosCursos").style = "display:none";
             document.getElementById("DatosAntSal").style = "display:none";
             document.getElementById("DatosCurriculum").style = "display:none";
-            document.getElementById("subir").style = "display:block;float:right; width:80px;height:100px;margin-top:-200px;z-index:999999";
+            //document.getElementById("subir").style = "display:block;float:right; width:80px;height:100px;margin-top:-200px;z-index:999999";
         }
         function MostrarRefLab() {
             document.getElementById("DatosRefLab").style = "display:block";
@@ -1452,7 +1443,7 @@
             document.getElementById("DatosCursos").style = "display:none";
             document.getElementById("DatosAntSal").style = "display:none";
             document.getElementById("DatosCurriculum").style = "display:none";
-            document.getElementById("subir").style = "display:block;float:right; width:80px;height:100px;margin-top:-200px;z-index:999999";
+            //document.getElementById("subir").style = "display:block;float:right; width:80px;height:100px;margin-top:-200px;z-index:999999";
         }
         function MostrarGrupoFam() {
             document.getElementById("DatosRefLab").style = "display:none";
@@ -1463,7 +1454,7 @@
             document.getElementById("DatosCursos").style = "display:none";
             document.getElementById("DatosAntSal").style = "display:none";
             document.getElementById("DatosCurriculum").style = "display:none";
-            document.getElementById("subir").style = "display:block;float:right; width:80px;height:100px;margin-top:-200px;z-index:999999";
+            //document.getElementById("subir").style = "display:block;float:right; width:80px;height:100px;margin-top:-200px;z-index:999999";
         }
         function MostrarFromAca() {
             document.getElementById("DatosRefLab").style = "display:none";
@@ -1474,7 +1465,7 @@
             document.getElementById("DatosCursos").style = "display:none";
             document.getElementById("DatosAntSal").style = "display:none";
             document.getElementById("DatosCurriculum").style = "display:none";
-            document.getElementById("subir").style = "display:block;float:right; width:80px;height:100px;margin-top:-200px;z-index:999999";
+            //document.getElementById("subir").style = "display:block;float:right; width:80px;height:100px;margin-top:-200px;z-index:999999";
         }
         function MostrarCursos() {
             document.getElementById("DatosRefLab").style = "display:none";
@@ -1485,7 +1476,7 @@
             document.getElementById("DatosCursos").style = "display:block";
             document.getElementById("DatosAntSal").style = "display:none";
             document.getElementById("DatosCurriculum").style = "display:none";
-            document.getElementById("subir").style = "display:block;float:right; width:80px;height:100px;margin-top:-200px;z-index:999999";
+            //document.getElementById("subir").style = "display:block;float:right; width:80px;height:100px;margin-top:-200px;z-index:999999";
         }
         function MostrarAntSal() {
             document.getElementById("DatosRefLab").style = "display:none";
@@ -1496,7 +1487,7 @@
             document.getElementById("DatosCursos").style = "display:none";
             document.getElementById("DatosAntSal").style = "display:block";
             document.getElementById("DatosCurriculum").style = "display:none";
-            document.getElementById("subir").style = "display:block;float:right; width:80px;height:100px;margin-top:-200px;z-index:999999";
+            //document.getElementById("subir").style = "display:block;float:right; width:80px;height:100px;margin-top:-200px;z-index:999999";
         }
         function MostrarCurriculum() {
             document.getElementById("DatosRefLab").style = "display:none";
@@ -1507,7 +1498,7 @@
             document.getElementById("DatosCursos").style = "display:none";
             document.getElementById("DatosAntSal").style = "display:none";
             document.getElementById("DatosCurriculum").style = "display:block";
-            document.getElementById("subir").style = "display:block;float:right; width:80px;height:100px;margin-top:-200px;z-index:999999";
+            //document.getElementById("subir").style = "display:block;float:right; width:80px;height:100px;margin-top:-200px;z-index:999999";
         }
     </script>
 
@@ -1544,7 +1535,11 @@
             $('#ComboRedes').val("SELECCIONAR").change();
             //$("#ComboRedes").val(0).change();
 
+            cargarDatosUsuario();
+            cargarRefLab();
             cargarGrupoFam();
+            cargarFormAcademica();
+            cargarCurso();
             mostrarTrat();
             mostrarCir();
             BuscarUserId();
