@@ -89,12 +89,12 @@ Public Class FrmLogin
                 Dim id_personal As Integer
                 Dim FechaActual As Date = Date.Now.ToString("yyyy-MM-dd")
 
-                id_personal = oObjeto2.Agregar(TxtApellido.Text, TxtNombre.Text, "", "", "", "", "", "", 5, "", "", 11, 12, TxtFechaRegistro.Text, 19, 22, "", 122, TxtFechaRegistro.Text, TxtFechaRegistro.Text, "", 64, 27, "", 29, "", 1, 3, 14, "", "", "", "", "", "", "", "", 140, 78, TxtEmail.Text, 209)
+                id_personal = oObjeto2.Agregar(TxtApellido.Text, TxtNombre.Text, "", "", "", "", "", "", 5, "", "", 191, 190, TxtFechaRegistro.Text, 19, 189, "", 122, TxtFechaRegistro.Text, TxtFechaRegistro.Text, "", 64, 27, "", 29, "", 1, 3, 14, "", "", "", "", "", "", "", "", 140, 78, TxtEmail.Text, 209)
 
                 'Apellido, Nombre, Calle, Nro, Piso, Depto, Telefono, Movil, ID_DocumentoTipo, NroDocumento, Foto, ID_NivelFormacion, ID_EstadoCivil, Nacimiento, ID_Nacionalidad, Sexo, CUIL, Categoria, Ingreso, Egreso, MesesAntiguedadReconocida, ID_Convenio, ID_Art, NroAfiliado, ID_Banco, NroCajaAhorro, ID_Seccion, ID_Puesto, ID_Jefe, Jubilado, Tarjeta, MensajeIngreso, MensajeEgreso, FondoCompJub, AporteVoluntario, Observaciones, Archivo, Estado, Tipo,Email
 
-                'EnviarEmailParaConfirmar(newUserId)
-                SendEmailByApi(newUserId, TxtEmail.Text.ToLower)
+                EnviarEmailParaConfirmar(newUserId)
+                'SendEmailByApi(newUserId, TxtEmail.Text.ToLower)
                 formulario.Visible = False
 
                 oculto.Visible = True

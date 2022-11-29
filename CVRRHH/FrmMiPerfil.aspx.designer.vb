@@ -308,7 +308,7 @@ Partial Public Class FrmMiPerfil
     '''Campo generado automáticamente.
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
-    Protected WithEvents ComboRedes As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents ComboRedes As Global.System.Web.UI.HtmlControls.HtmlSelect
 
     '''<summary>
     '''Control TxtLinkRedsocial.

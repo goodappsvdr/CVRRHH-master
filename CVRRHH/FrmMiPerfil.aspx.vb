@@ -355,6 +355,7 @@ Public Class FrmMiPerfil
                 CboLocalidad.SelectedValue = ods.Tables(0).Rows(0).Item("ID_Localidad").ToString
                 TxtNumeroDoc.Value = ods.Tables(0).Rows(0).Item("NroDocumento").ToString
                 CboEstadoCivil.SelectedValue = ods.Tables(0).Rows(0).Item("ID_EstadoCivil").ToString
+                CboSexo.SelectedValue = ods.Tables(0).Rows(0).Item("Sexo").ToString
 
                 Dim ods2 As New DataSet
                 Dim obj2 As New SeccionTrabajar
@@ -798,19 +799,20 @@ Public Class FrmMiPerfil
                 End If
 
                 Dim contenido As String = "<p>Te faltan cargar datos en los siguientes módulos:</p>"
-
+                If TotalNumDoc = 0 And TotalFoto = 0 Then
+                    contenido += "<p>Datos personales</p>"
+                ElseIf TotalNumDoc = 0 Then
+                    contenido += "<p>Datos personales</p>"
+                ElseIf TotalFoto = 0 Then
+                    contenido += "<p>Datos personales</p>"
+                End If
                 If TotalRedes = 0 Then
                     contenido += "<p>Redes sociales</p>"
                 End If
                 If TotalAntLab = 0 Then
                     contenido += "<p>Antecedentes laborales</p>"
                 End If
-                If TotalNumDoc = 0 Then
-                    contenido += "<p>Datos personales: Número de docuemtno</p>"
-                End If
-                If TotalFoto = 0 Then
-                    contenido += "<p>Datos personales: Foto</p>"
-                End If
+
                 If TotalFormAca = 0 Then
                     contenido += "<p>Formación academica</p>"
                 End If

@@ -31,7 +31,7 @@ function AgregarRedes() {
         return;
     }
 
-    if ($('#ComboRedes').val() == 1) {
+    if (ComboRedes == 'SELECCIONAR') {
         swal("", "Por favor seleccione una red para agregar", "info");
         return;
     }
@@ -53,7 +53,7 @@ function AgregarRedes() {
 
                 CargarRedes()
                 $('#TxtLinkRedsocial').val("");
-                $('#ComboRedes').val("SELECCIONE...");
+                $('#ComboRedes').val("SELECCIONAR");
 
             } else {
 
@@ -95,8 +95,8 @@ function CargarRedes() {
 
             if (status == 200) {
 
-                $('#TxtLinkRedsocial').val("");
-                $('#ComboRedes').val(1);
+                //$('#TxtLinkRedsocial').val("");
+                //$('#ComboRedes').val(1);
                 $('#DivRedes').empty();
 
                 for (var i = 0; i < json.Data.length; i++) {

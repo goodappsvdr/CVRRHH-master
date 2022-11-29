@@ -571,13 +571,20 @@
 
                                     <div class="col-md-4" style="margin-bottom: 20px;">
                                         <label>Redes</label>
-                                        <asp:DropDownList ID="ComboRedes" runat="server" class="form-control">
-                                            <asp:ListItem>SELECCIONE...</asp:ListItem>
+                                        <%--<asp:DropDownList ID="ComboRedes" runat="server" class="form-control">
+                                            <asp:ListItem>SELECCIONAR</asp:ListItem>
                                             <asp:ListItem>FACEBOOK</asp:ListItem>
                                             <asp:ListItem>INSTAGRAM</asp:ListItem>
                                             <asp:ListItem>TWITTER</asp:ListItem>
                                             <asp:ListItem>YOUTUBE</asp:ListItem>
-                                        </asp:DropDownList>
+                                        </asp:DropDownList>--%>
+                                        <select id="ComboRedes" name="select" runat="server" class="form-control">
+                                            <option id="se" value="SELECCIONAR" class="form-control">SELECCIONAR</option>
+                                            <option id="face" value="FACEBOOK" class="form-control">FACEBOOK</option>
+                                            <option id="insta" value="INSTAGRAM" class="form-control">INSTAGRAM</option>
+                                            <option id="tw" value="TWITTER" class="form-control">TWITTER</option>
+                                            <option id="youtube" value="YOUTUBE" class="form-control">YOUTUBE</option>
+                                        </select>
                                     </div>
 
                                     <div class="col-md-4" style="margin-bottom: 20px;">
@@ -1534,7 +1541,8 @@
         $(document).ready(function () {
             CargarRedes();
             $('#TxtLinkRedsocial').val("");
-            $('#ComboRedes').val("SELECCIONE...");
+            $('#ComboRedes').val("SELECCIONAR").change();
+            //$("#ComboRedes").val(0).change();
 
             cargarGrupoFam();
             mostrarTrat();

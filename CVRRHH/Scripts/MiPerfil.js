@@ -205,10 +205,13 @@ function guardarDatPers() {
     var tipoDoc = $("#CboTipoDoc").val();
     var nroDoc = $("#TxtNumeroDoc").val();
     var sexo = $("#CboSexo").val();
+    var sexoText = $("#CboSexo option:selected").text();
     var fechaNac = $("#TxtFechaNac").val();
     var estadoCivil = $("#CboEstadoCivil").val();
+    var estadoCivilText = $("#CboEstadoCivil option:selected").text();
     var nacionalidad = $("#CboNacionalidad").val();
     var nivelFormacion = $("#CboNivelFormacion").val();
+    var nivelFormacionText = $("#CboNivelFormacion option:selected").text();
     var cuil = $("#TxtCuil").val();
     var email = $("#txtEmail").val();
 
@@ -229,6 +232,12 @@ function guardarDatPers() {
         swal('', 'Escribe tu fecha de nacimiento', 'info')
     } else if (cuil == '') {
         swal('', 'Escribe tu cuil', 'info')
+    } else if (sexoText == 'SELECCIONAR') {
+        swal('', 'Selecciona tu sexo', 'info')
+    } else if (estadoCivilText == 'SELECCIONAR') {
+        swal('', 'Selecciona tu estado civil', 'info')
+    } else if (nivelFormacionText == 'SELECCIONAR') {
+        swal('', 'Selecciona tu nivel de formación', 'info')
     } else {
         var archivoInput = document.getElementById('btnSubirImgEmpleado');
         var archivoRuta = archivoInput.value;
@@ -497,10 +506,10 @@ function agregarFormAcademica() {
         var archivoRuta = archivoInput.value;
         var extPermitidas = /(.jpg|.png|.jpeg|.JPG|.PNG|.JPEG|.pdf|.PDF)$/i;
         if (!extPermitidas.exec(archivoRuta)) {
-            if (srcFoto.innerHTML == "") {
+            //if (srcFoto.innerHTML == "") {
                 swal("", "Seleccione un documento para subir", "info");
                 return;
-            }
+            //}
         } else {
             var pdfFA = visorFormacionAcademica.result;
 
