@@ -258,7 +258,7 @@
 
                 <div class="row">
 
-                    <div class="row" id="bienvenida" runat="server">
+                    <div class="row" id="bienvenida" style="display: none;" runat="server">
                         <div class="col-md-12">
                             <div class="card" style="width: 100%;">
                                 <div class="card-body">
@@ -1530,12 +1530,11 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            CargarRedes();
             $('#TxtLinkRedsocial').val("");
             $('#ComboRedes').val("SELECCIONAR").change();
-            //$("#ComboRedes").val(0).change();
 
             cargarDatosUsuario();
+            CargarRedes();
             cargarRefLab();
             cargarGrupoFam();
             cargarFormAcademica();

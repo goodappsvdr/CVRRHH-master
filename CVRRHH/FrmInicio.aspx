@@ -258,8 +258,8 @@ overflow : -moz-scrollbars-vertica}
 <br />
 
 
- <center><a href="FrmIngreso.aspx" target="_blank"><input type="button" value="INGRESAR" style="background:#047537; color:#fff;   border:1px solid black; width:300px;height:40px"/></a></center><br />
-  <center><a href="FrmLogin.aspx" target="_blank"> <input type="button" value="CREAR PERFIL" style="background:#047537; color:#fff;   border:1px solid black; width:300px;height:40px"/></a></center>
+ <center><a href="FrmIngreso.aspx"><input type="button" value="INGRESAR" style="background:#047537; color:#fff;   border:1px solid black; width:300px;height:40px"/></a></center><br />
+  <center><a href="FrmLogin.aspx"> <input type="button" value="CREAR PERFIL" style="background:#047537; color:#fff;   border:1px solid black; width:300px;height:40px"/></a></center>
  
 
 

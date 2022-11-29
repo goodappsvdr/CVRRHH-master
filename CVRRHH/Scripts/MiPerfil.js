@@ -377,7 +377,8 @@ function agregarDatCont() {
                         'success',
                         'CONTINUAR',
                     ).then(function () {
-                        window.location.href = 'FrmMiPerfil.aspx'
+                        //window.location.href = 'FrmMiPerfil.aspx'
+                        cargarDatosUsuario();
                     })
                 } else if (status = 401) {
                     swal('', 'Ocurrió un error', 'warning');
@@ -448,8 +449,10 @@ function agregarRefLab() {
                         'success',
                         'CONTINUAR',
                     ).then(function () {
-                        window.location.href = 'FrmMiPerfil.aspx'
-                        //ActualizarCampos()
+                        //window.location.href = 'FrmMiPerfil.aspx'
+                        cargarDatosUsuario();
+                        cargarRefLab();
+                        ActualizarCamposRefLab();
                     })
                 } else if (status = 401) {
                     swal('', 'Ocurrió un error', 'warning');
@@ -524,12 +527,12 @@ function cargarRefLab() {
                             <div class="col-md-3">
                                 <span>${json.Data[i].Empresa}</span>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2" style="display: flex; flex-direction: column;">
                                 <a href="${json.Data[i].urlMod}" class="btn-success" style="border-radius: 5px; color: #fff; border: 1px solid #218838; text-decoration: none; text-align: center;">
                                 Modificar
                                 </a>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2" style="display: flex; flex-direction: column;">
                                 <button type="button" onclick="ValidarEliminarRefLab(${json.Data[i].ID})" class="btn-danger" style="border-radius: 5px; color: #fff; border: 1px solid #dc3545;">
                                 Eliminar
                                 </button>
@@ -598,6 +601,7 @@ function EliminarRefLab(ID_RefLab) {
                     'success',
                     'CONTINUAR',
                 ).then(function () {
+                    cargarDatosUsuario();
                     cargarRefLab();
                 })
             } else if (status = 401) {
@@ -685,7 +689,10 @@ function agregarFormAcademica() {
                             'success',
                             'CONTINUAR',
                         ).then(function () {
-                            window.location.href = 'FrmMiPerfil.aspx'
+                            //window.location.href = 'FrmMiPerfil.aspx'
+                            cargarDatosUsuario();
+                            cargarFormAcademica();
+                            ActualizarCamposFormAcademica();
                         })
                     } else if (status = 401) {
                         swal('', 'Ocurrió un error', 'warning');
@@ -761,12 +768,12 @@ function cargarFormAcademica() {
                             <div class="col-md-3">
                                 <span>${json.Data[i].Institucion}</span>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2" style="display: flex; flex-direction: column;">
                                 <a href="${json.Data[i].urlMod}" class="btn-success" style="border-radius: 5px; color: #fff; border: 1px solid #218838; text-decoration: none; text-align: center;">
                                 Modificar
                                 </a>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2" style="display: flex; flex-direction: column;">
                                 <button type="button" onclick="ValidarEliminarFormAcademica(${json.Data[i].ID})" class="btn-danger" style="border-radius: 5px; color: #fff; border: 1px solid #dc3545;">
                                 Eliminar
                                 </button>
@@ -835,6 +842,7 @@ function EliminarFormAcademica(ID_FromAcademica) {
                     'success',
                     'CONTINUAR',
                 ).then(function () {
+                    cargarDatosUsuario();
                     cargarFormAcademica();
                 })
             } else if (status = 401) {
@@ -896,7 +904,9 @@ function agregarGrupoFam() {
                         'CONTINUAR',
                     ).then(function () {
                         //window.location.href = 'FrmMiPerfil.aspx'
+                        cargarDatosUsuario();
                         cargarGrupoFam();
+                        ActualizarCamposGrupoFam();
                     })
                 } else if (status = 401) {
                     swal('', 'Ocurrió un error', 'warning');
@@ -1019,6 +1029,7 @@ function EliminarFamiliar(ID_GrupoFamiliar) {
                     'success',
                     'CONTINUAR',
                 ).then(function () {
+                    cargarDatosUsuario();
                     cargarGrupoFam();
                 })
             } else if (status = 401) {
@@ -1087,7 +1098,10 @@ function agregarCurso() {
                         'success',
                         'CONTINUAR',
                     ).then(function () {
-                        window.location.href = 'FrmMiPerfil.aspx'
+                        //window.location.href = 'FrmMiPerfil.aspx'
+                        cargarDatosUsuario();
+                        cargarCurso();
+                        ActualizarCamposCurso();
                     })
                 } else if (status = 401) {
                     swal('', 'Ocurrió un error', 'warning');
@@ -1236,6 +1250,7 @@ function EliminarCurso(ID_Curso) {
                     'success',
                     'CONTINUAR',
                 ).then(function () {
+                    cargarDatosUsuario();
                     cargarCurso();
                 })
             } else if (status = 401) {
@@ -1312,7 +1327,8 @@ function agregarAntecedentesDeSalud() {
                         'success',
                         'CONTINUAR',
                     ).then(function () {
-                        window.location.href = 'FrmMiPerfil.aspx'
+                        //window.location.href = 'FrmMiPerfil.aspx'
+                        cargarDatosUsuario();
                     })
                 } else if (status = 401) {
                     swal('', 'Ocurrió un error', 'warning');
@@ -1368,7 +1384,8 @@ function agregarCurriculum() {
                         'success',
                         'CONTINUAR',
                     ).then(function () {
-                        window.location.href = 'FrmMiPerfil.aspx'
+                        //window.location.href = 'FrmMiPerfil.aspx'
+                        cargarDatosUsuario();
                     })
                 } else if (status = 401) {
                     swal('', 'Ocurrió un error', 'warning');
@@ -1514,21 +1531,49 @@ function CheckEmail100() {
 }
 
 
-function ActualizarCampos() {
-    $("#TxtFechaDesde").val() = '';
-    $('#ChkActivo').prop('checked') = false
-    $("#TxtFechaHasta").val() = '';
-    $("#TxtEmpresa").val() = '';
-    $("#TxtPuesto").val() = '';
-    $("#Combo").val() = 'SELECCIONAR';
-    $("#TxtDescrip").val() = '';
-    $("#TxtDatosRef").val() = '';
-    $("#TxtRefCoov").val() = '';
-    $("#cboSecciones").val() = 'SELECCIONAR';
+function ActualizarCamposRefLab() {
+    $("#TxtFechaDesde").val("")
+    $('#ChkActivo').prop('checked', false)
+    $("#TxtFechaHasta").val("")
+    $("#TxtEmpresa").val("")
+    $("#TxtPuesto").val("")
+    $("#Combo").val("SELECCIONAR");
+    $("#TxtDescrip").val("")
+    $("#TxtDatosRef").val("")
+    $("#TxtRefCoov").val("")
+    $("#cboSecciones").val("SELECCIONAR");
+}
+
+function ActualizarCamposFormAcademica() {
+    $("#TxtDesdeFA").val("")
+    $("#TxtHastaFA").val("")
+    $("#ComboFA").val("SELECCIONAR");
+    $("#ComboEspecilidad").val("SELECCIONAR");
+    $("#TxtTitulo").val("")
+    $("#TxtInstitucion").val("")
+    $("#CboInstitucion").val("SELECCIONAR");
+}
+
+function ActualizarCamposGrupoFam() {
+    $("#TxtApellidoGrupFam").val("")
+    $("#TxtNombreGrupFam").val("")
+    $("#ComboPrentezco").val("SELECCIONAR");
+    $("#TxtFechaNacGF").val("")
+    $("#TxtOcupacion").val("")
+}
+
+function ActualizarCamposCurso() {
+    $("#TxtFechaDesdeCurso").val("")
+    $("#TxtFechaHastaCurso").val("")
+    $("#TxtNombredelCurso").val("")
+    $("#ComboCursos").val("SELECCIONAR");
+    $("#TxtHoras").val("")
+    $("#TxtInstitucionCursos").val("")
+    $("#TxtComentarios").val("")
 }
 
 
-//GRAFICO
+//CARGAR DATOS DEL USUARIO MAS EL GRAFICO
 function cargarDatosUsuario() {
     var Email = $('#txtEmail').val();
     var par = { Email: Email };
@@ -1583,6 +1628,7 @@ function cargarDatosUsuario() {
                 $("#TxtNumeroDoc").val(json.TxtNumeroDoc);
                 $("#CboEstadoCivil").val(json.CboEstadoCivil);
                 $("#CboSexo").val(json.CboSexo);
+                $("#cboSecciones").val(json.SeccionTrabajar);
 
                 if (json.TxtNumeroDoc != "") {
                     $('#bienvenida').hide()
