@@ -11,7 +11,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-     <link rel="shortcut icon" href="http://www.coovilros.com/Imagenes/favicon16.ico" />
+     <link rel="shortcut icon" href="https://coovilros.com/Imagenes/favicon.ico" />
     <title runat="server" id="TituloPaginaWeb">CV Coovilros</title>
     <!-- Bootstrap -->
  

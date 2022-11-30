@@ -8,10 +8,9 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <link rel="shortcut icon" href="http://www.coovilros.com/Imagenes/favicon16.ico" />
+    <link rel="shortcut icon" href="https://coovilros.com/Imagenes/favicon.ico" />
     <title runat="server" id="TituloPaginaWeb">CV Coovilros</title>
     <!-- Bootstrap -->
-
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <link href="https://fonts.googleapis.com/css?family=Staatliches" rel="stylesheet">
@@ -37,16 +36,16 @@
         overflow: -moz-scrollbars-vertica
     }
 
-    ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    ::placeholder {
         color: #ffffff;
-        opacity: 1; /* Firefox */
+        opacity: 1;
     }
 
-    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    :-ms-input-placeholder {
         color: #ffffff;
     }
 
-    ::-ms-input-placeholder { /* Microsoft Edge */
+    ::-ms-input-placeholder {
         color: #ffffff;
     }
 
@@ -62,52 +61,7 @@
         height: 670px;
         border-radius: 0;
     }
-
-    @media (max-width: 600px) {
-        #borrarimagenes {
-            display: none;
-        }
-
-        #imagenresp2 {
-            display: block;
-        }
-
-        #imagenresp {
-            display: block;
-        }
-    }
-
-    @media (min-width: 600px) {
-
-        #imagenresp2 {
-            display: none;
-        }
-
-        #imagenresp {
-            display: none;
-        }
-    }
-
-    /*inscripcion*/
-    @media only screen and (min-width: 525px) {
-        #inscripcion {
-            display: none;
-        }
-    }
-
-    /*inscripcion*/
-    @media only screen and (max-width: 825px) {
-        #webcon {
-            display: none;
-        }
-    }
-
-    @media only screen and (max-width: 600px) {
-        #divsup {
-            background-size: cover;
-        }
-    }
-
+    
     .modal-dialog {
         width: auto;
         height: auto;
@@ -124,6 +78,54 @@
         margin-bottom: 150px;
     }
 
+    a{
+        text-decoration: none !important;
+    }
+
+    .title-card{
+        color: #000;
+        text-decoration: none;
+    }
+
+    .gray-scale{
+        transition: all 0.4s ease;
+    }
+    .gray-scale:hover{
+        -webkit-filter: grayscale(60%); /* Chrome, Safari, Opera */
+        filter: grayscale(60%);
+    }
+
+    .btnSave{
+        background: #04ce47;
+        color: #fff;
+        border: 1px solid #04ce47;
+        padding: 5px 40px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .btnSave:hover{
+        background: #0AC144;
+        transition: 0.5s;
+    }
+    .btnDelete{
+        background: #E40613;
+        color: #fff;
+        border: 1px solid #E40613;
+        padding: 5px 40px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .btnDelete:hover{
+        background: #C30510;
+        transition: 0.5s;
+    }
+
+    @media only screen and (max-width: 600px) {
+        #divsup {
+            background-size: cover;
+        }
+    }
+
     @media only screen and (max-width: 767px) {
         .contentGrafico {
             margin-bottom: 140px;
@@ -131,6 +133,38 @@
 
         .contentCabecera {
             margin-bottom: 0;
+        }
+
+        #borrarimagenes {
+            display: flex;
+            flex-wrap: nowrap !important;
+        }
+    }
+
+    @media only screen and (max-width: 375px) {
+        #borrarimagenes {
+            display: flex;
+            flex-wrap: wrap !important;
+        }
+
+        #menu{
+            height: 220px !important;
+        }
+
+        #webcon {
+            float: left !important;
+        }
+
+        #P1 {
+            float: left !important;
+        }
+
+        .imgLogout {
+            margin-top: 15px !important;
+        }
+        .imgPerfil {
+            margin-top: 0 !important;
+            margin-left: 4px;
         }
     }
 </style>
@@ -152,33 +186,28 @@
     <!--End of Tawk.to Script-->
 
     <form runat="server" id="form1">
-        <nav class="navbar navbar-default navbar-fixed-top" style="height: 120px; background-color: #187C45;">
-            <img src="https://www.coovilros.com/RRHHAdmin/Imagenes/Isologotipo_Coovilros_horizontal_blanco_total.png" runat="server" id="imagenresp" style="width: 220px; height: auto; max-height: 60px; margin-top: 10px;" alt="">
-            <p id="imagenresp2" style="font-family: 'Bitter',serif; margin-top: -30px">
-                <a href="" runat="server" id="iraperfilmovil"><i class="material-icons" style="margin-top: 30px; color: #fff; cursor: pointer; font-size: 40px; margin-left: 35px" data-toggle="tooltip" title="Ver Mi Perfil">assignment
-                </i></a>
-            </p>
+        <nav class="navbar navbar-default navbar-fixed-top" id="menu" style="height: 120px; background-color: #187C45;">
             <div class="container">
-                <div class="row" id="borrarimagenes">
-                    <div class="col-md-4">
-                        <img src="https://www.coovilros.com/RRHHAdmin/Imagenes/Isologotipo_Coovilros_horizontal_blanco_total.png" runat="server" id="ImagenLogo" style="width: 220px; height: auto; max-height: 60px; margin-top: 10px" alt="">
+                <div class="row" id="borrarimagenes" style="width: 100%;">
+                    <div class="col-md-10 col-sm-6 col-xs-3" style="margin-top: 30px;">
+                        <img src="https://www.coovilros.com/RRHHAdmin/Imagenes/Isologotipo_Coovilros_horizontal_blanco_total.png" runat="server" id="ImagenLogo" style="width: 200px; height: auto; max-height: 60px;" alt="" />
                     </div>
-                    <div class="col-md-7">
-                        <p id="webcon" style="float: right; margin-left: 800px; font-family: 'Bitter',serif; margin-top: -30px">
-                            <a onserverclick="CerrarSesion" runat="server"><i class="material-icons" style="margin-top: 30px; color: #fff; cursor: pointer; font-size: 40px; margin-left: 35px" data-toggle="tooltip" title="Cerrar Sesión">power_settings_new
-                            </i></a>
+                    <div class="col-md-1">
+                        <p id="webcon" style="float: right; /*margin-left: 800px; margin-top: -30px;*/">
+                            <a onserverclick="CerrarSesion" runat="server">
+                                <img src="Imagenes/cerrarSesion.svg" class="imgLogout" alt="Alternate Text" style="margin-top: 30px; width: 36px;" />
+                            </a>
                         </p>
                     </div>
                     <div class="col-md-1">
-                        <p id="P1" style="float: right; margin-left: 800px; font-family: 'Bitter',serif; margin-top: -30px">
+                        <p id="P1" style="float: right; /*margin-left: 800px; margin-top: -30px;*/">
                             <a href="" runat="server" id="irAPerfil">
-                                <i class="material-icons" style="margin-top: 30px; color: #fff; cursor: pointer; font-size: 40px; margin-left: 35px" data-toggle="tooltip" title="Ver Mi Perfil">assignment
-                                </i></a>
+                                <img src="Imagenes/verPerfil.svg" class="imgPerfil" alt="Alternate Text" style="margin-top: 30px; width: 30px;" />
+                            </a>
                         </p>
                     </div>
                 </div>
             </div>
-            <br />
         </nav>
 
         <script type="text/javascript">
@@ -232,7 +261,7 @@
                     <div class="col-md-3 col-sm-12">
                         <div>
                             <a href="#" onclick="buscarDatosFaltantes()">
-                                <input type="button" id="btnModal" runat="server" value="VER DATOS FALTANTES" style="display: none; background: #187C45; color: #fff; cursor: pointer; border-radius: 4px; border: none; height: 40px" /></a>
+                                <input type="button" id="btnModal" runat="server" value="VER DATOS FALTANTES" class="btnSave" style="display: none; cursor: pointer;" /></a>
                         </div>
                     </div>
 
@@ -291,14 +320,10 @@
                         <div class="col-md-4">
                             <a href="#primero" onclick="MostrarSig();">
                                 <div class="card" style="width: 100%; margin: 10px auto">
-                                    <img class="card-img-top" src=" https://crear.net.ar/CLIENTES/MAGICFLOORS/MagicFloors/illustration-quality-check-icon-blue-background_53876-8393.jpg" alt="Card image cap">
-
+                                    <img class="card-img-top gray-scale" src="Imagenes/datosPersonales.jpg" style="width: 100%; height: 190px; object-fit: cover;" alt="Card image cap"/>
                                     <div class="card-body">
                                         <center>
-                                            <h5 class="card-title">DATOS PERSONALES</h5>
-                                            <p style="color: Red"><b>* CAMPO OBLIGATORIO</b></p>
-                                            <i class="material-icons" style="margin-top: 30px; color: #000; cursor: pointer; font-size: 40px;" data-toggle="tooltip" title="Modificar mis datos">create
-                                            </i>
+                                            <h5 class="title-card" style="color: #000;">DATOS PERSONALES<span style="color: red;">*</span></h5>
                                         </center>
                                     </div>
                                 </div>
@@ -309,13 +334,10 @@
                         <div class="col-md-4">
                             <a href="#DatosContactoHide" onclick="MostrarDatosContacto();">
                                 <div class="card" style="width: 100%; margin: 10px auto">
-                                    <img class="card-img-top" src="https://crear.net.ar/CLIENTES/MAGICFLOORS/MagicFloors/auth.png" alt="Card image cap">
+                                    <img class="card-img-top gray-scale" src="Imagenes/datosContacto.jpg" style="width: 100%; height: 190px; object-fit: cover;" alt="Card image cap"/>
                                     <div class="card-body">
                                         <center>
-                                            <h5 class="card-title">DATOS DE CONTACTO</h5>
-                                            <p style="color: Red"><b>* CAMPO OBLIGATORIO</b></p>
-                                            <i class="material-icons" style="margin-top: 30px; color: #000; cursor: pointer; font-size: 40px;" data-toggle="tooltip" title="Modificar mis datos">create
-                                            </i>
+                                            <h5 class="title-card">DATOS DE CONTACTO<span style="color: red;">*</span></h5>
                                         </center>
                                     </div>
                                 </div>
@@ -326,13 +348,10 @@
                         <div class="col-md-4">
                             <a href="#DatosRefLab" onclick="MostrarRefLab();">
                                 <div class="card" style="width: 100%; margin: 10px auto">
-                                    <img class="card-img-top" src="https://crear.net.ar/CLIENTES/MAGICFLOORS/MagicFloors/storage.png" alt="Card image cap">
+                                    <img class="card-img-top gray-scale" src="Imagenes/antecedentesLaborales.jpg" style="width: 100%; height: 190px; object-fit: cover;" alt="Card image cap"/>
                                     <div class="card-body">
                                         <center>
-                                            <h5 class="card-title">ANTECEDENTES LABORALES</h5>
-                                            <p style="color: Red"><b>* CAMPO OBLIGATORIO</b></p>
-                                            <i class="material-icons" style="margin-top: 30px; color: #000; cursor: pointer; font-size: 40px;" data-toggle="tooltip" title="Modificar mis datos">create
-                                            </i>
+                                            <h5 class="title-card">ANTECEDENTES LABORALES<span style="color: red;">*</span></h5>
                                         </center>
                                     </div>
                                 </div>
@@ -343,13 +362,10 @@
                         <div class="col-md-4">
                             <a href="#DatosForma" onclick="MostrarFromAca();">
                                 <div class="card" style="width: 100%; margin: 10px auto">
-                                    <img class="card-img-top" src="https://crear.net.ar/CLIENTES/SIEMPREBONITA/Siemprebonita/analytics.png" alt="Card image cap">
+                                    <img class="card-img-top gray-scale" src="Imagenes/antecedentesAcademicos.jpg" style="width: 100%; height: 190px; object-fit: cover;" alt="Card image cap"/>
                                     <div class="card-body">
                                         <center>
-                                            <h5 class="card-title">FORMACION ACADEMICA</h5>
-                                            <p style="color: Red"><b>* CAMPO OBLIGATORIO</b></p>
-                                            <i class="material-icons" style="margin-top: 30px; color: #000; cursor: pointer; font-size: 40px;" data-toggle="tooltip" title="Modificar mis datos">create
-                                            </i>
+                                            <h5 class="title-card">FORMACION ACADÉMICA<span style="color: red;">*</span></h5>
                                         </center>
                                     </div>
                                 </div>
@@ -360,13 +376,10 @@
                         <div class="col-md-4">
                             <a href="#DatosGrupoFam" onclick="MostrarGrupoFam();">
                                 <div class="card" style="width: 100%; margin: 10px auto">
-                                    <img class="card-img-top" src="https://crear.net.ar/CLIENTES/MAGICFLOORS/MagicFloors/unnamed%20(2).png" alt="Card image cap">
+                                    <img class="card-img-top gray-scale" src="Imagenes/grupoFamiliar.jpg" style="width: 100%; height: 190px; object-fit: cover;" alt="Card image cap"/>
                                     <div class="card-body">
                                         <center>
-                                            <h5 class="card-title">GRUPO FAMILIAR</h5>
-                                            <br />
-                                            <i class="material-icons" style="margin-top: 30px; color: #000; cursor: pointer; font-size: 40px;" data-toggle="tooltip" title="Modificar mis datos">create
-                                            </i>
+                                            <h5 class="title-card">GRUPO FAMILIAR</h5>
                                         </center>
                                     </div>
                                 </div>
@@ -377,13 +390,10 @@
                         <div class="col-md-4">
                             <a href="#DatosCursos" onclick="MostrarCursos();">
                                 <div class="card" style="width: 100%; margin: 10px auto">
-                                    <img class="card-img-top" src="https://crear.net.ar/CLIENTES/MAGICFLOORS/MagicFloors/graf%20(2).png" alt="Card image cap">
+                                    <img class="card-img-top gray-scale" src="Imagenes/cursos.jpg" style="width: 100%; height: 190px; object-fit: cover;" alt="Card image cap"/>
                                     <div class="card-body">
                                         <center>
-                                            <h5 class="card-title">CURSOS Y SEMINARIOS</h5>
-                                            <br />
-                                            <i class="material-icons" style="margin-top: 30px; color: #000; cursor: pointer; font-size: 40px;" data-toggle="tooltip" title="Modificar mis datos">create
-                                            </i>
+                                            <h5 class="title-card">CURSOS Y SEMINARIOS<span style="color: red;">*</span></h5>
                                         </center>
                                     </div>
                                 </div>
@@ -394,13 +404,10 @@
                         <div class="col-md-4">
                             <a href="#DatosAntSal" onclick="MostrarAntSal();">
                                 <div class="card" style="width: 100%; margin: 10px auto">
-                                    <img class="card-img-top" src="https://crear.net.ar/CLIENTES/MAGICFLOORS/MagicFloors/experiments.png" alt="Card image cap">
+                                    <img class="card-img-top gray-scale" src="Imagenes/antecedentesSalud.jpg" style="width: 100%; height: 190px; object-fit: cover;" alt="Card image cap"/>
                                     <div class="card-body">
                                         <center>
-                                            <h5 class="card-title">ANTECEDENTES DE SALUD</h5>
-                                            <br />
-                                            <i class="material-icons" style="margin-top: 30px; color: #000; cursor: pointer; font-size: 40px;" data-toggle="tooltip" title="Modificar mis datos">create
-                                            </i>
+                                            <h5 class="title-card">ANTECEDENTES DE SALUD<span style="color: red;">*</span></h5>
                                         </center>
                                     </div>
                                 </div>
@@ -411,13 +418,10 @@
                         <div class="col-md-4">
                             <a href="#DatosCurriculum" onclick="MostrarCurriculum();">
                                 <div class="card" style="width: 100%; margin: 10px auto">
-                                    <img class="card-img-top" src="https://crear.net.ar/CLIENTES/MAGICFLOORS/MagicFloors/experiments.png" alt="Card image cap">
+                                    <img class="card-img-top gray-scale" src="Imagenes/curriculum.jpg" style="width: 100%; height: 190px; object-fit: cover;" alt="Card image cap"/>
                                     <div class="card-body">
                                         <center>
-                                            <h5 class="card-title">CURRICULUM</h5>
-                                            <br />
-                                            <i class="material-icons" style="margin-top: 30px; color: #000; cursor: pointer; font-size: 40px;" data-toggle="tooltip" title="Modificar mis datos">create
-                                            </i>
+                                            <h5 class="title-card">CURRICULUM<span style="color: red;">*</span></h5>
                                         </center>
                                     </div>
                                 </div>
@@ -503,7 +507,7 @@
                                 </center>
 
                                 <center>
-                                    <div alt="Cargando Imagen..." style="background-image: url('https://crear.net.ar/CLIENTES/PIN/Pin/camara-fotografica.png'); background-size: cover; height: 50px; width: 50px; cursor: pointer; decoration: none;" required="" name="imagen" id="files" type="file" accept="image/*">
+                                    <div alt="Cargando Imagen..." style="background-image: url('Imagenes/camera.svg'); background-size: cover; height: 50px; width: 50px; cursor: pointer; decoration: none;" required="" name="imagen" id="files" type="file" accept="image/*">
                                         <asp:FileUpload Style="opacity: 0; height: 80px; width: 80px; cursor: pointer; margin-top: -5px;" runat="server" ID="btnSubirImgEmpleado" onchange="readURL(this);" runat="server"></asp:FileUpload>
                                     </div>
                                 </center>
@@ -511,7 +515,7 @@
                             <p id="srcFoto" style="display: none;" runat="server"></p>
                             <%-- <center><a onserverclick="GuardarySeguir" runat="server"><input type="button" value="SIGUIENTE" style="background:#047537; color:#fff;   border:1px solid black; width:300px;height:40px" onmouseup="MostrarSig()"/></a></center><br />--%>
                             <center>
-                                <button id="BtnDatosPersonles" onclick="guardarDatPers()" type="button" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px; cursor: pointer;">Guardar</button></center>
+                                <button id="BtnDatosPersonles" onclick="guardarDatPers()" type="button" class="btnSave">Guardar</button></center>
                             <br />
                         </div>
                     </div>
@@ -593,7 +597,7 @@
                                     </div>
 
                                     <div class="col-md-4" style="margin-bottom: 20px;">
-                                        <button type="button" id="btnGuardar" onclick="AgregarRedes()" class="float" style="background: #047537; color: #fff; border: 1px solid black; height: 40px; cursor: pointer; margin-top: 30px;">
+                                        <button type="button" id="btnGuardar" onclick="AgregarRedes()" class="btnSave" style="margin-top: 30px;">
                                             Agregar redes
                                         </button>
                                     </div>
@@ -604,7 +608,7 @@
                                 <br />
 
                                 <center>
-                                    <button id="BtnDatosDeContacto" onclick="agregarDatCont()" type="button" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px; cursor: pointer;">Guardar</button></center>
+                                    <button id="BtnDatosDeContacto" onclick="agregarDatCont()" type="button" class="btnSave">Guardar</button></center>
                                 <br />
 
                             </div>
@@ -731,7 +735,7 @@
                                 <br />
 
                                 <center>
-                                    <button id="BtnRefLab" onclick="agregarRefLab()" type="button" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px; cursor: pointer;">Guardar</button>
+                                    <button id="BtnRefLab" onclick="agregarRefLab()" type="button" class="btnSave">Guardar</button>
                                 </center>
 
                                 <br />
@@ -830,7 +834,7 @@
                                 <br />
 
                                 <center>
-                                    <button id="BtnAgregarGrupoFam" onclick="agregarGrupoFam()" type="button" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px; cursor: pointer;">Guardar</button>
+                                    <button id="BtnAgregarGrupoFam" onclick="agregarGrupoFam()" type="button" class="btnSave">Guardar</button>
                                 </center>
                                 <br />
 
@@ -997,10 +1001,10 @@
 
                                         <span style="color: #203f56; font-size: 18px;">Adjuntar Archivo del Título o Analítico (Imagen o PDF)</span>
                                         <br />
-                                        <div style="padding-top: 20px; padding-bottom: 20px; margin: 10px; border: 1px solid #E3E3E3; border-radius: 4px;">
+                                        <div style="padding-top: 20px; padding-bottom: 20px; margin: 10px; border-radius: 4px;">
                                             <center>
 
-                                                <div alt="Cargando Imagen..." style="background-image: url('https://crear.net.ar/CLIENTES/PIN/Pin/camara-fotografica.png'); background-size: cover; height: 50px; width: 50px; cursor: pointer; decoration: none;" required="" name="imagen" id="Div1" type="file" accept="image/*">
+                                                <div alt="Cargando Imagen..." style="background-image: url('Imagenes/camera.svg'); background-size: cover; height: 50px; width: 50px; cursor: pointer; decoration: none;" required="" name="imagen" id="Div1" type="file" accept="image/*">
                                                     <center>
                                                         <asp:FileUpload Style="opacity: 0; height: 80px; width: 80px; cursor: pointer; margin-top: -5px;" runat="server" ID="SubirRecibo" accept="application/pdf,image/*" onchange="return validarExt2();" runat="server"></asp:FileUpload></center>
                                                 </div>
@@ -1020,7 +1024,7 @@
                                 <br />
 
                                 <center>
-                                    <button id="BtnFormacionAca" onclick="agregarFormAcademica()" type="button" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px; cursor: pointer;">Guardar</button></center>
+                                    <button id="BtnFormacionAca" onclick="agregarFormAcademica()" type="button" class="btnSave">Guardar</button></center>
 
                                 <br />
 
@@ -1159,7 +1163,7 @@
                                 <br />
 
                                 <center>
-                                    <button id="BtnAgregarCurso" onclick="agregarCurso()" type="button" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px; cursor: pointer;">Guardar</button>
+                                    <button id="BtnAgregarCurso" onclick="agregarCurso()" type="button" class="btnSave">Guardar</button>
                                 </center>
                                 <br />
 
@@ -1277,7 +1281,7 @@
                                 <br />
 
                                 <center>
-                                    <button id="BtnAgregarAntSalud" onclick="agregarAntecedentesDeSalud()" type="button" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px; cursor: pointer;">Guardar</button></center>
+                                    <button id="BtnAgregarAntSalud" onclick="agregarAntecedentesDeSalud()" type="button" class="btnSave">Guardar</button></center>
                                 <br />
 
                             </div>
@@ -1295,9 +1299,9 @@
 
                                     <div class="col col-md-12" style="margin-bottom: 20px;">
                                         <center><span style="color: #203f56; font-size: 18px;">Adjuntar archivo del curriculum(PDF)</span></center>
-                                        <div style="padding-top: 20px; padding-bottom: 20px; margin: 10px; border: 1px solid #E3E3E3; border-radius: 4px;">
+                                        <div style="padding-top: 20px; padding-bottom: 20px; margin: 10px; border-radius: 4px;">
                                             <center>
-                                                <div alt="Cargando Imagen..." style="background-image: url('https://crear.net.ar/CLIENTES/PIN/Pin/camara-fotografica.png'); background-size: cover; height: 50px; width: 50px; cursor: pointer; decoration: none;" required="" name="imagen" id="Div1" type="file" accept="image/*">
+                                                <div alt="Cargando Imagen..." style="background-image: url('Imagenes/camera.svg'); background-size: cover; height: 50px; width: 50px; cursor: pointer; decoration: none;" required="" name="imagen" id="Div1" type="file" accept="image/*">
                                                     <asp:FileUpload Style="opacity: 0; height: 80px; width: 80px; cursor: pointer; margin-top: -5px;" runat="server" ID="SubirCurriculum" accept="application/pdf,image/*" onchange="return validarExt3();" runat="server"></asp:FileUpload>
                                                 </div>
                                                 <p id="srcCurriculum" style="display: none;" runat="server"></p>
@@ -1316,7 +1320,7 @@
                                 </div>
 
                                 <center>
-                                    <button id="" onclick="agregarCurriculum()" type="button" style="background: #047537; color: #fff; border: 1px solid black; width: 300px; height: 40px; cursor: pointer;">Guardar</button></center>
+                                    <button id="" onclick="agregarCurriculum()" type="button" class="btnSave">Guardar</button></center>
                                 <br />
 
                             </div>
@@ -1351,17 +1355,11 @@
 
             <footer>
                 <!--#footer-->
-                <div style="background: #383232; padding: 35px; bottom: 0px; width: 100%">
+                <div style="background: #161616; padding: 35px; bottom: 0px; width: 100%">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-12">
                             <center>
-                                <img src="https://www.coovilros.com/Imagenes/logo-dark.png" style="height: 40px;" />
-                            </center>
-                        </div>
-                        <div class="col-md-6">
-                            <center>
-                                <span style="color: White;" runat="server" id="Span8">Copyright © 2020 Todos los Derechos
-                        Reservados </span>
+                                <span style="color: #AAADB1;" runat="server" id="Span8">Copyright © 2020 | Todos los derechos reservados.</span>
                             </center>
                         </div>
                     </div>

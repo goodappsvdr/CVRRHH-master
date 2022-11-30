@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Panel de Control para la Administración de tu sitio Web">
     <meta name="author" content="Coderthemes">
-   <link rel="shortcut icon" href="http://www.coovilros.com/Imagenes/favicon16.ico" />
+   <link rel="shortcut icon" href="https://coovilros.com/Imagenes/favicon.ico" />
     <title>RR HH</title>
     <!--Morris Chart CSS -->
     <link rel="stylesheet" href="assets/plugins/morris/morris.css">

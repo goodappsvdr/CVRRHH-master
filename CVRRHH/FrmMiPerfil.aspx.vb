@@ -359,38 +359,6 @@ Public Class FrmMiPerfil
         End If
     End Sub
 
-    Private Sub iraperfilmovil_ServerClick(sender As Object, e As System.EventArgs) Handles iraperfilmovil.ServerClick
-        Dim PruebaGalleta As HttpCookie
-        PruebaGalleta = Request.Cookies("datos")
-
-        'aca valido si hay cookies
-        If PruebaGalleta Is Nothing Then
-
-        Else
-            Dim ods2 As New DataSet
-            Dim Objeto2 As New PersonalLegajos
-
-            Dim Galleta As HttpCookie
-            Galleta = Request.Cookies("datos")
-
-            Dim ods3 As New DataSet
-            Dim oobjeto3 As New PersonalLegajos
-
-            Dim name As String = Galleta.Values("nombre")
-            'Dim pass As String = Galleta.Values("pass")
-            Dim IdUser As String = Galleta.Values("userid")
-            ods3 = oobjeto3.BuscarDatosDeUsuarioPorEmail(name)
-
-            Dim Nombre As String = ods3.Tables(0).Rows(0).Item("Nombre").ToString
-            Dim Apellido As String = ods3.Tables(0).Rows(0).Item("Apellido").ToString
-            Dim ID_PersonalLegajo As Integer = ods3.Tables(0).Rows(0).Item("ID_PersonalLegajo").ToString
-            Dim UserID As String = ods3.Tables(0).Rows(0).Item("Userid").ToString
-
-            Response.Redirect("VerMiPerfil.aspx?Token=" & UserID)
-        End If
-
-    End Sub
-
     'WEB METHODS
 #Region "BUSCAR DATOS DEL USUARIO + GRAFICO"
     <WebMethod()>

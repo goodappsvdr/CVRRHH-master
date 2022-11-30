@@ -507,13 +507,15 @@ function cargarRefLab() {
                             </div>
                             <div class="col-md-2" style="display: flex; flex-direction: column;">
                                 <p>Modificar</p>
-                                <a href="${json.Data[i].urlMod}" class="btn-success" style="border-radius: 5px; color: #fff; border: 1px solid #218838; text-decoration: none; text-align: center;">
-                                Modificar
+                                <a href="${json.Data[i].urlMod}">
+                                    <button type="button" class="btnSave">
+                                    Modificar
+                                    </button>
                                 </a>
                             </div>
                             <div class="col-md-2" style="display: flex; flex-direction: column;">
                                 <p>Eliminar</p>
-                                <button type="button" onclick="ValidarEliminarRefLab(${json.Data[i].ID})" class="btn-danger" style="border-radius: 5px; color: #fff; border: 1px solid #dc3545;">
+                                <button type="button" onclick="ValidarEliminarRefLab(${json.Data[i].ID})" class="btnDelete">
                                 Eliminar
                                 </button>
                             </div>
@@ -528,12 +530,14 @@ function cargarRefLab() {
                                 <span>${json.Data[i].Empresa}</span>
                             </div>
                             <div class="col-md-2" style="display: flex; flex-direction: column;">
-                                <a href="${json.Data[i].urlMod}" class="btn-success" style="border-radius: 5px; color: #fff; border: 1px solid #218838; text-decoration: none; text-align: center;">
-                                Modificar
+                                <a href="${json.Data[i].urlMod}">
+                                    <button type="button" class="btnSave">
+                                    Modificar
+                                    </button>
                                 </a>
                             </div>
                             <div class="col-md-2" style="display: flex; flex-direction: column;">
-                                <button type="button" onclick="ValidarEliminarRefLab(${json.Data[i].ID})" class="btn-danger" style="border-radius: 5px; color: #fff; border: 1px solid #dc3545;">
+                                <button type="button" onclick="ValidarEliminarRefLab(${json.Data[i].ID})" class="btnDelete">
                                 Eliminar
                                 </button>
                             </div>
@@ -748,13 +752,15 @@ function cargarFormAcademica() {
                             </div>
                             <div class="col-md-2" style="display: flex; flex-direction: column;">
                                 <p>Modificar</p>
-                                <a href="${json.Data[i].urlMod}" class="btn-success" style="border-radius: 5px; color: #fff; border: 1px solid #218838; text-decoration: none; text-align: center;">
-                                Modificar
+                                <a href="${json.Data[i].urlMod}">
+                                    <button type="button" class="btnSave">
+                                    Modificar
+                                    </button>
                                 </a>
                             </div>
                             <div class="col-md-2" style="display: flex; flex-direction: column;">
                                 <p>Eliminar</p>
-                                <button type="button" onclick="ValidarEliminarFormAcademica(${json.Data[i].ID})" class="btn-danger" style="border-radius: 5px; color: #fff; border: 1px solid #dc3545;">
+                                <button type="button" onclick="ValidarEliminarFormAcademica(${json.Data[i].ID})" class="btnDelete">
                                 Eliminar
                                 </button>
                             </div>
@@ -769,12 +775,14 @@ function cargarFormAcademica() {
                                 <span>${json.Data[i].Institucion}</span>
                             </div>
                             <div class="col-md-2" style="display: flex; flex-direction: column;">
-                                <a href="${json.Data[i].urlMod}" class="btn-success" style="border-radius: 5px; color: #fff; border: 1px solid #218838; text-decoration: none; text-align: center;">
-                                Modificar
+                                <a href="${json.Data[i].urlMod}">
+                                    <button type="button" class="btnSave">
+                                    Modificar
+                                    </button>
                                 </a>
                             </div>
                             <div class="col-md-2" style="display: flex; flex-direction: column;">
-                                <button type="button" onclick="ValidarEliminarFormAcademica(${json.Data[i].ID})" class="btn-danger" style="border-radius: 5px; color: #fff; border: 1px solid #dc3545;">
+                                <button type="button" onclick="ValidarEliminarFormAcademica(${json.Data[i].ID})" class="btnDelete">
                                 Eliminar
                                 </button>
                             </div>
@@ -963,7 +971,7 @@ function cargarGrupoFam() {
                                 <span>${json.Data[i].Ocupacion}</span>
                             </div>
                             <div class="col-md-2">
-                                <button type="button" onclick="ValidarEliminarFamiliar(${json.Data[i].ID_GrupoFamiliar})" class="btn-danger" style="border-radius: 5px; color: #fff; border: 1px solid #dc3545;">
+                                <button type="button" onclick="ValidarEliminarFamiliar(${json.Data[i].ID_GrupoFamiliar})" class="btnDelete">
                                 Eliminar
                                 </button>
                             </div>
@@ -1156,13 +1164,15 @@ function cargarCurso() {
                             </div>
                             <div class="col-md-2" style="display: flex; flex-direction: column;">
                                 <p>Modificar</p>
-                                <a href="${json.Data[i].urlMod}" class="btn-success" style="border-radius: 5px; color: #fff; border: 1px solid #218838; text-decoration: none; text-align: center;">
-                                Modificar
+                                <a href="${json.Data[i].urlMod}">
+                                    <button type="button" class="btnSave">
+                                    Modificar
+                                    </button>
                                 </a>
                             </div>
                             <div class="col-md-2" style="display: flex; flex-direction: column;">
                                 <p>Eliminar</p>
-                                <button type="button" onclick="ValidarEliminarCurso(${json.Data[i].ID_Curso})" class="btn-danger" style="border-radius: 5px; color: #fff; border: 1px solid #dc3545;">
+                                <button type="button" onclick="ValidarEliminarCurso(${json.Data[i].ID_Curso})" class="btnDelete">
                                 Eliminar
                                 </button>
                             </div>
@@ -1177,12 +1187,14 @@ function cargarCurso() {
                                 <span>${json.Data[i].Institucion}</span>
                             </div>
                             <div class="col-md-2" style="display: flex; flex-direction: column;">
-                                <a href="${json.Data[i].urlMod}" class="btn-success" style="border-radius: 5px; color: #fff; border: 1px solid #218838; text-decoration: none; text-align: center;">
-                                Modificar
+                                <a href="${json.Data[i].urlMod}">
+                                    <button type="button" class="btnSave">
+                                    Modificar
+                                    </button>
                                 </a>
                             </div>
                             <div class="col-md-2" style="display: flex; flex-direction: column;">
-                                <button type="button" onclick="ValidarEliminarCurso(${json.Data[i].ID_Curso})" class="btn-danger" style="border-radius: 5px; color: #fff; border: 1px solid #dc3545;">
+                                <button type="button" onclick="ValidarEliminarCurso(${json.Data[i].ID_Curso})" class="btnDelete">
                                 Eliminar
                                 </button>
                             </div>

@@ -7,7 +7,7 @@
     
     <title>CV RRHH</title>
     <link href="css/icons.css" rel="stylesheet" type="text/css" />
-   <link rel="shortcut icon" href="http://www.coovilros.com/Imagenes/favicon16.ico" /><meta http-equiv="X-UA-Compatible" content="IE=edge" />
+   <link rel="shortcut icon" href="https://coovilros.com/Imagenes/favicon.ico" /><meta http-equiv="X-UA-Compatible" content="IE=edge" />
    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
  
    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

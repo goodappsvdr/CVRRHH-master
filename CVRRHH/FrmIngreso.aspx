@@ -8,7 +8,7 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed:300" rel="stylesheet">
           <link href="https://fonts.googleapis.com/css?family=PT+Sans:400,700" rel="stylesheet" type="text/css">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-         <link rel="shortcut icon" href="http://www.coovilros.com/Imagenes/favicon16.ico" />
+         <link rel="shortcut icon" href="https://coovilros.com/Imagenes/favicon.ico" />
     <title runat="server" id="TituloPaginaWeb">CV Coovilros-Ingreso</title>
        
 

@@ -41,24 +41,6 @@ Partial Public Class FrmMiPerfil
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
 
     '''<summary>
-    '''Control imagenresp.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents imagenresp As Global.System.Web.UI.HtmlControls.HtmlImage
-
-    '''<summary>
-    '''Control iraperfilmovil.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents iraperfilmovil As Global.System.Web.UI.HtmlControls.HtmlAnchor
-
-    '''<summary>
     '''Control ImagenLogo.
     '''</summary>
     '''<remarks>

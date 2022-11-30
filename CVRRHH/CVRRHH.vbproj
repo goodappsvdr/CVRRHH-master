@@ -128,9 +128,17 @@
     <Content Include="FrmModificarFormacionAcademica.aspx" />
     <Content Include="FrmModificarGrupoFamiliar.aspx" />
     <Content Include="FrmModificarReferenciaLaboral.aspx" />
-    <Content Include="ImagenesPersonal\HVFMZNH1.png" />
-    <Content Include="ImagenesPersonal\L15MKBLC.png" />
-    <Content Include="ImagenesPersonal\SZUUKT8U.png" />
+    <Content Include="Imagenes\antecedentesAcademicos.jpg" />
+    <Content Include="Imagenes\antecedentesLaborales.jpg" />
+    <Content Include="Imagenes\antecedentesSalud.jpg" />
+    <Content Include="Imagenes\camera.svg" />
+    <Content Include="Imagenes\cerrarSesion.svg" />
+    <Content Include="Imagenes\curriculum.jpg" />
+    <Content Include="Imagenes\cursos.jpg" />
+    <Content Include="Imagenes\datosContacto.jpg" />
+    <Content Include="Imagenes\datosPersonales.jpg" />
+    <Content Include="Imagenes\grupoFamiliar.jpg" />
+    <Content Include="Imagenes\verPerfil.svg" />
     <Content Include="ResetEmail.aspx" />
     <Content Include="Scripts\Alertas\Alertas.js" />
     <Content Include="Scripts\Alertas\sweetalert2%409.js" />
@@ -350,7 +358,7 @@
     <Folder Include="App_Data\" />
     <Folder Include="ArchivoAdjunto\" />
     <Folder Include="ArchivoCurriculum\" />
-    <Folder Include="ImagenesPersonales\" />
+    <Folder Include="ImagenesPersonal\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AD\AD.vbproj">

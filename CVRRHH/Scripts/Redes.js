@@ -110,7 +110,7 @@ function CargarRedes() {
                  </div>
 
                  <div class="col-md-1">
-                 <button type="button" href="" onclick="Eliminar(${json.Data[i].ID_Redes})" class="float" style="background: red; border: 1px solid red; border-radius: 10px; color: #fff; cursor: ponter;">
+                 <button type="button" href="" onclick="Eliminar(${json.Data[i].ID_Redes})" class="btnDelete" style="cursor: ponter;">
                  Eliminar
                  </button>
                  </div>
