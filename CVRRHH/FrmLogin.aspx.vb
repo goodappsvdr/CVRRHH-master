@@ -93,8 +93,8 @@ Public Class FrmLogin
 
                 'Apellido, Nombre, Calle, Nro, Piso, Depto, Telefono, Movil, ID_DocumentoTipo, NroDocumento, Foto, ID_NivelFormacion, ID_EstadoCivil, Nacimiento, ID_Nacionalidad, Sexo, CUIL, Categoria, Ingreso, Egreso, MesesAntiguedadReconocida, ID_Convenio, ID_Art, NroAfiliado, ID_Banco, NroCajaAhorro, ID_Seccion, ID_Puesto, ID_Jefe, Jubilado, Tarjeta, MensajeIngreso, MensajeEgreso, FondoCompJub, AporteVoluntario, Observaciones, Archivo, Estado, Tipo,Email
 
-                EnviarEmailParaConfirmar(newUserId)
-                'SendEmailByApi(newUserId, TxtEmail.Text.ToLower)
+                'EnviarEmailParaConfirmar(newUserId)
+                SendEmailByApi(newUserId, TxtEmail.Text.ToLower)
                 formulario.Visible = False
 
                 oculto.Visible = True
