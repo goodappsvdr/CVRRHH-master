@@ -893,13 +893,13 @@ Public Class FrmMiPerfil
 
             Select Case ComboRedes
                 Case "FACEBOOK"
-                    Url = "https://crear.net.ar/CLIENTES/CONSTRUC/Construc/Facebook_icon-icons.com_66805.png"
+                    Url = "https://www.coovilros.com/RRHH/Imagenes/facebook.svg"
                 Case "INSTAGRAM"
-                    Url = "https://crear.net.ar/CLIENTES/CONSTRUC/Construc/1491580635-yumminkysocialmedia26_83102.png"
+                    Url = "https://www.coovilros.com/RRHH/Imagenes/instagram.svg"
                 Case "TWITTER"
-                    Url = "https://crear.net.ar/CLIENTES/CONSTRUC/Construc/1491579542-yumminkysocialmedia22_83078.png"
+                    Url = "https://www.coovilros.com/RRHH/Imagenes/twitter.svg"
                 Case "YOUTUBE"
-                    Url = "https://crear.net.ar/CLIENTES/CONSTRUC/Construc/1491580651-yumminkysocialmedia28_83061.png"
+                    Url = "https://www.coovilros.com/RRHH/Imagenes/youtube.svg"
                 Case Else
 
             End Select
