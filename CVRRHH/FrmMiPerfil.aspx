@@ -139,6 +139,10 @@
             display: flex;
             flex-wrap: nowrap !important;
         }
+
+        .pCabeceraTabla{
+            display: none;
+        }
     }
 
     @media only screen and (max-width: 375px) {

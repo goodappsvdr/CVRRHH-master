@@ -497,24 +497,24 @@ function cargarRefLab() {
                     for (var i = 0; i < json.Data.length; i++) {
                         if (i == 0) {
                             $('#DivRL').append(`<div class= "row" style="margin-bottom: 15px; width: 100%;">
-                            <div class= "col-md-3" style="display: flex; flex-direction: column;">
-                                <p>Area</p>
+                            <div class= "col-md-3" style="display: flex; flex-direction: column; margin-bottom: 7px;">
+                                <p class="pCabeceraTabla">Area</p>
                                 <span>${json.Data[i].Area}</span>
                             </div>
-                            <div class="col-md-3" style="display: flex; flex-direction: column;">
-                                <p>Empresa</p>
+                            <div class="col-md-3" style="display: flex; flex-direction: column; margin-bottom: 7px;">
+                                <p class="pCabeceraTabla">Empresa</p>
                                 <span>${json.Data[i].Empresa}</span>
                             </div>
-                            <div class="col-md-2" style="display: flex; flex-direction: column;">
-                                <p>Modificar</p>
+                            <div class="col-md-2" style="display: flex; flex-direction: column; margin-bottom: 7px;">
+                                <p class="pCabeceraTabla">Modificar</p>
                                 <a href="${json.Data[i].urlMod}">
                                     <button type="button" class="btnSave">
                                     Modificar
                                     </button>
                                 </a>
                             </div>
-                            <div class="col-md-2" style="display: flex; flex-direction: column;">
-                                <p>Eliminar</p>
+                            <div class="col-md-2" style="display: flex; flex-direction: column; margin-bottom: 7px;">
+                                <p class="pCabeceraTabla">Eliminar</p>
                                 <button type="button" onclick="ValidarEliminarRefLab(${json.Data[i].ID})" class="btnDelete">
                                 Eliminar
                                 </button>
@@ -529,14 +529,14 @@ function cargarRefLab() {
                             <div class="col-md-3">
                                 <span>${json.Data[i].Empresa}</span>
                             </div>
-                            <div class="col-md-2" style="display: flex; flex-direction: column;">
+                            <div class="col-md-2" style="display: flex; flex-direction: column; margin-bottom: 7px;">
                                 <a href="${json.Data[i].urlMod}">
                                     <button type="button" class="btnSave">
                                     Modificar
                                     </button>
                                 </a>
                             </div>
-                            <div class="col-md-2" style="display: flex; flex-direction: column;">
+                            <div class="col-md-2" style="display: flex; flex-direction: column; margin-bottom: 7px;">
                                 <button type="button" onclick="ValidarEliminarRefLab(${json.Data[i].ID})" class="btnDelete">
                                 Eliminar
                                 </button>
@@ -742,24 +742,24 @@ function cargarFormAcademica() {
                     for (var i = 0; i < json.Data.length; i++) {
                         if (i == 0) {
                             $('#DivFA').append(`<div class= "row" style="margin-bottom: 15px; width: 100%;">
-                            <div class= "col-md-3" style="display: flex; flex-direction: column;">
-                                <p>Título</p>
+                            <div class= "col-md-3" style="display: flex; flex-direction: column; margin-bottom: 7px;">
+                                <p class="pCabeceraTabla">Título</p>
                                 <span>${json.Data[i].Titulo}</span>
                             </div>
-                            <div class="col-md-3" style="display: flex; flex-direction: column;">
-                                <p>Institución</p>
+                            <div class="col-md-3" style="display: flex; flex-direction: column; margin-bottom: 7px;">
+                                <p class="pCabeceraTabla">Institución</p>
                                 <span>${json.Data[i].Institucion}</span>
                             </div>
-                            <div class="col-md-2" style="display: flex; flex-direction: column;">
-                                <p>Modificar</p>
+                            <div class="col-md-2" style="display: flex; flex-direction: column; margin-bottom: 7px;">
+                                <p class="pCabeceraTabla">Modificar</p>
                                 <a href="${json.Data[i].urlMod}">
                                     <button type="button" class="btnSave">
                                     Modificar
                                     </button>
                                 </a>
                             </div>
-                            <div class="col-md-2" style="display: flex; flex-direction: column;">
-                                <p>Eliminar</p>
+                            <div class="col-md-2" style="display: flex; flex-direction: column; margin-bottom: 7px;">
+                                <p class="pCabeceraTabla">Eliminar</p>
                                 <button type="button" onclick="ValidarEliminarFormAcademica(${json.Data[i].ID})" class="btnDelete">
                                 Eliminar
                                 </button>
@@ -774,14 +774,14 @@ function cargarFormAcademica() {
                             <div class="col-md-3">
                                 <span>${json.Data[i].Institucion}</span>
                             </div>
-                            <div class="col-md-2" style="display: flex; flex-direction: column;">
+                            <div class="col-md-2" style="display: flex; flex-direction: column; margin-bottom: 7px;">
                                 <a href="${json.Data[i].urlMod}">
                                     <button type="button" class="btnSave">
                                     Modificar
                                     </button>
                                 </a>
                             </div>
-                            <div class="col-md-2" style="display: flex; flex-direction: column;">
+                            <div class="col-md-2" style="display: flex; flex-direction: column; margin-bottom: 7px;">
                                 <button type="button" onclick="ValidarEliminarFormAcademica(${json.Data[i].ID})" class="btnDelete">
                                 Eliminar
                                 </button>
@@ -1154,24 +1154,24 @@ function cargarCurso() {
                     for (var i = 0; i < json.Data.length; i++) {
                         if (i == 0) {
                             $('#DivC').append(`<div class= "row" style="margin-bottom: 15px; width: 100%;">
-                            <div class= "col-md-3" style="display: flex; flex-direction: column;">
-                                <p>Curso</p>
+                            <div class= "col-md-3" style="display: flex; flex-direction: column; margin-bottom: 7px;">
+                                <p class="pCabeceraTabla">Curso</p>
                                 <span>${json.Data[i].Curso}</span>
                             </div>
-                            <div class="col-md-3" style="display: flex; flex-direction: column;">
-                                <p>Institución</p>
+                            <div class="col-md-3" style="display: flex; flex-direction: column; margin-bottom: 7px;">
+                                <p class="pCabeceraTabla">Institución</p>
                                 <span>${json.Data[i].Institucion}</span>
                             </div>
-                            <div class="col-md-2" style="display: flex; flex-direction: column;">
-                                <p>Modificar</p>
+                            <div class="col-md-2" style="display: flex; flex-direction: column; margin-bottom: 7px;">
+                                <p class="pCabeceraTabla">Modificar</p>
                                 <a href="${json.Data[i].urlMod}">
                                     <button type="button" class="btnSave">
                                     Modificar
                                     </button>
                                 </a>
                             </div>
-                            <div class="col-md-2" style="display: flex; flex-direction: column;">
-                                <p>Eliminar</p>
+                            <div class="col-md-2" style="display: flex; flex-direction: column; margin-bottom: 7px;">
+                                <p class="pCabeceraTabla">Eliminar</p>
                                 <button type="button" onclick="ValidarEliminarCurso(${json.Data[i].ID_Curso})" class="btnDelete">
                                 Eliminar
                                 </button>
@@ -1186,14 +1186,14 @@ function cargarCurso() {
                             <div class="col-md-3">
                                 <span>${json.Data[i].Institucion}</span>
                             </div>
-                            <div class="col-md-2" style="display: flex; flex-direction: column;">
+                            <div class="col-md-2" style="display: flex; flex-direction: column; margin-bottom: 7px;">
                                 <a href="${json.Data[i].urlMod}">
                                     <button type="button" class="btnSave">
                                     Modificar
                                     </button>
                                 </a>
                             </div>
-                            <div class="col-md-2" style="display: flex; flex-direction: column;">
+                            <div class="col-md-2" style="display: flex; flex-direction: column; margin-bottom: 7px;">
                                 <button type="button" onclick="ValidarEliminarCurso(${json.Data[i].ID_Curso})" class="btnDelete">
                                 Eliminar
                                 </button>
