@@ -91,7 +91,7 @@ Public Class FrmMiPerfil
         Dim OCategoriaTipo As New Categorias
 
         ods = OCategoriaTipo.BuscarPorCategoriatipo("NIVELFORMACION")
-        CboNivelFormacion.DataSource = ods.Tables(0)
+        CboNivelFormacion.DataSource = ods.Tables(1)
         CboNivelFormacion.DataTextField = "NOMBRE"
         CboNivelFormacion.DataValueField = "ID_CATEGORIA"
         CboNivelFormacion.DataBind()
@@ -102,7 +102,7 @@ Public Class FrmMiPerfil
         Dim OCategoriaTipo As New Categorias
 
         ods = OCategoriaTipo.BuscarPorCategoriatipo("ESTADOCIVIL")
-        CboEstadoCivil.DataSource = ods.Tables(0)
+        CboEstadoCivil.DataSource = ods.Tables(1)
         CboEstadoCivil.DataTextField = "NOMBRE"
         CboEstadoCivil.DataValueField = "ID_CATEGORIA"
         CboEstadoCivil.DataBind()
@@ -124,7 +124,7 @@ Public Class FrmMiPerfil
         Dim OCategoriaTipo As New Categorias
 
         ods = OCategoriaTipo.BuscarPorCategoriatipo("SEXOTIPO")
-        CboSexo.DataSource = ods.Tables(0)
+        CboSexo.DataSource = ods.Tables(1)
         CboSexo.DataTextField = "NOMBRE"
         CboSexo.DataValueField = "ID_CATEGORIA"
         CboSexo.DataBind()
@@ -322,6 +322,10 @@ Public Class FrmMiPerfil
                 If ods2.Tables(0).Rows.Count > 0 Then
                     srcArchivo.Src = ods2.Tables(0).Rows(0).Item("Archivo").ToString
                     srcCurriculum.InnerHtml = ods2.Tables(0).Rows(0).Item("Archivo").ToString
+                    aCurriculum.Visible = True
+                    aCurriculum.Attributes("href") = ods2.Tables(0).Rows(0).Item("Archivo").ToString
+                Else
+                    aCurriculum.Visible = False
                 End If
             End If
 
@@ -386,7 +390,7 @@ Public Class FrmMiPerfil
                 ods2 = Obj2.Postulantes_BuscarDatosCargadosParaProgressBar(ID_PersonalLegajo)
 
                 'CARGO VALORES PARA EL GRAFICO DE PORCENTAJES
-                Dim TotalRedes As Integer = ods2.Tables(0).Rows.Count
+                'Dim TotalRedes As Integer = ods2.Tables(0).Rows.Count
                 Dim TotalAntLab As Integer = ods2.Tables(1).Rows.Count
                 Dim TotalNumDoc As Integer = ods2.Tables(2).Rows(0).Item("NroDocumento")
                 Dim TotalFoto As Integer = ods2.Tables(3).Rows(0).Item("Foto")
@@ -406,8 +410,8 @@ Public Class FrmMiPerfil
                     TotalFoto = ods2.Tables(3).Rows.Count
                 End If
 
-                Dim TotalAlcanzado As Integer = TotalRedes + TotalAntLab + TotalNumDoc + TotalFoto + TotalFormAca + TotalCurso + TotalAntecedentes + TotalCurriculum
-                Dim TotalPermitido As Integer = 8
+                Dim TotalAlcanzado As Integer = TotalAntLab + TotalNumDoc + TotalFoto + TotalFormAca + TotalCurso + TotalAntecedentes + TotalCurriculum
+                Dim TotalPermitido As Integer = 7
                 Dim Resultado As Integer = TotalAlcanzado * 100 / TotalPermitido
                 Dim Grafico As String
                 If TotalAlcanzado < 1 Then
@@ -507,7 +511,7 @@ Public Class FrmMiPerfil
                 Dim ods2 As New DataSet
                 ods2 = oObjeto.Postulantes_BuscarDatosCargadosParaProgressBar(ID_PersonalLegajo)
 
-                Dim TotalRedes As Integer = ods2.Tables(0).Rows.Count
+                'Dim TotalRedes As Integer = ods2.Tables(0).Rows.Count
                 Dim TotalAntLab As Integer = ods2.Tables(1).Rows.Count
                 Dim TotalNumDoc As Integer = ods2.Tables(2).Rows(0).Item("NroDocumento")
                 Dim TotalFoto As Integer = ods2.Tables(3).Rows(0).Item("Foto")
@@ -526,7 +530,7 @@ Public Class FrmMiPerfil
                     TotalFoto = ods2.Tables(3).Rows.Count
                 End If
 
-                Dim contenido As String = "<p>Te faltan cargar datos en los siguientes módulos:</p>"
+                Dim contenido As String = "<p style='font-weight: bold;'>Te faltan cargar datos en los siguientes módulos:</p>"
                 If TotalNumDoc = 0 And TotalFoto = 0 Then
                     contenido += "<p>Datos personales</p>"
                 ElseIf TotalNumDoc = 0 Then
@@ -534,9 +538,9 @@ Public Class FrmMiPerfil
                 ElseIf TotalFoto = 0 Then
                     contenido += "<p>Datos personales</p>"
                 End If
-                If TotalRedes = 0 Then
-                    contenido += "<p>Redes sociales</p>"
-                End If
+                'If TotalRedes = 0 Then
+                '    contenido += "<p>Redes sociales</p>"
+                'End If
                 If TotalAntLab = 0 Then
                     contenido += "<p>Antecedentes laborales</p>"
                 End If

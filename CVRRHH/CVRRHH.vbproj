@@ -140,6 +140,7 @@
     <Content Include="Imagenes\facebook.svg" />
     <Content Include="Imagenes\grupoFamiliar.jpg" />
     <Content Include="Imagenes\instagram.svg" />
+    <Content Include="Imagenes\paperclip.svg" />
     <Content Include="Imagenes\twitter.svg" />
     <Content Include="Imagenes\verPerfil.svg" />
     <Content Include="Imagenes\youtube.svg" />

@@ -558,13 +558,13 @@
                                     </div>
 
                                     <div class="col-md-4" style="margin-bottom: 20px;">
-                                        <label>Telefono Fijo</label>
-                                        <input type="text" class="form-control" id="TxtTelefonoFijo" runat="server" />
+                                        <label>Telefono Móvil</label>
+                                        <input type="text" class="form-control" id="TxtTelefonMovil" runat="server" />
                                     </div>
 
                                     <div class="col-md-4" style="margin-bottom: 20px;">
-                                        <label>Telefono Móvil</label>
-                                        <input type="text" class="form-control" id="TxtTelefonMovil" runat="server" />
+                                        <label>Telefono Alternativo</label>
+                                        <input type="text" class="form-control" id="TxtTelefonoFijo" runat="server" />
                                     </div>
 
                                     <div class="col-md-4" style="margin-bottom: 20px;">
@@ -574,6 +574,10 @@
                                     </div>
 
                                 </div>
+
+                                    <center>
+                                    <button id="BtnDatosDeContacto" onclick="agregarDatCont()" type="button" class="btnSave">Guardar</button></center>
+                                <br />
 
                                 <div class="row">
 
@@ -609,10 +613,6 @@
                                 </div>
 
 
-                                <br />
-
-                                <center>
-                                    <button id="BtnDatosDeContacto" onclick="agregarDatCont()" type="button" class="btnSave">Guardar</button></center>
                                 <br />
 
                             </div>
@@ -933,6 +933,13 @@
                                                 $('#CboInstitucion').hide();
                                             }
 
+                                            if (cboFA == "TERCIARIO COMPLETO" || cboFA == "TERCIARIO EN CURSO" || cboFA == "TERCIARIO INCOMPLETO" || cboFA == "UNIVERSITARIO COMPLETO" || cboFA == "UNIVERSITARIO EN CURSO" || cboFA == "UNIVERSITARIO INCOMPLETO") {
+                                                $('#ComboEspecilidad').val("SELECCIONAR").change();
+                                                $('#contentEspecialidad').hide();
+                                            } else {
+                                                $('#contentEspecialidad').show();
+                                            }
+
                                             if (cboFA == "SECUNDARIO EN CURSO" || cboFA == "SECUNDARIO INCOMPLETO") {
                                                 swal('', '“Por política interna de esta Cooperativa, solo se receptarán los Curriculums de postulantes que obtengan el nivel secundario COMPLETO(analítico en mano)', 'info')
                                                 $("#BtnFormacionAca").hide();
@@ -952,7 +959,7 @@
                                     </script>
 
 
-                                    <div class="col-md-4" style="margin-bottom: 20px;">
+                                    <div class="col-md-4" id="contentEspecialidad" style="margin-bottom: 20px;">
                                         <label>Especialidad</label>
                                         <select id="ComboEspecilidad" name="select" runat="server" class="form-control">
                                             <option id="Opt2" value="SELECCIONAR" class="form-control">SELECCIONAR</option>
@@ -1003,15 +1010,15 @@
 
                                     <div class="col col-md-12" style="margin-bottom: 20px;">
 
-                                        <span style="color: #203f56; font-size: 18px;">Adjuntar Archivo del Título o Analítico (Imagen o PDF)</span>
                                         <br />
                                         <div style="padding-top: 20px; padding-bottom: 20px; margin: 10px; border-radius: 4px;">
                                             <center>
 
-                                                <div alt="Cargando Imagen..." style="background-image: url('Imagenes/camera.svg'); background-size: cover; height: 50px; width: 50px; cursor: pointer; decoration: none;" required="" name="imagen" id="Div1" type="file" accept="image/*">
+                                                <div alt="Cargando Imagen..." style="background-image: url('Imagenes/paperclip.svg'); background-size: cover; height: 50px; width: 50px; cursor: pointer; decoration: none;" required="" name="imagen" id="Div1" type="file" accept="image/*">
                                                     <center>
                                                         <asp:FileUpload Style="opacity: 0; height: 80px; width: 80px; cursor: pointer; margin-top: -5px;" runat="server" ID="SubirRecibo" accept="application/pdf,image/*" onchange="return validarExt2();" runat="server"></asp:FileUpload></center>
                                                 </div>
+                                                <span style="color: #203f56; font-size: 18px;">Adjuntar Archivo del Título o Analítico (Imagen o PDF)</span>
 
                                                 <div id="visorArchivo">
                                                     <!--Aqui se desplegará el fichero-->
@@ -1302,15 +1309,18 @@
                                 <div class="row">
 
                                     <div class="col col-md-12" style="margin-bottom: 20px;">
-                                        <center><span style="color: #203f56; font-size: 18px;">Adjuntar archivo del curriculum(PDF)</span></center>
                                         <div style="padding-top: 20px; padding-bottom: 20px; margin: 10px; border-radius: 4px;">
                                             <center>
-                                                <div alt="Cargando Imagen..." style="background-image: url('Imagenes/camera.svg'); background-size: cover; height: 50px; width: 50px; cursor: pointer; decoration: none;" required="" name="imagen" id="Div1" type="file" accept="image/*">
+                                                <div alt="Cargando Imagen..." style="background-image: url('Imagenes/paperclip.svg'); background-size: cover; height: 50px; width: 50px; cursor: pointer; decoration: none;" required="" name="imagen" id="Div1" type="file" accept="image/*">
                                                     <asp:FileUpload Style="opacity: 0; height: 80px; width: 80px; cursor: pointer; margin-top: -5px;" runat="server" ID="SubirCurriculum" accept="application/pdf,image/*" onchange="return validarExt3();" runat="server"></asp:FileUpload>
                                                 </div>
+                                                <center><span style="color: #203f56; font-size: 18px;">Adjuntar archivo del curriculum(PDF)</span></center>
                                                 <p id="srcCurriculum" style="display: none;" runat="server"></p>
                                                 <div class="col-md-12" id="contentArchivo" style="margin-bottom: 8px;">
-                                                    <embed id="srcArchivo" runat="server" src="" width="400" height="440" />
+                                                    <embed id="srcArchivo" runat="server" style="display: none;" src="" width="400" height="440" />
+                                                    <br />
+                                                    <br />
+                                                    <a href="#" id="aCurriculum" runat="server" target="_blank"><button type="button" class="btnSave">VER CURRICULUM</button></a>
                                                 </div>
 
                                                 <div id="visorArchivoC">
@@ -1533,7 +1543,7 @@
     <script type="text/javascript">
         $(document).ready(function () {
             $('#TxtLinkRedsocial').val("");
-            $('#ComboRedes').val("SELECCIONAR").change();
+            $('#ComboRedes').val("SELECCIONAR").change();   
 
             cargarDatosUsuario();
             CargarRedes();

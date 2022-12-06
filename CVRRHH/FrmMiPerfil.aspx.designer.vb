@@ -257,15 +257,6 @@ Partial Public Class FrmMiPerfil
     Protected WithEvents TxtDepto As Global.System.Web.UI.HtmlControls.HtmlInputText
 
     '''<summary>
-    '''Control TxtTelefonoFijo.
-    '''</summary>
-    '''<remarks>
-    '''Campo generado automáticamente.
-    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-    '''</remarks>
-    Protected WithEvents TxtTelefonoFijo As Global.System.Web.UI.HtmlControls.HtmlInputText
-
-    '''<summary>
     '''Control TxtTelefonMovil.
     '''</summary>
     '''<remarks>
@@ -273,6 +264,15 @@ Partial Public Class FrmMiPerfil
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents TxtTelefonMovil As Global.System.Web.UI.HtmlControls.HtmlInputText
+
+    '''<summary>
+    '''Control TxtTelefonoFijo.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents TxtTelefonoFijo As Global.System.Web.UI.HtmlControls.HtmlInputText
 
     '''<summary>
     '''Control CboLocalidad.
@@ -768,6 +768,15 @@ Partial Public Class FrmMiPerfil
     '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
     '''</remarks>
     Protected WithEvents srcArchivo As Global.System.Web.UI.HtmlControls.HtmlEmbed
+
+    '''<summary>
+    '''Control aCurriculum.
+    '''</summary>
+    '''<remarks>
+    '''Campo generado automáticamente.
+    '''Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+    '''</remarks>
+    Protected WithEvents aCurriculum As Global.System.Web.UI.HtmlControls.HtmlAnchor
 
     '''<summary>
     '''Control TextBox10.

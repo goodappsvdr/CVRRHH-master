@@ -649,6 +649,10 @@ function agregarFormAcademica() {
         return;
     }
 
+    if (nivelAcademico == "TERCIARIO COMPLETO" || nivelAcademico == "TERCIARIO EN CURSO" || nivelAcademico == "TERCIARIO INCOMPLETO" || nivelAcademico == "UNIVERSITARIO COMPLETO" || nivelAcademico == "UNIVERSITARIO EN CURSO" || nivelAcademico == "UNIVERSITARIO INCOMPLETO") {
+        especialidad == "SIN ESPECIALIDAD"
+    }
+
     if (fechaDesde == '') {
         swal('', 'Debes seleccionar una fecha desde', 'info');
     } else if (fechaHasta == '') {
@@ -767,7 +771,7 @@ function cargarFormAcademica() {
                             <hr style="width: 100%;">`
                             );
                         } else {
-                            $('#DivRL').append(`<div class= "row" style="margin-bottom: 15px; width: 100%;">
+                            $('#DivFA').append(`<div class= "row" style="margin-bottom: 15px; width: 100%;">
                             <div class= "col-md-3">
                                 <span>${json.Data[i].Titulo}</span>
                             </div>
