@@ -17,36 +17,24 @@ Partial Public Class ReporteLegajoPostulante
 
         ods = oRecibo.GenerarReporteLegajo(ID_PersonalLegajo)
 
-        'http://coovilros.com/RRHHAdmin/ImagenesPersonal/96.png
-        'http://coovilros.com/rrhh/ImagenesPersonal/95.png
+        If ods.Tables(1).Rows(0).Item("Foto").ToString() = "" Then
 
-        'If ods.Tables(1).Rows(0).Item("Foto").ToString() = "" Then
+        Else
+            Dim imagenBD = ods.Tables(1).Rows(0).Item("Foto").ToString()
+            Dim imgExt As String = ""
 
-        'Else
-        '    Dim imagenBD = ods.Tables(1).Rows(0).Item("Foto").ToString()
-        '    Dim imgExt As String = ""
+            Dim path__1 As [String] = HttpContext.Current.Server.MapPath("../ImagenesPersonal/")
+            Dim img As String
 
-        '    Dim path__1 As [String] = HttpContext.Current.Server.MapPath("../ImagenesPersonal/")
-        '    Dim img As String
+            If ods.Tables(1).Rows(0).Item("Foto").ToString().Length > 52 Then
+                imgExt = Right(imagenBD, 11)
+            Else
+                imgExt = ID_PersonalLegajo + ".png"
+            End If
+            img = path__1 + imgExt
 
-        '    If ImagenBD.Contains("Admin") Then
-        '        If ods.Tables(1).Rows(0).Item("Foto").ToString().Length > 55 Then
-        '            ImgExt = Right(ImagenBD, 12)
-        '        Else
-        '            ImgExt = ID_PersonalLegajo + ".png"
-        '        End If
-        '        img = path__1 + imagenBD
-        '    Else
-        '        If ods.Tables(1).Rows(0).Item("Foto").ToString().Length > 50 Then
-        '            ImgExt = Right(ImagenBD, 12)
-        '        Else
-        '            ImgExt = ID_PersonalLegajo + ".png"
-        '        End If
-        '        img = path__1.Replace("Admin", "") + imagenBD
-        '    End If
-
-        '    imgEmpleado.Value = img 'ods.Tables(0).Rows(0).Item("Foto").ToString()
-        'End If
+            imgEmpleado.Value = img
+        End If
 
         txtNombre.Value = ods.Tables(1).Rows(0).Item("Nombre").ToString()
         txtApellido.Value = ods.Tables(1).Rows(0).Item("Apellido").ToString()

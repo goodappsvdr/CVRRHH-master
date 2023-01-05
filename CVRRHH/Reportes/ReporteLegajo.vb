@@ -17,33 +17,24 @@ Partial Public Class ReporteLegajo
 
         ods = oRecibo.GenerarReporteLegajo(ID_PersonalLegajo)
 
-        'If ods.Tables(0).Rows(0).Item("Foto").ToString() = "" Then
+        If ods.Tables(0).Rows(0).Item("Foto").ToString() = "" Then
 
-        'Else
-        '    Dim imagenBD = ods.Tables(0).Rows(0).Item("Foto").ToString()
-        '    Dim imgExt As String = ""
+        Else
+            Dim imagenBD = ods.Tables(0).Rows(0).Item("Foto").ToString()
+            Dim imgExt As String = ""
 
-        '    Dim path__1 As [String] = HttpContext.Current.Server.MapPath("../ImagenesPersonal/")
-        '    Dim img As String
+            Dim path__1 As [String] = HttpContext.Current.Server.MapPath("../ImagenesPersonal/")
+            Dim img As String
 
-        '    If imagenBD.Contains("Admin") Then
-        '        If ods.Tables(0).Rows(0).Item("Foto").ToString().Length > 55 Then
-        '            imgExt = Right(imagenBD, 12)
-        '        Else
-        '            imgExt = ID_PersonalLegajo + ".png"
-        '        End If
-        '        img = path__1 + imagenBD
-        '    Else
-        '        If ods.Tables(0).Rows(0).Item("Foto").ToString().Length > 50 Then
-        '            imgExt = Right(imagenBD, 12)
-        '        Else
-        '            imgExt = ID_PersonalLegajo + ".png"
-        '        End If
-        '        img = path__1.Replace("Admin", "") + imagenBD
-        '    End If
+            If ods.Tables(0).Rows(0).Item("Foto").ToString().Length > 55 Then
+                imgExt = Right(imagenBD, 11)
+            Else
+                imgExt = ID_PersonalLegajo + ".png"
+            End If
+            img = path__1 + imgExt
 
-        '    imgEmpleado.Value = img 'ods.Tables(0).Rows(0).Item("Foto").ToString()
-        'End If
+            imgEmpleado.Value = img
+        End If
 
         txtNombre.Value = ods.Tables(0).Rows(0).Item("Nombre").ToString()
         txtApellido.Value = ods.Tables(0).Rows(0).Item("Apellido").ToString()
