@@ -1,0 +1,90 @@
+Partial Class RptGrupoFamiliar
+
+    'NOTE: The following procedure is required by the telerik Reporting Designer
+    'It can be modified using the telerik Reporting Designer.  
+    'Do not modify it using the code editor.
+    Private Sub InitializeComponent()
+        Dim ReportParameter1 As Telerik.Reporting.ReportParameter = New Telerik.Reporting.ReportParameter()
+        Dim StyleRule1 As Telerik.Reporting.Drawing.StyleRule = New Telerik.Reporting.Drawing.StyleRule()
+        Me.detail = New Telerik.Reporting.DetailSection()
+        Me.TextBox2 = New Telerik.Reporting.TextBox()
+        Me.TextBox1 = New Telerik.Reporting.TextBox()
+        Me.TextBox3 = New Telerik.Reporting.TextBox()
+        Me.SqlDataSource1 = New Telerik.Reporting.SqlDataSource()
+        CType(Me, System.ComponentModel.ISupportInitialize).BeginInit()
+        '
+        'detail
+        '
+        Me.detail.Height = Telerik.Reporting.Drawing.Unit.Cm(0.80000007152557373R)
+        Me.detail.Items.AddRange(New Telerik.Reporting.ReportItemBase() {Me.TextBox2, Me.TextBox1, Me.TextBox3})
+        Me.detail.Name = "detail"
+        '
+        'TextBox2
+        '
+        Me.TextBox2.Location = New Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(0R), Telerik.Reporting.Drawing.Unit.Cm(0R))
+        Me.TextBox2.Name = "TextBox2"
+        Me.TextBox2.Size = New Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Cm(6.8000001907348633R), Telerik.Reporting.Drawing.Unit.Cm(0.5R))
+        Me.TextBox2.Style.Color = System.Drawing.Color.FromArgb(CType(CType(16, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(57, Byte), Integer))
+        Me.TextBox2.Style.Font.Bold = True
+        Me.TextBox2.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(7.0R)
+        Me.TextBox2.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Left
+        Me.TextBox2.Value = "= Fields.Nombre"
+        '
+        'TextBox1
+        '
+        Me.TextBox1.Location = New Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(6.79979944229126R), Telerik.Reporting.Drawing.Unit.Cm(0.00010012308484874666R))
+        Me.TextBox1.Name = "TextBox1"
+        Me.TextBox1.Size = New Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Cm(1.1000000238418579R), Telerik.Reporting.Drawing.Unit.Cm(0.4999997615814209R))
+        Me.TextBox1.Style.Color = System.Drawing.Color.FromArgb(CType(CType(16, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(57, Byte), Integer))
+        Me.TextBox1.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(7.0R)
+        Me.TextBox1.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Left
+        Me.TextBox1.Value = "D.N.I.:"
+        '
+        'TextBox3
+        '
+        Me.TextBox3.Location = New Telerik.Reporting.Drawing.PointU(Telerik.Reporting.Drawing.Unit.Cm(7.8999996185302734R), Telerik.Reporting.Drawing.Unit.Cm(0.000099921220680698752R))
+        Me.TextBox3.Name = "TextBox3"
+        Me.TextBox3.Size = New Telerik.Reporting.Drawing.SizeU(Telerik.Reporting.Drawing.Unit.Cm(4.7997002601623535R), Telerik.Reporting.Drawing.Unit.Cm(0.4999997615814209R))
+        Me.TextBox3.Style.Color = System.Drawing.Color.FromArgb(CType(CType(16, Byte), Integer), CType(CType(112, Byte), Integer), CType(CType(57, Byte), Integer))
+        Me.TextBox3.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(7.0R)
+        Me.TextBox3.Style.TextAlign = Telerik.Reporting.Drawing.HorizontalAlign.Left
+        Me.TextBox3.Value = "= Fields.Dni"
+        '
+        'SqlDataSource1
+        '
+        Me.SqlDataSource1.ConnectionString = "Conn2"
+        Me.SqlDataSource1.Name = "SqlDataSource1"
+        Me.SqlDataSource1.Parameters.AddRange(New Telerik.Reporting.SqlDataSourceParameter() {New Telerik.Reporting.SqlDataSourceParameter("@ID_PersonalLegajo", System.Data.DbType.Int32, "=Parameters.ID_PersonalLegajo.Value")})
+        Me.SqlDataSource1.SelectCommand = "dbo.PersonalLegajo_GrupoFamiliar_GenerarReporte"
+        Me.SqlDataSource1.SelectCommandType = Telerik.Reporting.SqlDataSourceCommandType.StoredProcedure
+        '
+        'RptGrupoFamiliar
+        '
+        Me.DataSource = Me.SqlDataSource1
+        Me.DocumentName = ""
+        Me.Items.AddRange(New Telerik.Reporting.ReportItemBase() {Me.detail})
+        Me.Name = "RptGrupoFamiliar"
+        Me.PageSettings.Landscape = False
+        Me.PageSettings.Margins = New Telerik.Reporting.Drawing.MarginsU(Telerik.Reporting.Drawing.Unit.Mm(5.4000000953674316R), Telerik.Reporting.Drawing.Unit.Mm(5.4000000953674316R), Telerik.Reporting.Drawing.Unit.Mm(5.4000000953674316R), Telerik.Reporting.Drawing.Unit.Mm(5.4000000953674316R))
+        Me.PageSettings.PaperKind = System.Drawing.Printing.PaperKind.A4
+        ReportParameter1.Name = "ID_PersonalLegajo"
+        ReportParameter1.Text = "ID_PersonalLegajo"
+        ReportParameter1.Type = Telerik.Reporting.ReportParameterType.[Integer]
+        ReportParameter1.Value = "10"
+        Me.ReportParameters.Add(ReportParameter1)
+        Me.Style.BackgroundColor = System.Drawing.Color.White
+        Me.Style.Font.Size = Telerik.Reporting.Drawing.Unit.Point(10.0R)
+        StyleRule1.Selectors.AddRange(New Telerik.Reporting.Drawing.ISelector() {New Telerik.Reporting.Drawing.TypeSelector(GetType(Telerik.Reporting.TextItemBase)), New Telerik.Reporting.Drawing.TypeSelector(GetType(Telerik.Reporting.HtmlTextBox))})
+        StyleRule1.Style.Padding.Left = Telerik.Reporting.Drawing.Unit.Point(2.0R)
+        StyleRule1.Style.Padding.Right = Telerik.Reporting.Drawing.Unit.Point(2.0R)
+        Me.StyleSheet.AddRange(New Telerik.Reporting.Drawing.StyleRule() {StyleRule1})
+        Me.Width = Telerik.Reporting.Drawing.Unit.Cm(12.699999809265137R)
+        CType(Me, System.ComponentModel.ISupportInitialize).EndInit()
+
+    End Sub
+    Friend WithEvents detail As Telerik.Reporting.DetailSection
+    Friend WithEvents SqlDataSource1 As Telerik.Reporting.SqlDataSource
+    Friend WithEvents TextBox2 As Telerik.Reporting.TextBox
+    Friend WithEvents TextBox1 As Telerik.Reporting.TextBox
+    Friend WithEvents TextBox3 As Telerik.Reporting.TextBox
+End Class

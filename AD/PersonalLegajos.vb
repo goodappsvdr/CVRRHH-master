@@ -364,8 +364,22 @@ Public Class PersonalLegajos
 
     End Function
 
+    Public Function ObtenerAntiguedad(id_PersonalLegajo As Integer, ingreso As DateTime, egreso As DateTime) As DataSet
+        Try
+            Return oDatabase.ExecuteDataSet("PersonalLegajos_ObtenerAntiguedad", id_PersonalLegajo, ingreso, egreso)
+        Catch ex As System.Exception
+            Throw ex
+        End Try
+    End Function
 
 
+    Public Function GenerarReporteLegajo(ByVal ID_PersonalLegajo As Integer) As DataSet
+        Try
+            Return oDatabase.ExecuteDataSet("PersonalLegajos_GenerarReporteNew", ID_PersonalLegajo)
+        Catch ex As Exception
+            Throw ex
+        End Try
+    End Function
 
 
 
