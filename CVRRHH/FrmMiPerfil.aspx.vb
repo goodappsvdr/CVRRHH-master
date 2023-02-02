@@ -448,7 +448,7 @@ Public Class FrmMiPerfil
                 Dim SeccionTrabajar As String
                 ods3 = obj3.BuscarPorId_Legajo(ID_PersonalLegajo)
                 If ods3.Tables(0).Rows.Count > 0 Then
-                    SeccionTrabajar = ods3.Tables(0).Rows(0).Item("Descripcion")
+                    SeccionTrabajar = ods3.Tables(0).Rows(0).Item("Descripcion").ToString
                 Else
                 End If
 
